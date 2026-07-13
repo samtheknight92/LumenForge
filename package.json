@@ -1,0 +1,14 @@
+{
+  "name": "lumenforge-rpg",
+  "version": "5.0.0",
+  "private": true,
+  "type": "module",
+  "description": "LumenForge RPG v5 — Table Ready (browser character sheet & play aid)",
+  "scripts": {
+    "serve": "npx --yes serve -l 8000 .",
+    "build-data": "node scripts/build-data.mjs",
+    "validate": "node scripts/validate-data.mjs",
+    "audit": "node scripts/full-audit.mjs",
+    "test": "node scripts/test-save-roundtrip.mjs && node scripts/check-js-syntax.mjs && node scripts/verify-js-imports.mjs && node scripts/verify-race-passives.mjs && node scripts/verify-encounter-balancer.mjs && node scripts/verify-gm-monster-builder.mjs && node scripts/verify-homebrew-items.mjs && node scripts/verify-cursed-equipment.mjs && node scripts/verify-inventory-nav.mjs && node scripts/verify-note-pages.mjs && node scripts/verify-unidentified-items.mjs && node scripts/verify-weather-effects.mjs"
+  }
+}
