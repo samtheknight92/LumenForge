@@ -1,0 +1,621 @@
+{
+  "TOGGLE_BONUSES": {
+    "defensive_stance": {
+      "physicalDefence": 2,
+      "magicalDefence": 2
+    },
+    "polearm_defensive_stance": {
+      "physicalDefence": 2,
+      "magicalDefence": 2
+    },
+    "iron_body": {
+      "physicalDefence": 2,
+      "magicalDefence": 2
+    },
+    "berserker_rage": {
+      "strength": 2,
+      "speed": 2,
+      "physicalDefence": -1
+    },
+    "monster_berserker_rage": {
+      "strength": 2,
+      "speed": 2,
+      "physicalDefence": -1
+    },
+    "fortress_stance": {
+      "physicalDefence": 4,
+      "magicalDefence": 4
+    }
+  },
+  "PASSIVE_SKILL_BONUSES": {
+    "tough_skin": {
+      "physicalDefence": 2
+    },
+    "rock_skin": {
+      "physicalDefence": 3
+    },
+    "metal_skin": {
+      "physicalDefence": 4
+    },
+    "magical_resistance": {
+      "magicalDefence": 3
+    },
+    "dwarven_toughness": {
+      "hp": 5
+    },
+    "elven_accuracy": {
+      "accuracy": 1
+    },
+    "evasion": {
+      "physicalDefence": 2,
+      "magicalDefence": 2
+    },
+    "infernal_constitution": {
+      "stamina": 2
+    },
+    "oathbound": {
+      "magicalDefence": 1
+    }
+  },
+  "PASSIVE_SKILL_EFFECTS": {
+    "arcane_mastery": [
+      "arcane_mastery"
+    ],
+    "elven_high_magic": [
+      "arcane_mastery",
+      "spell_warded"
+    ],
+    "spell_penetration": [
+      "spell_penetration"
+    ],
+    "mind_shield": [
+      "mind_shield"
+    ],
+    "infernal_constitution": [
+      "fire_immunity",
+      "darkness_resistance"
+    ],
+    "hammer_mastery": [
+      "hammer_mastery_passive"
+    ],
+    "elemental_mastery": [
+      "elemental_mastery_passive"
+    ],
+    "rapid_healing": [
+      "rapid_regeneration"
+    ],
+    "human_determination": [
+      "incapacitated_resistance"
+    ],
+    "dwarven_toughness": [
+      "knockdown_resistance"
+    ],
+    "shadow_affinity": [
+      "shadow_affinity_passive"
+    ],
+    "immunity_poison": [
+      "poison_resistance",
+      "disease_immunity"
+    ],
+    "armored_plates": [
+      "critical_immunity"
+    ],
+    "cosmic_awareness": [
+      "magic_sight"
+    ],
+    "multiattack": [
+      "multiattack"
+    ],
+    "quick_draw": [
+      "quick_draw"
+    ],
+    "striker_mastery": [
+      "striker_mastery_passive"
+    ],
+    "weaponwright": [
+      "weaponwright"
+    ],
+    "armourer": [
+      "armourer"
+    ],
+    "tempered_steel": [
+      "tempered_steel"
+    ],
+    "spice_box": [
+      "spice_box"
+    ],
+    "field_medic": [
+      "field_medic"
+    ],
+    "antidote_training": [
+      "antidote_training"
+    ],
+    "surgical_touch": [
+      "surgical_touch"
+    ],
+    "plague_ward": [
+      "plague_ward"
+    ],
+    "volatile_expert": [
+      "volatile_expert"
+    ],
+    "trace_evidence": [
+      "trace_evidence"
+    ],
+    "case_notes": [
+      "case_notes"
+    ],
+    "ambush_spotter": [
+      "ambush_spotter"
+    ],
+    "keen_sight": [
+      "keen_sight"
+    ],
+    "hold_the_line": [
+      "hold_the_line"
+    ],
+    "phalanx": [
+      "phalanx"
+    ],
+    "commanders_presence": [
+      "commanders_presence"
+    ],
+    "arcane_study": [
+      "arcane_study"
+    ],
+    "mana_font": [
+      "mana_font"
+    ],
+    "amplified_healing": [
+      "amplified_healing"
+    ],
+    "oathbound": [
+      "oathbound"
+    ],
+    "battle_fury": [
+      "battle_fury"
+    ],
+    "bulwark": [
+      "bulwark"
+    ],
+    "aura_of_protection": [
+      "aura_of_protection"
+    ],
+    "bloodlust": [
+      "bloodlust"
+    ],
+    "executioner": [
+      "executioner"
+    ],
+    "unstoppable": [
+      "unstoppable"
+    ],
+    "quick_reload": [
+      "quick_reload"
+    ],
+    "volley_support": [
+      "volley_support"
+    ],
+    "snap_shot": [
+      "snap_shot"
+    ],
+    "disengage_master": [
+      "disengage_master"
+    ],
+    "dueling_stance": [
+      "dueling_stance"
+    ],
+    "finishing_thrust": [
+      "finishing_thrust"
+    ],
+    "escape_artist": [
+      "escape_artist"
+    ],
+    "hit_and_run": [
+      "hit_and_run"
+    ],
+    "light_fingers": [
+      "light_fingers"
+    ],
+    "chefs_instinct": [
+      "chefs_instinct"
+    ],
+    "trail_warden": [
+      "trail_warden"
+    ],
+    "label_reader": [
+      "label_reader"
+    ],
+    "long_set": [
+      "long_set"
+    ],
+    "encore": [
+      "encore"
+    ]
+  },
+  "EQUIPMENT_SKILL_EFFECTS": {
+    "sword_basics": {
+      "weaponKind": "sword",
+      "effectId": "sword_training",
+      "statModifiers": {
+        "accuracy": 1
+      }
+    },
+    "sword_stance": {
+      "weaponKind": "sword",
+      "effectId": "combat_stance",
+      "statModifiers": {
+        "physicalDefence": 1
+      }
+    },
+    "ranged_basics": {
+      "weaponKind": "ranged",
+      "effectId": "ranged_training",
+      "statModifiers": {
+        "accuracy": 1,
+        "strength": 1
+      }
+    },
+    "axe_basics": {
+      "weaponKind": "axe",
+      "effectId": "axe_training",
+      "statModifiers": {
+        "accuracy": 1
+      }
+    },
+    "dagger_basics": {
+      "weaponKind": "dagger",
+      "effectId": "dagger_training",
+      "statModifiers": {
+        "accuracy": 1
+      }
+    },
+    "polearm_basics": {
+      "weaponKind": "polearm",
+      "effectId": "polearm_training",
+      "statModifiers": {
+        "accuracy": 1
+      }
+    },
+    "hammer_basics": {
+      "weaponKind": "hammer",
+      "effectId": "hammer_training",
+      "statModifiers": {
+        "accuracy": 1
+      }
+    },
+    "staff_basics": {
+      "weaponKind": "staff",
+      "effectId": "staff_training",
+      "statModifiers": {
+        "magicPower": 1
+      }
+    },
+    "mana_focus": {
+      "weaponKind": "staff",
+      "effectId": "mana_focus",
+      "statModifiers": {}
+    },
+    "spell_power": {
+      "weaponKind": "staff",
+      "effectId": null,
+      "statModifiers": {
+        "magicPower": 2
+      }
+    },
+    "staff_mastery": {
+      "weaponKind": "staff",
+      "effectId": null,
+      "statModifiers": {
+        "magicPower": 4
+      }
+    },
+    "light_step": {
+      "weaponKind": "dagger",
+      "effectId": "light_step",
+      "statModifiers": {
+        "speed": 1
+      }
+    },
+    "dagger_mastery": {
+      "weaponKind": "dagger",
+      "effectId": "dagger_mastery_passive",
+      "statModifiers": {
+        "speed": 2
+      }
+    },
+    "striker_basics": {
+      "weaponKind": "striker",
+      "effectId": "striker_training",
+      "statModifiers": {
+        "accuracy": 1
+      }
+    },
+    "open_stance": {
+      "weaponKind": "striker",
+      "effectId": "open_stance_passive",
+      "statModifiers": {
+        "speed": 1,
+        "magicalDefence": 1
+      }
+    },
+    "iron_palm": {
+      "weaponKind": "striker",
+      "effectId": "iron_palm_passive",
+      "statModifiers": {
+        "physicalDefence": 1
+      }
+    },
+    "striker_mastery": {
+      "weaponKind": "striker",
+      "effectId": "striker_mastery_passive",
+      "statModifiers": {
+        "accuracy": 2,
+        "strength": 1
+      }
+    },
+    "steady_hand": {
+      "weaponKind": "ranged",
+      "effectId": "steady_hand",
+      "statModifiers": {
+        "accuracy": 1
+      }
+    },
+    "precise_footwork": {
+      "weaponKind": "oneHanded",
+      "effectId": "precise_footwork",
+      "statModifiers": {
+        "speed": 1
+      }
+    }
+  },
+  "TOGGLE_SKILL_EFFECTS": {
+    "defensive_stance": "defensive_stance_buff",
+    "polearm_defensive_stance": "defensive_stance_buff",
+    "iron_body": "iron_body_buff",
+    "berserker_rage": "berserker_rage_buff",
+    "monster_berserker_rage": "berserker_rage_buff",
+    "fortress_stance": "fortress_stance_buff"
+  },
+  "INCOMPATIBILITIES": {
+    "defensive_stance": [
+      "berserker_rage",
+      "monster_berserker_rage",
+      "fortress_stance",
+      "polearm_defensive_stance",
+      "iron_body"
+    ],
+    "iron_body": [
+      "berserker_rage",
+      "monster_berserker_rage",
+      "fortress_stance",
+      "defensive_stance",
+      "polearm_defensive_stance"
+    ],
+    "berserker_rage": [
+      "defensive_stance",
+      "polearm_defensive_stance",
+      "fortress_stance",
+      "monster_berserker_rage",
+      "iron_body"
+    ],
+    "monster_berserker_rage": [
+      "defensive_stance",
+      "berserker_rage",
+      "polearm_defensive_stance",
+      "fortress_stance",
+      "iron_body"
+    ],
+    "polearm_defensive_stance": [
+      "berserker_rage",
+      "monster_berserker_rage",
+      "fortress_stance",
+      "defensive_stance",
+      "iron_body"
+    ],
+    "fortress_stance": [
+      "defensive_stance",
+      "berserker_rage",
+      "monster_berserker_rage",
+      "polearm_defensive_stance",
+      "iron_body"
+    ],
+    "regeneration": [
+      "rapid_healing",
+      "water_mastery"
+    ],
+    "rapid_healing": [
+      "regeneration",
+      "water_mastery"
+    ],
+    "water_mastery": [
+      "regeneration",
+      "rapid_healing"
+    ]
+  },
+  "ARMOUR_SKILL_EFFECTS": {
+    "soldier_training": {
+      "armourWeights": [
+        "medium",
+        "heavy"
+      ],
+      "effectId": "soldier_training",
+      "statModifiers": {
+        "strength": 1
+      }
+    },
+    "shadow_blend": {
+      "armourWeights": [
+        "light",
+        "none"
+      ],
+      "effectId": "shadow_blend",
+      "statModifiers": {}
+    }
+  },
+  "CONDITIONAL_SKILL_STATS": {
+    "steady_aim": {
+      "accuracy": 2,
+      "condition": "notMovedThisTurn",
+      "weaponKind": "ranged"
+    },
+    "bulwark": {
+      "physicalDefence": 1,
+      "condition": "selfBelowHalfHp"
+    }
+  },
+  "CAREER_DAMAGE_BONUSES": {
+    "battle_fury": {
+      "flat": 1,
+      "melee": true,
+      "condition": "selfBelowHalfHp"
+    },
+    "executioner": {
+      "flat": 2,
+      "condition": "targetBelowHalfHp"
+    },
+    "finishing_thrust": {
+      "flat": 2,
+      "condition": "targetNotActed"
+    }
+  },
+  "CAREER_HEAL_BONUSES": {
+    "amplified_healing": {
+      "flat": 2,
+      "onOthers": true,
+      "spellOnly": true
+    },
+    "field_medic": {
+      "flat": 2,
+      "craftedPotion": true
+    }
+  },
+  "CAREER_ACTION_BUFFS": {
+    "rage": {
+      "effectId": "career_rage_buff",
+      "duration": 3,
+      "potency": 0
+    },
+    "reckless_strike": {
+      "effectId": "reckless_strike_buff",
+      "duration": 2,
+      "potency": 0
+    },
+    "sacred_stance": {
+      "effectId": "sacred_stance_buff",
+      "duration": 2,
+      "potency": 0
+    },
+    "ward_circle": {
+      "effectId": "ward_circle_buff",
+      "duration": 3,
+      "potency": 0
+    },
+    "hearty_rations": {
+      "effectId": "hearty_rations_buff",
+      "duration": 10,
+      "potency": 0
+    },
+    "battle_breakfast": {
+      "effectId": "battle_breakfast",
+      "duration": 999,
+      "potency": 0
+    },
+    "banquet_planner": {
+      "effectId": "banquet_planner_buff",
+      "duration": 20,
+      "potency": 0
+    },
+    "empower_ally": {
+      "effectId": "empower_ally_buff",
+      "duration": 1,
+      "potency": 0
+    },
+    "shield_wall": {
+      "effectId": "shield_wall_buff",
+      "duration": 1,
+      "potency": 0
+    },
+    "second_wind": {
+      "effectId": "second_wind_heal",
+      "duration": 0,
+      "potency": 0
+    },
+    "lay_on_hands": {
+      "effectId": "lay_on_hands_heal",
+      "duration": 0,
+      "potency": 0
+    },
+    "clean_bandage": {
+      "effectId": "clean_bandage_heal",
+      "duration": 0,
+      "potency": 0
+    },
+    "intimidate": {
+      "effectId": "intimidate_debuff",
+      "duration": 1,
+      "potency": 0
+    },
+    "suppressing_fire": {
+      "effectId": "suppressing_fire_debuff",
+      "duration": 1,
+      "potency": 0
+    },
+    "dirty_trick": {
+      "effectId": "dirty_trick_buff",
+      "duration": 1,
+      "potency": 0
+    },
+    "volley_call": {
+      "effectId": "volley_call_buff",
+      "duration": 1,
+      "potency": 0
+    },
+    "called_shot": {
+      "effectId": "called_shot_buff",
+      "duration": 1,
+      "potency": 0
+    },
+    "field_fit": {
+      "effectId": "field_fit_buff",
+      "duration": 1,
+      "potency": 0
+    },
+    "fusion_field_spark": {
+      "effectId": "fusion_field_spark_heal",
+      "duration": 0,
+      "potency": 0
+    },
+    "work_song": {
+      "effectId": "work_song_buff",
+      "duration": 3,
+      "potency": 0
+    },
+    "marching_tune": {
+      "effectId": "marching_tune_buff",
+      "duration": 2,
+      "potency": 0
+    },
+    "soothing_hymn": {
+      "effectId": "soothing_hymn_buff",
+      "duration": 2,
+      "potency": 0
+    },
+    "battle_anthem": {
+      "effectId": "battle_anthem_buff",
+      "duration": 3,
+      "potency": 0
+    },
+    "dissonant_note": {
+      "effectId": "dissonant_note_debuff",
+      "duration": 1,
+      "potency": 0
+    }
+  },
+  "CAREER_STAMINA_DISCOUNTS": {
+    "quick_reload": {
+      "amount": 1,
+      "rangedOnly": true
+    }
+  }
+}
