@@ -1,0 +1,152 @@
+import { computeStats } from '../character/character.js'
+import { getRace, getItem } from '../core/cache.js'
+import { getActionBarSkills, getSkillActivationType } from '../skills/skill-activation.js'
+import { getSkill } from '../skills/skills.js'
+import { formatStatModifiers } from '../ui/format.js'
+import { computeSkillLevel } from '../character/skill-level.js'
+import { computeCombatPower } from '../character/combat-power.js'
+import { getBackground } from '../character/backgrounds.js'
+import { titleCase } from '../core/utils.js'
+import { toast } from '../core/utils.js'
+
+function equippedItem(character, slot) {
+  const inventory = character.inventory || []
+  const entry = inventory.find(inv => inv.uid === character.equipped?.[slot])
+  return entry ? getItem(entry.itemId) : null
+}
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
+function buildSheetSections(character) {
+  const stats = computeStats(character)
+  const race = getRace(character.race)
+  const background = getBackground(character.background)
+  const skillLevel = computeSkillLevel(character)
+  const combatPower = computeCombatPower(character)
+  const actionSkills = getActionBarSkills(character)
+
+  const equipRows = ['weapon', 'offhand', 'armor', 'accessory'].map(slot => {
+    const item = equippedItem(character, slot)
+    const label = slot === 'offhand' ? 'Off-hand' : titleCase(slot)
+    return `<tr><th>${escapeHtml(label)}</th><td>${item ? escapeHtml(item.name) : '—'}</td><td>${item ? escapeHtml(formatStatModifiers(item.statModifiers)) : ''}</td></tr>`
+  }).join('')
+
+  const statRows = Object.entries(character.stats || {}).map(([key, value]) =>
+    `<tr><th>${escapeHtml(titleCase(key))}</th><td>${value}</td><td>${stats[key] ?? value}</td></tr>`
+  ).join('')
+
+  const skillRows = (character.skills || []).map(id => {
+    const skill = getSkill(id)
+    return skill
+      ? `<li><strong>${escapeHtml(skill.name)}</strong> — ${escapeHtml(skill.desc || '')}</li>`
+      : `<li>${escapeHtml(id)}</li>`
+  }).join('')
+
+  const barSkills = actionSkills.map(skill => {
+    const type = getSkillActivationType(skill)
+    const cost = Number(skill.staminaCost || 0)
+    return `<li>${escapeHtml(skill.name)} (${type}, ${cost} stamina)</li>`
+  }).join('')
+
+  const inventoryRows = (character.inventory || []).slice(0, 40).map(entry => {
+    const item = getItem(entry.itemId)
+    return `<tr><td>${escapeHtml(item?.name || entry.itemId)}</td><td>${entry.qty || 1}</td></tr>`
+  }).join('')
+
+  return { stats, race, background, skillLevel, combatPower, equipRows, statRows, skillRows, barSkills, inventoryRows }
+}
+
+export function buildPrintableSheetHtml(character) {
+  const { stats, race, background, skillLevel, combatPower, equipRows, statRows, skillRows, barSkills, inventoryRows } = buildSheetSections(character)
+  const notes = character.notes?.trim() || '—'
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>${escapeHtml(character.name)} — LumenForge Sheet</title>
+  <style>
+    body { font-family: Georgia, 'Times New Roman', serif; color: #111; margin: 24px; line-height: 1.45; }
+    h1 { margin: 0 0 4px; font-size: 1.8rem; }
+    .meta { color: #444; margin-bottom: 20px; }
+    h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid #ccc; padding-bottom: 4px; margin-top: 22px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.95rem; }
+    th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid #eee; vertical-align: top; }
+    th { width: 28%; color: #333; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    .notes { white-space: pre-wrap; background: #f7f7f7; padding: 12px; border-radius: 6px; }
+    .footer { margin-top: 28px; font-size: 0.8rem; color: #666; }
+    @media print { body { margin: 12mm; } }
+  </style>
+</head>
+<body>
+  <h1>${escapeHtml(character.name)}</h1>
+  <div class="meta">
+    ${escapeHtml(race?.name || 'Unknown race')}${character.elementalAffinity ? ` · ${escapeHtml(titleCase(character.elementalAffinity))}` : ''}
+    · ${escapeHtml(background?.name || character.background || 'No background')}
+    · Skill Level ${skillLevel.skillLevel} · Combat Power ${combatPower.combatPower}
+    · HP ${character.hp}/${stats.hp} · Stamina ${character.stamina}/${stats.stamina}
+    · Gil ${character.gil} · Lumens ${character.lumens}
+  </div>
+
+  <h2>Equipment</h2>
+  <table>${equipRows}</table>
+
+  <h2>Stats (base → effective)</h2>
+  <table>${statRows}</table>
+
+  <h2>Action Bar</h2>
+  <ul>${barSkills || '<li>No activatable skills slotted.</li>'}</ul>
+
+  <h2>All Skills (${(character.skills || []).length})</h2>
+  <ul>${skillRows || '<li>None learned.</li>'}</ul>
+
+  <h2>Inventory (${(character.inventory || []).length} entries)</h2>
+  <table><thead><tr><th>Item</th><th>Qty</th></tr></thead><tbody>${inventoryRows || '<tr><td colspan="2">Empty</td></tr>'}</tbody></table>
+
+  <h2>Notes</h2>
+  <div class="notes">${escapeHtml(notes)}</div>
+
+  <div class="footer">Generated by LumenForge · ${new Date().toLocaleString()}</div>
+</body>
+</html>`
+}
+
+export function openPrintableCharacterSheet(character) {
+  if (!character) return
+
+  let html
+  try {
+    html = buildPrintableSheetHtml(character)
+  } catch (error) {
+    console.error('Character sheet build failed:', error)
+    return toast('Could not build character sheet.')
+  }
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const win = window.open(url, '_blank')
+  if (!win) {
+    URL.revokeObjectURL(url)
+    return toast('Allow pop-ups to open the printable character sheet.')
+  }
+
+  const cleanupAndPrint = (() => {
+    let done = false
+    return () => {
+      if (done) return
+      done = true
+      URL.revokeObjectURL(url)
+      try { win.print() } catch { /* tab closed before print */ }
+    }
+  })()
+
+  win.addEventListener('load', () => setTimeout(cleanupAndPrint, 200))
+  setTimeout(cleanupAndPrint, 1000)
+}
