@@ -132,7 +132,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Process Turn',
-      'Press <strong>Process Turn</strong> on the Character tab at the <strong>start of your turn</strong> (before you move or act). On <em>your</em> sheet it: pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses; then ticks each effect\'s remaining duration down by 1 — a 1-round effect applies its tick this press, then expires. In combat, do this every turn; out of combat, only when the GM says to and you have effects or toggles to process.'
+      'Press <strong>Process Turn</strong> on the Character tab at the <strong>END OF YOUR TURN</strong> (after you move and/or act). On <em>your</em> sheet it: pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses; then ticks each effect\'s remaining duration down by 1 — a 1-round effect applies its tick this press, then expires. In combat, do this every turn; out of combat, only when the GM says to and you have effects or toggles to process.'
     ),
     tip(
       'Saves',
