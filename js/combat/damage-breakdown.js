@@ -10,6 +10,7 @@ import {
 } from './striker-combat.js'
 import { parseMultiWeaponAttackCount } from './weapon-combat.js'
 import { enchantmentDamageBonusForEntry, entryEnchantments } from '../items/enchantments.js'
+import { applyHealingToCharacter } from '../character/knockout.js'
 
 export const BASIC_ATTACK_ID = '__basic_attack__'
 export { characterHasStrikerBasics } from './striker-combat.js'
@@ -475,12 +476,11 @@ export function applySkillHeal(character, skill, rollDiceFn) {
   const breakdown = resolveHealBreakdown(character, skill, { rollDiceFn })
   if (!breakdown) return null
 
-  const stats = computeStats(character)
-  const before = character.hp
-  character.hp = Math.min(stats.hp, before + breakdown.total)
-  const healed = character.hp - before
+  const result = applyHealingToCharacter(character, breakdown.total, computeStats)
+  if (result.blocked) return null
+  const healed = result.healed
 
-  return { breakdown, healed, amount: breakdown.total }
+  return { breakdown, healed, amount: breakdown.total, revived: result.revived }
 }
 
 export function formatHealUseSummary(breakdown, healed) {

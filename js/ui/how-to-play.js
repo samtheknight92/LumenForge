@@ -132,11 +132,19 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Process Turn',
-      'Press <strong>Process Turn</strong> on the Character tab at the <strong>END OF YOUR TURN</strong> (after you move and/or act). On <em>your</em> sheet it: pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses; then ticks each effect\'s remaining duration down by 1 — a 1-round effect applies its tick this press, then expires. In combat, do this every turn; out of combat, only when the GM says to and you have effects or toggles to process.'
+      'Press <strong>Process Turn</strong> on the Character tab at the <strong>End of Turn</strong> — after you move, attack, use an item, or finish your action. On <em>your</em> sheet it: pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses (Bleeding, Poison, Burn, regeneration, Mana Focus, and similar); then ticks each effect\'s remaining duration down by 1 — a 1-round effect like Blind stays for your action, then expires on this press. Clears your Moved marker for next turn. In combat, do this every turn after you act; out of combat, only when the GM says to and you have effects or toggles to process.'
+    ),
+    tip(
+      'Knocked Out &amp; Revival',
+      'At <strong>0 HP</strong> you are <strong>Knocked Out</strong> — you cannot move, attack, use items, or use skills, but you stay in initiative. On each of your turns you may make one <strong>Recovery Roll</strong> (1d20): <strong>11+</strong> success, <strong>10 or lower</strong> failure. Two successes <em>in a row</em> → <strong>Revived</strong> at 1 HP. Three failures <em>in a row</em> → <strong>Dead</strong>. A failure resets the success streak; a success resets the failure streak. Track streaks on the Character tab. <strong>Manual revival</strong> by another character takes two of the helper\'s turns (step 1 begin CPR/first aid, step 2 finish) and Revives at 1 HP. A healing item or healing skill restores its full HP amount immediately, clears Recovery streaks, and removes Knocked Out (example: a 25 HP potion Revives and restores up to 25 HP, not merely 1 HP).'
+    ),
+    tip(
+      'Improvised actions &amp; Rule of Cool',
+      'Players may attempt actions that are not represented by a specific skill or item. The GM decides whether the action is reasonable, whether it uses the character\'s full turn, and what number must be rolled to succeed (<strong>Saving Roll</strong>). The GM may also require an item, piece of equipment or other resource to be damaged, consumed or sacrificed as part of the attempt. Example: a Bleeding character without bandages may tear clothing or gear into a pressure wrap — the GM may require the full turn, set a Saving Roll target, and permanently remove the sacrificed item whether the roll succeeds or fails. The app does not automate this; it stays a flexible GM ruling.'
     ),
     tip(
       'Saves',
-      'Use Export Save (sidebar) to back up characters. Homebrew packs and character files move between devices — the live website does not store your data. Clearing browser data, switching browsers, or using another device may lose local saves unless you exported them.'
+      'Use Export Save (sidebar) to back up characters. Homebrew packs and character files move between devices — the live website does not store your data. Clearing browser data, switching browsers, or using another device may lose local saves unless you exported them. Knocked Out state and Recovery Roll streaks are included in saves.'
     )
   ])
 
@@ -147,11 +155,11 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Your turn (combat)',
-      'When initiative reaches you: <strong>1.</strong> <strong>Process Turn</strong> on your sheet. <strong>2.</strong> <strong>Move</strong> <em>or</em> use one skill / Basic Attack (your choice first). <strong>3.</strong> Do the other if you still can — melee can move then strike; bows normally cannot move and shoot the same turn unless Quick Draw or a skill says otherwise. <strong>4.</strong> Say you are done; next player goes. Roll accuracy at the table first; only apply damage or target effects after the GM confirms a hit — action bar, physical dice, or manual HP/Stamina all work.'
+      'When initiative reaches you: <strong>1.</strong> <strong>Move</strong> <em>or</em> use one skill / Basic Attack (your choice first) — unless you are Knocked Out (Recovery Roll only). <strong>2.</strong> Do the other if you still can — melee can move then strike; bows normally cannot move and shoot the same turn unless Quick Draw or a skill says otherwise. <strong>3.</strong> Press <strong>Process Turn</strong> at the <strong>End of Turn</strong> (ticks, then durations). <strong>4.</strong> Say you are done; next player goes. Roll accuracy at the table first; only apply damage or target effects after the GM confirms a hit — action bar, physical dice, or manual HP/Stamina all work.'
     ),
     tip(
       'Outside combat',
-      'No initiative loop — explore, talk to NPCs and teammates, and all the roleplaying you expect from a TTRPG. Press <strong>Process Turn</strong> only when the GM calls for it and you have statuses or toggles that need ticking down; skip it if nothing is active.'
+      'No initiative loop — explore, talk to NPCs and teammates, and all the roleplaying you expect from a TTRPG. Press <strong>Process Turn</strong> only when the GM calls for it and you have statuses or toggles that need ticking down at End of Turn; skip it if nothing is active.'
     ),
     tip(
       'Skills tab',
@@ -198,7 +206,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Applying effects',
-      'Add status effects from the Character tab (pick effect, duration, optional note). Players press <strong>Process Turn</strong> at the start of their turn to tick timers — see <strong>Everyone</strong> above.'
+      'Add status effects from the Character tab (pick effect, duration, optional note). Players press <strong>Process Turn</strong> at the End of Turn to tick timers — see <strong>Everyone</strong> above. Track Knocked Out Recovery Rolls and manual revival on that character\'s sheet.'
     ),
     tip(
       'Homebrew',

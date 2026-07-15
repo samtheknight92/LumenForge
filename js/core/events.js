@@ -171,7 +171,11 @@ import {
   removeQuestEntry as doRemoveQuestEntry,
   addWeatherEffect as doAddWeatherEffect,
   removeWeatherEffect as doRemoveWeatherEffect,
-  setWeatherCombatRoll as doSetWeatherCombatRoll
+  setWeatherCombatRoll as doSetWeatherCombatRoll,
+  rollRecoveryCheck as doRollRecoveryCheck,
+  beginManualRevival as doBeginManualRevival,
+  continueManualRevival as doContinueManualRevival,
+  clearManualRevival as doClearManualRevival
 } from '../ui/actions.js'
 import { stepNumberInput } from '../ui/number-stepper.js'
 import { render } from '../ui/render.js'
@@ -553,6 +557,13 @@ const clickActions = {
   healFull() { doHeal() },
   staminaFull() { doRestoreStamina() },
   processTurn() { doProcessTurn() },
+  recoveryRoll() { doRollRecoveryCheck() },
+  manualRevivalStart() {
+    const name = prompt('Helper name (optional):', '') || ''
+    doBeginManualRevival(name)
+  },
+  manualRevivalAdvance() { doContinueManualRevival() },
+  manualRevivalCancel() { doClearManualRevival() },
   removeEffect(target) { doRemoveStatusEffect(target.dataset.removeEffect) },
   addEffect() {
     doAddStatusEffect(

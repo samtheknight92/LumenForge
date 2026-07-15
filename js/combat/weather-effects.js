@@ -142,7 +142,7 @@ export function weatherGameplayLines(effect) {
   }
 
   if (effect.processTurnStaminaDrain) {
-    lines.push(`End of Process Turn: −${effect.processTurnStaminaDrain} Stamina (apply to whole party at the table)`)
+    lines.push(`End of Turn: −${effect.processTurnStaminaDrain} Stamina (apply to whole party at the table)`)
   }
 
   if (effect.manaStorm) {

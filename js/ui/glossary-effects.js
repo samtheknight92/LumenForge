@@ -52,12 +52,12 @@ export const EFFECT_ALIASES = {
 
 /** Dictionary-only wording — game data in effects.json stays unchanged. */
 export const EFFECT_DESC_OVERRIDES = {
-  burn: 'Take 1 fire damage each turn for 4 turns. While burning, Strength is 2 lower.',
-  poison: 'Poison damage each turn for 3 turns: 1, then 2, then 3.',
-  acid_corrosion: 'Acid weakens armour each turn: Physical Defence goes down by 1 per turn for 5 turns. Usually no direct HP loss unless the GM adds it.',
-  bleeding: 'A nasty cut: lose 1 HP at the start of each turn for 3 turns. First aid or bandaging can end it early.',
-  critical_bleeding: 'A deep cut from a critical hit: lose 2 HP at the start of each turn for 3 turns.',
-  incapacitated: 'You cannot take actions this round — stunned, dazed, knocked out, or similar.',
+  burn: 'Take 1 fire damage each End of Turn for 4 turns. While burning, Strength is 2 lower.',
+  poison: 'Poison damage each End of Turn for 3 turns: 1, then 2, then 3.',
+  acid_corrosion: 'Acid weakens armour each End of Turn: Physical Defence goes down by 1 per turn for 5 turns. Usually no direct HP loss unless the GM adds it.',
+  bleeding: 'A nasty cut: lose 1 HP at the End of Turn for 3 turns. First aid or bandaging can end it early.',
+  critical_bleeding: 'A deep cut from a critical hit: lose 2 HP at the End of Turn for 3 turns.',
+  incapacitated: 'You cannot take actions this round — stunned, dazed, or similar (not the same as Knocked Out at 0 HP).',
   immobilized: 'You cannot move, but you can still attack or cast if the rules allow. Covers freeze, roots, and stuck-in-place effects.',
   mind_controlled: 'Someone else is steering your choices. Fear makes you move away; charm makes you unwilling to hurt the charmer.',
   fear: 'You must move away and cannot willingly move closer. While facing what scared you, roll twice on attacks and keep the lower roll.',
@@ -72,13 +72,13 @@ export const EFFECT_DESC_OVERRIDES = {
   intimidate_debuff: 'Shaken up: Accuracy −1 for 1 round.',
   suppressing_fire_debuff: 'Pinned down: −1 to attacks or movement for 1 round.',
   dissonant_note_debuff: 'Distracting noise: enemies in range have Accuracy −1 per performing Musician (saves also −1 per helper joining the song).',
-  regeneration: 'Heal 2 HP each turn for 5 turns. Also helps shrug off poison and disease while active.',
-  hp_regen: 'Heal a little HP each turn while this lasts.',
-  rapid_regeneration: 'Heal more HP each turn than normal regeneration.',
-  auto_healing: 'Your body mends itself a little each turn automatically.',
-  stamina_regen: 'Recover Stamina faster while this lasts.',
-  mana_regeneration: 'Recover spell energy over time — ask the GM how much each turn.',
-  mana_focus: 'Your next spell or magical attack hits a little harder or heals a little more.',
+  regeneration: 'Heal 2 HP each End of Turn for 5 turns. Also helps shrug off poison and disease while active.',
+  hp_regen: 'Heal a little HP each End of Turn while this lasts.',
+  rapid_regeneration: 'Heal more HP each End of Turn than normal regeneration.',
+  auto_healing: 'Your body mends itself a little each End of Turn automatically.',
+  stamina_regen: 'Recover Stamina faster while this lasts (Process Turn at End of Turn).',
+  mana_regeneration: 'Recover spell energy over time — Process Turn restores Stamina at End of Turn.',
+  mana_focus: 'Restore Stamina at the End of Turn while a staff or wand is equipped (Mana Focus).',
   poison_immunity: 'Poison damage and the Poison status cannot affect you.',
   poison_resistance: 'Poison damage is halved. You cannot gain new Poison stacks while this lasts (existing Poison still ticks).',
   fire_resistance: 'Fire damage is halved (50% resist — divide by 2).',
@@ -101,11 +101,11 @@ export const EFFECT_DESC_OVERRIDES = {
 
 /** One-line read-aloud summary for kids and casual tables. */
 export const EFFECT_TABLE_HINTS = {
-  burn: 'At the table: “You’re on fire — 1 damage each turn and you’re weaker until it fades.”',
-  poison: 'At the table: “The poison gets worse — 1, then 2, then 3 damage on Process Turn.”',
-  acid_corrosion: 'At the table: “Your armour is melting — subtract 1 Physical Defence each turn.”',
-  bleeding: 'At the table: “You’re bleeding — lose 1 HP when the turn ticks; bandage to stop.”',
-  critical_bleeding: 'At the table: “Bad cut — 2 HP each turn until healed or time runs out.”',
+  burn: 'At the table: “You’re on fire — 1 damage each End of Turn and you’re weaker until it fades.”',
+  poison: 'At the table: “The poison gets worse — 1, then 2, then 3 damage on Process Turn (End of Turn).”',
+  acid_corrosion: 'At the table: “Your armour is melting — subtract 1 Physical Defence each End of Turn.”',
+  bleeding: 'At the table: “You’re bleeding — lose 1 HP at End of Turn; bandage to stop.”',
+  critical_bleeding: 'At the table: “Bad cut — 2 HP each End of Turn until healed or time runs out.”',
   incapacitated: 'At the table: “You sit out your turn — no actions until it wears off.”',
   immobilized: 'At the table: “Your feet are stuck — you can still swing or cast if allowed.”',
   mind_controlled: 'At the table: “The GM tells you what your character does or feels until you shake it off.”',
@@ -120,8 +120,8 @@ export const EFFECT_TABLE_HINTS = {
   cursed: 'At the table: “Bad luck magic — weaker hits and spells cost extra Stamina.”',
   intimidate_debuff: 'At the table: “They stared you down — −1 to hit this round.”',
   suppressing_fire_debuff: 'At the table: “Keep your head down — −1 to hit or move.”',
-  regeneration: 'At the table: “You glow a little — +2 HP each Process Turn.”',
-  hp_regen: 'At the table: “Slow healing — tick HP up each turn.”',
+  regeneration: 'At the table: “You glow a little — +2 HP each End of Turn.”',
+  hp_regen: 'At the table: “Slow healing — tick HP up each End of Turn.”',
   poison_immunity: 'At the table: “Poison slides off — no poison damage or Poison status.”',
   fire_resistance: 'At the table: “Flames hurt half as much.”',
   fire_weakness: 'At the table: “Fire hits you twice as hard — watch out for torches and dragons.”',
@@ -231,7 +231,7 @@ function formatEffectDetail(effect) {
   if (effect.statModifiers && Object.keys(effect.statModifiers).length) {
     lines.push(`While active: ${formatStatModifiers(effect.statModifiers)}`)
   }
-  if (effect.tickHeal) lines.push(`Heals ${effect.tickHeal} health each turn when you press Process Turn.`)
+  if (effect.tickHeal) lines.push(`Heals ${effect.tickHeal} health at End of Turn when you press Process Turn.`)
   if (effect.flatDamageBonus) lines.push(`Bonus damage: +${effect.flatDamageBonus} while active.`)
   if (effect.stackable) lines.push('Can stack: yes — the GM tracks multiple copies if needed.')
   if (effect.immunities?.length) {

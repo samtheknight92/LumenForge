@@ -35,6 +35,7 @@ import {
   generateEncounterWarnings
 } from '../gm/encounter-balancer.js'
 import { isTableRuleRacePassive, racePassiveTooltip } from '../character/race-passives.js'
+import { knockoutStatusLabel, isKnockedOut, isDead } from '../character/knockout.js'
 import { listHomebrewItems, listHomebrewSkills, listHomebrewRaces, listHomebrewBackgrounds, listHomebrewRecipes, listHomebrewMonsterTypes, listHomebrewMonsterRoles, listHomebrewMonsterSpecials, homebrewSkillTreeOptions, homebrewRaceOptionsForSkills, homebrewWeaponKindOptions, weaponKindDisplayLabel, homebrewSkillLockOptions, homebrewSkillLockSummary, isHomebrewSkill, homebrewBalanceWarning, listMonsterTemplateSkillOptions, MONSTER_IMMUNITY_EXTRA_TAGS } from '../homebrew/homebrew.js'
 import {
   listBuilderTypeOptions,
@@ -374,7 +375,16 @@ function renderHeader() {
   const skillLevel = computeSkillLevel(character)
   const combatPower = computeCombatPower(character)
   name.textContent = character.name
-  subtitle.textContent = `${race?.name || 'Unknown race'} · Skill Level ${skillLevel.display} · Combat Power ${combatPower.display}${isGmMode() ? ' · GM Mode' : ''} · ${character.skills.length} skills · ${character.inventory.length} inventory lines`
+  const koLabel = knockoutStatusLabel(character)
+  subtitle.textContent = [
+    race?.name || 'Unknown race',
+    `Skill Level ${skillLevel.display}`,
+    `Combat Power ${combatPower.display}`,
+    isGmMode() ? 'GM Mode' : '',
+    koLabel,
+    `${character.skills.length} skills`,
+    `${character.inventory.length} inventory lines`
+  ].filter(Boolean).join(' · ')
   avatar.textContent = race?.icon || '👤'
   lumens.textContent = character.lumens
   hp.textContent = `${character.hp}/${stats.hp}`
@@ -1214,8 +1224,11 @@ function renderEffectsManager(character) {
           <h3>Effects & Status Manager</h3>
           <p class="effects-manager-intro">Hover any effect to see what it does. Shows ongoing passives from gear, weapon-matched skills, active toggles, max-stat hidden rewards, and resistances — not one-shot attack spells.</p>
         </div>
-        <button type="button" class="ghost-btn tiny" data-process-turn>Process Turn</button>
+        <button type="button" class="ghost-btn tiny" data-process-turn title="Press at the End of Turn after you act">Process Turn</button>
       </div>
+      <p class="subtle mt-8">Press <strong>Process Turn</strong> at the <strong>End of Turn</strong> — after you move, attack, or act — to apply ticks, then reduce durations.</p>
+
+      ${renderKnockoutPanel(character)}
 
       <div class="grid two effects-sections">
         <div class="effects-section">
@@ -1252,6 +1265,44 @@ function renderEffectsManager(character) {
         <button type="button" class="primary-btn full" data-add-weather>Add weather</button>
       </div>
     </section>
+  `
+}
+
+function renderKnockoutPanel(character) {
+  if (!character) return ''
+  if (isDead(character)) {
+    return `
+      <div class="effect-add-box knockout-panel warn mt-12">
+        <h3 class="effects-section-title">Dead</h3>
+        <p class="effect-add-intro">This character is Dead (three failed Recovery Rolls in a row). They remain on the roster for narrative or GM rulings — healing does not revive them.</p>
+      </div>
+    `
+  }
+  if (!isKnockedOut(character)) return ''
+  const ok = Number(character.recoverySuccessStreak || 0)
+  const fail = Number(character.recoveryFailureStreak || 0)
+  const revival = character.manualRevival
+  const revivalText = revival
+    ? `Manual revival in progress — <strong>step ${revival.step}/2</strong>${revival.helperName ? ` (${esc(revival.helperName)})` : ''}.`
+    : 'No manual revival in progress.'
+  return `
+    <div class="effect-add-box knockout-panel warn mt-12">
+      <h3 class="effects-section-title">Knocked Out</h3>
+      <p class="effect-add-intro">At 0 HP. Cannot move, attack, use items, or use skills. Remains in initiative. On your turn you may make one <strong>Recovery Roll</strong> (1d20: 11+ success). Two successes in a row → Revived at 1 HP. Three failures in a row → Dead. A failure resets the success streak and a success resets the failure streak.</p>
+      <div class="wrap mt-12">
+        <span class="pill warn">Success streak ${ok}/2</span>
+        <span class="pill danger">Failure streak ${fail}/3</span>
+      </div>
+      <p class="subtle mt-12">${revivalText}</p>
+      <div class="wrap mt-12">
+        <button type="button" class="primary-btn tiny" data-recovery-roll>Recovery Roll (1d20)</button>
+        ${!revival ? '<button type="button" class="ghost-btn tiny" data-manual-revival-start>Helper: begin revival (step 1)</button>' : ''}
+        ${revival?.step === 1 ? '<button type="button" class="ghost-btn tiny" data-manual-revival-advance>Helper: continue (step 2)</button>' : ''}
+        ${revival?.step === 2 ? '<button type="button" class="primary-btn tiny" data-manual-revival-advance>Helper: complete revival</button>' : ''}
+        ${revival ? '<button type="button" class="danger-btn tiny" data-manual-revival-cancel>Cancel manual revival</button>' : ''}
+      </div>
+      <p class="subtle mt-12">Healing item or healing skill on this sheet: Revives immediately, restores the full heal amount (capped by max HP), clears Recovery streaks, and removes Knocked Out.</p>
+    </div>
   `
 }
 

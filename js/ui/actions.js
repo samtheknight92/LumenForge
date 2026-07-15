@@ -104,6 +104,17 @@ import { getBackground } from '../character/backgrounds.js'
 import { computeSkillLevel } from '../character/skill-level.js'
 import { computeCombatPower } from '../character/combat-power.js'
 import { allocateCharacterName } from '../character/character-naming.js'
+import {
+  applyHealingToCharacter,
+  syncKnockoutAfterHpChange,
+  rollRecovery,
+  startManualRevival,
+  advanceManualRevival,
+  cancelManualRevival,
+  knockoutActionBlockReason,
+  isKnockedOut,
+  isDead
+} from '../character/knockout.js'
 import { buildNpcTurnSuggestions } from '../gm/gm-npc-turn.js'
 import { openPrintableCharacterSheet } from '../export/export-sheet.js'
 import {
@@ -604,23 +615,29 @@ export function useSkill(skillId) {
 export function processTurn() {
   const character = activeCharacter()
   if (!character) return
+  if (isDead(character)) return toast('Dead — Process Turn no longer applies.')
+  const previousHp = Number(character.hp || 0)
   character.movedThisTurn = false
   invalidateCharacterCache(character)
   const stillActive = []
   let spent = 0
   const messages = []
-  for (const skillId of character.activeToggles) {
-    const skill = getSkill(skillId)
-    const cost = getEffectiveSkillStaminaCost(character, skill)
-    if (character.stamina >= cost) {
-      character.stamina -= cost
-      spent += cost
-      stillActive.push(skillId)
-    } else {
-      messages.push(`${skill?.name || titleCase(skillId)} switched off: not enough Stamina.`)
+  if (!isKnockedOut(character)) {
+    for (const skillId of character.activeToggles) {
+      const skill = getSkill(skillId)
+      const cost = getEffectiveSkillStaminaCost(character, skill)
+      if (character.stamina >= cost) {
+        character.stamina -= cost
+        spent += cost
+        stillActive.push(skillId)
+      } else {
+        messages.push(`${skill?.name || titleCase(skillId)} switched off: not enough Stamina.`)
+      }
     }
+    character.activeToggles = stillActive
+  } else {
+    character.activeToggles = []
   }
-  character.activeToggles = stillActive
   const effectTick = tickStatusEffects(character)
   const weatherTick = tickWeatherEffects(character)
   const passiveTick = tickPassiveEffectSources(character)
@@ -631,12 +648,14 @@ export function processTurn() {
   const stats = computeStats(character)
   character.hp = clamp(character.hp, 0, stats.hp)
   character.stamina = clamp(character.stamina, 0, stats.stamina)
+  const koSync = syncKnockoutAfterHpChange(character, { previousHp })
   touch(character)
   const effectParts = [effectTick.summary, weatherTick.summary, passiveTick.summary].filter(Boolean)
   if (weatherDrain > 0) effectParts.push(`Heatwave: −${weatherDrain} Stamina (apply to whole party at table)`)
+  if (koSync.entered) effectParts.push('Knocked Out')
   const effectText = effectParts.length ? ` ${effectParts.join(', ')}.` : ''
   const toggleText = spent ? `${spent} Stamina spent.` : 'No toggle costs.'
-  toastCombat(`Processed turn. ${toggleText}${effectText}${messages.length ? ` ${messages[0]}` : ''}`)
+  toastCombat(`End of Turn processed. ${toggleText}${effectText}${messages.length ? ` ${messages[0]}` : ''}`)
 }
 
 export function addStatusEffect(effectId, duration, potency, notes) {
@@ -929,6 +948,8 @@ export function useBasicAttack() {
 export function markMoved() {
   const character = activeCharacter()
   if (!character) return
+  const koBlock = knockoutActionBlockReason(character)
+  if (koBlock) return toast(koBlock)
   character.movedThisTurn = true
   invalidateCharacterCache(character)
   touch(character, { header: true, actionBar: true })
@@ -998,7 +1019,25 @@ export function setResource(resource, value) {
   if (!character) return
   const stats = computeStats(character)
   const cleanValue = Math.floor(Number(value || 0))
-  if (resource === 'hp') character.hp = clamp(cleanValue, 0, stats.hp)
+  if (resource === 'hp') {
+    if (isDead(character) && cleanValue > 0) {
+      return toast('Dead — clear Dead via GM ruling before restoring HP.')
+    }
+    const previousHp = Number(character.hp || 0)
+    const wasKo = isKnockedOut(character)
+    if (wasKo && cleanValue > previousHp) {
+      const result = applyHealingToCharacter(character, cleanValue - previousHp, computeStats)
+      touch(character, { header: true, content: true, actionBar: true })
+      if (result.revived) toast(`Revived — restored ${result.healed} HP. Recovery streaks cleared.`)
+      return
+    }
+    character.hp = clamp(cleanValue, 0, stats.hp)
+    const sync = syncKnockoutAfterHpChange(character, { previousHp })
+    touch(character, { header: true, content: true, actionBar: true })
+    if (sync.entered) toast('Knocked Out at 0 HP.')
+    else if (sync.revived) toast('Revived — Recovery streaks cleared.')
+    return
+  }
   if (resource === 'stamina') character.stamina = clamp(cleanValue, 0, stats.stamina)
   if (resource === 'lumens') character.lumens = Math.max(0, cleanValue)
   touch(character, { header: true, content: true, actionBar: true })
@@ -1042,9 +1081,10 @@ export function setCurrencyPart(_part, value) {
 export function heal(amount = 9999) {
   const character = activeCharacter()
   if (!character) return
-  const stats = computeStats(character)
-  character.hp = clamp(character.hp + amount, 0, stats.hp)
-  touch(character, { header: true, content: true })
+  const result = applyHealingToCharacter(character, amount, computeStats)
+  if (result.blocked) return toast(result.reason === 'Dead' ? 'Dead — healing does not revive.' : 'Cannot heal.')
+  touch(character, { header: true, content: true, actionBar: true })
+  if (result.revived) toast(`Revived — restored ${result.healed} HP. Recovery streaks cleared.`)
 }
 
 export function restoreStamina(amount = 9999) {
@@ -1053,6 +1093,55 @@ export function restoreStamina(amount = 9999) {
   const stats = computeStats(character)
   character.stamina = clamp(character.stamina + amount, 0, stats.stamina)
   touch(character, { header: true, content: true })
+}
+
+export function rollRecoveryCheck() {
+  const character = activeCharacter()
+  if (!character) return
+  const result = rollRecovery(character)
+  if (result.error) return toast(result.error)
+  touch(character)
+  if (result.dead) {
+    toastCombat(`Recovery Roll ${result.roll} — failure. Three failures in a row: Dead.`)
+    return
+  }
+  if (result.revived) {
+    toastCombat(`Recovery Roll ${result.roll} — success. Two successes in a row: Revived at 1 HP.`)
+    return
+  }
+  if (result.success) {
+    toastCombat(`Recovery Roll ${result.roll} — success (${result.successStreak}/2). Need one more success in a row.`)
+    return
+  }
+  toastCombat(`Recovery Roll ${result.roll} — failure (${result.failureStreak}/3). Success streak reset.`)
+}
+
+export function beginManualRevival(helperName = '') {
+  const character = activeCharacter()
+  if (!character) return
+  if (!startManualRevival(character, helperName)) {
+    return toast(isDead(character) ? 'Dead — cannot start manual revival.' : 'Only Knocked Out characters can begin manual revival.')
+  }
+  touch(character)
+  toast(`Manual revival started — step 1/2${helperName ? ` (${helperName})` : ''}. Helper uses this turn to begin CPR / first aid.`)
+}
+
+export function continueManualRevival() {
+  const character = activeCharacter()
+  if (!character) return
+  const result = advanceManualRevival(character)
+  if (result.error) return toast(result.error)
+  touch(character)
+  if (result.revived) toast('Manual revival complete — Revived at 1 HP. Recovery streaks cleared.')
+  else toast('Manual revival — step 2/2. Helper finishes revival on their next turn.')
+}
+
+export function clearManualRevival() {
+  const character = activeCharacter()
+  if (!character) return
+  cancelManualRevival(character)
+  touch(character)
+  toast('Manual revival cancelled.')
 }
 
 export function rollDice(count, sides, modifier = 0) {

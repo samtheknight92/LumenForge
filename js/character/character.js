@@ -16,6 +16,7 @@ import { normalizeGil } from '../ui/format.js'
 import { applyBackgroundToCharacter, DEFAULT_BACKGROUND } from './backgrounds.js'
 import { mergeInventoryStacks } from '../items/items.js'
 import { migrateLegacyStatusEffect, statusStatModifiers } from '../effects/status-stat-modifiers.js'
+import { normalizeKnockoutFields } from './knockout.js'
 
 export function stripCharacterCache(character) {
   if (!character) return character
@@ -55,7 +56,12 @@ export function createCharacter(name, raceId, options = {}) {
     starredSkillIds: [],
     starredRecipeIds: [],
     weatherEffects: [],
-    folder: ''
+    folder: '',
+    knockedOut: false,
+    dead: false,
+    recoverySuccessStreak: 0,
+    recoveryFailureStreak: 0,
+    manualRevival: null
   }
   if (options.folder) character.folder = String(options.folder).trim().slice(0, 48)
   if (race?.id === 'dragonborn' && options.elementalAffinity) {
@@ -109,6 +115,7 @@ export function normalizeCharacter(character) {
   const computed = computeStats(merged)
   merged.hp = clamp(merged.hp, 0, computed.hp)
   merged.stamina = clamp(merged.stamina, 0, computed.stamina)
+  normalizeKnockoutFields(merged)
   return merged
 }
 

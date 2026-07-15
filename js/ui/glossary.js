@@ -43,7 +43,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['hit points', 'health'],
     category: 'Resources & money',
     summary: 'How much harm you can take before you are out of the fight.',
-    detail: 'HP is your health pool. When you take damage, subtract it from current HP. At 0 HP your character is down — the GM decides if that means unconscious, captured, or needing rescue. Raise max HP with stat upgrades (Lumens cap: 1000), gear, and helpful effects. The action bar has quick +/− buttons during fights.\n\nAt the table: “Subtract damage from HP; at zero, you’re out until someone helps.”'
+    detail: 'HP is your health pool. When you take damage, subtract it from current HP. At 0 HP your character is Knocked Out — see Recovery Roll and Revival in How to Play and the dictionary. Raise max HP with stat upgrades (Lumens cap: 1000), gear, and helpful effects. The action bar has quick +/− buttons during fights.\n\nAt the table: “Subtract damage from HP; at zero, you’re Knocked Out until you succeed on Recovery Rolls, an ally revives you, or healing brings you back.”'
   },
   {
     id: 'stamina',
@@ -83,7 +83,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['SPD', 'initiative'],
     category: 'Core stats',
     summary: 'Turn order, movement (1 Speed = 5ft per turn), and dodge-style checks.',
-    detail: 'Speed helps decide who acts first in combat. At the table, treat 1 Speed as 5ft of movement per turn (cap 12 = 60ft). Press Process Turn at the start of your turn to clear your movement marker (Moved on the action bar). Lumens upgrade cap: 12. At cap you unlock Afterimage (movement never provokes; win initiative ties vs equal or lower Speed). Some skills and racial traits reference Speed for evasion or special saves. The GM Tools tab has an initiative tracker — Speed is a guide, not auto-sorted by the app.'
+    detail: 'Speed helps decide who acts first in combat. At the table, treat 1 Speed as 5ft of movement per turn (cap 12 = 60ft). Press Process Turn at the End of Turn to clear your movement marker (Moved on the action bar). Lumens upgrade cap: 12. At cap you unlock Afterimage (movement never provokes; win initiative ties vs equal or lower Speed). Some skills and racial traits reference Speed for evasion or special saves. The GM Tools tab has an initiative tracker — Speed is a guide, not auto-sorted by the app.'
   },
   {
     id: 'physical-defence',
@@ -275,7 +275,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['status', 'buff', 'debuff', 'condition'],
     category: 'Effects & gear',
     summary: 'Temporary condition — poison, burn, bless, dazed, and similar.',
-    detail: 'Active statuses show on the Character tab under Applied Status Effects. The GM or player can add one from the Effects list (pick effect, duration, optional note). Press Process Turn at the start of your turn to tick durations down. Each entry in this dictionary explains what a status does in plain language.\n\nAt the table: “Put a token or note on the sheet — tick down each turn at the start of your turn.”'
+    detail: 'Active statuses show on the Character tab under Applied Status Effects. The GM or player can add one from the Effects list (pick effect, duration, optional note). Press Process Turn at the End of Turn to apply ticks and reduce durations. Each entry in this dictionary explains what a status does in plain language.\n\nAt the table: “Put a token or note on the sheet — tick down each End of Turn.”'
   },
   {
     id: 'potency',
@@ -290,16 +290,32 @@ export const GLOSSARY_ENTRIES = [
     term: 'Duration (rounds)',
     aliases: ['rounds', 'remaining'],
     category: 'Effects & gear',
-    summary: 'How many turns an effect lasts — Process Turn counts down at the start of your turn.',
-    detail: 'Duration is in turns unless the effect says otherwise. Blank duration often means “until removed.” Press Process Turn at the start of your turn to reduce remaining time on all active statuses and apply per-turn ticks. “Sustain” on skills is separate — that is how long you keep performing a song.'
+    summary: 'How many turns an effect lasts — Process Turn counts down at the End of Turn.',
+    detail: 'Duration is in turns unless the effect says otherwise. Blank duration often means “until removed.” Press Process Turn at the End of Turn to apply per-turn ticks, then reduce remaining time on all active statuses. A 1-turn Blind lasts through your action, then expires when you process. “Sustain” on skills is separate — that is how long you keep performing a song.'
   },
   {
     id: 'process-turn',
     term: 'Process Turn',
-    aliases: ['start of turn', 'tick effects'],
+    aliases: ['end of turn', 'tick effects', 'end of round'],
     category: 'Effects & gear',
-    summary: 'Press at the start of your turn — pays toggle costs, ticks statuses, clears movement marker.',
-    detail: 'Press Process Turn at the start of your turn, before moving or acting. It pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses; ticks each effect\'s remaining duration down by 1; and clears your previous movement marker. In combat, do this every turn; out of combat, only when the GM says to and you have effects or toggles to process.'
+    summary: 'Press at the End of Turn — pays toggle costs, ticks statuses, then reduces durations, clears Moved.',
+    detail: 'Press Process Turn at the End of Turn, after moving or acting. It pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses; ticks each effect\'s remaining duration down by 1; and clears your movement marker for next turn. In combat, do this every turn after you act; out of combat, only when the GM says to and you have effects or toggles to process.'
+  },
+  {
+    id: 'knocked-out',
+    term: 'Knocked Out',
+    aliases: ['0 hp', 'recovery roll', 'revived', 'dead', 'manual revival'],
+    category: 'Effects & gear',
+    summary: 'At 0 HP — no normal actions; Recovery Rolls, ally revival, or healing bring you back.',
+    detail: 'When you reach 0 HP you become Knocked Out: you cannot move, attack, use items, or use skills, but you stay in initiative. Each of your turns you may make one Recovery Roll (1d20): 11+ success, 10 or lower failure. Two successes in a row → Revived at 1 HP. Three failures in a row → Dead. Streaks reset when the opposite result is rolled. Another character may spend two of their turns on manual revival (step 1 begin, step 2 finish) to Revive you at 1 HP. A healing item or healing skill Revives immediately, restores its full heal amount (capped by max HP), and clears Recovery streaks. Track all of this on the Character tab.\n\nAt the table: “Zero HP? Knocked Out — Recovery Roll or someone helps.”'
+  },
+  {
+    id: 'saving-roll',
+    term: 'Saving Roll',
+    aliases: ['saving throw', 'save'],
+    category: 'Effects & gear',
+    summary: 'A GM-set roll to resist an effect or succeed at an improvised action.',
+    detail: 'When the table needs a check that is not a normal Accuracy attack — resisting a curse, improvising a bandage from torn cloth, and similar — the GM sets a target number for a Saving Roll. Roll as the GM directs; the app does not automate most Saving Rolls.'
   },
   {
     id: 'background',
