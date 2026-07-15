@@ -2160,7 +2160,7 @@ body.has-action-bar .toast {
   .app-shell.sidebar-collapsed .sidebar {
     display: none;
   }
-  
+
   /* Keep Export/Import Save at the bottom of the character menu clear of the action bar. */
   body.has-action-bar .app-shell:not(.sidebar-collapsed) ~ .action-bar {
     left: max(0px, calc((100vw - min(1760px, 100vw)) / 2 + 10px + 280px + 12px));
