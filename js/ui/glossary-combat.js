@@ -50,12 +50,12 @@ export const COMBAT_GLOSSARY_ENTRIES = [
     detail: 'Read the weapon or skill. Crits often add extra dice or trigger bonus effects (Burn, Bleeding). There is no shared crit chart — follow the card that gave you the attack.\n\nAt the table: “That was a crit — add the extra dice or effect from the skill.”'
   },
   {
-    id: 'ranged-critical',
-    term: 'Ranged critical (double natural 20)',
-    aliases: ['bow crit', 'crossbow crit', 'double 20', 'vital shot'],
+    id: 'double-natural-20',
+    term: 'Double Natural 20',
+    aliases: ['double 20', 'instant defeat', 'vital shot', 'ranged critical', 'bow crit', 'crossbow crit'],
     category: 'Combat & rolls',
-    summary: 'Bow or crossbow: natural 20 on accuracy, then roll a second d20 — double 20 may drop the target.',
-    detail: 'Ranged criticals: if a bow or crossbow attack rolls a natural 20 on accuracy, roll one extra d20. If that second roll is also a natural 20, the GM may allow an instant takedown or vital-shot effect. Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover.\n\nAt the table: “Nat 20 on the bow — roll again. Another 20? GM calls the shot.”'
+    summary: 'Natural 20 on a Basic Weapon Attack → roll again; another 20 instantly defeats the target (with limits).',
+    detail: 'When any Basic Weapon Attack rolls a natural 20, roll another d20. If that second roll is also a natural 20, the target is instantly defeated. This applies to Basic Attacks from all weapon types. Ranged weapon skills and abilities can also trigger this rule; non-ranged weapon skills cannot unless their description says otherwise. Multi-hit and area attacks get one Double Natural 20 check per ability use. Bosses, major story characters, and enemies marked immune to instant defeat take maximum critical damage and ignore Defence instead.\n\nAt the table: “Nat 20 on the Basic Attack — roll again. Another 20? They’re down — unless the GM says boss rules.”'
   },
   {
     id: 'physical-damage',

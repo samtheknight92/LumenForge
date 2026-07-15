@@ -1,5 +1,4 @@
 import { esc } from '../core/utils.js'
-import { RANGED_CRITICAL_RULE } from '../core/constants.js'
 
 function section(title, bodyHtml) {
   return `
@@ -21,6 +20,29 @@ function tip(label, text) {
 
 function tips(items) {
   return `<div class="how-to-items">${items.join('')}</div>`
+}
+
+function doubleNatural20Block() {
+  const rules = [
+    'If the second roll is also a natural 20, the target is instantly defeated.',
+    'This applies to Basic Attacks from <strong>all</strong> weapon types.',
+    '<strong>Ranged</strong> weapon skills and abilities can also trigger this rule.',
+    '<strong>Non-ranged</strong> weapon skills and abilities cannot trigger it unless their description specifically says otherwise.',
+    'Multi-hit and area attacks only receive <strong>one</strong> Double Natural 20 check per ability use — not one check per hit or target.',
+    'Bosses, major story characters, and enemies marked as immune to instant defeat are not instantly killed. Instead, the attack deals its <strong>maximum critical damage</strong> and ignores Defence.'
+  ]
+
+  return `
+    <div class="how-to-block">
+      ${tip(
+        'Double Natural 20',
+        'When any <strong>Basic Weapon Attack</strong> rolls a natural 20, roll another d20.'
+      )}
+      <ul class="how-to-sublist">
+        ${rules.map(row => `<li>${row}</li>`).join('')}
+      </ul>
+    </div>
+  `
 }
 
 function skillTypesBlock() {
@@ -111,6 +133,7 @@ export function renderHowToPlayTab() {
       'Combat flow',
       'On your turn, say what you do. To attack, roll <strong>d20 + Accuracy</strong> vs the target\'s <strong>Physical Defence</strong> (melee/ranged) or <strong>Magical Defence</strong> (spells). On a hit, roll damage — read the skill or Basic Attack tooltip for the formula.'
     ),
+    doubleNatural20Block(),
     actionBarBlock(),
     resourcesBlock(),
     skillTypesBlock(),
@@ -120,7 +143,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Ranged weapons',
-      'With bows and crossbows, you normally <strong>cannot move and attack in the same turn, in either order</strong>, unless <strong>Quick Draw</strong> or a skill says otherwise (e.g. Parting Shot: attack then up to 15ft — plus normal movement if you have Quick Draw). Mark <strong>Moved</strong> on the action bar when you reposition. Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover. ${RANGED_CRITICAL_RULE} See <strong>Skills → Weapons → Ranged</strong> for the full summary.'
+      'With bows and crossbows, you normally <strong>cannot move and attack in the same turn, in either order</strong>, unless <strong>Quick Draw</strong> or a skill says otherwise (e.g. Parting Shot: attack then up to 15ft — plus normal movement if you have Quick Draw). Mark <strong>Moved</strong> on the action bar when you reposition. Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover. See <strong>Skills → Weapons → Ranged</strong> for the full summary.'
     ),
     tip(
       'Harmonies &amp; careers',
