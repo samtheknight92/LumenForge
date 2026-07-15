@@ -183,7 +183,7 @@ const CAREERS_SKILLS_DATA = {
     [
       { id: 'long_set', name: 'Long Set', icon: '🎭', desc: 'Passive: Sustained performance — your songs may last 1 extra turn (e.g. Work Song up to 4 turns).' },
       { id: 'marching_tune', name: 'Marching Tune', icon: '🥁', desc: 'Action: Sustained performance — up to 2 turns (4 Stamina once); allies in hearing range +1 Speed per performing Musician. + Harmony Reaction: join the same song (+1 initiative for listeners while sustained).' },
-      { id: 'soothing_hymn', name: 'Soothing Hymn', icon: '🕊️', desc: 'Action: Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener\'s turn while sustained).' }
+      { id: 'soothing_hymn', name: 'Soothing Hymn', icon: '🕊️', desc: 'Action: Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the End of each listener\'s turn while sustained).' }
     ],
     [
       { id: 'battle_anthem', name: 'Battle Anthem', icon: '🎺', desc: 'Action: Allied ballad — sustain up to 3 turns (6 Stamina once); allies in hearing range +1 accuracy per performing Musician. + Harmony Reaction: join the same song (+1 damage on next hit per Musician while sustained).', prereqT2: 'marching_tune' },

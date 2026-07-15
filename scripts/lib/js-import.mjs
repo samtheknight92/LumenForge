@@ -29,6 +29,7 @@ const BASENAME_PATHS = {
   'combat-power.js': 'character/combat-power.js',
   'threat-level.js': 'character/threat-level.js',
   'max-stat-rewards.js': 'character/max-stat-rewards.js',
+  'knockout.js': 'character/knockout.js',
   'skills.js': 'skills/skills.js',
   'fusion-nav.js': 'skills/fusion-nav.js',
   'skill-activation.js': 'skills/skill-activation.js',
