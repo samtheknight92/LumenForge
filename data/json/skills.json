@@ -12368,7 +12368,7 @@
         "tier": 5,
         "cost": 320,
         "staminaCost": 22,
-        "desc": "Action: Make three dagger attacks as one Action (each at -2 Accuracy). Each hit applies Bleeding — lose 1d4 HP at the start of each turn for 3 rounds. You must wield a dagger.",
+        "desc": "Action: Make three dagger attacks as one Action (each at -2 Accuracy). Each hit applies Bleeding — lose 1d4 HP at the End of Turn for 3 rounds. You must wield a dagger.",
         "icon": "🗡️",
         "prerequisites": {
           "type": "AND",
@@ -13822,7 +13822,7 @@
         "tier": 2,
         "cost": 20,
         "staminaCost": 0,
-        "desc": "Action: Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener's turn while sustained).",
+        "desc": "Action: Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the End of each listener's turn while sustained).",
         "icon": "🕊️",
         "prerequisites": {
           "type": "AND",
@@ -15048,7 +15048,7 @@
         "tier": 5,
         "cost": 25,
         "staminaCost": 12,
-        "desc": "Ultimate (once per long rest): 30ft hellfire for 5 rounds — each enemy inside takes 1d8 fire at the start of their turn; allies inside gain +1 damage on attacks.",
+        "desc": "Ultimate (once per long rest): 30ft hellfire for 5 rounds — each enemy inside takes 1d8 fire at the End of their turn; allies inside gain +1 damage on attacks.",
         "icon": "🔥",
         "prerequisites": {
           "type": "AND",

@@ -692,7 +692,7 @@ try {
             "tier": 5,
             "cost": 25,
             "staminaCost": 12,
-            "desc": "Ultimate (once per long rest): 30ft hellfire for 5 rounds — each enemy inside takes 1d8 fire at the start of their turn; allies inside gain +1 damage on attacks.",
+            "desc": "Ultimate (once per long rest): 30ft hellfire for 5 rounds — each enemy inside takes 1d8 fire at the End of their turn; allies inside gain +1 damage on attacks.",
             "icon": "🔥",
             "prerequisites": {
                 "type": "AND",

@@ -1205,7 +1205,7 @@ const CAREERS_SKILLS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action: Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener's turn while sustained).",
+            "desc": "Action: Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the End of each listener's turn while sustained).",
             "icon": "🕊️",
             "prerequisites": {
                 "type": "AND",

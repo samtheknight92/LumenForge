@@ -507,7 +507,7 @@ const ITEMS_DATA = {
             "specialEffects": [
                 "nature_blessing"
             ],
-            "desc": "An elegant elvish bow. +3 Speed, +1 Magic Power. Damage: 1d10. GRANTS: Nature Blessing (+2 Accuracy, +1 Magic Power outdoors for 8 turns; heal 1 HP at start of outdoor turns).",
+            "desc": "An elegant elvish bow. +3 Speed, +1 Magic Power. Damage: 1d10. GRANTS: Nature Blessing (+2 Accuracy, +1 Magic Power outdoors for 8 turns; heal 1 HP at End of outdoor turns).",
             "icon": "ðŸ§",
             "price": {
                 "gold": 1,
@@ -3190,7 +3190,7 @@ const ITEMS_DATA = {
                 "permanent_all_stats_1",
                 "regeneration"
             ],
-            "desc": "Consume: permanently +1 Strength, Magic Power, Accuracy, and Speed; restore 1 HP at the start of each turn.",
+            "desc": "Consume: permanently +1 Strength, Magic Power, Accuracy, and Speed; restore 1 HP at the End of Turn.",
             "icon": "âš—ï¸",
             "price": {
                 "gold": 25,
@@ -3526,7 +3526,7 @@ const ITEMS_DATA = {
             "isCursed": true,
             "curseStyle": "combat",
             "hiddenGMDescription": "The blade is warm to the touch and hums after a killing blow. It remembers every life it takes.",
-            "hiddenGMAbility": "After the wielder defeats a foe, they lose 2 Stamina at the start of their next turn unless they feed the blade a drop of blood (flavour — no extra mechanic).",
+            "hiddenGMAbility": "After the wielder defeats a foe, they lose 2 Stamina at the End of their next turn unless they feed the blade a drop of blood (flavour — no extra mechanic).",
             "hiddenGMNotes": "Let them enjoy +5 Strength first. The hunger reveal should feel personal, not punitive math."
         },
         "staff_of_borrowed_light": {

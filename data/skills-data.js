@@ -13105,7 +13105,7 @@ const SKILLS_DATA = {
                 "tier": 5,
                 "cost": 320,
                 "staminaCost": 22,
-                "desc": "Action: Make three dagger attacks as one Action (each at -2 Accuracy). Each hit applies Bleeding — lose 1d4 HP at the start of each turn for 3 rounds. You must wield a dagger.",
+                "desc": "Action: Make three dagger attacks as one Action (each at -2 Accuracy). Each hit applies Bleeding — lose 1d4 HP at the End of Turn for 3 rounds. You must wield a dagger.",
                 "icon": "🗡️",
                 "prerequisites": {
                     "type": "AND",

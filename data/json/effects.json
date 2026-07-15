@@ -125,7 +125,7 @@
     "type": "healOverTime",
     "duration": 5,
     "potency": 1,
-    "desc": "Restore 1 HP at the start of each turn for 5 turns (Process Turn).",
+    "desc": "Restore 1 HP at the End of Turn for 5 turns (Process Turn).",
     "stackable": true,
     "tickHeal": 1,
     "manual": true
@@ -137,7 +137,7 @@
     "type": "recovery",
     "duration": 5,
     "potency": 1,
-    "desc": "Restore 1 Stamina at the start of each turn for 5 turns (Process Turn).",
+    "desc": "Restore 1 Stamina at the End of Turn for 5 turns (Process Turn).",
     "stackable": true,
     "tickStamina": 1,
     "manual": true
@@ -149,7 +149,7 @@
     "type": "recovery",
     "duration": 0,
     "potency": 0,
-    "desc": "Restore 1 Stamina at the start of each turn while a staff or wand is equipped (Mana Focus passive).",
+    "desc": "Restore 1 Stamina at the End of Turn while a staff or wand is equipped (Mana Focus passive).",
     "stackable": false,
     "tickStamina": 1,
     "manual": true
@@ -477,7 +477,7 @@
     "type": "damageOverTime",
     "duration": 3,
     "potency": 1,
-    "desc": "Bleeding wound: lose 1 HP at the start of each turn for 3 turns. Bandaging ends the effect early.",
+    "desc": "Bleeding wound: lose 1 HP at the End of Turn for 3 turns. Bandaging ends the effect early.",
     "stackable": false,
     "tickDamage": 1,
     "manual": true
@@ -950,7 +950,7 @@
     "type": "recovery",
     "duration": 0,
     "potency": 0,
-    "desc": "Restore 1 Stamina at the start of each turn while active.",
+    "desc": "Restore 1 Stamina at the End of Turn while active.",
     "stackable": false,
     "tickStamina": 1,
     "manual": true
@@ -1588,7 +1588,7 @@
     "type": "recovery",
     "duration": 0,
     "potency": 0,
-    "desc": "Permanent: restore 1 HP at the start of each turn (Process Turn). Legendary.",
+    "desc": "Permanent: restore 1 HP at the End of Turn (Process Turn). Legendary.",
     "stackable": false,
     "tickHeal": 1,
     "manual": false
@@ -1747,7 +1747,7 @@
     "type": "protection",
     "duration": 8,
     "potency": 0,
-    "desc": "+2 Physical Defence OR +2 Magical Defence each turn (choose at start of turn) for 8 turns.",
+    "desc": "+2 Physical Defence OR +2 Magical Defence each turn (choose each turn) for 8 turns.",
     "stackable": false,
     "statModifiers": {
       "physicalDefence": 2,
@@ -1809,7 +1809,7 @@
     "type": "healOverTime",
     "duration": 999,
     "potency": 0,
-    "desc": "Restore 1 HP at the start of each turn while equipped or active.",
+    "desc": "Restore 1 HP at the End of Turn while equipped or active.",
     "stackable": false,
     "tickHeal": 1,
     "manual": true
@@ -4610,7 +4610,7 @@
     "type": "buff",
     "duration": 2,
     "potency": 0,
-    "desc": "Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the start of each listener's turn while sustained).",
+    "desc": "Allied ballad — sustain up to 2 turns (4 Stamina once); allies in hearing range +1 Magical Defence per performing Musician. + Harmony Reaction: join the same song (+1 Stamina at the End of each listener's turn while sustained).",
     "stackable": false,
     "manual": false,
     "statModifiers": {
