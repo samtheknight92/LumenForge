@@ -113,7 +113,7 @@ const skillsJson = JSON.parse(fs.readFileSync(path.join(jsonDir, 'skills.json'),
 const allSkills = walkSkills(skillsJson)
 const COPY_CHECKS = [
   { id: 'algebra', re: /\bn²\b|\bn\^2\b|where n\b/i, allow: [] },
-  { id: 'advantage', re: /\badvantage\b|\bdisadvantage\b/i, allow: [/reach_advantage/i] },
+  { id: 'advantage', re: /\badvantage\b|\bdisadvantage\b/i, allow: [/reach_advantage/i, /quick_draw/i] },
   { id: 'pd-md', re: /\b\+\d+ PD\b|\b\+\d+ MD\b|\bPD for\b/i, allow: [] },
   { id: 'bad-harmony', re: /Other \[careers\]/i, allow: [] },
   { id: 'stack-bookkeeping', re: /stackable up to|per long rest per source|every \d+ also|at 3\+ also/i, allow: [] }

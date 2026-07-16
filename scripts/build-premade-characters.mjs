@@ -174,7 +174,9 @@ function buildEntry({ category, level, slotIndex, archetype, name, race, element
 
   const targets = selectSkillTargets(archetype, category, level)
   const toggleTargets = (archetype.toggles || []).filter(id => skillById.has(id))
-  const expandedSkills = expandSkillTargets([...targets, ...toggleTargets], skillById)
+  let expandedSkills = expandSkillTargets([...targets, ...toggleTargets], skillById)
+  const maxSkills = Math.max(0, level - 1)
+  if (expandedSkills.length > maxSkills) expandedSkills = expandedSkills.slice(0, maxSkills)
   const activeToggles = expandedSkills.filter(id => toggleSkills.has(id) && toggleTargets.includes(id))
 
   const { specs: gearSpecs, gearIds } = buildGear(archetype, level)

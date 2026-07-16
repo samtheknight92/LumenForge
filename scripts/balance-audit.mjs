@@ -13,6 +13,7 @@ import {
   HUMANOID_MONSTER_GIL
 } from './lib/premade-generator.mjs'
 import { TIER_LUMEN_COST, TIER_MIN_LEVEL, minLevelForTier, characterLevelFromTotal } from './lib/progression.mjs'
+import { getStatCostForPurchasedCount } from './lib/stat-costs.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.join(__dirname, '..')
@@ -22,11 +23,17 @@ const CURRENCY = { gold: 2500, silver: 100, copper: 1 }
 const toGil = p => (Number(p?.gold || 0) * CURRENCY.gold) + (Number(p?.silver || 0) * CURRENCY.silver) + Number(p?.copper || 0)
 
 const DEFAULT_STATS = { hp: 10, stamina: 10, strength: -3, magicPower: -3, accuracy: -3, speed: 2, physicalDefence: 8, magicalDefence: 8 }
-const STAT_RULES = { hp: 3, stamina: 4, strength: 10, magicPower: 10, accuracy: 8, speed: 12, physicalDefence: 10, magicalDefence: 10 }
+const STAT_BASE = { hp: 3, stamina: 4, strength: 10, magicPower: 10, accuracy: 8, speed: 12, physicalDefence: 10, magicalDefence: 10 }
 const STAT_MAX = { hp: 500, stamina: 200, strength: 15, magicPower: 15, accuracy: 12, speed: 20, physicalDefence: 30, magicalDefence: 30 }
 const START_LUMEN = 113
 const START_GIL = 2400
 const TARGET_LEVEL = 43
+
+function progressiveSpend(stat, purchases) {
+  let total = 0
+  for (let i = 0; i < purchases; i++) total += getStatCostForPurchasedCount(stat, i)
+  return total
+}
 
 const tierLevel = t => Number(t || 1) / 5
 const statLevel = k => (k === 'hp' || k === 'stamina' ? 0.2 : 0.4)
@@ -99,7 +106,7 @@ let maxStatLumen = 0
 for (const [stat, base] of Object.entries(DEFAULT_STATS)) {
   const purchases = Math.max(0, STAT_MAX[stat] - base)
   maxStatLevels += purchases * statLevel(stat)
-  maxStatLumen += purchases * STAT_RULES[stat]
+  maxStatLumen += progressiveSpend(stat, purchases)
 }
 
 const allSkillLevels = allSkills.reduce((s, sk) => s + tierLevel(sk.tier), 0)
@@ -157,9 +164,10 @@ function packSkillsForLevelWithStatUnlock(displayLevel) {
     if (rem < statLevel('hp') - 0.001) break
     rem -= statLevel('hp')
     statLevels += statLevel('hp')
-    lumen += STAT_RULES.hp
+    const cost = getStatCostForPurchasedCount('hp', hpPurchases)
+    lumen += cost
     hpPurchases += 1
-    picked.push({ kind: 'hp', cost: STAT_RULES.hp })
+    picked.push({ kind: 'hp', cost })
   }
   return {
     count: picked.filter(p => p.kind === 'skill').length,
@@ -180,13 +188,13 @@ function packStatsForLevel(displayLevel) {
   for (const stat of ['strength', 'magicPower', 'physicalDefence', 'magicalDefence', 'accuracy', 'speed', 'stamina', 'hp']) {
     const base = DEFAULT_STATS[stat]
     const max = STAT_MAX[stat]
-    const cost = STAT_RULES[stat]
+    const cost = getStatCostForPurchasedCount(stat, purchases[stat] || 0)
     const lv = statLevel(stat)
     let cur = base
     while (cur < max && rem >= lv - 0.001) {
       cur += 1
       rem -= lv
-      lumen += cost
+      lumen += getStatCostForPurchasedCount(stat, purchases[stat] || 0)
       purchases[stat] = (purchases[stat] || 0) + 1
       final[stat] = cur
     }
@@ -240,7 +248,7 @@ function auditPremadeSpend(entry) {
   let statLevels = 0
   for (const [stat, base] of Object.entries(DEFAULT_STATS)) {
     const purchases = Math.max(0, Number(entry.stats?.[stat] ?? base) - base)
-    statLumen += purchases * STAT_RULES[stat]
+    statLumen += progressiveSpend(stat, purchases)
     statLevels += purchases * statLevel(stat)
   }
   const level = characterLevelFromTotal(skillLevels + statLevels)

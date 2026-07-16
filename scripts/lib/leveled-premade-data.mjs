@@ -43,7 +43,9 @@ export function gearFraction(level) {
 }
 
 export function targetSkillCount(level) {
-  return Math.min(16, 2 + Math.floor(level / 3))
+  // Leave room for Combat Power so SL + CP can still hit the target Threat Level.
+  const maxForThreat = Math.max(0, Number(level || 0) - 1)
+  return Math.min(maxForThreat, Math.min(18, Math.floor(Number(level || 0) * 0.45)))
 }
 
 // ─── Gear tables (ordered common → legendary within each list) ───

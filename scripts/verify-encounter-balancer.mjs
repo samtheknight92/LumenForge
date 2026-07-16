@@ -1,41 +1,43 @@
 #!/usr/bin/env node
-import { computeEncounterDifficulty } from '../js/gm/encounter-balancer.js'
+import { computeEncounterDifficulty, resolvePartyAvgThreatLevel } from '../js/gm/encounter-balancer.js'
 
-const base = computeEncounterDifficulty({
-  partyAvgCombatPower: 10,
-  partyAvgSkillLevel: 2,
+const low = computeEncounterDifficulty({
+  partyAvgThreatLevel: 8,
   partyCount: 4,
   enemyThreatLevel: 10,
   enemyCount: 2
 })
 
-const highSkill = computeEncounterDifficulty({
-  partyAvgCombatPower: 10,
-  partyAvgSkillLevel: 30,
+const high = computeEncounterDifficulty({
+  partyAvgThreatLevel: 30,
   partyCount: 4,
   enemyThreatLevel: 10,
   enemyCount: 2
 })
 
-if (!base.power || !base.technique) {
-  throw new Error('Encounter difficulty must return power and technique pressures')
+if (!Number.isFinite(low.index) || !low.label) {
+  throw new Error('Encounter difficulty must return label and index')
 }
 
-if (base.power.index === base.technique.index && base.power.index === highSkill.power.index) {
-  throw new Error('Same CP with different SL should produce different technique ratings')
+if (high.index >= low.index) {
+  throw new Error('Higher party Threat Level should ease difficulty vs same enemies')
 }
 
-if (highSkill.technique.index >= base.technique.index) {
-  throw new Error('Higher Skill Level should ease technique pressure vs same enemies')
+const combined = resolvePartyAvgThreatLevel({
+  partyAvgSkillLevel: 5,
+  partyAvgCombatPower: 7
+})
+if (combined !== 12) {
+  throw new Error(`Expected SL+CP fallback of 12, got ${combined}`)
 }
 
-if (!base.label || base.index == null) {
-  throw new Error('Combined label and index required for backward compatibility')
-}
-
-const combined = Math.round((base.power.index + base.technique.index) / 2)
-if (base.index !== combined) {
-  throw new Error(`Combined index should be average of pressures (expected ${combined}, got ${base.index})`)
+const explicit = resolvePartyAvgThreatLevel({
+  partyAvgThreatLevel: 20,
+  partyAvgSkillLevel: 5,
+  partyAvgCombatPower: 7
+})
+if (explicit !== 20) {
+  throw new Error(`Explicit party TL should win (expected 20, got ${explicit})`)
 }
 
 console.log('verify-encounter-balancer: ok')

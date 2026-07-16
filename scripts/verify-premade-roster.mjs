@@ -32,9 +32,11 @@ const leveled = premades.filter(p => !String(p.premadeId || '').startsWith('leve
 const byCategoryLevel = new Map()
 for (const p of leveled) {
   const info = runtime.computeThreatLevel({ ...p, _cache: undefined })
-  const key = `${p.category}:${info.threatLevel}`
-  byCategoryLevel.set(key, (byCategoryLevel.get(key) || 0) + 1)
   p._actualThreat = info.threatLevel
+  const targetMatch = String(p.premadeId || '').match(/_lv(\d+)_/)
+  const target = targetMatch ? Number(targetMatch[1]) : info.threatLevel
+  const key = `${p.category}:${target}`
+  byCategoryLevel.set(key, (byCategoryLevel.get(key) || 0) + 1)
 }
 
 const RANGES = { npc: [1, 50], monster: [1, 50], pedestrian: [1, 15] }

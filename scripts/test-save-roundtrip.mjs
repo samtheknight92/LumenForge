@@ -40,7 +40,7 @@ const FULL_UI_KEYS = [
   'itemBuyableOnly', 'itemSort', 'itemPage', 'gmMode',
   'initiativeTracker', 'gmNpcTurnCharacterIds',
   'characterFolderNames', 'characterFolderOrder', 'characterFolderOpen',
-  'gmSpawnFolder'
+  'gmSpawnFolder', 'activeEncounter'
 ]
 
 const tests = []

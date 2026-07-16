@@ -6,6 +6,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { getStatCostForPurchasedCount } from './lib/stat-costs.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const premadeDir = path.join(root, 'data', 'premade-characters')
@@ -18,7 +19,6 @@ const DEFAULT_STATS = {
   hp: 10, stamina: 10, strength: -3, magicPower: -3, accuracy: -3,
   speed: 2, physicalDefence: 8, magicalDefence: 8
 }
-const STAT_COST = { hp: 3, accuracy: 8, strength: 10, magicPower: 10, physicalDefence: 10, magicalDefence: 10 }
 
 const WEAPON_KIND = {
   bronze_sword: 'sword', wooden_staff: 'staff', bronze_dagger: 'dagger', training_bow: 'ranged'
@@ -105,9 +105,16 @@ function diceAvg(formula, stat, flat = 0) {
 
 function fmtPct(n) { return `${(n * 100).toFixed(0)}%` }
 
+function nextStatCost(char, stat) {
+  const purchased = Math.max(0, Number(char.stats[stat] ?? DEFAULT_STATS[stat]) - Number(DEFAULT_STATS[stat]))
+  return getStatCostForPurchasedCount(stat, purchased)
+}
+
 function applyStatBuy(char, stat) {
+  const cost = nextStatCost(char, stat)
   char.stats[stat] = (char.stats[stat] ?? DEFAULT_STATS[stat]) + 1
-  char.lumens -= STAT_COST[stat]
+  char.lumens -= cost
+  return cost
 }
 
 function rest1Sensible(char) {
@@ -122,17 +129,18 @@ function rest1Sensible(char) {
   for (const stat of order) {
     const base = c.stats[stat] ?? DEFAULT_STATS[stat]
     const target = 0
-    if (base < target && budget >= STAT_COST[stat]) {
+    const cost = nextStatCost(c, stat)
+    if (base < target && budget >= cost) {
       applyStatBuy(c, stat)
-      budget -= STAT_COST[stat]
-      buys.push(`${stat} +1 (${STAT_COST[stat]}L)`)
+      budget -= cost
+      buys.push(`${stat} +1 (${cost}L)`)
       if (budget < 3) break
     }
   }
-  while (budget >= STAT_COST.hp) {
-    applyStatBuy(c, 'hp')
-    budget -= STAT_COST.hp
-    buys.push(`hp +1 (${STAT_COST.hp}L)`)
+  while (budget >= nextStatCost(c, 'hp')) {
+    const cost = applyStatBuy(c, 'hp')
+    budget -= cost
+    buys.push(`hp +1 (${cost}L)`)
   }
   return { buys, char: c, banked: budget }
 }
@@ -141,9 +149,9 @@ function rest1HpOnly(char) {
   const c = JSON.parse(JSON.stringify(char))
   c.lumens = 9
   const buys = []
-  while (c.lumens >= STAT_COST.hp) {
-    applyStatBuy(c, 'hp')
-    buys.push(`hp +1 (${STAT_COST.hp}L)`)
+  while (c.lumens >= nextStatCost(c, 'hp')) {
+    const cost = applyStatBuy(c, 'hp')
+    buys.push(`hp +1 (${cost}L)`)
   }
   return { buys, char: c, banked: c.lumens }
 }

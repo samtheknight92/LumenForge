@@ -8,13 +8,13 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { minLevelForTier, characterLevelFromTotal } from './lib/progression.mjs'
+import { getStatCostForPurchasedCount } from './lib/stat-costs.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const jsonDir = path.join(root, 'data', 'json')
 const premadeDir = path.join(root, 'data', 'premade-characters')
 
 const DEFAULT_STATS = { hp: 10, stamina: 10, strength: -3, magicPower: -3, accuracy: -3, speed: 2, physicalDefence: 8, magicalDefence: 8 }
-const STAT_COST = { hp: 3, stamina: 4, strength: 10, magicPower: 10, accuracy: 8, speed: 12, physicalDefence: 10, magicalDefence: 10 }
 
 /** Combat stats before HP padding — mirrors what players actually buy at the table. */
 const REST_STAT_PRIORITY = {
@@ -106,7 +106,8 @@ function tryLearnNext(char) {
 }
 
 function buyStat(char, statKey) {
-  const cost = STAT_COST[statKey]
+  const purchased = Math.max(0, Number(char.stats[statKey] ?? DEFAULT_STATS[statKey]) - Number(DEFAULT_STATS[statKey]))
+  const cost = getStatCostForPurchasedCount(statKey, purchased)
   if (!cost || char.lumens < cost) return null
   char.lumens -= cost
   char.stats[statKey] = (char.stats[statKey] ?? DEFAULT_STATS[statKey]) + 1
