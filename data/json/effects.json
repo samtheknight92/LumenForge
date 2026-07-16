@@ -939,7 +939,7 @@
     "type": "passive",
     "duration": 0,
     "potency": 0,
-    "desc": "You may attack with ranged weapons the same turn you move (others cannot).",
+    "desc": "Your first ranged weapon attack each combat gains Advantage and costs 1 less Stamina, to a minimum cost of 0.",
     "stackable": false,
     "manual": false
   },

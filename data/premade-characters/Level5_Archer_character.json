@@ -4,14 +4,14 @@
   "race": "human",
   "category": "npc",
   "elementalAffinity": "",
-  "lumens": 1,
+  "lumens": 0,
   "gil": 850,
   "stats": {
-    "hp": 24,
+    "hp": 20,
     "stamina": 10,
-    "strength": -2,
+    "strength": 0,
     "magicPower": -3,
-    "accuracy": -1,
+    "accuracy": 1,
     "speed": 2,
     "physicalDefence": 8,
     "magicalDefence": 8
@@ -52,5 +52,5 @@
     "armor": "level5_archer_leather_armor_3",
     "accessory": null
   },
-  "notes": "Bow + Marksman — Aimed Shot, Steady Aim, Steady Hand (+1 ACC ranged). ACC/STR trained; leather armour. Quick-Start sheet — legacy combined level 5 (diagnostic only). Spent 112 Lumens (44 skills + 68 stats) and 1550 Gil on gear. Banked 1 Lumens after creation."
+  "notes": "Bow + Marksman — Aimed Shot, Steady Aim, Steady Hand. ACC/STR trained; leaner HP. Quick-Start sheet — legacy combined level 5 (diagnostic only). Spent 150 Lumens (44 skills + 106 stats) and 1550 Gil on gear."
 }

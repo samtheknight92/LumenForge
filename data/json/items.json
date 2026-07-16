@@ -16,7 +16,7 @@
         "silver": 3
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "iron_sword": {
       "id": "iron_sword",
@@ -48,7 +48,7 @@
         "quantity": 1,
         "skillRequired": 2
       },
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "steel_sword": {
       "id": "steel_sword",
@@ -66,7 +66,7 @@
         "silver": 15
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "silver_sword": {
       "id": "silver_sword",
@@ -118,7 +118,7 @@
         "silver": 20
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "frost_sword": {
       "id": "frost_sword",
@@ -140,7 +140,7 @@
         "silver": 20
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "wind_blade": {
       "id": "wind_blade",
@@ -162,7 +162,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "obsidian_blade": {
       "id": "obsidian_blade",
@@ -184,7 +184,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "dragon_blade": {
       "id": "dragon_blade",
@@ -207,7 +207,7 @@
         "silver": 75
       },
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "bronze_dagger": {
       "id": "bronze_dagger",
@@ -225,7 +225,7 @@
         "silver": 2
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "iron_dagger": {
       "id": "iron_dagger",
@@ -243,7 +243,7 @@
         "silver": 6
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "main_gauche": {
       "id": "main_gauche",
@@ -265,7 +265,7 @@
         "silver": 9
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "silver_dagger": {
       "id": "silver_dagger",
@@ -330,7 +330,7 @@
         "silver": 15
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "assassin_blade": {
       "id": "assassin_blade",
@@ -352,7 +352,7 @@
         "silver": 0
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "void_dagger": {
       "id": "void_dagger",
@@ -374,7 +374,7 @@
         "silver": 0
       },
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "shadow_fang": {
       "id": "shadow_fang",
@@ -396,7 +396,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "temporal_blade": {
       "id": "temporal_blade",
@@ -418,7 +418,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "training_bow": {
       "id": "training_bow",
@@ -436,7 +436,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "hunting_bow": {
       "id": "hunting_bow",
@@ -454,7 +454,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "crossbow": {
       "id": "crossbow",
@@ -475,7 +475,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "composite_bow": {
       "id": "composite_bow",
@@ -516,7 +516,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "elvish_bow": {
       "id": "elvish_bow",
@@ -538,7 +538,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "crystal_bow": {
       "id": "crystal_bow",
@@ -561,7 +561,7 @@
       },
       "enchantmentSlots": 3,
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "storm_bow": {
       "id": "storm_bow",
@@ -583,7 +583,7 @@
       },
       "enchantmentSlots": 3,
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "celestial_bow": {
       "id": "celestial_bow",
@@ -605,7 +605,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "stone_hammer": {
       "id": "stone_hammer",
@@ -623,7 +623,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "iron_mace": {
       "id": "iron_mace",
@@ -642,7 +642,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "war_hammer": {
       "id": "war_hammer",
@@ -663,7 +663,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "blessed_mace": {
       "id": "blessed_mace",
@@ -706,7 +706,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "earth_hammer": {
       "id": "earth_hammer",
@@ -728,7 +728,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "thunder_hammer": {
       "id": "thunder_hammer",
@@ -750,7 +750,7 @@
       },
       "enchantmentSlots": 3,
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "titan_hammer": {
       "id": "titan_hammer",
@@ -773,7 +773,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "void_crusher": {
       "id": "void_crusher",
@@ -796,7 +796,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "bronze_axe": {
       "id": "bronze_axe",
@@ -814,7 +814,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "iron_axe": {
       "id": "iron_axe",
@@ -832,7 +832,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "battle_axe": {
       "id": "battle_axe",
@@ -853,7 +853,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "double_axe": {
       "id": "double_axe",
@@ -897,7 +897,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "berserker_axe": {
       "id": "berserker_axe",
@@ -920,7 +920,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "executioner_axe": {
       "id": "executioner_axe",
@@ -942,7 +942,7 @@
       },
       "enchantmentSlots": 3,
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "chaos_axe": {
       "id": "chaos_axe",
@@ -965,7 +965,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "world_cleaver": {
       "id": "world_cleaver",
@@ -988,7 +988,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "wooden_staff": {
       "id": "wooden_staff",
@@ -1006,7 +1006,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "quarterstaff": {
       "id": "quarterstaff",
@@ -1026,7 +1026,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "mystic_staff": {
       "id": "mystic_staff",
@@ -1044,7 +1044,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "crystal_staff": {
       "id": "crystal_staff",
@@ -1085,7 +1085,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "void_staff": {
       "id": "void_staff",
@@ -1107,7 +1107,7 @@
       },
       "enchantmentSlots": 3,
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "elemental_staff": {
       "id": "elemental_staff",
@@ -1130,7 +1130,7 @@
       },
       "enchantmentSlots": 3,
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "cosmic_staff": {
       "id": "cosmic_staff",
@@ -1153,7 +1153,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "genesis_rod": {
       "id": "genesis_rod",
@@ -1177,7 +1177,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "bronze_spear": {
       "id": "bronze_spear",
@@ -1196,7 +1196,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "iron_spear": {
       "id": "iron_spear",
@@ -1215,7 +1215,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "spear": {
       "id": "spear",
@@ -1236,7 +1236,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "halberd": {
       "id": "halberd",
@@ -1304,7 +1304,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "dragon_lance": {
       "id": "dragon_lance",
@@ -1327,7 +1327,7 @@
       },
       "enchantmentSlots": 3,
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "infinity_spear": {
       "id": "infinity_spear",
@@ -1351,7 +1351,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "reality_piercer": {
       "id": "reality_piercer",
@@ -1375,7 +1375,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     }
   },
   "armor": {
@@ -1394,7 +1394,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "leather_armor": {
       "id": "leather_armor",
@@ -1421,7 +1421,7 @@
         "quantity": 1,
         "skillRequired": 2
       },
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "studded_leather": {
       "id": "studded_leather",
@@ -1439,7 +1439,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "chain_mail": {
       "id": "chain_mail",
@@ -1457,7 +1457,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "scale_mail": {
       "id": "scale_mail",
@@ -1476,7 +1476,7 @@
       },
       "enchantmentSlots": 0,
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "plate_mail": {
       "id": "plate_mail",
@@ -1571,7 +1571,7 @@
         "silver": 40
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "ice_armor": {
       "id": "ice_armor",
@@ -1602,7 +1602,7 @@
         "silver": 45
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "shadow_cloak": {
       "id": "shadow_cloak",
@@ -1623,7 +1623,7 @@
       },
       "enchantmentSlots": 2,
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "dragon_scale_armor": {
       "id": "dragon_scale_armor",
@@ -1646,7 +1646,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "void_armor": {
       "id": "void_armor",
@@ -1669,7 +1669,7 @@
       },
       "enchantmentSlots": 3,
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "celestial_robes": {
       "id": "celestial_robes",
@@ -1694,7 +1694,7 @@
       },
       "enchantmentSlots": 1,
       "rarity": "legendary",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     }
   },
   "accessories": {
@@ -1713,7 +1713,7 @@
         "silver": 25
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "ring_of_speed": {
       "id": "ring_of_speed",
@@ -1778,7 +1778,7 @@
         "silver": 20
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "ring_of_ice": {
       "id": "ring_of_ice",
@@ -1808,7 +1808,7 @@
         "silver": 20
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "ring_of_storms": {
       "id": "ring_of_storms",
@@ -1838,7 +1838,7 @@
         "silver": 25
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "ring_of_shadows": {
       "id": "ring_of_shadows",
@@ -1858,7 +1858,7 @@
         "silver": 35
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "speed_boots": {
       "id": "speed_boots",
@@ -1913,7 +1913,7 @@
         "silver": 45
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "winged_boots": {
       "id": "winged_boots",
@@ -1932,7 +1932,7 @@
         "silver": 0
       },
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "health_amulet": {
       "id": "health_amulet",
@@ -1952,7 +1952,7 @@
         "silver": 25
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "amulet_of_mana": {
       "id": "amulet_of_mana",
@@ -1973,7 +1973,7 @@
         "silver": 30
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "pendant_of_wisdom": {
       "id": "pendant_of_wisdom",
@@ -2015,7 +2015,7 @@
         "silver": 18
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "amulet_of_shadows": {
       "id": "amulet_of_shadows",
@@ -2037,7 +2037,7 @@
         "silver": 22
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "amulet_of_light": {
       "id": "amulet_of_light",
@@ -2060,7 +2060,7 @@
         "silver": 25
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "cloak_of_elvenkind": {
       "id": "cloak_of_elvenkind",
@@ -2081,7 +2081,7 @@
         "silver": 50
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "cloak_of_displacement": {
       "id": "cloak_of_displacement",
@@ -2102,7 +2102,7 @@
         "silver": 25
       },
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "lucky_coin": {
       "id": "lucky_coin",
@@ -2139,7 +2139,7 @@
         "silver": 0
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "gauntlets_of_ogre_power": {
       "id": "gauntlets_of_ogre_power",
@@ -2159,7 +2159,7 @@
         "silver": 60
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "belt_of_giant_strength": {
       "id": "belt_of_giant_strength",
@@ -2234,7 +2234,7 @@
         "silver": 25
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "precision_scope": {
       "id": "precision_scope",
@@ -2254,7 +2254,7 @@
         "silver": 15
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "hunter_focus_charm": {
       "id": "hunter_focus_charm",
@@ -2273,7 +2273,7 @@
         "silver": 20
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     }
   },
   "offhand": {
@@ -2293,7 +2293,7 @@
         "silver": 6
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "iron_shield": {
       "id": "iron_shield",
@@ -2311,7 +2311,7 @@
         "silver": 18
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "apprentice_spell_tome": {
       "id": "apprentice_spell_tome",
@@ -2330,7 +2330,7 @@
         "silver": 12
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "travel_lute": {
       "id": "travel_lute",
@@ -2348,7 +2348,7 @@
         "silver": 15
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "round_buckler": {
       "id": "round_buckler",
@@ -2369,7 +2369,7 @@
         "silver": 10
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "steel_kite_shield": {
       "id": "steel_kite_shield",
@@ -2407,7 +2407,7 @@
         "silver": 14
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "scholars_grimoire": {
       "id": "scholars_grimoire",
@@ -2444,7 +2444,7 @@
         "silver": 12
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "war_horn": {
       "id": "war_horn",
@@ -2482,7 +2482,7 @@
         "silver": 11
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "torch_brace": {
       "id": "torch_brace",
@@ -2500,7 +2500,7 @@
         "copper": 8
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "heater_shield": {
       "id": "heater_shield",
@@ -2560,7 +2560,7 @@
         "silver": 8
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "mirror_shield": {
       "id": "mirror_shield",
@@ -2582,7 +2582,7 @@
         "silver": 20
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "aegis_of_dawn": {
       "id": "aegis_of_dawn",
@@ -2604,7 +2604,7 @@
         "silver": 40
       },
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "novice_wand": {
       "id": "novice_wand",
@@ -2622,7 +2622,7 @@
         "silver": 8
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "star_chart_folio": {
       "id": "star_chart_folio",
@@ -2665,7 +2665,7 @@
         "silver": 5
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "void_scripture": {
       "id": "void_scripture",
@@ -2685,7 +2685,7 @@
         "silver": 25
       },
       "rarity": "epic",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "wooden_flute": {
       "id": "wooden_flute",
@@ -2703,7 +2703,7 @@
         "silver": 9
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "silver_bells": {
       "id": "silver_bells",
@@ -2761,7 +2761,7 @@
         "silver": 12
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "symphony_harp": {
       "id": "symphony_harp",
@@ -2781,7 +2781,7 @@
         "silver": 35
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "trail_compass": {
       "id": "trail_compass",
@@ -2800,7 +2800,7 @@
         "silver": 7
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "component_pouch": {
       "id": "component_pouch",
@@ -2820,7 +2820,7 @@
         "silver": 10
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "druidic_totem": {
       "id": "druidic_totem",
@@ -2919,7 +2919,7 @@
         "silver": 18
       },
       "rarity": "rare",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "lucky_charm": {
       "id": "lucky_charm",
@@ -2937,7 +2937,7 @@
         "copper": 5
       },
       "rarity": "common",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     }
   },
   "consumables": {
@@ -2956,7 +2956,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "bread": {
       "id": "bread",
@@ -2973,7 +2973,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "cheese": {
       "id": "cheese",
@@ -2991,7 +2991,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "meat_ration": {
       "id": "meat_ration",
@@ -3009,7 +3009,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "wine": {
       "id": "wine",
@@ -3027,7 +3027,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "health_potion": {
       "id": "health_potion",
@@ -3054,7 +3054,7 @@
         "quantity": 2,
         "skillRequired": 1
       },
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "stamina_potion": {
       "id": "stamina_potion",
@@ -3072,7 +3072,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "greater_health_potion": {
       "id": "greater_health_potion",
@@ -3192,7 +3192,7 @@
       },
       "rarity": "rare",
       "stackable": true,
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "fire_resistance_potion": {
       "id": "fire_resistance_potion",
@@ -3246,7 +3246,7 @@
       },
       "rarity": "rare",
       "stackable": true,
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "scroll_of_fireball": {
       "id": "scroll_of_fireball",
@@ -3299,7 +3299,7 @@
       },
       "rarity": "rare",
       "stackable": true,
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "phoenix_feather": {
       "id": "phoenix_feather",
@@ -3319,7 +3319,7 @@
       },
       "rarity": "legendary",
       "stackable": true,
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "dragon_heart": {
       "id": "dragon_heart",
@@ -3339,7 +3339,7 @@
       },
       "rarity": "legendary",
       "stackable": true,
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "elixir_of_immortality": {
       "id": "elixir_of_immortality",
@@ -3359,7 +3359,7 @@
       },
       "rarity": "legendary",
       "stackable": false,
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "lockpick_set": {
       "id": "lockpick_set",
@@ -3376,7 +3376,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "rope": {
       "id": "rope",
@@ -3393,7 +3393,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "torch": {
       "id": "torch",
@@ -3411,7 +3411,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "holy_water": {
       "id": "holy_water",
@@ -3446,7 +3446,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "wood": {
       "id": "wood",
@@ -3461,7 +3461,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "leather": {
       "id": "leather",
@@ -3476,7 +3476,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "herbs": {
       "id": "herbs",
@@ -3491,7 +3491,7 @@
       },
       "rarity": "common",
       "stackable": true,
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "crystal": {
       "id": "crystal",
@@ -3521,7 +3521,7 @@
       },
       "rarity": "rare",
       "stackable": true,
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "reinforcement_studs": {
       "id": "reinforcement_studs",
@@ -3552,7 +3552,7 @@
       },
       "rarity": "rare",
       "stackable": true,
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "titan_bones": {
       "id": "titan_bones",
@@ -3567,7 +3567,7 @@
       },
       "rarity": "epic",
       "stackable": true,
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "phase_essence": {
       "id": "phase_essence",
@@ -3582,7 +3582,7 @@
       },
       "rarity": "epic",
       "stackable": true,
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "storm_organ": {
       "id": "storm_organ",
@@ -3598,7 +3598,7 @@
       },
       "rarity": "epic",
       "stackable": true,
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "elemental_core": {
       "id": "elemental_core",
@@ -3613,7 +3613,7 @@
       },
       "rarity": "epic",
       "stackable": true,
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "soul_essence": {
       "id": "soul_essence",
@@ -3628,7 +3628,7 @@
       },
       "rarity": "legendary",
       "stackable": true,
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "divine_essence": {
       "id": "divine_essence",
@@ -3643,7 +3643,7 @@
       },
       "rarity": "legendary",
       "stackable": true,
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "ghost_moss": {
       "id": "ghost_moss",
@@ -3658,7 +3658,7 @@
       },
       "rarity": "rare",
       "stackable": true,
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "flame_petals": {
       "id": "flame_petals",
@@ -3673,7 +3673,7 @@
       },
       "rarity": "rare",
       "stackable": true,
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "cosmic_dust": {
       "id": "cosmic_dust",
@@ -3688,7 +3688,7 @@
       },
       "rarity": "legendary",
       "stackable": true,
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     }
   },
   "cursed_equipment": {
@@ -3726,7 +3726,7 @@
       "counterMax": 20,
       "blockRemoveWithCounter": true,
       "counterEquippedOnly": true,
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "blade_of_hungry_shadows": {
       "id": "blade_of_hungry_shadows",
@@ -3754,7 +3754,7 @@
       "hiddenGMDescription": "The blade is warm to the touch and hums after a killing blow. It remembers every life it takes.",
       "hiddenGMAbility": "After the wielder defeats a foe, they lose 2 Stamina at the End of their next turn unless they feed the blade a drop of blood (flavour — no extra mechanic).",
       "hiddenGMNotes": "Let them enjoy +5 Strength first. The hunger reveal should feel personal, not punitive math.",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "staff_of_borrowed_light": {
       "id": "staff_of_borrowed_light",
@@ -3782,7 +3782,7 @@
       "hiddenGMDescription": "The light is stolen from a bound spirit inside the crystal head.",
       "hiddenGMAbility": "In total darkness the staff sheds bright light — but allies within 10 ft feel uneasy (−1 to social checks while lit, GM call). The spirit sometimes whispers through the glow.",
       "hiddenGMNotes": "Obvious combat upside; social unease is the trade-off. Good starter curse.",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "ring_of_false_comfort": {
       "id": "ring_of_false_comfort",
@@ -3807,7 +3807,7 @@
       "hiddenGMDescription": "The stone is a frozen tear from a sorrow spirit.",
       "hiddenGMAbility": "When the wearer drops below half Stamina, they must pass a simple Will check or become Distracted for 1 turn (GM sets DC by scene).",
       "hiddenGMNotes": "Players love the +4 Stamina until the first crisis.",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "cursed_buckler": {
       "id": "cursed_buckler",
@@ -3861,7 +3861,7 @@
       "hiddenGMDescription": "Threads of shadow replace broken links overnight.",
       "hiddenGMAbility": "After each long rest, roll 1d6. On a 1, the armour sheds one thread — −1 Physical Defence until repaired (craft or story).",
       "hiddenGMNotes": "Track the penalty on the sheet; repair is a roleplay beat.",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "achilles_dagger": {
       "id": "achilles_dagger",
@@ -3889,7 +3889,7 @@
       "hiddenGMDescription": "The blade drinks from both victim and wielder.",
       "hiddenGMAbility": "Whenever this weapon deals damage, the wielder immediately suffers damage equal to half the damage dealt (rounded down).",
       "hiddenGMNotes": "Common rarity, uncommon power — the self-harm is the reveal.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "bloodletter_axe": {
       "id": "bloodletter_axe",
@@ -3917,7 +3917,7 @@
       "hiddenGMDescription": "The axe is happiest when the ground runs red.",
       "hiddenGMAbility": "If the wielder finishes a combat without drawing blood, they instead lose HP equal to their Strength bonus (minimum 5).",
       "hiddenGMNotes": "Crit-heal is player-facing flavour; the bloodless combat tax is the real curse.",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "dragonheart_armour": {
       "id": "dragonheart_armour",
@@ -3945,7 +3945,7 @@
       "hiddenGMDescription": "Dragonfire still lives in the scales — water quenches dragons.",
       "hiddenGMAbility": "Water attacks against the wearer always Crit.",
       "hiddenGMNotes": "Tempting tank gear. Reveal the water weakness when it matters.",
-      "shopMinLevel": 21
+      "shopMinLevel": 35
     },
     "helm_of_truth": {
       "id": "helm_of_truth",
@@ -3971,7 +3971,7 @@
       "hiddenGMDescription": "The helm knows when you lie — and punishes the attempt.",
       "hiddenGMAbility": "The wearer cannot knowingly tell a lie.",
       "hiddenGMNotes": "Roleplay curse. Social scenes become memorable fast.",
-      "shopMinLevel": 9
+      "shopMinLevel": 12
     },
     "lantern_of_lost_souls": {
       "id": "lantern_of_lost_souls",
@@ -4023,7 +4023,7 @@
       "hiddenGMDescription": "The mirror does not discriminate between gift and wound.",
       "hiddenGMAbility": "When you copy a skill, you also copy every negative status effect attached to that skill.",
       "hiddenGMNotes": "Player-facing copy is a huge upside; the mirrored debuff is the sting.",
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "lucky_amulet": {
       "id": "lucky_amulet",
@@ -4105,7 +4105,7 @@
       "counterLabel": "Whispers",
       "counterDefault": 0,
       "counterMax": 99,
-      "shopMinLevel": 14
+      "shopMinLevel": 20
     },
     "ring_of_friendship": {
       "id": "ring_of_friendship",
@@ -4130,7 +4130,7 @@
       "hiddenGMDescription": "Kindness draws attention — not all of it gentle.",
       "hiddenGMAbility": "Hostile monsters become curious rather than immediately aggressive. This is not always beneficial.",
       "hiddenGMNotes": "Curious ogres still exist. Roleplay tool, not a charm spell.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     }
   },
   "unidentified_loot": {
@@ -4155,7 +4155,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real sword you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_axe": {
       "id": "unknown_axe",
@@ -4178,7 +4178,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real axe you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_dagger": {
       "id": "unknown_dagger",
@@ -4201,7 +4201,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real dagger you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_staff": {
       "id": "unknown_staff",
@@ -4224,7 +4224,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real staff you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_bow": {
       "id": "unknown_bow",
@@ -4248,7 +4248,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real bow you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_hammer": {
       "id": "unknown_hammer",
@@ -4271,7 +4271,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real hammer you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_polearm": {
       "id": "unknown_polearm",
@@ -4294,7 +4294,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real polearm you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_ring": {
       "id": "unknown_ring",
@@ -4315,7 +4315,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real ring you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_amulet": {
       "id": "unknown_amulet",
@@ -4336,7 +4336,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real amulet you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_cloak": {
       "id": "unknown_cloak",
@@ -4357,7 +4357,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real cloak you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_armour": {
       "id": "unknown_armour",
@@ -4379,7 +4379,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real armour you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_shield": {
       "id": "unknown_shield",
@@ -4402,7 +4402,7 @@
       "unidentifiedItem": true,
       "sellable": false,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real shield you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_vial": {
       "id": "unknown_vial",
@@ -4424,7 +4424,7 @@
       "sellable": false,
       "stackable": true,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real potion or elixir you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_scroll": {
       "id": "unknown_scroll",
@@ -4446,7 +4446,7 @@
       "sellable": false,
       "stackable": true,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real scroll you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     },
     "unknown_item": {
       "id": "unknown_item",
@@ -4468,7 +4468,7 @@
       "sellable": false,
       "stackable": true,
       "hiddenGMNotes": "When the party identifies this at a town, remove it and grant the real item you prepared. Until then, you may tell the player what it does if you have already decided.",
-      "shopMinLevel": 1
+      "shopMinLevel": 0
     }
   }
 }

@@ -32,7 +32,7 @@
 // BALANCE NOTES:
 // - Toggle skills have stamina costs and mutual exclusivity
 // - Immunity skills have doubled costs to reflect their power
-// - Tier level gates: T1→Lv1 · T2→Lv5 · T3→Lv9 · T4→Lv14 · T5→Lv21
+// - Training gates (progress = sum of tier÷5): T2≈6×T1 · T3≈12×T2 · T4≈16×T3 · T5≈20×T4
 // - Tier Lumen floors: 8 / 20 / 40 / 65 / 100 (premiums scale from legacy costs)
 // - Weapon-based skills require appropriate equipment
 //
@@ -279,7 +279,7 @@ const SKILLS_DATA = {
                 "tier": 1,
                 "cost": 8,
                 "staminaCost": 0,
-                "desc": "Passive: +2 Accuracy while wielding a ranged weapon and you did not move this turn.",
+                "desc": "Passive: +2 Accuracy while wielding a ranged weapon.",
                 "icon": "🎯",
                 "prerequisites": {
                     "type": "NONE",
@@ -416,7 +416,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 3,
-                "desc": "Action: Ranged weapon attack (d20 + accuracy vs Physical Defence; weapon damage on hit), then move up to 15ft without provoking opportunity attacks. If you know Quick Draw, that 15ft is in addition to your normal movement this turn.",
+                "desc": "Action: Ranged weapon attack (d20 + accuracy vs Physical Defence; weapon damage on hit), then move up to 15ft without provoking opportunity attacks.",
                 "icon": "↩️",
                 "prerequisites": {
                     "type": "AND",
@@ -432,7 +432,7 @@ const SKILLS_DATA = {
                 "tier": 3,
                 "cost": 40,
                 "staminaCost": 0,
-                "desc": "Passive: You may attack with ranged weapons the same turn you move (others cannot).",
+                "desc": "Passive: Your first ranged weapon attack each combat gains Advantage and costs 1 less Stamina, to a minimum cost of 0.",
                 "icon": "⚡",
                 "prerequisites": {
                     "type": "AND",

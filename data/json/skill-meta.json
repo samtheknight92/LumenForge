@@ -456,7 +456,6 @@
   "CONDITIONAL_SKILL_STATS": {
     "steady_aim": {
       "accuracy": 2,
-      "condition": "notMovedThisTurn",
       "weaponKind": "ranged"
     },
     "bulwark": {

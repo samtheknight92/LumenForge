@@ -84,5 +84,5 @@ export const INCOMPATIBILITIES = {
 
 /** Stat bonuses gated on a condition (see career-effects.js evaluateSkillStatCondition). */
 export const CONDITIONAL_SKILL_STATS = {
-  steady_aim: { accuracy: 2, condition: 'notMovedThisTurn', weaponKind: 'ranged' }
+  steady_aim: { accuracy: 2, weaponKind: 'ranged' }
 }

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles/appearance.css" />
   <link rel="stylesheet" href="styles/compact.css" />
   <link rel="stylesheet" href="styles/mobile.css" />
+  <link rel="stylesheet" href="styles/v5-extras.css" />
   <script>
     (function () {
       var theme = localStorage.getItem('lumenforge_theme') || 'midnight';
@@ -45,7 +46,8 @@
         <select id="new-background" class="input"></select>
         <p id="background-preview" class="subtle create-preview"></p>
         <div id="create-extras"></div>
-        <button type="button" id="create-character" class="primary-btn full">Create</button>
+        <button type="button" id="create-character" class="primary-btn full">Quick Create</button>
+        <button type="button" id="guided-create" class="ghost-btn full mt-8">Guided Create</button>
         </div>
       </section>
 
@@ -86,6 +88,7 @@
 
       <nav class="tabbar" id="tabbar" role="tablist" aria-label="Character sections">
         <button type="button" role="tab" data-tab="character" class="active" aria-selected="true" aria-controls="app-content">Character</button>
+        <button type="button" role="tab" data-tab="play" aria-selected="false" aria-controls="app-content">Play</button>
         <button type="button" role="tab" data-tab="skills" aria-selected="false" aria-controls="app-content">Skills</button>
         <button type="button" role="tab" data-tab="stats" aria-selected="false" aria-controls="app-content">Stats</button>
         <button type="button" role="tab" data-tab="shop" aria-selected="false" aria-controls="app-content">Shop</button>
