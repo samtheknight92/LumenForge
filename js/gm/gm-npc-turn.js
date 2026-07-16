@@ -64,10 +64,6 @@ export function buildNpcTurnSuggestion(character) {
     }
   })
 
-  const movementHint = character.movedThisTurn
-    ? 'Moved this turn — ranged blocked unless Quick Draw.'
-    : ''
-
   return {
     characterId: character.id,
     characterName: character.name,
@@ -75,7 +71,6 @@ export function buildNpcTurnSuggestion(character) {
     stamina: `${character.stamina}/${stats.stamina}`,
     hasMultiattack,
     suggestions,
-    movementHint,
     generatedAt: new Date().toISOString()
   }
 }

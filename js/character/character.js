@@ -17,6 +17,10 @@ import { applyBackgroundToCharacter, DEFAULT_BACKGROUND } from './backgrounds.js
 import { mergeInventoryStacks } from '../items/items.js'
 import { migrateLegacyStatusEffect, statusStatModifiers } from '../effects/status-stat-modifiers.js'
 import { normalizeKnockoutFields } from './knockout.js'
+import {
+  emptyStatUpgradeHistory,
+  normalizeStatUpgradeHistory
+} from './stat-costs.js'
 
 export function stripCharacterCache(character) {
   if (!character) return character
@@ -48,7 +52,10 @@ export function createCharacter(name, raceId, options = {}) {
     statusEffects: [],
     inventory: [],
     equipped: { weapon: null, offhand: null, armor: null, accessory: null },
-    movedThisTurn: false,
+    combatFlags: {},
+    statUpgradeHistory: emptyStatUpgradeHistory(),
+    guidedPlaystyle: '',
+    skillViewMode: 'focused',
     notes: '',
     notePages: [],
     quests: [],
@@ -91,8 +98,16 @@ export function normalizeCharacter(character) {
   merged.equipped = { weapon: null, offhand: null, armor: null, accessory: null, ...(character?.equipped || {}) }
   merged.equipped = sanitizeEquippedSlots(merged.equipped)
   reconcileOffhandEquip(merged)
-  merged.movedThisTurn = Boolean(character?.movedThisTurn)
+  // Legacy movedThisTurn was used by the old ranged movement block — ignore on load.
+  delete merged.movedThisTurn
+  merged.combatFlags = character?.combatFlags && typeof character.combatFlags === 'object'
+    ? { ...character.combatFlags }
+    : {}
   merged.premadeId = character?.premadeId || null
+  merged.isTemplate = Boolean(character?.isTemplate)
+  merged.guidedPlaystyle = String(character?.guidedPlaystyle || '').trim()
+  merged.skillViewMode = character?.skillViewMode === 'browse' ? 'browse' : 'focused'
+  merged.statUpgradeHistory = normalizeStatUpgradeHistory(merged)
   merged.folder = String(character?.folder || '').trim().slice(0, 48)
   merged.hp = Number.isFinite(Number(merged.hp)) ? Number(merged.hp) : merged.stats.hp
   merged.stamina = Number.isFinite(Number(merged.stamina)) ? Number(merged.stamina) : merged.stats.stamina
@@ -359,9 +374,14 @@ export function statBreakdown(character, stat) {
     if (!rule?.[stat]) continue
     if (!evaluateSkillStatCondition(character, rule)) continue
     const skill = getSkill(skillId)
-    const suffix = conditionalSkillStatLabel(rule.condition)
-    const weaponNote = rule.weaponKind ? `, ${rule.weaponKind} equipped` : ''
-    rows.push({ label: `${skill?.name || titleCase(skillId)} (${suffix}${weaponNote})`, value: rule[stat] })
+    const conditionLabel = rule.condition ? conditionalSkillStatLabel(rule.condition) : ''
+    const weaponNote = rule.weaponKind
+      ? `${conditionLabel ? ', ' : ''}${rule.weaponKind} equipped`
+      : ''
+    const detail = conditionLabel || weaponNote
+      ? ` (${conditionLabel}${weaponNote})`
+      : ''
+    rows.push({ label: `${skill?.name || titleCase(skillId)}${detail}`, value: rule[stat] })
   }
   rows.push(...raceEquipmentStatBreakdown(character, stat))
   rows.push(...enchantmentStatBreakdown(character, stat))

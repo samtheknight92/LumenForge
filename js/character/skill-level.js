@@ -1,64 +1,56 @@
 import { getSkill } from '../core/cache.js'
-import { tierLevelValue, formatLevelValue } from './level.js'
 
 /**
- * Skill Level — "how advanced/trained is this character?"
- * Built ONLY from learned skills (weapon/magic/career/race/fusion/ascension/ultimate
- * all live in the same flat `character.skills` list). Stat purchases, HP/Stamina,
- * and gear never contribute here — see combat-power.js for that side of the split.
+ * Skill Level — "how many skills has this character learned?"
+ * 1 learned skill = +1 Skill Level (any tier). Starts at 0.
+ * Stat purchases, HP/Stamina, and gear never contribute — see combat-power.js.
  */
 export function computeSkillLevel(character) {
   if (!character) {
     return {
       skillCount: 0,
       skillLevels: 0,
-      skillLevel: 1,
+      skillLevel: 0,
       fraction: 0,
       pct: 0,
-      display: '1'
+      display: '0'
     }
   }
 
   let skillCount = 0
-  let skillLevels = 0
   const byCategory = {}
   for (const id of character.skills || []) {
     const skill = getSkill(id)
     if (!skill) continue
     skillCount += 1
-    const contribution = tierLevelValue(skill.tier)
-    skillLevels += contribution
-    byCategory[skill.category || 'other'] = (byCategory[skill.category || 'other'] || 0) + contribution
+    const cat = skill.category || 'other'
+    byCategory[cat] = (byCategory[cat] || 0) + 1
   }
-
-  const progressFloor = Math.floor(skillLevels)
-  const skillLevel = progressFloor + 1
-  const fraction = skillLevels - progressFloor
 
   return {
     skillCount,
-    skillLevels,
+    /** Alias of skillCount — kept for older call sites that expected a progress sum. */
+    skillLevels: skillCount,
     byCategory,
-    skillLevel,
-    fraction,
-    pct: Math.round(fraction * 100),
-    display: String(skillLevel)
+    skillLevel: skillCount,
+    fraction: 0,
+    pct: 0,
+    display: String(skillCount)
   }
 }
 
 export function skillLevelTooltip(info) {
   const categoryLines = Object.entries(info.byCategory || {})
     .sort((a, b) => b[1] - a[1])
-    .map(([category, value]) => `· ${category}: +${formatLevelValue(value)}`)
+    .map(([category, value]) => `· ${category}: +${value}`)
 
   return [
     `Skill Level ${info.skillLevel}`,
-    info.fraction > 0 ? `${info.pct}% toward Skill Level ${info.skillLevel + 1}` : 'Whole level reached',
-    '',
-    'Based only on learned skills — tier 5 skill = +1 level (tier N = N ÷ 5).',
+    '1 skill learned = +1 Skill Level (any tier).',
+    'Tier gates: T2@5 · T3@12 · T4@20 · T5@35 · T6@50.',
     'HP/stat purchases and gear do NOT count toward Skill Level.',
     '',
-    `${info.skillCount} skills learned (+${formatLevelValue(info.skillLevels)} total)`,
+    `${info.skillCount} skills learned`,
     ...(categoryLines.length ? ['', ...categoryLines] : [])
   ].join('\n')
 }

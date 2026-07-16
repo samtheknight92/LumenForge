@@ -1,23 +1,20 @@
 import { getSkill } from '../core/cache.js'
-import { computeStats } from './character.js'
-import { combatPowerFromStats } from './combat-power.js'
+import { computeCombatPower } from './combat-power.js'
+import { computeSkillLevel } from './skill-level.js'
 
 /**
- * Threat Level — "how hard is this enemy to beat in combat?"
- * Not meant to be perfectly exact — just consistent, and built from the same
- * stat-power math as player Combat Power (combatPowerFromStats), plus a
- * lightweight keyword scan over the enemy's learned skill descriptions to
- * account for things raw stats miss: multi-hit, area attacks, control effects,
- * damage-over-time, healing, and "passive-heavy" kits. Every weight below is a
- * named constant so a GM/dev can retune the curve without touching the logic.
+ * Threat Level — how hard is this character/foe in a fight?
+ * Threat Level = Skill Level + Combat Power (same formula for PCs and premades).
+ * A light skill-description scan still marks solo-boss traits (multi-hit / area / control)
+ * for encounter action-economy hints — it does not add to the number.
  */
 export const THREAT_ABILITY_WEIGHTS = {
-  multiHit: 1.5,
-  area: 1.5,
-  control: 1,
-  dot: 0.5,
-  healing: 1,
-  passive: 0.3
+  multiHit: 2,
+  area: 2,
+  control: 1.5,
+  dot: 0.75,
+  healing: 1.25,
+  passive: 0.5
 }
 
 const THREAT_ABILITY_PATTERNS = {
@@ -28,48 +25,60 @@ const THREAT_ABILITY_PATTERNS = {
   healing: /\bheal|regenerat|restore(?:s)? .*hp/i
 }
 
-/** Enemies with these flags can meaningfully act more than once per round, so a solo fight isn't automatically "easier than it looks". */
+/** Enemies with these flags can meaningfully act more than once per round. */
 export function isSoloBossCapable(flags) {
   return Boolean(flags?.multiHit || flags?.area || flags?.control)
 }
 
-export function computeThreatLevel(character) {
-  if (!character) {
-    return { threatLevel: 1, base: 0, abilityBonus: 0, flags: {}, passiveCount: 0 }
-  }
-
-  const stats = computeStats(character)
-  const { total: base, breakdown } = combatPowerFromStats(stats)
-
-  let abilityBonus = 0
-  let passiveCount = 0
+function scanAbilityFlags(character) {
   const flags = {}
-  for (const id of character.skills || []) {
+  let passiveCount = 0
+  for (const id of character?.skills || []) {
     const skill = getSkill(id)
     if (!skill) continue
     const desc = String(skill.desc || '').toLowerCase()
-
     for (const [flag, pattern] of Object.entries(THREAT_ABILITY_PATTERNS)) {
       if (flags[flag]) continue
       if (pattern.test(desc) || (flag === 'multiHit' && id === 'multiattack')) {
-        abilityBonus += THREAT_ABILITY_WEIGHTS[flag]
         flags[flag] = true
       }
     }
-    if (desc.startsWith('passive')) {
-      passiveCount += 1
-      abilityBonus += THREAT_ABILITY_WEIGHTS.passive
+    if (desc.startsWith('passive')) passiveCount += 1
+  }
+  return { flags, passiveCount }
+}
+
+export function computeThreatLevel(character) {
+  if (!character) {
+    return {
+      threatLevel: 0,
+      skillLevel: 0,
+      combatPower: 0,
+      base: 0,
+      abilityBonus: 0,
+      flags: {},
+      passiveCount: 0,
+      soloBossCapable: false,
+      display: '0'
     }
   }
 
-  const total = base + abilityBonus
-  const threatLevel = Math.max(1, Math.round(total))
+  const skillInfo = computeSkillLevel(character)
+  const combatInfo = computeCombatPower(character)
+  const skillLevel = Number(skillInfo.skillLevel) || 0
+  const combatPower = Number(combatInfo.combatPower) || 0
+  const threatLevel = Math.max(0, skillLevel + combatPower)
+  const { flags, passiveCount } = scanAbilityFlags(character)
 
   return {
     threatLevel,
-    base,
-    abilityBonus,
-    breakdown,
+    skillLevel,
+    combatPower,
+    /** Compat: Combat Power half of the mix (was old stat base). */
+    base: combatPower,
+    /** Compat: Skill Level half of the mix (was old ability keyword bonus). */
+    abilityBonus: skillLevel,
+    breakdown: combatInfo.breakdown,
     flags,
     passiveCount,
     soloBossCapable: isSoloBossCapable(flags),
@@ -92,11 +101,11 @@ export function threatLevelTooltip(info) {
   return [
     `Threat Level ${info.threatLevel}`,
     '',
-    'Approximate — built from effective combat stats plus a scan of learned',
-    'skills for dangerous traits. Useful for comparison, not exact math.',
+    'Threat Level = Skill Level + Combat Power.',
+    'Same formula for player characters and premade foes.',
     '',
-    `Stat power: ${(Math.round(info.base * 10) / 10).toFixed(1)}`,
-    `Ability bonus: +${(Math.round(info.abilityBonus * 10) / 10).toFixed(1)}${info.passiveCount ? ` (${info.passiveCount} passive skill${info.passiveCount === 1 ? '' : 's'})` : ''}`,
+    `Skill Level: ${info.skillLevel ?? info.abilityBonus ?? 0}`,
+    `Combat Power: ${info.combatPower ?? info.base ?? 0}`,
     ...(activeFlags.length ? ['', 'Notable traits:', ...activeFlags] : []),
     ...(info.soloBossCapable ? ['', 'Can act like more than "one turn" — treat as boss-capable solo.'] : [])
   ].join('\n')

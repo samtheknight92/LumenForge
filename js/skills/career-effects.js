@@ -1,5 +1,6 @@
 import { cache, getSkill, getItem } from '../core/cache.js'
 import { characterWieldsWeaponKind } from '../items/equipment.js'
+import { willQuickDrawActivate } from '../combat/quick-draw.js'
 
 function getEffectDefinition(effectId) {
   return cache.effectDefinitions?.[effectId] || null
@@ -36,8 +37,6 @@ function evaluateDamageCondition(character, condition, options = {}) {
   switch (condition) {
     case 'selfBelowHalfHp':
       return isBelowHalfHp(character)
-    case 'notMovedThisTurn':
-      return !character?.movedThisTurn
     case 'targetBelowHalfHp':
       return options.targetBelowHalfHp === true
     case 'targetNotActed':
@@ -55,8 +54,6 @@ export function conditionalSkillStatLabel(condition) {
   switch (condition) {
     case 'selfBelowHalfHp':
       return 'below half HP'
-    case 'notMovedThisTurn':
-      return "didn't move this turn"
     default:
       return condition || 'conditional'
   }
@@ -162,7 +159,9 @@ export function getCareerStaminaDiscount(character, skill) {
 }
 
 export function getEffectiveSkillStaminaCost(character, skill) {
-  return Math.max(0, Number(skill?.staminaCost || 0) - getCareerStaminaDiscount(character, skill))
+  const careerDiscount = getCareerStaminaDiscount(character, skill)
+  const quickDrawDiscount = willQuickDrawActivate(character, skill) ? 1 : 0
+  return Math.max(0, Number(skill?.staminaCost || 0) - careerDiscount - quickDrawDiscount)
 }
 
 export function resolveCareerActionBuffs(skill) {

@@ -1,9 +1,15 @@
 import { $, $$, esc, titleCase } from '../core/utils.js'
 import { STAT_RULES, ITEMS_PER_PAGE, DRAGONBORN_AFFINITIES, HOMEBREW_ITEM_TYPES, HOMEBREW_RARITIES, HOMEBREW_SKILL_CATEGORIES, HOMEBREW_SKILL_TYPES, HOMEBREW_SKILL_DAMAGE_MODES, HOMEBREW_ELEMENT_TYPES, HOMEBREW_DAMAGE_STAT_KEYS, TIER_LUMEN_COST, WEAPON_SKILL_TREE_INTROS, HOMEBREW_OFFHAND_TYPES, HOMEBREW_WEAPON_HANDS, HOMEBREW_BALANCE_TAGS, HOMEBREW_APPROVAL_STATUSES, HOMEBREW_SKILL_APPLY_TO, HOMEBREW_SKILL_EFFECT_KINDS, HOMEBREW_SKILL_USE_LIMITS } from '../core/constants.js'
+import {
+  getNextStatUpgradeCost,
+  getLatestStatRefund,
+  getPurchasedStatCount,
+  purchasesUntilNextBand
+} from '../character/stat-costs.js'
 import { state, activeCharacter } from '../core/state.js'
 import { raceOptions, getRace, getSkill, getItem, cache } from '../core/cache.js'
 import { computeStats, statBreakdown, getEffect } from '../character/character.js'
-import { offhandSlotLockReason, weaponHandednessLabel, offhandTypeLabel, canEquipToOffhand, isOffhandItem, canEquipToMainHand } from '../items/equipment.js'
+import { offhandSlotLockReason, weaponHandednessLabel, offhandTypeLabel, canEquipToOffhand, isOffhandItem, canEquipToMainHand, getEquippedWeapon, getWeaponKind } from '../items/equipment.js'
 import { activePerformanceStatuses, formatPerformanceMeta } from '../combat/instruments.js'
 import {
   visibleSubcategories,
@@ -25,6 +31,13 @@ import {
   displayFusionWeapon,
   hasActiveFusionFilters
 } from '../skills/fusion-nav.js'
+import {
+  getFocusedSkillContext,
+  focusedCategories,
+  focusedSubcategories,
+  skillIsFocused,
+  isOutsideFocus
+} from '../skills/focused-skills.js'
 import { computeSkillLevel, skillLevelTooltip } from '../character/skill-level.js'
 import { computeCombatPower, combatPowerTooltip } from '../character/combat-power.js'
 import { threatLevelTooltip } from '../character/threat-level.js'
@@ -60,7 +73,7 @@ import {
   paginatePremadeList
 } from '../character/premade-characters.js'
 import { filterCatalogItems, paginateItems, isShopPurchaseItem, shopMinLevelForItem, shopPurchaseCheck, ITEM_CATALOG_CATEGORIES, catalogCategoryCounts, catalogSourceCounts, activeCatalogFilterLabels, itemHasCounter, itemCounterLabel, inventoryCounterValue } from '../items/items.js'
-import { renderHowToPlayTab } from './how-to-play.js'
+import { renderGuidedCreateModal } from './guided-create.js'
 import {
   manualEffectList,
   groupedManualEffects,
@@ -93,7 +106,14 @@ import {
   INVENTORY_FILTER_OPTIONS
 } from '../items/inventory-nav.js'
 import { renderActionBar } from '../combat/action-bar.js'
-import { isActionBarSkill } from '../skills/skill-activation.js'
+import { isActionBarSkill, getPinnedActionBarSkills, getSkillActivationType } from '../skills/skill-activation.js'
+import { getBasicAttackSkill } from '../combat/combat.js'
+import {
+  formatSkillEffectBreakdownPlain,
+  resolveSkillEffectBreakdown,
+  skillHasEffectBreakdown
+} from '../combat/damage-breakdown.js'
+import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
 import { backgroundOptions, getBackground, backgroundRewardSummary, backgroundItemLabel, DEFAULT_BACKGROUND } from '../character/backgrounds.js'
 import { sortInitiativeEntries, activeInitiativeEntry } from '../gm/gm-initiative.js'
 import { filterCraftRecipes, canCraftRecipe, materialsStatus, craftProfessionOptions } from '../items/craft.js'
@@ -409,6 +429,7 @@ export function renderContent() {
 
   const tabs = {
     character: () => renderCharacterTab(character),
+    play: () => renderPlayTab(character),
     skills: () => renderSkillsTab(character),
     stats: () => renderStatsTab(character),
     shop: () => renderShopTab(character),
@@ -418,7 +439,7 @@ export function renderContent() {
     notes: () => renderNotesTab(character),
     howtoplay: () => renderHowToPlayTab()
   }
-  content.innerHTML = tabs[state.tab]?.() || ''
+  content.innerHTML = (tabs[state.tab]?.() || '') + renderGuidedCreateModal()
   restoreContentFocus(focusCapture)
 }
 
@@ -1224,9 +1245,12 @@ function renderEffectsManager(character) {
           <h3>Effects & Status Manager</h3>
           <p class="effects-manager-intro">Hover any effect to see what it does. Shows ongoing passives from gear, weapon-matched skills, active toggles, max-stat hidden rewards, and resistances — not one-shot attack spells.</p>
         </div>
-        <button type="button" class="ghost-btn tiny" data-process-turn title="Press at the End of Turn after you act">Process Turn</button>
+        <div class="wrap">
+          <button type="button" class="ghost-btn tiny" data-process-turn title="Press at the End of Turn after you act">Process Turn</button>
+          <button type="button" class="ghost-btn tiny" data-begin-new-combat title="Reset once-per-combat uses like Quick Draw">New Combat</button>
+        </div>
       </div>
-      <p class="subtle mt-8">Press <strong>Process Turn</strong> at the <strong>End of Turn</strong> — after you move, attack, or act — to apply ticks, then reduce durations.</p>
+      <p class="subtle mt-8">Press <strong>Process Turn</strong> at the <strong>End of Turn</strong> — after you move, attack, or act — to apply ticks, then reduce durations. Press <strong>New Combat</strong> when a fight starts to reset once-per-combat uses (Quick Draw, Encore, Homing Shot, Rage, Feint, and similar).</p>
 
       ${renderKnockoutPanel(character)}
 
@@ -1306,6 +1330,176 @@ function renderKnockoutPanel(character) {
   `
 }
 
+function renderPlayTab(character) {
+  const stats = computeStats(character)
+  const weapon = getEquippedWeapon(character)
+  const weaponEntry = character.inventory.find(inv => inv.uid === character.equipped.weapon)
+  const basic = getBasicAttackSkill(character)
+  const basicBreakdown = skillHasEffectBreakdown(basic)
+    ? formatSkillEffectBreakdownPlain(resolveSkillEffectBreakdown(character, basic))
+    : ''
+  const pinned = getPinnedActionBarSkills(character)
+  const toggleSkills = (character.activeToggles || [])
+    .map(id => getSkill(id))
+    .filter(Boolean)
+  const statuses = (character.statusEffects || [])
+    .map(status => {
+      const effect = getEffect(status.id)
+      if (!effect) return null
+      return `<span class="pill ${effectTone(effect)}" data-tooltip="${esc(effectTooltip(effect))}" tabindex="0">${esc(effect.icon || '✦')} ${esc(effect.name)} · ${esc(effectDurationLabel(status.duration))}</span>`
+    })
+    .filter(Boolean)
+    .join('')
+  const weather = (character.weatherEffects || [])
+    .map(status => {
+      const effect = getEffect(status.id)
+      if (!effect) return null
+      return `<span class="pill warn">${esc(effect.icon || '☁')} ${esc(effect.name)}</span>`
+    })
+    .filter(Boolean)
+    .join('')
+
+  const combatItems = (character.inventory || []).filter(entry => {
+    const item = getItem(entry.itemId)
+    if (!item) return false
+    const type = String(item.type || '').toLowerCase()
+    const isConsumable = type.includes('consumable') || type.includes('potion') || type.includes('food')
+    const equipped = Object.values(character.equipped || {}).includes(entry.uid)
+    return isConsumable || itemHasCounter(item) || equipped
+  })
+
+  const pinnedHtml = pinned.length
+    ? pinned.map(skill => {
+        const type = getSkillActivationType(skill)
+        const cost = type === 'activatable'
+          ? getEffectiveSkillStaminaCost(character, skill)
+          : Number(skill.staminaCost || 0)
+        const active = type === 'toggle' && character.activeToggles?.includes(skill.id)
+        const breakdown = skillHasEffectBreakdown(skill)
+          ? formatSkillEffectBreakdownPlain(resolveSkillEffectBreakdown(character, skill))
+          : ''
+        const useBtn = type === 'toggle'
+          ? `<button type="button" class="chip-btn tiny" data-toggle-skill="${esc(skill.id)}">${active ? 'Switch Off' : 'Switch On'}</button>`
+          : type === 'activatable'
+            ? `<button type="button" class="primary-btn tiny" data-use-skill="${esc(skill.id)}">Use Skill</button>`
+            : ''
+        return `
+          <details class="play-skill-card card">
+            <summary>
+              <strong>${esc(skill.icon || '✦')} ${esc(skill.name)}</strong>
+              <span class="pill warn">${cost} STA</span>
+              ${active ? '<span class="pill good">Active</span>' : ''}
+            </summary>
+            <p class="mt-8">${esc(skill.desc || '')}</p>
+            ${breakdown ? `<p class="subtle mt-8">${esc(breakdown)}</p>` : ''}
+            <div class="wrap mt-12">${useBtn}</div>
+          </details>
+        `
+      }).join('')
+    : '<p class="subtle">Pin skills on the Skills tab to show them here.</p>'
+
+  const itemsHtml = combatItems.length
+    ? combatItems.map(entry => {
+        const item = getItem(entry.itemId)
+        const presentation = resolveItemPresentation(item, entry)
+        const equippedSlot = Object.entries(character.equipped || {}).find(([, uid]) => uid === entry.uid)?.[0]
+        return `
+          <div class="play-item-row">
+            <div>
+              <strong>${fallbackIcon(item)} ${esc(presentation.displayName)}</strong>
+              <div class="subtle">${esc(item.type)}${equippedSlot ? ` · equipped (${esc(equippedSlot)})` : ''} · qty ${entry.qty || 1}</div>
+              ${renderItemCounterControls(entry, item, { showWhenEquipped: true })}
+            </div>
+          </div>
+        `
+      }).join('')
+    : '<p class="subtle">No combat consumables or counter items.</p>'
+
+  return `
+    <div class="play-tab">
+      <section class="card play-session-card">
+        <div class="card-header">
+          <div>
+            <div class="kicker">Session</div>
+            <h3>${esc(character.name)}</h3>
+            <p class="tab-intro">Compact combat view — full inventory stays on Character.</p>
+          </div>
+          <div class="wrap">
+            <button type="button" class="ghost-btn tiny" data-process-turn>Process Turn</button>
+            <button type="button" class="primary-btn tiny" data-begin-new-combat>New Combat</button>
+          </div>
+        </div>
+        <div class="play-resource-row wrap mt-12">
+          <div class="play-resource">
+            <strong>HP ${character.hp}/${stats.hp}</strong>
+            <div class="wrap">
+              <button type="button" class="ghost-btn tiny" data-adjust-resource="hp" data-amount="-1">−1</button>
+              <button type="button" class="ghost-btn tiny" data-adjust-resource="hp" data-amount="1">+1</button>
+              <button type="button" class="primary-btn tiny" data-full-resource="hp">Full</button>
+            </div>
+          </div>
+          <div class="play-resource">
+            <strong>STA ${character.stamina}/${stats.stamina}</strong>
+            <div class="wrap">
+              <button type="button" class="ghost-btn tiny" data-adjust-resource="stamina" data-amount="-1">−1</button>
+              <button type="button" class="ghost-btn tiny" data-adjust-resource="stamina" data-amount="1">+1</button>
+              <button type="button" class="primary-btn tiny" data-full-resource="stamina">Full</button>
+            </div>
+          </div>
+        </div>
+        <div class="wrap mt-12 play-stat-strip">
+          <span class="pill">ACC ${stats.accuracy}</span>
+          <span class="pill">SPD ${stats.speed}</span>
+          <span class="pill">STR ${stats.strength}</span>
+          <span class="pill">MP ${stats.magicPower}</span>
+          <span class="pill">PD ${stats.physicalDefence}</span>
+          <span class="pill">MD ${stats.magicalDefence}</span>
+        </div>
+      </section>
+
+      <section class="card mt-16">
+        <div class="kicker">Weapon</div>
+        <h3>${weapon ? `${fallbackIcon(weapon)} ${esc(weapon.name)}` : 'Unarmed / Striker'}</h3>
+        <p class="subtle">${weapon ? esc(weaponKindDisplayLabel(getWeaponKind(weapon) || weapon.weaponKind || '')) : 'Empty hands'}${weaponEntry ? ` · ${esc(weapon.damage || '')}` : ''}</p>
+        ${basic ? `
+          <div class="mt-12">
+            <strong>${esc(basic.icon || '⚔')} ${esc(basic.name)}</strong>
+            <p class="subtle mt-8">${esc(basic.desc || '')}</p>
+            ${basicBreakdown ? `<p class="subtle mt-8">${esc(basicBreakdown)}</p>` : ''}
+            <button type="button" class="primary-btn tiny mt-12" data-use-skill="${esc(basic.id)}">Basic Attack</button>
+          </div>
+        ` : ''}
+      </section>
+
+      <section class="card mt-16">
+        <div class="kicker">Pinned skills</div>
+        <h3>Ready actions</h3>
+        <div class="stack mt-12">${pinnedHtml}</div>
+      </section>
+
+      <section class="card mt-16">
+        <div class="kicker">Ongoing</div>
+        <h3>Toggles, statuses &amp; weather</h3>
+        <div class="wrap mt-12">
+          ${toggleSkills.length
+            ? toggleSkills.map(skill => `<span class="pill warn">${esc(skill.icon || '✦')} ${esc(skill.name)}</span>`).join('')
+            : '<span class="subtle">No active toggles.</span>'}
+        </div>
+        <div class="wrap mt-12">${statuses || '<span class="subtle">No status effects.</span>'}</div>
+        <div class="wrap mt-12">${weather || '<span class="subtle">No weather.</span>'}</div>
+      </section>
+
+      <section class="card mt-16">
+        <div class="kicker">Combat kit</div>
+        <h3>Consumables &amp; counters</h3>
+        <div class="stack mt-12">${itemsHtml}</div>
+      </section>
+
+      ${renderKnockoutPanel(character)}
+    </div>
+  `
+}
+
 function renderElementalAffinitySection(character) {
   const profile = computeElementalAffinity(character)
   const affected = ELEMENTS
@@ -1381,8 +1575,8 @@ function renderCharacterTab(character) {
         <div class="level-split-grid">
           <div class="level-split-item">
             <h3 data-tooltip="${esc(skillLevelTooltip(skillLevel))}" tabindex="0">Skill Level ${skillLevel.display}</h3>
-            <div class="level-xp-meta subtle">${skillLevel.fraction > 0 ? `${skillLevel.pct}% toward Skill Level ${skillLevel.skillLevel + 1}` : 'Whole level — tier 5 skill = +1 level'}</div>
-            <div class="progress-bar level-xp-bar"><div class="progress-fill" style="width:${skillLevel.pct}%"></div></div>
+            <div class="level-xp-meta subtle">${skillLevel.skillCount} skills · +1 Level per skill</div>
+            <div class="progress-bar level-xp-bar"><div class="progress-fill" style="width:0%"></div></div>
           </div>
           <div class="level-split-item">
             <h3 data-tooltip="${esc(combatPowerTooltip(combatPower))}" tabindex="0">Combat Power ${combatPower.display}</h3>
@@ -1531,23 +1725,57 @@ function renderFusionFilterBar(character) {
 }
 
 function renderSkillsTab(character) {
-  const categories = visibleSkillCategories(character)
+  const viewMode = character.skillViewMode === 'browse' ? 'browse' : 'focused'
+  const focusedCtx = viewMode === 'focused' ? getFocusedSkillContext(character) : null
+  const searching = Boolean(state.skillSearch)
+
+  let categories = visibleSkillCategories(character)
+  if (focusedCtx && !searching) categories = focusedCategories(focusedCtx, categories)
+
   if (!categories.length) {
     return '<div class="empty">No skill trees available yet. Learn prerequisite skills to reveal more.</div>'
   }
   if (!categories.includes(state.skillCategory)) state.skillCategory = categories[0]
-  const subs = visibleSubcategories(state.skillCategory, character)
+  let subs = visibleSubcategories(state.skillCategory, character)
+  if (focusedCtx && !searching) subs = focusedSubcategories(focusedCtx, state.skillCategory, subs)
   if (!subs.includes(state.skillSubcategory)) state.skillSubcategory = subs[0] || ''
   syncFusionFilters(character)
   const fusionFiltersHtml = renderFusionFilterBar(character)
 
-  const list = skillsInSubcategory(state.skillCategory, state.skillSubcategory, character)
-    .filter(skill => {
-      if (state.skillStarredOnly && !(character.starredSkillIds || []).includes(skill.id)) return false
-      if (!state.skillSearch) return true
-      const haystack = [skill.name, skill.desc, skill.id, ...(skill.tags || [])].join(' ').toLowerCase()
-      return haystack.includes(state.skillSearch.toLowerCase())
+  let list
+  let searchOutsideHits = []
+  if (searching) {
+    // Full catalogue search even in Focused mode
+    const q = state.skillSearch.toLowerCase()
+    const allCats = visibleSkillCategories(character)
+    const hits = []
+    for (const category of allCats) {
+      for (const sub of visibleSubcategories(category, character)) {
+        for (const skill of skillsInSubcategory(category, sub, character)) {
+          const haystack = [skill.name, skill.desc, skill.id, ...(skill.tags || [])].join(' ').toLowerCase()
+          if (!haystack.includes(q)) continue
+          if (state.skillStarredOnly && !(character.starredSkillIds || []).includes(skill.id)) continue
+          hits.push(skill)
+        }
+      }
+    }
+    const seen = new Set()
+    list = hits.filter(skill => {
+      if (seen.has(skill.id)) return false
+      seen.add(skill.id)
+      return true
     })
+    if (focusedCtx) {
+      searchOutsideHits = list.filter(skill => isOutsideFocus(focusedCtx, skill))
+    }
+  } else {
+    list = skillsInSubcategory(state.skillCategory, state.skillSubcategory, character)
+      .filter(skill => {
+        if (state.skillStarredOnly && !(character.starredSkillIds || []).includes(skill.id)) return false
+        if (focusedCtx && !skillIsFocused(focusedCtx, skill)) return false
+        return true
+      })
+  }
 
   const byTier = new Map()
   list.forEach(skill => {
@@ -1561,7 +1789,7 @@ function renderSkillsTab(character) {
     : list.filter(skill => !character.skills.includes(skill.id)).reduce((sum, skill) => sum + skill.cost, 0)
 
   const treeIntro = state.skillCategory === 'weapons' && WEAPON_SKILL_TREE_INTROS[state.skillSubcategory]
-  const introHtml = treeIntro
+  const introHtml = treeIntro && !searching
     ? `<aside class="card skill-tree-intro" aria-label="${esc(displaySubcategory(state.skillSubcategory))} rules">
         <div class="kicker">${esc(displaySubcategory(state.skillSubcategory))} at the table</div>
         <ul class="skill-tree-intro-list">
@@ -1570,32 +1798,46 @@ function renderSkillsTab(character) {
       </aside>`
     : ''
 
+  const sparseHint = focusedCtx?.isSparse && !searching
+    ? `<p class="subtle mt-8">New sheet — showing starter weapon, magic, and career paths. Switch to <strong>Browse All</strong> anytime.</p>`
+    : ''
+
   return `
     <div class="toolbar skills-toolbar">
+      <div class="segmented skill-view-mode" role="group" aria-label="Skills view">
+        <button type="button" data-skill-view-mode="focused" class="${viewMode === 'focused' ? 'active' : ''}">Focused</button>
+        <button type="button" data-skill-view-mode="browse" class="${viewMode === 'browse' ? 'active' : ''}">Browse All</button>
+      </div>
       <input class="input" id="skill-search" placeholder="Search skills, effects, prerequisites..." value="${esc(state.skillSearch)}" />
       <label class="pill ${state.skillStarredOnly ? 'good' : ''} shop-filter-toggle" title="Show only starred skills">
         <input type="checkbox" id="skill-starred-only" ${state.skillStarredOnly ? 'checked' : ''} />
         ⭐ Starred
       </label>
-      <span class="pill good">${learnedInTree}/${list.length} in tree</span>
+      <span class="pill good">${learnedInTree}/${list.length}${searching ? ' matches' : ' in tree'}</span>
       <span class="pill gold">${isGmMode() ? 'Free (GM)' : `${costRemaining}L remaining`}</span>
     </div>
-    <div class="segmented">${categories.map(category => `<button type="button" data-skill-category="${esc(category)}" class="${category === state.skillCategory ? 'active' : ''}">${displayCategory(category)}</button>`).join('')}</div>
+    ${sparseHint}
+    ${searching && viewMode === 'focused' && searchOutsideHits.length
+      ? `<p class="subtle mt-8">${searchOutsideHits.length} result${searchOutsideHits.length === 1 ? '' : 's'} outside Focused (marked below).</p>`
+      : ''}
+    ${searching ? '' : `<div class="segmented">${categories.map(category => `<button type="button" data-skill-category="${esc(category)}" class="${category === state.skillCategory ? 'active' : ''}">${displayCategory(category)}</button>`).join('')}</div>
     <div class="segmented">${subs.map(sub => `<button type="button" data-skill-subcategory="${esc(sub)}" class="${sub === state.skillSubcategory ? 'active' : ''}">${displaySubcategory(sub)}</button>`).join('')}</div>
-    ${fusionFiltersHtml}
+    ${fusionFiltersHtml}`}
     ${introHtml}
     <div class="skill-tree">
       ${[...byTier.entries()].sort((a, b) => a[0] - b[0]).map(([tier, skills]) => `
         <section class="tier-lane">
           <h3>Tier ${tier}</h3>
-          <div class="skill-grid">${skills.map(skill => renderSkillCard(character, skill)).join('')}</div>
+          <div class="skill-grid">${skills.map(skill => renderSkillCard(character, skill, {
+            outsideFocus: searching && focusedCtx && isOutsideFocus(focusedCtx, skill)
+          })).join('')}</div>
         </section>
       `).join('') || `<div class="empty">${state.skillCategory === 'fusion' && hasActiveFusionFilters(state.skillFusionFilters) ? 'No skills match these filters — try fewer selections or Clear.' : 'No skills matched your search.'}</div>`}
     </div>
   `
 }
 
-function renderSkillCard(character, skill) {
+function renderSkillCard(character, skill, options = {}) {
   const unlocked = character.skills.includes(skill.id)
   const check = canLearnSkill(character, skill)
   const active = character.activeToggles.includes(skill.id)
@@ -1621,6 +1863,7 @@ function renderSkillCard(character, skill) {
             <span class="pill warn">${Number(skill.staminaCost || 0)} STA</span>
             <span class="pill">Tier ${Number(skill.tier || 1)}</span>
             ${active ? '<span class="pill good">Active</span>' : ''}
+            ${options.outsideFocus ? '<span class="pill subtle-pill">Outside focus</span>' : ''}
           </div>
         </div>
       </div>
@@ -1709,22 +1952,28 @@ function renderStatsTab(character) {
   const computed = computeStats(character)
   return `
     ${renderResourceManager(character)}
+    <p class="subtle mt-12">Early stat upgrades are cheaper. The price rises as you repeatedly improve the same stat. Gear and skill bonuses do not change the upgrade price.</p>
     <div class="grid two stat-upgrade-grid mt-16">
       ${Object.entries(STAT_RULES).map(([stat, rule]) => {
         const rows = statBreakdown(character, stat).map(row => `<span class="pill ${row.value >= 0 ? 'good' : 'bad'}">${esc(row.label)} ${row.value >= 0 ? '+' : ''}${row.value}</span>`).join('')
+        const nextCost = getNextStatUpgradeCost(character, stat)
+        const purchased = getPurchasedStatCount(character, stat)
+        const untilBand = purchasesUntilNextBand(character, stat)
+        const refund = getLatestStatRefund(character, stat)
         return `
           <section class="card stat-upgrade-card">
             <div class="stat-row stat-row-upgrade" data-tooltip="${esc(statTooltip(rule, { includeCost: true }))}" tabindex="0">
               <div class="stat-upgrade-head">
-                <div class="kicker">${rule.cost} Lumens / point</div>
+                <div class="kicker">Next: ${isGmMode() ? 'Free' : `${nextCost} Lumens`}</div>
                 <h3>${esc(rule.label)}</h3>
               </div>
               <div class="stat-value">${computed[stat]}</div>
             </div>
+            <div class="subtle mt-8">Purchased: ${purchased} · Next band in ${untilBand} · Refund: ${isGmMode() ? '—' : `${refund}L`}</div>
             <div class="wrap mt-12 stat-breakdown-pills">${rows}</div>
             <div class="stat-actions">
-              <button type="button" class="ghost-btn" data-refund-stat="${esc(stat)}" data-tooltip="${esc(statRefundTooltip(stat, rule, character))}" tabindex="0">- Refund</button>
-              <button type="button" class="primary-btn" data-upgrade-stat="${esc(stat)}" data-tooltip="${esc(statUpgradeTooltip(stat, rule, character))}" tabindex="0">Upgrade (${isGmMode() ? 'Free' : `${rule.cost}L`})</button>
+              <button type="button" class="ghost-btn" data-refund-stat="${esc(stat)}" data-tooltip="${esc(statRefundTooltip(stat, rule, character))}" tabindex="0">− Refund${isGmMode() || !refund ? '' : ` (${refund}L)`}</button>
+              <button type="button" class="primary-btn" data-upgrade-stat="${esc(stat)}" data-tooltip="${esc(statUpgradeTooltip(stat, rule, character))}" tabindex="0">Upgrade (${isGmMode() ? 'Free' : `${nextCost}L`})</button>
             </div>
           </section>
         `
@@ -2679,7 +2928,7 @@ function gmPanel(title, body, { kicker = '', open = false, extraClass = '' } = {
   `
 }
 
-function renderPremadeBrowser({ avgCombatPower = 0, avgSkillLevel = 0, partyCount = 0 } = {}) {
+function renderPremadeBrowser({ avgCombatPower = 0, avgSkillLevel = 0, avgThreatLevel = 0, partyCount = 0 } = {}) {
   const list = filterPremadeCharacters({
     search: state.gmPremadeSearch,
     category: state.gmPremadeCategory,
@@ -2730,7 +2979,7 @@ function renderPremadeBrowser({ avgCombatPower = 0, avgSkillLevel = 0, partyCoun
           const skillCount = Array.isArray(entry.skills) ? entry.skills.length : 0
           const threatInfo = premadeTemplateThreatLevel(entry)
           const difficulty = partyCount
-            ? computeEncounterDifficulty({ partyAvgCombatPower: avgCombatPower, partyAvgSkillLevel: avgSkillLevel, partyCount, enemyThreatLevel: threat, enemyCount: 1, soloBossCapable: threatInfo.soloBossCapable })
+            ? computeEncounterDifficulty({ partyAvgThreatLevel: avgThreatLevel || (avgSkillLevel + avgCombatPower), partyAvgCombatPower: avgCombatPower, partyAvgSkillLevel: avgSkillLevel, partyCount, enemyThreatLevel: threat, enemyCount: 1, soloBossCapable: threatInfo.soloBossCapable })
             : null
           const inEncounter = state.encounterEnemies.find(e =>
             e.source === 'premade' ? e.premadeId === entry.premadeId : false
@@ -2788,7 +3037,6 @@ function renderNpcTurnSuggestionCard(result) {
       </div>
       ${result.hasMultiattack ? '<span class="pill subtle-pill tiny-pill">Multiattack</span>' : ''}
       ${skillsHtml}
-      ${result.movementHint ? `<p class="npc-turn-note subtle">${esc(result.movementHint)}</p>` : ''}
     </article>
   `
 }
@@ -3110,29 +3358,34 @@ function renderGmTab(character) {
   const partyCount = party.length
   const avgSkillLevel = partyCount ? party.reduce((sum, row) => sum + row.skillLevel, 0) / partyCount : 0
   const avgCombatPower = partyCount ? party.reduce((sum, row) => sum + row.combatPower, 0) / partyCount : 0
+  const avgThreatLevel = avgSkillLevel + avgCombatPower
   const totalCombatPower = party.reduce((sum, row) => sum + row.combatPower, 0)
 
   const rosterOptions = state.characters.map(c => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('')
 
   const partyRows = party.length
-    ? party.map(row => `
+    ? party.map(row => {
+        const rowThreat = Number(row.skillLevel || 0) + Number(row.combatPower || 0)
+        return `
         <div class="encounter-party-row">
           <input class="input" type="text" value="${esc(row.name)}" data-encounter-party-name="${esc(row.id)}" placeholder="Name" aria-label="Party member name" />
-          <label class="encounter-inline-field"><span class="field-label">SL</span><input class="input tiny" type="number" min="1" value="${row.skillLevel}" data-encounter-party-skill="${esc(row.id)}" aria-label="Skill Level" /></label>
-          <label class="encounter-inline-field"><span class="field-label">CP</span><input class="input tiny" type="number" min="1" value="${row.combatPower}" data-encounter-party-power="${esc(row.id)}" aria-label="Combat Power" /></label>
+          <label class="encounter-inline-field"><span class="field-label">SL</span><input class="input tiny" type="number" min="0" value="${row.skillLevel}" data-encounter-party-skill="${esc(row.id)}" aria-label="Skill Level" /></label>
+          <label class="encounter-inline-field"><span class="field-label">CP</span><input class="input tiny" type="number" min="0" value="${row.combatPower}" data-encounter-party-power="${esc(row.id)}" aria-label="Combat Power" /></label>
+          <span class="pill subtle-pill tiny-pill" title="Threat Level = Skill Level + Combat Power">TL ${rowThreat}</span>
           <button type="button" class="ghost-btn tiny" data-remove-encounter-party="${esc(row.id)}" aria-label="Remove ${esc(row.name)}">×</button>
         </div>
-      `).join('')
+      `
+      }).join('')
     : '<p class="subtle">Add party members to see averages.</p>'
 
   const enemyGroups = resolveEncounterEnemyGroups(state.encounterEnemies)
 
   const encounterSummary = enemyGroups.length
-    ? summarizeEncounter({ partyAvgCombatPower: avgCombatPower, partyAvgSkillLevel: avgSkillLevel, partyCount, enemyGroups })
+    ? summarizeEncounter({ partyAvgThreatLevel: avgThreatLevel, partyAvgCombatPower: avgCombatPower, partyAvgSkillLevel: avgSkillLevel, partyCount, enemyGroups })
     : null
 
   const encounterWarnings = enemyGroups.length
-    ? generateEncounterWarnings({ partyAvgCombatPower: avgCombatPower, partyAvgSkillLevel: avgSkillLevel, partyCount, enemyGroups })
+    ? generateEncounterWarnings({ partyAvgThreatLevel: avgThreatLevel, partyAvgCombatPower: avgCombatPower, partyAvgSkillLevel: avgSkillLevel, partyCount, enemyGroups })
     : []
 
   const encounterRows = enemyGroups.length
@@ -3160,7 +3413,7 @@ function renderGmTab(character) {
   const focusId = state.encounterQuantityFocusId || enemyGroups[0]?.id || ''
   const focusGroup = enemyGroups.find(group => group.id === focusId) || null
   const quantityTable = focusGroup && partyCount
-    ? suggestEnemyQuantities({ partyAvgCombatPower: avgCombatPower, partyAvgSkillLevel: avgSkillLevel, partyCount, enemyThreatLevel: focusGroup.threatLevel, soloBossCapable: focusGroup.soloBossCapable, maxQty: 10 })
+    ? suggestEnemyQuantities({ partyAvgThreatLevel: avgThreatLevel, partyAvgCombatPower: avgCombatPower, partyAvgSkillLevel: avgSkillLevel, partyCount, enemyThreatLevel: focusGroup.threatLevel, soloBossCapable: focusGroup.soloBossCapable, maxQty: 10 })
     : []
 
   return `
@@ -3190,6 +3443,20 @@ function renderGmTab(character) {
 
     ${renderGmMonsterBuilder()}
 
+    <section class="card gm-saving-roll-card">
+      <div class="kicker">Quick reference</div>
+      <h3>Saving Rolls</h3>
+      <p class="subtle mt-8">1d20, meet or beat. Call the difficulty out loud.</p>
+      <div class="gm-save-ladder wrap mt-10">
+        <span class="pill">Super Easy 3</span>
+        <span class="pill">Easy 8</span>
+        <span class="pill">Normal 11</span>
+        <span class="pill">Hard 14</span>
+        <span class="pill">Extreme 17</span>
+      </div>
+      <p class="subtle mt-10">Modifiers: Advantage / Disadvantage, a fitting high stat, or ±1–2 from gear, footing, weather, or help. Accuracy attacks are not Saving Rolls. Knocked Out Recovery stays 11+.</p>
+    </section>
+
     ${renderGmInitiativeTracker()}
 
     ${renderGmNpcTurnPanel()}
@@ -3212,7 +3479,8 @@ function renderGmTab(character) {
           <span class="pill">${partyCount} PC${partyCount === 1 ? '' : 's'}</span>
           <span class="pill good">SL ${formatOneDecimal(avgSkillLevel)}</span>
           <span class="pill warn">CP ${formatOneDecimal(avgCombatPower)}</span>
-          <span class="pill gold">Σ ${formatOneDecimal(totalCombatPower)}</span>
+          <span class="pill level-pill">TL ${formatOneDecimal(avgThreatLevel)}</span>
+          <span class="pill gold">ΣCP ${formatOneDecimal(totalCombatPower)}</span>
         </div>
       </section>
 
@@ -3231,10 +3499,9 @@ function renderGmTab(character) {
         ${encounterSummary ? `
           <div class="wrap mt-12">
             <span class="pill">${encounterSummary.totalEnemyCount} foe${encounterSummary.totalEnemyCount === 1 ? '' : 's'}</span>
-            <span class="pill warn">Threat ${formatOneDecimal(encounterSummary.totalEnemyThreat)}</span>
-            <span class="pill ${difficultyPillClass(encounterSummary.power?.index ?? encounterSummary.index)}">Power: ${esc(encounterSummary.power?.label || encounterSummary.label)}</span>
-            <span class="pill ${difficultyPillClass(encounterSummary.technique?.index ?? encounterSummary.index)}">Technique: ${esc(encounterSummary.technique?.label || encounterSummary.label)}</span>
-            <span class="pill ${difficultyPillClass(encounterSummary.index)}">Overall: ${esc(encounterSummary.label)}</span>
+            <span class="pill warn">Enemy TL Σ ${formatOneDecimal(encounterSummary.totalEnemyThreat)}</span>
+            <span class="pill level-pill">Party TL ${formatOneDecimal(avgThreatLevel)}</span>
+            <span class="pill ${difficultyPillClass(encounterSummary.index)}">${esc(encounterSummary.label)}</span>
           </div>
         ` : ''}
         ${encounterWarnings.length ? `
@@ -3242,29 +3509,123 @@ function renderGmTab(character) {
             ${encounterWarnings.map(warning => `<div>${esc(warning)}</div>`).join('')}
           </div>
         ` : ''}
-        ${enemyGroups.length ? '<button type="button" class="ghost-btn tiny mt-12" data-clear-encounter-enemies>Clear encounter</button>' : ''}
+        ${enemyGroups.length ? `
+          <div class="wrap mt-12">
+            <button type="button" class="primary-btn tiny" data-start-active-encounter>Start Encounter</button>
+            <button type="button" class="ghost-btn tiny mt-12" data-clear-encounter-enemies>Clear encounter</button>
+          </div>
+        ` : ''}
       </section>
     </div>
 
+    ${renderActiveEncounterPanel()}
+
     ${focusGroup && quantityTable.length ? gmPanel(`Qty guide — ${esc(focusGroup.name)}`, `
-        <p class="subtle">Party: ${partyCount} PC${partyCount === 1 ? '' : 's'}, avg SL ${formatOneDecimal(avgSkillLevel)}, avg CP ${formatOneDecimal(avgCombatPower)}</p>
+        <p class="subtle">Party: ${partyCount} PC${partyCount === 1 ? '' : 's'}, avg TL ${formatOneDecimal(avgThreatLevel)} (SL ${formatOneDecimal(avgSkillLevel)} + CP ${formatOneDecimal(avgCombatPower)})</p>
         <div class="encounter-quantity-table gm-quantity-scroll">
           <div class="encounter-quantity-row encounter-quantity-header">
-            <span>Qty</span><span>Overall</span><span>Power</span><span>Technique</span>
+            <span>Qty</span><span>Difficulty</span>
           </div>
           ${quantityTable.map(row => `
             <div class="encounter-quantity-row">
               <span>${row.enemyCount}</span>
               <span class="pill ${difficultyPillClass(row.index)}">${esc(row.label)}</span>
-              <span class="pill subtle-pill">${esc(row.power?.label || '—')}</span>
-              <span class="pill subtle-pill">${esc(row.technique?.label || '—')}</span>
             </div>
           `).join('')}
         </div>
       `, { kicker: 'Balancer' }) : ''}
 
-    ${renderPremadeBrowser({ avgCombatPower, avgSkillLevel, partyCount })}
+    ${renderPremadeBrowser({ avgCombatPower, avgSkillLevel, avgThreatLevel, partyCount })}
     </div>
+  `
+}
+
+function renderActiveEncounterPanel() {
+  const enc = state.activeEncounter
+  if (!enc) {
+    return `
+      <section class="card mt-16">
+        <div class="kicker">Live Encounter</div>
+        <h3>No active encounter</h3>
+        <p class="subtle">Use Start Encounter on the balancer to spawn temporary combatant copies.</p>
+      </section>
+    `
+  }
+  const filter = state.encounterCombatantFilter || 'all'
+  const search = String(state.encounterCombatantSearch || '').toLowerCase()
+  let list = enc.combatants || []
+  if (filter === 'defeated') list = list.filter(c => c.defeated || c.hp <= 0 || c.dead)
+  else if (filter === 'active') list = list.filter(c => !(c.defeated || c.hp <= 0 || c.dead))
+  if (search) list = list.filter(c => String(c.name || '').toLowerCase().includes(search))
+
+  const cards = list.map(c => {
+    const stats = computeStats(c)
+    const expanded = Boolean(state.encounterExpandedIds?.[c.id])
+    const isActive = enc.activeCombatantId === c.id
+    const defeated = c.defeated || c.hp <= 0 || c.dead
+    const generated = c.encounterSource?.generated ? '<span class="pill subtle-pill">generated</span>' : ''
+    const skillsHtml = expanded
+      ? (c.skills || []).slice(0, 20).map(id => {
+          const skill = getSkill(id)
+          if (!skill) return ''
+          return `<div class="wrap mt-8"><span>${esc(skill.name)}</span>
+            <button type="button" class="ghost-btn tiny" data-encounter-use-skill="${esc(c.id)}" data-skill-id="${esc(skill.id)}">Use</button></div>`
+        }).join('') || '<p class="subtle">No skills.</p>'
+      : ''
+    return `
+      <article class="card encounter-combatant-card ${defeated ? 'defeated' : ''} ${isActive ? 'is-active-turn' : ''}">
+        <div class="card-header">
+          <div>
+            <strong>${esc(c.name)}</strong> ${generated}
+            ${defeated ? '<span class="pill bad">Defeated</span>' : ''}
+            ${isActive ? '<span class="pill good">Active</span>' : ''}
+          </div>
+          <button type="button" class="ghost-btn tiny" data-encounter-expand="${esc(c.id)}">${expanded ? 'Collapse' : 'Expand'}</button>
+        </div>
+        <div class="subtle">HP ${c.hp}/${stats.hp} · STA ${c.stamina}/${stats.stamina}</div>
+        <div class="wrap mt-8">
+          <span class="pill">ACC ${stats.accuracy}</span>
+          <span class="pill">SPD ${stats.speed}</span>
+          <span class="pill">PD ${stats.physicalDefence}</span>
+          <span class="pill">MD ${stats.magicalDefence}</span>
+        </div>
+        <div class="wrap mt-8">
+          <button type="button" class="ghost-btn tiny" data-encounter-adjust-hp="${esc(c.id)}" data-amount="-1">HP−</button>
+          <button type="button" class="ghost-btn tiny" data-encounter-adjust-hp="${esc(c.id)}" data-amount="1">HP+</button>
+          <button type="button" class="ghost-btn tiny" data-encounter-adjust-sta="${esc(c.id)}" data-amount="-1">STA−</button>
+          <button type="button" class="ghost-btn tiny" data-encounter-adjust-sta="${esc(c.id)}" data-amount="1">STA+</button>
+          <button type="button" class="ghost-btn tiny" data-encounter-process-turn="${esc(c.id)}">Process Turn</button>
+          <button type="button" class="ghost-btn tiny" data-encounter-toggle-defeated="${esc(c.id)}">${defeated ? 'Undefeated' : 'Mark defeated'}</button>
+          <button type="button" class="ghost-btn tiny" data-encounter-duplicate="${esc(c.id)}">Duplicate</button>
+          <button type="button" class="danger-btn tiny" data-encounter-remove="${esc(c.id)}">Remove</button>
+        </div>
+        ${expanded ? `<div class="mt-12">${skillsHtml}</div>` : ''}
+      </article>
+    `
+  }).join('')
+
+  return `
+    <section class="card mt-16">
+      <div class="kicker">Live Encounter</div>
+      <h3>${esc(enc.name)} · Round ${enc.round}</h3>
+      <div class="encounter-sticky-bar wrap mt-8">
+        <button type="button" class="primary-btn tiny" data-start-active-encounter>Restart from balancer</button>
+        <button type="button" class="ghost-btn tiny" data-encounter-next-turn>Next Turn</button>
+        <button type="button" class="ghost-btn tiny" data-encounter-prev-turn>Previous Turn</button>
+        <button type="button" class="ghost-btn tiny" data-encounter-advance-round>Advance Round</button>
+        <button type="button" class="ghost-btn tiny" data-encounter-process-active>Process Active Enemy Turn</button>
+        <button type="button" class="danger-btn tiny" data-end-active-encounter>End Encounter</button>
+      </div>
+      <div class="toolbar mt-8">
+        <input class="input" data-encounter-search placeholder="Search combatants…" value="${esc(state.encounterCombatantSearch || '')}" />
+        <div class="segmented">
+          <button type="button" data-encounter-filter="all" class="${filter === 'all' ? 'active' : ''}">All</button>
+          <button type="button" data-encounter-filter="active" class="${filter === 'active' ? 'active' : ''}">Active</button>
+          <button type="button" data-encounter-filter="defeated" class="${filter === 'defeated' ? 'active' : ''}">Defeated</button>
+        </div>
+      </div>
+      <div class="encounter-combatant-grid mt-12">${cards || '<p class="subtle">No combatants match.</p>'}</div>
+    </section>
   `
 }
 

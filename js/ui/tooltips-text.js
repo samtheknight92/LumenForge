@@ -2,6 +2,12 @@ import { titleCase } from '../core/utils.js'
 import { DEFAULT_STATS } from '../core/constants.js'
 import { isGmMode } from '../gm/gm-mode.js'
 import {
+  getNextStatUpgradeCost,
+  getLatestStatRefund,
+  getPurchasedStatCount,
+  purchasesUntilNextBand
+} from '../character/stat-costs.js'
+import {
   formatStatModifiers,
   formatElementalAffinities,
   formatCraftingRecipe,
@@ -28,6 +34,8 @@ import {
 } from '../combat/instruments.js'
 import { resolveItemPresentation, itemGmTooltipLines } from '../items/item-presentation.js'
 import { isUnidentifiedCatalogItem } from '../items/unidentified-items.js'
+import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
+import { willQuickDrawActivate } from '../combat/quick-draw.js'
 
 export function itemTooltip(item, character = null, entry = null) {
   if (!item) return ''
@@ -80,7 +88,10 @@ export function itemTooltip(item, character = null, entry = null) {
 export function statTooltip(rule, { includeCost = false } = {}) {
   if (!rule) return ''
   const lines = [rule.label]
-  if (includeCost) lines.push(`${rule.cost} Lumens / point`)
+  if (includeCost) {
+    lines.push(`Base cost: ${rule.cost} Lumens`)
+    lines.push('Early upgrades are cheaper. The price rises as you repeatedly improve the same stat.')
+  }
   if (rule.desc) lines.push('', rule.desc)
   return lines.join('\n')
 }
@@ -88,16 +99,21 @@ export function statTooltip(rule, { includeCost = false } = {}) {
 export function statUpgradeTooltip(statKey, rule, character) {
   if (!rule || !character) return ''
   const current = Number(character.stats?.[statKey] ?? 0)
+  const nextCost = getNextStatUpgradeCost(character, statKey)
+  const purchased = getPurchasedStatCount(character, statKey)
+  const untilBand = purchasesUntilNextBand(character, statKey)
   const lines = [
     `Upgrade ${rule.label}`,
-    isGmMode() ? 'Cost: Free (GM Mode)' : `Cost: ${rule.cost} Lumens`,
-    `Current: ${current} (max ${rule.max})`
+    isGmMode() ? 'Cost: Free (GM Mode — no refund history)' : `Next upgrade: ${nextCost} Lumens`,
+    `Purchased upgrades: ${purchased}`,
+    `Next price band in: ${untilBand} upgrade${untilBand === 1 ? '' : 's'}`,
+    `Current: ${current} (max ${rule.max})`,
+    '',
+    'Early stat upgrades are cheaper. The price rises as you repeatedly improve the same stat. Race, gear, and skill bonuses do not change the price.'
   ]
   if (current >= rule.max) lines.push('', 'Already at maximum.')
-  else if (!isGmMode() && character.lumens < rule.cost) {
-    lines.push('', `Not enough Lumens — you have ${character.lumens}, need ${rule.cost}.`)
-  } else {
-    lines.push('', `Adds +1 ${rule.label}. You have ${character.lumens} Lumens.`)
+  else if (!isGmMode() && character.lumens < nextCost) {
+    lines.push('', `Not enough Lumens — you have ${character.lumens}, need ${nextCost}.`)
   }
   return lines.join('\n')
 }
@@ -106,13 +122,15 @@ export function statRefundTooltip(statKey, rule, character) {
   if (!rule || !character) return ''
   const current = Number(character.stats?.[statKey] ?? 0)
   const base = Number(DEFAULT_STATS[statKey] ?? 0)
+  const refund = getLatestStatRefund(character, statKey)
   const lines = [
     `Refund ${rule.label}`,
-    `Returns: ${rule.cost} Lumens`,
+    isGmMode() ? 'GM Mode: frees the point with no Lumen return' : `Latest refundable upgrade: ${refund} Lumens`,
     `Current: ${current} (base ${base})`
   ]
   if (current <= base) lines.push('', 'Already at starting value — nothing to refund.')
-  else lines.push('', `Removes 1 purchased point and refunds ${rule.cost} Lumens.`)
+  else if (!isGmMode() && refund <= 0) lines.push('', 'No refundable purchase history for this stat.')
+  else if (!isGmMode()) lines.push('', `Removes 1 purchased point and refunds ${refund} Lumens (what you paid).`)
   return lines.join('\n')
 }
 
@@ -122,9 +140,12 @@ export function skillTooltip(skill, character = null) {
   const lines = [
     skill.name,
     `${displayCategory(skill.category)} / ${titleCase(skill.subcategory)} · Tier ${skill.tier || 1}`,
-    `Cost: ${skill.cost || 0} Lumens · Stamina: ${Number(skill.staminaCost || 0)}`
+    `Cost: ${skill.cost || 0} Lumens · Stamina: ${character ? getEffectiveSkillStaminaCost(character, skill) : Number(skill.staminaCost || 0)}`
   ]
   if (skill.desc) lines.push('', skill.desc)
+  if (character && willQuickDrawActivate(character, skill)) {
+    lines.push('', 'Quick Draw ready: Advantage + −1 Stamina on this attack')
+  }
 
   if (owned && skillHasEffectBreakdown(skill)) {
     const breakdown = resolveSkillEffectBreakdown(character, skill)

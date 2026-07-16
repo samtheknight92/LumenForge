@@ -64,7 +64,17 @@ function normalizedPremadeCharacter(entry) {
 }
 
 export function premadeTemplateThreatLevel(entry) {
-  if (!entry?.premadeId) return { threatLevel: 1, base: 0, abilityBonus: 0, flags: {}, soloBossCapable: false }
+  if (!entry?.premadeId) {
+    return {
+      threatLevel: 0,
+      skillLevel: 0,
+      combatPower: 0,
+      base: 0,
+      abilityBonus: 0,
+      flags: {},
+      soloBossCapable: false
+    }
+  }
   if (threatCache.has(entry.premadeId)) return threatCache.get(entry.premadeId)
   const info = computeThreatLevel(normalizedPremadeCharacter(entry))
   threatCache.set(entry.premadeId, info)

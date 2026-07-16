@@ -101,7 +101,21 @@ export const state = {
   homebrewShowDrafts: true,
   homebrewImportPreview: null,
   homebrewMonsterShowSkillPicker: false,
-  homebrewMonsterSkillSearch: ''
+  homebrewMonsterSkillSearch: '',
+  guidedCreate: {
+    open: false,
+    step: 1,
+    draftCharacter: null,
+    playstyle: '',
+    dirty: false,
+    browseSkills: false,
+    browseItems: false,
+    form: { name: '', raceId: 'human', background: 'wanderer', elementalAffinity: '', humanStarterSkill: '' }
+  },
+  activeEncounter: null,
+  encounterCombatantFilter: 'all',
+  encounterCombatantSearch: '',
+  encounterExpandedIds: {}
 }
 
 export function activeCharacter() {

@@ -131,7 +131,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Combat flow',
-      'On your turn, say what you do. To attack, roll <strong>d20 + Accuracy</strong> vs the target\'s <strong>Physical Defence</strong> (melee/ranged) or <strong>Magical Defence</strong> (spells). On a hit, roll damage — read the skill or Basic Attack tooltip for the formula.'
+      'On your turn, say what you do. You may normally <strong>move and attack or use abilities in the same turn</strong> with no automatic Accuracy penalty or other punishment for doing both. To attack, roll <strong>d20 + Accuracy</strong> vs the target\'s <strong>Physical Defence</strong> (melee/ranged) or <strong>Magical Defence</strong> (spells). On a hit, roll damage — read the skill or Basic Attack tooltip for the formula.'
     ),
     doubleNatural20Block(),
     actionBarBlock(),
@@ -143,7 +143,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Ranged weapons',
-      'With bows and crossbows, you normally <strong>cannot move and attack in the same turn, in either order</strong>, unless <strong>Quick Draw</strong> or a skill says otherwise (e.g. Parting Shot: attack then up to 15ft — plus normal movement if you have Quick Draw). Mark <strong>Moved</strong> on the action bar when you reposition. Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover. See <strong>Skills → Weapons → Ranged</strong> for the full summary.'
+      'Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover. <strong>Quick Draw</strong>: your first ranged weapon attack each combat gains Advantage and costs 1 less Stamina (minimum 0) — press <strong>New Combat</strong> on the Character tab when a fight starts. Ranged Basic Attacks and ranged weapon skills can also trigger Double Natural 20. See <strong>Skills → Weapons → Ranged</strong> for the full summary.'
     ),
     tip(
       'Harmonies &amp; careers',
@@ -155,7 +155,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Process Turn',
-      'Press <strong>Process Turn</strong> on the Character tab at the <strong>End of Turn</strong> — after you move, attack, use an item, or finish your action. On <em>your</em> sheet it: pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses (Bleeding, Poison, Burn, regeneration, Mana Focus, and similar); then ticks each effect\'s remaining duration down by 1 — a 1-round effect like Blind stays for your action, then expires on this press. Clears your Moved marker for next turn. In combat, do this every turn after you act; out of combat, only when the GM says to and you have effects or toggles to process.'
+      'Press <strong>Process Turn</strong> on the Character tab at the <strong>End of Turn</strong> — after you move, attack, use an item, or finish your action. On <em>your</em> sheet it: pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses (Bleeding, Poison, Burn, regeneration, Mana Focus, and similar); then ticks each effect\'s remaining duration down by 1 — a 1-round effect like Blind stays for your action, then expires on this press. In combat, do this every turn after you act; out of combat, only when the GM says to and you have effects or toggles to process. When a new fight starts, press <strong>New Combat</strong> to reset once-per-combat uses like Quick Draw.'
     ),
     tip(
       'Knocked Out &amp; Revival',
@@ -166,19 +166,27 @@ export function renderHowToPlayTab() {
       'Players may attempt actions that are not represented by a specific skill or item. The GM decides whether the action is reasonable, whether it uses the character\'s full turn, and what number must be rolled to succeed (<strong>Saving Roll</strong>). The GM may also require an item, piece of equipment or other resource to be damaged, consumed or sacrificed as part of the attempt. Example: a Bleeding character without bandages may tear clothing or gear into a pressure wrap — the GM may require the full turn, set a Saving Roll target, and permanently remove the sacrificed item whether the roll succeeds or fails. The app does not automate this; it stays a flexible GM ruling.'
     ),
     tip(
-      'Saves',
+      'Saving Rolls',
+      'When the GM calls for a <strong>Saving Roll</strong>, pick a target from this ladder (1d20, meet or beat): <strong>Super Easy 3</strong> · <strong>Easy 8</strong> · <strong>Normal 11</strong> · <strong>Hard 14</strong> · <strong>Extreme 17</strong>. Apply Advantage / Disadvantage, relevant stats, or circumstance bonuses as the GM rules. Recovery Rolls at 0 HP stay fixed at 11+ (see Knocked Out).'
+    ),
+    tip(
+      'Saves (backup)',
       'Use Export Save (sidebar) to back up characters. Homebrew packs and character files move between devices — the live website does not store your data. Clearing browser data, switching browsers, or using another device may lose local saves unless you exported them. Knocked Out state and Recovery Roll streaks are included in saves.'
     )
   ])
 
   const player = tips([
     tip(
+      'Play tab',
+      'During a fight, open the <strong>Play</strong> tab for a compact session view: HP/Stamina, key stats, Basic Attack, pinned skills, statuses, combat consumables, <strong>Process Turn</strong>, and <strong>New Combat</strong>. Full inventory and identity stay on the Character tab. The footer action bar still works everywhere.'
+    ),
+    tip(
       'Setup',
-      'Create a character (sidebar) — pick race, background, spend Lumens on skills, buy gear on the <strong>Shop</strong> tab, and craft on the <strong>Craft</strong> tab if you know the right career recipes. Keep the action bar visible at the bottom during fights.'
+      'Create a character (sidebar) — pick race, background, spend Lumens on skills, buy gear on the <strong>Shop</strong> tab, and craft on the <strong>Craft</strong> tab if you know the right career recipes. Keep the action bar visible at the bottom during fights. Use <strong>Quick Create</strong> for a full sheet now, or <strong>Guided Create</strong> for a step-by-step wizard.'
     ),
     tip(
       'Your turn (combat)',
-      'When initiative reaches you: <strong>1.</strong> <strong>Move</strong> <em>or</em> use one skill / Basic Attack (your choice first) — unless you are Knocked Out (Recovery Roll only). <strong>2.</strong> Do the other if you still can — melee can move then strike; bows normally cannot move and shoot the same turn unless Quick Draw or a skill says otherwise. <strong>3.</strong> Press <strong>Process Turn</strong> at the <strong>End of Turn</strong> (ticks, then durations). <strong>4.</strong> Say you are done; next player goes. Roll accuracy at the table first; only apply damage or target effects after the GM confirms a hit — action bar, physical dice, or manual HP/Stamina all work.'
+      'When initiative reaches you: <strong>1.</strong> <strong>Move</strong> and/or use one skill / Basic Attack (in either order) — unless you are Knocked Out (Recovery Roll only). <strong>2.</strong> Press <strong>Process Turn</strong> at the <strong>End of Turn</strong> (ticks, then durations). <strong>3.</strong> Say you are done; next player goes. Roll accuracy at the table first; only apply damage or target effects after the GM confirms a hit — action bar, physical dice, or manual HP/Stamina all work.'
     ),
     tip(
       'Outside combat',
@@ -186,7 +194,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Skills tab',
-      'Learn skills when you have enough Lumens and meet requirements. <strong>Ascension</strong> (~20 breakthroughs, hidden until you qualify — T3 Lv10 · T4 Lv15 · T5 Lv22). <strong>Ultimate</strong> splits into Rare Legends, Weapon Mastery (one per weapon path), and Element Mastery (one per magic path) — T5 Lv22 · T6 Lv30.'
+      'Learn skills when you have enough Lumens and meet requirements. Use <strong>Focused</strong> to see trees that match your race, weapon, and started paths, or <strong>Browse All</strong> for the full catalogue. Search always looks everywhere and marks results outside Focused. <strong>Ascension</strong> (~20 breakthroughs, hidden until you qualify — T3 Lv10 · T4 Lv15 · T5 Lv22). <strong>Ultimate</strong> splits into Rare Legends, Weapon Mastery, and Element Mastery — T5 Lv22 · T6 Lv30.'
     ),
     tip(
       'Notes tab',
@@ -213,11 +221,11 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'GM Tools tab',
-      'Turn on <strong>GM Mode</strong> to unlock all skills/items for testing, free purchases, and ignore prerequisites. Use the <strong>initiative tracker</strong> and <strong>NPC turn</strong> helper to keep combat moving.'
+      'Turn on <strong>GM Mode</strong> to unlock all skills/items for testing, free purchases, and ignore prerequisites. Use the <strong>initiative tracker</strong>, <strong>Start Encounter</strong> on the balancer for live enemy cards, and the <strong>NPC turn</strong> helper to keep combat moving. Saving Roll targets are on the quick-reference card.'
     ),
     tip(
       'Premade characters',
-      'Spawn NPCs and monsters from <strong>GM Tools → Premade Characters</strong>. Each player still uses their own device for their PC; foes live on your GM roster. Cards show a <strong>Threat Level</strong> pill plus <strong>L</strong> / <strong>Gil loot</strong> pills — Threat Level is how dangerous that foe is in a fight, and the wallet reward is baked into the template. Use the <strong>Encounter Balancer</strong> section (also in GM Tools) to compare Threat Level against your party\'s Combat Power before you spawn a fight — "Add to Encounter" checks difficulty without touching your roster.'
+      'Spawn NPCs and monsters from <strong>GM Tools → Premade Characters</strong>. Each player still uses their own device for their PC; foes live on your GM roster. Cards show a <strong>Threat Level</strong> pill (Skill Level + Combat Power) plus <strong>L</strong> / <strong>Gil loot</strong> pills. Use the <strong>Encounter Balancer</strong> to compare the party\'s Threat Level to the enemy\'s Threat Level before you spawn a fight — "Add to Encounter" checks difficulty without touching your roster.'
     ),
     tip(
       'Defeat loot — Lumens & Gil',
@@ -226,6 +234,10 @@ export function renderHowToPlayTab() {
     tip(
       'Defeat loot — items',
       'Everything in the foe\'s inventory — <strong>not equipped</strong> — is lootable unless you rule otherwise: weapons, armor, potions, materials, and monster parts. Read their <strong>Notes</strong> (premades often list <strong>Potential defeat drops</strong>). Hand items out in fiction, or have the player on <em>their own device</em> use <strong>Shop → Grant</strong> (with <strong>GM Mode</strong> if needed) on their character — there is no auto-sync between devices. Remove spent loot from the defeated sheet if you keep corpses on the roster until you are finished with them.'
+    ),
+    tip(
+      'Saving Rolls (GM)',
+      'Set targets from the ladder on the GM Tools card: Super Easy 3 · Easy 8 · Normal 11 · Hard 14 · Extreme 17. Prefer calling the difficulty out loud ("Hard save — 14") so the table hears it. Grant Advantage/Disadvantage or ±1–2 for gear, standing, weather, or a fitting high stat. Resisting spells and improvised stunts use Saving Rolls; Accuracy attacks do not.'
     ),
     tip(
       'Applying effects',

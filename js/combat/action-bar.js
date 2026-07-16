@@ -27,6 +27,8 @@ import {
   resolveSkillEffectBreakdown,
   skillHasEffectBreakdown
 } from './damage-breakdown.js'
+import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
+import { willQuickDrawActivate } from './quick-draw.js'
 
 function resourceMeter(resource, label, icon, value, max, tone) {
   const pct = max > 0 ? Math.max(0, Math.min(100, Math.round((value / max) * 100))) : 0
@@ -50,7 +52,9 @@ function resourceMeter(resource, label, icon, value, max, tone) {
 
 function skillSlot(skill, character) {
   const type = isBasicAttackSkill(skill) ? 'activatable' : getSkillActivationType(skill)
-  const cost = Number(skill.staminaCost || 0)
+  const cost = type === 'activatable'
+    ? getEffectiveSkillStaminaCost(character, skill)
+    : Number(skill.staminaCost || 0)
   const active = type === 'toggle' && character.activeToggles?.includes(skill.id)
   const disableReason = (type === 'activatable' || type === 'toggle')
     ? getActionBarBlockReason(character, skill, type)
@@ -66,11 +70,13 @@ function skillSlot(skill, character) {
   const effectBreakdown = skillHasEffectBreakdown(skill)
     ? formatSkillEffectBreakdownPlain(resolveSkillEffectBreakdown(character, skill))
     : ''
+  const quickDrawReady = willQuickDrawActivate(character, skill)
   const tooltipLines = [
     skill.name,
     bonuses.length ? formatDescWithBonusTotalsPlain(skill.desc || '', bonusTotals) : (skill.desc || ''),
     ...bonuses.map(bonus => `${formatBonusStatLabel(bonus.stat, bonus.value)} (${bonus.sourceName})`),
-    effectBreakdown
+    effectBreakdown,
+    quickDrawReady ? 'Quick Draw ready: Advantage + −1 Stamina on this attack' : ''
   ].filter(Boolean)
   if (disableReason) tooltipLines.push('', `Why greyed out: ${disableReason}`)
   const classes = [
@@ -102,7 +108,7 @@ function skillSlot(skill, character) {
       ${disabled && !window.matchMedia('(max-width: 760px)').matches ? 'disabled' : ''}
       ${disableReason ? `title="${esc(disableReason)}"` : ''}
       aria-pressed="${active ? 'true' : 'false'}"
-      aria-label="${esc(`${skill.name}, ${type}, ${cost} stamina${disableReason ? `, unavailable: ${disableReason}` : ''}${bonusChip ? `, ${bonusChip} from passives` : ''}`)}"
+      aria-label="${esc(`${skill.name}, ${type}, ${cost} stamina${quickDrawReady ? ', Quick Draw ready' : ''}${disableReason ? `, unavailable: ${disableReason}` : ''}${bonusChip ? `, ${bonusChip} from passives` : ''}`)}"
     >
       ${disableReason ? '<span class="action-bar-skill-block-hint" aria-hidden="true">!</span>' : ''}
       ${bonusHtml}
@@ -194,7 +200,6 @@ export function renderActionBar(character) {
               ? renderActionBarSkillSlots(skills, character)
               : '<div class="action-bar-empty">Learn Action, Spell, or Toggle skills to slot them here.</div>'}
           </div>
-          <button type="button" class="ghost-btn tiny action-bar-move-btn" data-mark-moved="">Mark movement</button>
           ${activePerformanceStatuses(character).length
             ? `<button type="button" class="ghost-btn tiny action-bar-stop-performance-btn" data-stop-performance="" aria-label="Stop current performance">Stop performance</button>`
             : ''}

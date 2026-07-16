@@ -58,6 +58,14 @@ export const COMBAT_GLOSSARY_ENTRIES = [
     detail: 'When any Basic Weapon Attack rolls a natural 20, roll another d20. If that second roll is also a natural 20, the target is instantly defeated. This applies to Basic Attacks from all weapon types. Ranged weapon skills and abilities can also trigger this rule; non-ranged weapon skills cannot unless their description says otherwise. Multi-hit and area attacks get one Double Natural 20 check per ability use. Bosses, major story characters, and enemies marked immune to instant defeat take maximum critical damage and ignore Defence instead.\n\nAt the table: “Nat 20 on the Basic Attack — roll again. Another 20? They’re down — unless the GM says boss rules.”'
   },
   {
+    id: 'quick-draw',
+    term: 'Quick Draw',
+    aliases: ['quickdraw', 'first ranged attack'],
+    category: 'Combat & rolls',
+    summary: 'First ranged weapon attack each combat: Advantage and −1 Stamina (minimum 0).',
+    detail: 'If you know Quick Draw, your first ranged Basic Attack or ranged weapon ability each combat gains Advantage (roll twice, keep the higher attack roll) and costs 1 less Stamina (never below 0). Spells, melee, and non-ranged abilities do not trigger it. Press New Combat on the Character tab when a fight starts to reset it.\n\nAt the table: “First bow shot this fight — roll twice and keep the higher, and pay 1 less Stamina.”'
+  },
+  {
     id: 'physical-damage',
     term: 'Physical damage',
     aliases: ['weapon damage', 'melee damage', 'ranged damage'],
@@ -191,7 +199,7 @@ export const COMBAT_GLOSSARY_ENTRIES = [
     aliases: ['once per combat', 'once per day', 'once per scene', '1/day'],
     category: 'Combat & rolls',
     summary: 'Strong effect with a limit — tick a box when used.',
-    detail: 'Per combat resets after the fight. Per day resets after a rest (GM decides). Per scene is once until the story moves on.\n\nAt the table: “Mark it used so we remember.”'
+    detail: 'Per combat resets after the fight — press New Combat on the Character tab to clear the app\'s once-per-combat trackers (Quick Draw, Encore, Homing Shot, Rage, and similar; homebrew skills marked Once per combat too). Per day resets after a rest (GM decides). Per scene is once until the story moves on.\n\nAt the table: “Mark it used so we remember — or New Combat on the sheet.”'
   },
   {
     id: 'reaction',

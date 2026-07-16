@@ -1,5 +1,6 @@
-export const SAVE_VERSION = 2
-export const STORAGE_KEY = 'lumenforge_save_v2'
+export const SAVE_VERSION = 3
+export const STORAGE_KEY = 'lumenforge_save_v3'
+export const LEGACY_V2_STORAGE_KEY = 'lumenforge_save_v2'
 export const LEGACY_STORAGE_KEY = 'lumenforge_characters_v1'
 export const LEGACY_ACTIVE_KEY = 'lumenforge_active_character_v1'
 /** Legacy item prices still use gold/silver/copper — 1 gil = 1 copper equivalent. */
@@ -7,21 +8,23 @@ export const CURRENCY_RATE = { gold: 2500, silver: 100, copper: 1 }
 export const DEFAULT_STARTING_GIL = 2400
 export const DEFAULT_STARTING_LUMENS = 113
 
-/** Minimum character level to learn a skill of that tier. */
-/** +1 vs raw progress floor so tier gates match the same total skill/stat investment as before Level 1 baseline. */
-export const TIER_MIN_LEVEL = { 1: 1, 2: 5, 3: 9, 4: 14, 5: 21 }
+/** Default Lumen cost floor by skill tier. */
+export const TIER_LUMEN_COST = { 1: 8, 2: 20, 3: 40, 4: 65, 5: 100 }
 
-/** Ascension & Ultimate — stricter tier level gates (weapons/magic/careers use TIER_MIN_LEVEL). Tier 6 = Ultimate only. */
-export const CAPSTONE_TIER_MIN_LEVEL = { 3: 10, 4: 15, 5: 22, 6: 30 }
+/**
+ * Skill Level gates (1 learned skill = +1 Skill Level, starting at 0).
+ * Tier N unlocks when Skill Level reaches this number.
+ */
+export const TIER_MIN_LEVEL = { 1: 0, 2: 5, 3: 12, 4: 20, 5: 35, 6: 50 }
+
+/** Ascension & Ultimate use the same Skill Level ladder. Tier 6 = Ultimate only. */
+export const CAPSTONE_TIER_MIN_LEVEL = { 3: 12, 4: 20, 5: 35, 6: 50 }
 
 /** Default Lumen cost floors for capstone tiers (individual skills may cost more). */
 export const CAPSTONE_TIER_LUMEN_COST = { 3: 133, 4: 163, 5: 320, 6: 450 }
 
-/** Shop stock unlocks by item rarity (display level). */
-export const SHOP_MIN_LEVEL_BY_RARITY = { common: 1, uncommon: 5, rare: 9, epic: 14, legendary: 21 }
-
-/** Default Lumen cost floor by skill tier. */
-export const TIER_LUMEN_COST = { 1: 8, 2: 20, 3: 40, 4: 65, 5: 100 }
+/** Shop stock unlocks by item rarity — aligned with Skill Level tier milestones. */
+export const SHOP_MIN_LEVEL_BY_RARITY = { common: 0, uncommon: 5, rare: 12, epic: 20, legendary: 35 }
 
 export const DRAGONBORN_AFFINITIES = ['fire', 'ice', 'thunder', 'earth', 'wind', 'water', 'darkness', 'light']
 export const ITEMS_PER_PAGE = 48
@@ -48,14 +51,13 @@ export const STAT_RULES = {
   magicalDefence: { label: 'Magical Defence', cost: 10, min: 1, max: 30, desc: 'Magical AC — spells and magical attacks must roll d20 + accuracy at or above this to hit (otherwise miss/block).' }
 }
 
-export const TAB_IDS = ['character', 'skills', 'stats', 'shop', 'craft', 'homebrew', 'gm', 'notes', 'howtoplay']
+export const TAB_IDS = ['character', 'play', 'skills', 'stats', 'shop', 'craft', 'homebrew', 'gm', 'notes', 'howtoplay']
 
 /** Callout shown above a weapon skill subcategory on the Skills tab. */
 export const WEAPON_SKILL_TREE_INTROS = {
   ranged: [
-    'With bows and crossbows, you normally cannot move and attack in the same turn, in either order — unless you have Quick Draw or a skill says otherwise (e.g. Parting Shot: attack then up to 15ft; with Quick Draw, that 15ft is in addition to normal movement). Mark Moved on the action bar when you reposition.',
     'Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover.',
-    'Ranged Basic Attacks and ranged weapon skills can trigger Double Natural 20 — see How to Play.'
+    'Quick Draw: your first ranged weapon attack each combat gains Advantage and costs 1 less Stamina (minimum 0). Press New Combat on the Character tab when a fight starts.'
   ]
 }
 

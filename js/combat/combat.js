@@ -1,7 +1,6 @@
 import { getEquippedWeapon, getEquippedOffhand, getWeaponKind, characterHandsEmpty } from '../items/equipment.js'
 import { getSkillWeaponKinds } from './action-bar-bonuses.js'
 import { ANY_WEAPON_KIND } from '../core/constants.js'
-import { getSkillActivationType } from '../skills/skill-activation.js'
 import {
   BASIC_ATTACK_ID,
   applyBasicAttackDamage,
@@ -17,11 +16,21 @@ import { strikerBasicDamageFormula } from './striker-combat.js'
 import { invalidateCharacterCache } from '../character/character.js'
 import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
 import { knockoutActionBlockReason } from '../character/knockout.js'
+import { oncePerCombatBlockReason } from './skill-use-limits.js'
+export {
+  characterHasQuickDraw,
+  isRangedAttackSkill,
+  isRangedBasicAttack,
+  isQuickDrawAttack,
+  isQuickDrawReady,
+  willQuickDrawActivate,
+  markQuickDrawUsed,
+  resetCombatUses,
+  formatQuickDrawActivationNote
+} from './quick-draw.js'
 
 export { BASIC_ATTACK_ID, isBasicAttackSkill, rollWeaponDamage }
 
-/** Ranged skills that intentionally work after movement. */
-const MOVE_EXEMPT_SKILL_IDS = new Set(['quick_draw'])
 export function getBasicAttackSkill(character) {
   const weapon = getEquippedWeapon(character)
   const offhand = getEquippedOffhand(character)
@@ -76,49 +85,6 @@ export function skillWeaponRequirementLabel(skill) {
   }).join(' or ')
 }
 
-export function characterHasQuickDraw(character) {
-  return character?.skills?.includes('quick_draw')
-}
-
-function isBowFusionSkill(skill) {
-  return String(skill?.fusionType || '').toLowerCase().startsWith('bow_')
-}
-
-function fusionDescImpliesRangedAttack(skill) {
-  const desc = String(skill?.desc || '')
-  return /\b(arrows?|volley|projectiles?|bow shot|shot from (?:a |your )?bow|burning arrows?|frost arrows?|enchanted arrows?)\b/i.test(desc)
-}
-
-/** True for activatable ranged attacks blocked after movement (not support toggles). */
-export function isRangedAttackSkill(skill) {
-  if (!skill || isBasicAttackSkill(skill)) return false
-  if (MOVE_EXEMPT_SKILL_IDS.has(skill.id)) return false
-
-  const type = getSkillActivationType(skill)
-  if (type === 'passive' || type === 'toggle') return false
-
-  const sub = String(skill?.subcategory || '').toLowerCase()
-  if (sub === 'ranged_magic') return true
-  if (isBowFusionSkill(skill)) return true
-  if (sub === 'ranged') return true
-  if (skillRequiredWeaponKinds(skill).includes('ranged')) return true
-  if (skill.category === 'fusion' && fusionDescImpliesRangedAttack(skill)) return true
-  return false
-}
-
-export function isRangedBasicAttack(character) {
-  return getWeaponKind(getEquippedWeapon(character)) === 'ranged'
-    || getWeaponKind(getEquippedOffhand(character)) === 'ranged'
-}
-
-export function skillBlockedByMoveRule(character, skill) {
-  if (!character) return false
-  if (!character.movedThisTurn) return false
-  if (characterHasQuickDraw(character)) return false
-  if (isBasicAttackSkill(skill)) return isRangedBasicAttack(character)
-  return isRangedAttackSkill(skill)
-}
-
 export function getSkillUseBlockReason(character, skill) {
   if (!skill) return 'Unknown skill'
   const koBlock = knockoutActionBlockReason(character)
@@ -127,9 +93,8 @@ export function getSkillUseBlockReason(character, skill) {
     const label = skillWeaponRequirementLabel(skill)
     return `Requires ${label} equipped`
   }
-  if (skillBlockedByMoveRule(character, skill)) {
-    return 'Moved this turn — ranged attacks unavailable (learn Quick Draw to fire after moving)'
-  }
+  const combatLimit = oncePerCombatBlockReason(character, skill)
+  if (combatLimit) return combatLimit
   return ''
 }
 

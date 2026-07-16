@@ -467,13 +467,6 @@
     bottom: 3px;
   }
 
-  .action-bar-move-btn {
-    align-self: flex-start;
-    margin-top: 0;
-    padding: 5px 8px;
-    font-size: 11px;
-  }
-
   body.has-action-bar .content {
     padding-bottom: calc(var(--action-bar-offset, 168px) + env(safe-area-inset-bottom, 0px));
     scroll-padding-bottom: calc(var(--action-bar-offset, 168px) + env(safe-area-inset-bottom, 0px));

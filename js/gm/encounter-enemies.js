@@ -60,6 +60,8 @@ export function resolveEncounterEnemyGroup(row) {
       name: template.name,
       count: normalized.count,
       threatLevel: threatInfo.threatLevel,
+      skillLevel: threatInfo.skillLevel,
+      combatPower: threatInfo.combatPower,
       base: threatInfo.base,
       abilityBonus: threatInfo.abilityBonus,
       soloBossCapable: threatInfo.soloBossCapable
@@ -77,6 +79,8 @@ export function resolveEncounterEnemyGroup(row) {
       name: character.name,
       count: normalized.count,
       threatLevel: threatInfo.threatLevel,
+      skillLevel: threatInfo.skillLevel,
+      combatPower: threatInfo.combatPower,
       base: threatInfo.base,
       abilityBonus: threatInfo.abilityBonus,
       soloBossCapable: threatInfo.soloBossCapable
@@ -89,6 +93,8 @@ export function resolveEncounterEnemyGroup(row) {
     name: normalized.name,
     count: normalized.count,
     threatLevel: normalized.threatLevel,
+    skillLevel: 0,
+    combatPower: normalized.threatLevel,
     base: normalized.threatLevel,
     abilityBonus: 0,
     soloBossCapable: normalized.soloBossCapable

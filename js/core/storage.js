@@ -1,4 +1,4 @@
-import { SAVE_VERSION, STORAGE_KEY, LEGACY_STORAGE_KEY, LEGACY_ACTIVE_KEY, RETIRED_SKILL_SUBCATEGORIES } from './constants.js'
+import { SAVE_VERSION, STORAGE_KEY, LEGACY_V2_STORAGE_KEY, LEGACY_STORAGE_KEY, LEGACY_ACTIVE_KEY, RETIRED_SKILL_SUBCATEGORIES } from './constants.js'
 import { state } from './state.js'
 import { applyFusionNavigationState, parseFusionFiltersFromUrl } from '../skills/fusion-nav.js'
 import { debounce, toast } from './utils.js'
@@ -7,6 +7,7 @@ import { serializeHomebrewForSave, applyHomebrewFromSave } from '../homebrew/hom
 import { normalizePremadePageSize } from '../character/premade-characters.js'
 import { defaultGmMonsterBuilderDraft } from '../gm/gm-monster-builder.js'
 import { normalizeEncounterEnemies, migrateEncounterQuantityFocusId } from '../gm/encounter-enemies.js'
+import { normalizeActiveEncounter } from '../gm/active-encounter.js'
 
 /** Full app save — characters plus UI, folders, GM tools, and filters. */
 export function serializeSave() {
@@ -51,6 +52,15 @@ export function serializeSave() {
       encounterParty: state.encounterParty,
       encounterEnemies: state.encounterEnemies,
       encounterQuantityFocusId: state.encounterQuantityFocusId,
+      activeEncounter: state.activeEncounter
+        ? {
+            ...state.activeEncounter,
+            combatants: (state.activeEncounter.combatants || []).map(c => {
+              const clean = stripCharacterCache(c)
+              return { ...clean, defeated: Boolean(c.defeated), encounterSource: c.encounterSource || null }
+            })
+          }
+        : null,
       gmMonsterBuilderDraft: state.gmMonsterBuilderDraft
     },
     characters: state.characters.map(character => {
@@ -155,8 +165,8 @@ function applyUiFromSave(ui) {
       .map(row => ({
         id: String(row.id || `party_${Math.random().toString(36).slice(2, 9)}`),
         name: String(row.name || 'Hero'),
-        skillLevel: Math.max(1, Math.round(Number(row.skillLevel) || 1)),
-        combatPower: Math.max(1, Math.round(Number(row.combatPower) || 1)),
+        skillLevel: Math.max(0, Math.round(Number(row.skillLevel) || 0)),
+        combatPower: Math.max(0, Math.round(Number(row.combatPower) || 0)),
         source: row.source === 'roster' ? 'roster' : 'manual',
         characterId: row.characterId || null
       }))
@@ -167,6 +177,7 @@ function applyUiFromSave(ui) {
   }
   if (ui.encounterQuantityFocusId != null) state.encounterQuantityFocusId = String(ui.encounterQuantityFocusId || '')
   migrateEncounterQuantityFocusId()
+  state.activeEncounter = ui.activeEncounter ? normalizeActiveEncounter(ui.activeEncounter) : null
   if (ui.gmMonsterBuilderDraft && typeof ui.gmMonsterBuilderDraft === 'object') {
     const draft = ui.gmMonsterBuilderDraft
     state.gmMonsterBuilderDraft = defaultGmMonsterBuilderDraft({
@@ -243,13 +254,21 @@ export function load() {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) {
       const parsed = JSON.parse(raw)
-      if (parsed.version === SAVE_VERSION) {
+      if (parsed.version === SAVE_VERSION || parsed.version === 2) {
         applySavePayload(parsed, { replace: true })
+        if (parsed.version !== SAVE_VERSION) saveNow()
       } else {
         migrateLegacy(parsed)
       }
     } else {
-      migrateFromLegacyKeys()
+      const rawV2 = localStorage.getItem(LEGACY_V2_STORAGE_KEY)
+      if (rawV2) {
+        const parsed = JSON.parse(rawV2)
+        applySavePayload(parsed, { replace: true })
+        saveNow()
+      } else {
+        migrateFromLegacyKeys()
+      }
     }
     if (!state.characters.some(character => character.id === state.activeId)) {
       state.activeId = state.characters[0]?.id || null

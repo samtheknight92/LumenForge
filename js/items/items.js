@@ -290,9 +290,9 @@ export function activeCatalogFilterLabels() {
 }
 
 export function shopMinLevelForItem(item) {
-  if (!item) return 1
+  if (!item) return 0
   if (Number.isFinite(Number(item.shopMinLevel))) return Number(item.shopMinLevel)
-  return SHOP_MIN_LEVEL_BY_RARITY[String(item.rarity || 'common').toLowerCase()] ?? 1
+  return SHOP_MIN_LEVEL_BY_RARITY[String(item.rarity || 'common').toLowerCase()] ?? 0
 }
 
 export function isShopPurchaseItem(item) {
@@ -331,9 +331,10 @@ export function shopPurchaseCheck(character, item, { free = false } = {}) {
     return { ok: false, reason }
   }
   if (!character) return { ok: false, reason: 'No character loaded.' }
-  const need = shopMinLevelForItem(item)
-  const level = computeSkillLevel(character).skillLevel
-  if (level < need) return { ok: false, reason: `Requires Skill Level ${need}` }
+  if (!isShopItemLevelUnlocked(character, item)) {
+    const need = shopMinLevelForItem(item)
+    return { ok: false, reason: `Requires more training (about Skill Level ${need}+)` }
+  }
   const price = itemPriceGil(item)
   if (price > normalizeGil(character.gil)) return { ok: false, reason: 'Not enough Gil.' }
   return { ok: true }

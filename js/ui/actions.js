@@ -17,6 +17,13 @@ import {
   getEffect
 } from '../character/character.js'
 import {
+  getNextStatUpgradeCost,
+  getLatestStatRefund,
+  appendStatPurchase,
+  popStatPurchase,
+  isTemplateCharacter
+} from '../character/stat-costs.js'
+import {
   getSkill,
   canLearnSkill,
   dependentUnlockedSkills,
@@ -77,10 +84,15 @@ import {
 import { weatherProcessTurnStaminaDrain } from '../combat/weather-effects.js'
 import {
   BASIC_ATTACK_ID,
+  getBasicAttackSkill,
   getSkillUseBlockReason,
-  isBasicAttackSkill,
-  resolveBasicAttackDamage
+  resolveBasicAttackDamage,
+  willQuickDrawActivate,
+  markQuickDrawUsed,
+  resetCombatUses,
+  formatQuickDrawActivationNote
 } from '../combat/combat.js'
+import { markSkillUsedThisCombat, isOncePerCombatSkill } from '../combat/skill-use-limits.js'
 import {
   applySkillHeal,
   formatHealUseSummary,
@@ -117,6 +129,23 @@ import {
 } from '../character/knockout.js'
 import { buildNpcTurnSuggestions } from '../gm/gm-npc-turn.js'
 import { openPrintableCharacterSheet } from '../export/export-sheet.js'
+import {
+  openGuidedCreate as openGuidedCreateState,
+  closeGuidedCreate as closeGuidedCreateState,
+  finishGuidedCreate as finishGuidedCreateState,
+  syncDraftFromIdentityForm
+} from './guided-create.js'
+import {
+  startActiveEncounterFromBalancer,
+  endActiveEncounter,
+  nextEncounterTurn,
+  prevEncounterTurn,
+  advanceEncounterRound,
+  removeEncounterCombatant,
+  duplicateEncounterCombatant,
+  markEncounterCombatantDefeated,
+  getEncounterCombatant
+} from '../gm/active-encounter.js'
 import {
   createInitiativeEntry,
   nextTurnEntryId,
@@ -442,9 +471,18 @@ export function useSkill(skillId) {
   const blockReason = getSkillUseBlockReason(character, skill)
   if (blockReason) return toast(blockReason)
 
+  const quickDraw = willQuickDrawActivate(character, skill)
   const cost = getEffectiveSkillStaminaCost(character, skill)
   if (character.stamina < cost) {
     return toast(`Not enough Stamina for ${skill.name} (need ${cost}, have ${character.stamina}).`)
+  }
+
+  const qdNote = quickDraw
+    ? ` — ${formatQuickDrawActivationNote(Number(skill.staminaCost || 0), cost)}`
+    : ''
+  const markCombatUses = () => {
+    if (quickDraw) markQuickDrawUsed(character)
+    if (isOncePerCombatSkill(skill)) markSkillUsedThisCombat(character, skill.id)
   }
 
   if (isStrikerMultiBasicSkill(skill)) {
@@ -455,6 +493,7 @@ export function useSkill(skillId) {
       return toast(`${skill.name} requires Striker Basics.`)
     }
     character.stamina -= cost
+    markCombatUses()
     invalidateCharacterCache(character)
     const count = parseMultiBasicAttackCount(skill, character)
     const hitLines = []
@@ -465,12 +504,13 @@ export function useSkill(skillId) {
       hitLines.push(formatCombatDamageToastLine(i + 1, summary, total))
     }
     touch(character, { header: true, content: true, actionBar: true })
-    toastCombat(formatMultiHitCombatToast(skill.name, hitLines, totals, cost), { html: true })
+    toastCombat(`${formatMultiHitCombatToast(skill.name, hitLines, totals, cost).replace(/\.$/, '')}${qdNote}.`, { html: true })
     return
   }
 
   if (isMultiWeaponAttackSkill(skill)) {
     character.stamina -= cost
+    markCombatUses()
     invalidateCharacterCache(character)
     const count = parseMultiWeaponAttackCount(skill)
     const hitLines = []
@@ -485,14 +525,15 @@ export function useSkill(skillId) {
     }
     touch(character, { header: true, content: true, actionBar: true })
     if (hitLines.length) {
-      toastCombat(formatMultiHitCombatToast(skill.name, hitLines, totals, cost), { html: true })
+      toastCombat(`${formatMultiHitCombatToast(skill.name, hitLines, totals, cost).replace(/\.$/, '')}${qdNote}.`, { html: true })
     } else {
-      toast(`${skill.name} used (−${cost} Stamina). Roll each hit at the table.`)
+      toast(`${skill.name} used (−${cost} Stamina)${qdNote}. Roll each hit at the table.`)
     }
     return
   }
 
   character.stamina -= cost
+  markCombatUses()
 
   const healResult = applySkillHeal(character, skill, rollDice)
   const healSummary = healResult ? formatHealUseSummary(healResult.breakdown, healResult.healed) : ''
@@ -571,53 +612,56 @@ export function useSkill(skillId) {
     const lead = [damageLine, body].filter(Boolean).join('; ')
     return lead || damageLine
   }
+  const finish = (message, opts) => toastCombat(`${message.replace(/\.$/, '')}${qdNote}.`, opts)
 
   if (healPart && !effectPart && !missed.length) {
-    toastCombat(`${skill.name}: ${withDamage(healPart)} ${staminaNote}.`, { html: Boolean(damageLine) })
+    finish(`${skill.name}: ${withDamage(healPart)} ${staminaNote}`, { html: Boolean(damageLine) })
     return
   }
   if (healPart && effectPart && !missed.length) {
-    toastCombat(`${skill.name}: ${withDamage(`${healPart}; ${effectPart}`)} ${staminaNote}.`, { html: Boolean(damageLine) })
+    finish(`${skill.name}: ${withDamage(`${healPart}; ${effectPart}`)} ${staminaNote}`, { html: Boolean(damageLine) })
     return
   }
   if (healPart && effectPart && missed.length) {
-    toastCombat(`${skill.name}: ${withDamage(`${healPart}; ${effectPart}; ${missed.join(', ')}`)} ${staminaNote}.`, { html: Boolean(damageLine) })
+    finish(`${skill.name}: ${withDamage(`${healPart}; ${effectPart}; ${missed.join(', ')}`)} ${staminaNote}`, { html: Boolean(damageLine) })
     return
   }
   if (healPart && !effectPart && missed.length) {
-    toastCombat(`${skill.name}: ${withDamage(`${healPart}; ${missed.join(', ')}`)} ${staminaNote}.`, { html: Boolean(damageLine) })
+    finish(`${skill.name}: ${withDamage(`${healPart}; ${missed.join(', ')}`)} ${staminaNote}`, { html: Boolean(damageLine) })
     return
   }
 
   if (!activations.length && !healResult) {
     if (damageLine) {
-      toastCombat(`${skill.name}: ${damageLine} ${staminaNote}.`, { html: true })
+      finish(`${skill.name}: ${damageLine} ${staminaNote}`, { html: true })
       return
     }
-    toastCombat(`${skill.name} used ${staminaNote}.`)
+    finish(`${skill.name} used ${staminaNote}`)
     return
   }
   if (applied.length && !missed.length) {
-    toastCombat(`${skill.name}: ${withDamage(effectPart)}${ampSuffix} (−${cost} Stamina).`, { html: Boolean(damageLine) })
+    finish(`${skill.name}: ${withDamage(effectPart)}${ampSuffix} (−${cost} Stamina)`, { html: Boolean(damageLine) })
     return
   }
   if (applied.length) {
-    toastCombat(`${skill.name}: ${withDamage(`${effectPart}${ampSuffix}; ${missed.join(', ')}`)} (−${cost} Stamina).`, { html: Boolean(damageLine) })
+    finish(`${skill.name}: ${withDamage(`${effectPart}${ampSuffix}; ${missed.join(', ')}`)} (−${cost} Stamina)`, { html: Boolean(damageLine) })
     return
   }
   if (damageLine) {
-    toastCombat(`${skill.name}: ${damageLine}; ${missed.length ? missed.join(', ') : 'no effects applied'} (−${cost} Stamina).`, { html: true })
+    finish(`${skill.name}: ${damageLine}; ${missed.length ? missed.join(', ') : 'no effects applied'} (−${cost} Stamina)`, { html: true })
     return
   }
-  toastCombat(`${skill.name} failed to apply effects${missed.length ? `: ${missed.join(', ')}` : ''} (−${cost} Stamina).`)
+  finish(`${skill.name} failed to apply effects${missed.length ? `: ${missed.join(', ')}` : ''} (−${cost} Stamina)`)
 }
 
-export function processTurn() {
-  const character = activeCharacter()
+export function processTurn(targetCharacter = null) {
+  const character = targetCharacter || activeCharacter()
   if (!character) return
-  if (isDead(character)) return toast('Dead — Process Turn no longer applies.')
+  if (isDead(character)) {
+    if (!targetCharacter) toast('Dead — Process Turn no longer applies.')
+    return
+  }
   const previousHp = Number(character.hp || 0)
-  character.movedThisTurn = false
   invalidateCharacterCache(character)
   const stillActive = []
   let spent = 0
@@ -649,7 +693,11 @@ export function processTurn() {
   character.hp = clamp(character.hp, 0, stats.hp)
   character.stamina = clamp(character.stamina, 0, stats.stamina)
   const koSync = syncKnockoutAfterHpChange(character, { previousHp })
-  touch(character)
+  if (!targetCharacter || targetCharacter === activeCharacter()) touch(character)
+  else if (state.activeEncounter) {
+    // Encounter combatant — persist via normal save path
+    save()
+  }
   const effectParts = [effectTick.summary, weatherTick.summary, passiveTick.summary].filter(Boolean)
   if (weatherDrain > 0) effectParts.push(`Heatwave: −${weatherDrain} Stamina (apply to whole party at table)`)
   if (koSync.entered) effectParts.push('Knocked Out')
@@ -937,23 +985,28 @@ export function equipItem(entryUid, slot = null) {
 export function useBasicAttack() {
   const character = activeCharacter()
   if (!character) return
-  const blockReason = getSkillUseBlockReason(character, { id: BASIC_ATTACK_ID, subcategory: 'attack' })
+  const skill = getBasicAttackSkill(character)
+  const blockReason = getSkillUseBlockReason(character, skill)
   if (blockReason) return toast(blockReason)
+  const quickDraw = willQuickDrawActivate(character, skill)
   invalidateCharacterCache(character)
   const { total, summary } = resolveBasicAttackDamage(character, rollDice)
+  if (quickDraw) markQuickDrawUsed(character)
   touch(character, { header: true, content: true, actionBar: true })
-  toastCombat(`Basic Attack: ${formatCombatDamageToastLine(null, summary, total)}`, { html: true })
+  const qdNote = quickDraw
+    ? ` — ${formatQuickDrawActivationNote(Number(skill.staminaCost || 0), 0)}`
+    : ''
+  toastCombat(`Basic Attack: ${formatCombatDamageToastLine(null, summary, total)}${qdNote}`, { html: true })
 }
 
-export function markMoved() {
+export function beginNewCombat() {
   const character = activeCharacter()
   if (!character) return
-  const koBlock = knockoutActionBlockReason(character)
-  if (koBlock) return toast(koBlock)
-  character.movedThisTurn = true
+  resetCombatUses(character)
+  delete character.movedThisTurn
   invalidateCharacterCache(character)
-  touch(character, { header: true, actionBar: true })
-  toast('Movement marked — ranged attacks blocked this turn (Quick Draw bypasses this).')
+  touch(character, { header: true, content: true, actionBar: true })
+  toast('New combat started — once-per-combat uses reset (Quick Draw, Encore, Homing Shot, Rage, and similar).')
 }
 
 export function unequip(slot) {
@@ -988,10 +1041,17 @@ export function upgradeStat(stat) {
   const rule = STAT_RULES[stat]
   if (!character || !rule) return
   if (character.stats[stat] >= rule.max) return toast(`${rule.label} is already at its cap.`)
-  if (!isGmMode() && character.lumens < rule.cost) return toast('Not enough lumens for that upgrade.')
+  const gm = isGmMode()
+  const nextCost = getNextStatUpgradeCost(character, stat)
+  if (!gm && character.lumens < nextCost) return toast(`Not enough lumens for that upgrade (need ${nextCost}).`)
   const wasBelowCap = character.stats[stat] < rule.max
   character.stats[stat] += 1
-  if (!isGmMode()) character.lumens -= rule.cost
+  if (gm) {
+    // Free GM edits do not create refundable history.
+  } else {
+    character.lumens -= nextCost
+    appendStatPurchase(character, stat, nextCost)
+  }
   if (stat === 'hp') character.hp += 1
   if (stat === 'stamina') character.stamina += 1
   touch(character)
@@ -1006,8 +1066,19 @@ export function refundStat(stat) {
   const rule = STAT_RULES[stat]
   if (!character || !rule) return
   if (character.stats[stat] <= DEFAULT_STATS[stat]) return toast(`${rule.label} is already at its starting value.`)
+  const gm = isGmMode()
+  if (!gm && isTemplateCharacter(character)) {
+    return toast('Template / premade stats cannot be refunded for Lumens. Enable GM Mode to edit freely.')
+  }
+  const refundAmount = gm ? 0 : getLatestStatRefund(character, stat)
+  if (!gm && refundAmount <= 0) {
+    return toast(`No refundable ${rule.label} purchases left (template or GM free points).`)
+  }
   character.stats[stat] -= 1
-  if (!isGmMode()) character.lumens += rule.cost
+  if (!gm) {
+    popStatPurchase(character, stat)
+    character.lumens += refundAmount
+  }
   const computed = computeStats(character)
   character.hp = clamp(character.hp, 0, computed.hp)
   character.stamina = clamp(character.stamina, 0, computed.stamina)
@@ -2386,7 +2457,7 @@ export function addEncounterPartyMemberManual() {
   state.encounterParty.push({
     id: uid('party'),
     name: `Player ${state.encounterParty.length + 1}`,
-    skillLevel: 1,
+    skillLevel: 0,
     combatPower: 1,
     source: 'manual',
     characterId: null
@@ -2405,8 +2476,8 @@ export function updateEncounterPartyMember(rowId, field, value) {
   const row = state.encounterParty.find(r => r.id === rowId)
   if (!row) return
   if (field === 'name') row.name = String(value || '').trim() || row.name
-  else if (field === 'skillLevel') row.skillLevel = Math.max(1, Math.round(Number(value) || 1))
-  else if (field === 'combatPower') row.combatPower = Math.max(1, Math.round(Number(value) || 1))
+  else if (field === 'skillLevel') row.skillLevel = Math.max(0, Math.round(Number(value) || 0))
+  else if (field === 'combatPower') row.combatPower = Math.max(0, Math.round(Number(value) || 0))
   save()
   render({ content: true })
 }
@@ -2729,6 +2800,13 @@ export function toggleSkillStar(skillId) {
   touch(character)
 }
 
+export function setSkillViewMode(mode) {
+  const character = activeCharacter()
+  if (!character) return
+  character.skillViewMode = mode === 'browse' ? 'browse' : 'focused'
+  touch(character)
+}
+
 export function togglePinnedSkill(skillId) {
   const character = activeCharacter()
   if (!character || !skillId) return
@@ -2860,4 +2938,130 @@ export function removeWeatherEffect(uid) {
   if (!character) return
   character.weatherEffects = (character.weatherEffects || []).filter(row => row.uid !== uid)
   touch(character)
+}
+
+export function openGuidedCreate() {
+  openGuidedCreateState()
+  render({ content: true })
+}
+
+export function cancelGuidedCreate() {
+  if (!closeGuidedCreateState({ force: false })) return
+  render({ content: true })
+}
+
+export function guidedCreateNext() {
+  const gc = state.guidedCreate
+  if (!gc?.open) return
+  if (gc.step === 1) {
+    const f = gc.form
+    if (!String(f.name || "").trim()) return toast("Enter a name.")
+    if (f.raceId === "dragonborn" && !f.elementalAffinity) return toast("Pick an elemental affinity.")
+    if (f.raceId === "human" && !f.humanStarterSkill) return toast("Pick a starter weapon skill.")
+    syncDraftFromIdentityForm()
+  }
+  if (gc.step === 2 && !gc.playstyle) return toast("Pick a playstyle (or Explore).")
+  if (gc.step < 6) {
+    if (gc.step >= 2) syncDraftFromIdentityForm()
+    gc.step += 1
+    gc.dirty = true
+  }
+  render({ content: true })
+}
+
+export function guidedCreateBack() {
+  const gc = state.guidedCreate
+  if (!gc?.open) return
+  gc.step = Math.max(1, gc.step - 1)
+  render({ content: true })
+}
+
+export function guidedCreateFinish() {
+  const created = finishGuidedCreateState()
+  if (!created) return
+  save()
+  render({ all: true })
+}
+
+export function startActiveEncounter() {
+  startActiveEncounterFromBalancer()
+  save()
+  render({ content: true })
+}
+
+export function endActiveEncounterAction() {
+  endActiveEncounter({ confirmEnd: true })
+  save()
+  render({ content: true })
+}
+
+export function encounterNextTurn() {
+  nextEncounterTurn()
+  save()
+  render({ content: true })
+}
+
+export function encounterPrevTurn() {
+  prevEncounterTurn()
+  save()
+  render({ content: true })
+}
+
+export function encounterAdvanceRound() {
+  advanceEncounterRound()
+  save()
+  render({ content: true })
+}
+
+export function encounterProcessActiveTurn() {
+  const enc = state.activeEncounter
+  const combatant = getEncounterCombatant(enc?.activeCombatantId)
+  if (!combatant) return toast("No active enemy.")
+  processTurn(combatant)
+  save()
+  render({ content: true })
+}
+
+export function encounterProcessTurn(id) {
+  const combatant = getEncounterCombatant(id)
+  if (!combatant) return
+  processTurn(combatant)
+  save()
+  render({ content: true })
+}
+
+export function encounterAdjustResource(id, resource, amount) {
+  const combatant = getEncounterCombatant(id)
+  if (!combatant) return
+  const stats = computeStats(combatant)
+  if (resource === "hp") combatant.hp = clamp(combatant.hp + amount, 0, stats.hp)
+  if (resource === "stamina") combatant.stamina = clamp(combatant.stamina + amount, 0, stats.stamina)
+  save()
+  render({ content: true })
+}
+
+export function encounterToggleDefeated(id) {
+  const c = getEncounterCombatant(id)
+  if (!c) return
+  markEncounterCombatantDefeated(id, !c.defeated)
+  save()
+  render({ content: true })
+}
+
+export function encounterRemove(id) {
+  removeEncounterCombatant(id)
+  save()
+  render({ content: true })
+}
+
+export function encounterDuplicate(id) {
+  duplicateEncounterCombatant(id)
+  save()
+  render({ content: true })
+}
+
+export function encounterToggleExpand(id) {
+  state.encounterExpandedIds = state.encounterExpandedIds || {}
+  state.encounterExpandedIds[id] = !state.encounterExpandedIds[id]
+  render({ content: true })
 }

@@ -204,6 +204,29 @@ function capstoneTierMinLevel(skill) {
   return CAPSTONE_TIER_MIN_LEVEL[tier] ?? null
 }
 
+/** Display Skill Level / homebrew lock — capstones and explicit level locks stay Skill-Level based. */
+export function minLevelToLearnSkill(skill) {
+  skill = resolvedHomebrewSkill(skill)
+  const tier = Number(skill?.tier || 1)
+  const capstoneGate = capstoneTierMinLevel(skill)
+  if (capstoneGate != null) {
+    const explicit = skill?.prerequisites?.type === 'LEVEL' ? Number(skill.prerequisites.level || 0) : 0
+    return Math.max(capstoneGate, explicit)
+  }
+  const explicit = skill?.prerequisites?.type === 'LEVEL' ? Number(skill.prerequisites.level || 0) : 0
+  if (isHomebrewSkill(skill)) {
+    const homebrewLock = Number(skill.lockMinLevel || 0)
+    if (homebrewLock > 0) return Math.max(homebrewLock, explicit)
+    // Approximate display gate for homebrew without explicit lock
+    return Math.max(TIER_MIN_LEVEL[tier] ?? 0, explicit)
+  }
+  return Math.max(TIER_MIN_LEVEL[tier] ?? 0, explicit)
+}
+
+function characterMeetsSkillTierGate(character, skill) {
+  return computeSkillLevel(character).skillLevel >= minLevelToLearnSkill(skill)
+}
+
 export function isSkillVisible(character, skill) {
   if (!skill || !character) return false
   if (skill.source === 'homebrew') {
@@ -347,20 +370,6 @@ export function isToggleSkill(skill) {
   return skill?.isToggle || Object.prototype.hasOwnProperty.call(cache.toggleBonuses, skill?.id)
 }
 
-export function minLevelToLearnSkill(skill) {
-  skill = resolvedHomebrewSkill(skill)
-  const tier = Number(skill?.tier || 1)
-  const capstoneGate = capstoneTierMinLevel(skill)
-  const tierGate = capstoneGate ?? TIER_MIN_LEVEL[tier] ?? 1
-  const explicit = skill?.prerequisites?.type === 'LEVEL' ? Number(skill.prerequisites.level || 0) : 0
-  if (isHomebrewSkill(skill)) {
-    const homebrewLock = Number(skill.lockMinLevel || 0)
-    if (homebrewLock > 0) return Math.max(homebrewLock, explicit)
-    return Math.max(tierGate, explicit)
-  }
-  return Math.max(tierGate, explicit)
-}
-
 function countLearnedTier5MagicSkills(character) {
   return character.skills.filter(id => {
     const learned = getSkill(id)
@@ -425,7 +434,10 @@ export function prereqLabel(skill) {
     if (extras) parts.push(extras)
     return parts.join(' · ')
   }
-  const parts = [`Skill Level ${minLevelToLearnSkill(skill)}+`]
+  const tier = Number(skill?.tier || 1)
+  const parts = tier <= 1
+    ? ['Tier 1']
+    : [`Skill Level ${minLevelToLearnSkill(skill)}+`]
   const req = skill?.prerequisites
   const main = formatPrerequisiteReq(req)
   if (main) parts.push(main)

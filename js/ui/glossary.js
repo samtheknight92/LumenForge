@@ -35,7 +35,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['money', 'currency', 'gold', 'silver', 'copper'],
     category: 'Resources & money',
     summary: 'Shop money — buy gear, materials, and consumables.',
-    detail: 'Gil is the in-game coin used in the Shop tab. Item prices are shown in Gil. Shop stock unlocks by rarity: common Skill Level 1 · uncommon Skill Level 5 · rare Skill Level 9 · epic Skill Level 14 · legendary Skill Level 21. Old save data may still list gold, silver, and copper — the app converts them to one Gil total (1 Gil = 1 copper equivalent). Crafting materials are bought or looted, then spent at the Craft tab.'
+    detail: 'Gil is the in-game coin used in the Shop tab. Item prices are shown in Gil. Shop stock unlocks by rarity alongside Skill Level: common early · uncommon at Skill Level 5 · rare at 12 · epic at 20 · legendary at 35. Old save data may still list gold, silver, and copper — the app converts them to one Gil total (1 Gil = 1 copper equivalent). Crafting materials are bought or looted, then spent at the Craft tab.'
   },
   {
     id: 'hp',
@@ -83,7 +83,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['SPD', 'initiative'],
     category: 'Core stats',
     summary: 'Turn order, movement (1 Speed = 5ft per turn), and dodge-style checks.',
-    detail: 'Speed helps decide who acts first in combat. At the table, treat 1 Speed as 5ft of movement per turn (cap 12 = 60ft). Press Process Turn at the End of Turn to clear your movement marker (Moved on the action bar). Lumens upgrade cap: 12. At cap you unlock Afterimage (movement never provokes; win initiative ties vs equal or lower Speed). Some skills and racial traits reference Speed for evasion or special saves. The GM Tools tab has an initiative tracker — Speed is a guide, not auto-sorted by the app.'
+    detail: 'Speed helps decide who acts first in combat. At the table, treat 1 Speed as 5ft of movement per turn (cap 12 = 60ft). You may move and attack in the same turn with no automatic penalty. Lumens upgrade cap: 12. At cap you unlock Afterimage (movement never provokes; win initiative ties vs equal or lower Speed). Some skills and racial traits reference Speed for evasion or special saves. The GM Tools tab has an initiative tracker — Speed is a guide, not auto-sorted by the app.'
   },
   {
     id: 'physical-defence',
@@ -107,7 +107,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['tier', 'tier 1', 'tier 5', 'star rating'],
     category: 'Skills & trees',
     summary: 'How advanced a skill is — tier 5 is the biggest, tier 1 is the starter.',
-    detail: 'Skills run from tier 1 (basic) to tier 5 (signature capstone). Higher tiers cost more Lumens and count more toward your Skill Level. You usually need lower-tier skills in the same tree first.\n\nNew characters start at Skill Level 1. Minimum Skill Level to learn: Tier 1 → Skill Level 1 · Tier 2 → Skill Level 5 · Tier 3 → Skill Level 9 · Tier 4 → Skill Level 14 · Tier 5 → Skill Level 21.\n\nAt the table: “Higher star skill = fancier move — but you need the Skill Level first.”'
+    detail: 'Skills run from tier 1 (basic) to tier 5 (signature), with Ultimate as tier 6. Higher tiers cost more Lumens. You usually need lower-tier skills in the same tree first.\n\nTraining gates (Skill Level = skills learned): Tier 2 at Skill Level 5 · Tier 3 at 12 · Tier 4 at 20 · Tier 5 at 35 · Tier 6 at 50. Ascension and Ultimate use the same ladder.\n\nAt the table: “Higher star skill = fancier move — train a bit first.”'
   },
   {
     id: 'skill-level',
@@ -115,7 +115,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['level', 'skill level', 'XP', 'experience'],
     category: 'Skills & trees',
     summary: 'Grows only as you learn skills — no grinding XP charts, and stat purchases don\'t count.',
-    detail: 'Skill Level goes up only when you learn new skills — weapon, magic, career, race, fusion, ascension, and ultimate skills all count. Bigger (higher-tier) skills move the bar faster. Buying HP, Stamina, or other stats never raises Skill Level — that instead raises Combat Power (see dictionary). The Character tab shows Skill Level and a progress bar — hover it for the exact breakdown.\n\nAt the table: “Skill Level is how trained your build is — hover the sheet for details.”'
+    detail: 'Skill Level goes up only when you learn new skills — weapon, magic, career, race, fusion, ascension, and ultimate skills all count. Each skill adds +1 Skill Level (any tier). Buying HP, Stamina, or other stats never raises Skill Level — that instead raises Combat Power (see dictionary). Higher skill tiers unlock at Skill Level 5 / 12 / 20 / 35 / 50. The Character tab shows Skill Level — hover it for the breakdown.\n\nAt the table: “Skill Level is how many skills you know.”'
   },
   {
     id: 'combat-power',
@@ -123,7 +123,15 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['combat power', 'CP', 'power level'],
     category: 'Core stats',
     summary: 'How dangerous/survivable your character is in a fight — separate from Skill Level.',
-    detail: 'Combat Power is built from your final effective stats — HP, Stamina, Strength, Magic Power, Accuracy, Speed, Physical Defence, Magical Defence — including equipped weapon/armour/accessory bonuses, passive skill bonuses, enchantments, and active status effects. A character with lots of HP and stat purchases but few skills can have high Combat Power and low Skill Level, or the reverse. GMs use both Combat Power and Skill Level in the Encounter Balancer (Power and Technique pressure) — see GM Tools.\n\nAt the table: “Combat Power is how scary you are in a fight — Skill Level is how many tricks you know.”'
+    detail: 'Combat Power is built from your final effective stats — HP, Stamina, Strength, Magic Power, Accuracy, Speed, Physical Defence, Magical Defence — including equipped weapon/armour/accessory bonuses, passive skill bonuses, enchantments, and active status effects. A character with lots of HP and stat purchases but few skills can have high Combat Power and low Skill Level, or the reverse. Threat Level (for encounter balancing) is Skill Level + Combat Power — same number for PCs and premade foes.\n\nAt the table: “Combat Power is how scary your stats are — Skill Level is how many tricks you know.”'
+  },
+  {
+    id: 'threat-level',
+    term: 'Threat Level',
+    aliases: ['threat', 'TL', 'encounter threat'],
+    category: 'Skills & trees',
+    summary: 'Skill Level + Combat Power — how hard a character or foe is in a fight.',
+    detail: 'Threat Level = Skill Level + Combat Power. Premade NPCs and monsters use the same formula as player characters. The Encounter Balancer compares the party\'s average Threat Level to the enemies\' Threat Level to rate a fight from Breeze to Deadly.\n\nAt the table: “Match party TL to enemy TL for a fairer scrap.”'
   },
   {
     id: 'career',
@@ -155,7 +163,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['ascension skills', 'breakthrough'],
     category: 'Skills & trees',
     summary: 'Major personal breakthrough powers — strong, limited, not your legendary capstone.',
-    detail: 'Ascension skills are universal breakthrough powers with stricter Skill Level gates than normal skills: Tier 3 → Skill Level 10+ · Tier 4 → Skill Level 15+ · Tier 5 → Skill Level 22+. They stay hidden until you qualify. Most are gated by Stamina cost and drawbacks — not once-per-combat limits. Rare exceptions (once per day / lifetime) mark the biggest effects.'
+    detail: 'Ascension skills are universal breakthrough powers on the same Skill Level ladder as other skills: Tier 3 → Skill Level 12+ · Tier 4 → Skill Level 20+ · Tier 5 → Skill Level 35+. They stay hidden until you qualify. Most are gated by Stamina cost and drawbacks — not once-per-combat limits. Rare exceptions (once per day / lifetime) mark the biggest effects.'
   },
   {
     id: 'ultimate',
@@ -163,7 +171,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['ultimate skill', 'capstone', 'legendary'],
     category: 'Skills & trees',
     summary: 'Legendary endgame powers — build-defining, rare, hard to unlock.',
-    detail: 'Ultimate skills are legendary capstones with strict skill prerequisites. Skill Level gates: Tier 5 → Skill Level 22+ · Tier 6 → Skill Level 30+. Weapon and Element Mastery ultimates are balanced by high Stamina cost and drawbacks — not once-per-combat limits. Rare Legends on the same tab may cost even more Stamina for cross-build effects.'
+    detail: 'Ultimate skills are legendary capstones with strict skill prerequisites. Skill Level gates: Tier 5 → Skill Level 35+ · Tier 6 → Skill Level 50+. Weapon and Element Mastery ultimates are balanced by high Stamina cost and drawbacks — not once-per-combat limits. Rare Legends on the same tab may cost even more Stamina for cross-build effects.'
   },
   {
     id: 'racial',
@@ -298,8 +306,8 @@ export const GLOSSARY_ENTRIES = [
     term: 'Process Turn',
     aliases: ['end of turn', 'tick effects', 'end of round'],
     category: 'Effects & gear',
-    summary: 'Press at the End of Turn — pays toggle costs, ticks statuses, then reduces durations, clears Moved.',
-    detail: 'Press Process Turn at the End of Turn, after moving or acting. It pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses; ticks each effect\'s remaining duration down by 1; and clears your movement marker for next turn. In combat, do this every turn after you act; out of combat, only when the GM says to and you have effects or toggles to process.'
+    summary: 'Press at the End of Turn — pays toggle costs, ticks statuses, then reduces durations.',
+    detail: 'Press Process Turn at the End of Turn, after moving or acting. It pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses; and ticks each effect\'s remaining duration down by 1. In combat, do this every turn after you act; out of combat, only when the GM says to and you have effects or toggles to process. When a new fight starts, press New Combat to reset once-per-combat uses like Quick Draw.'
   },
   {
     id: 'knocked-out',
@@ -312,10 +320,10 @@ export const GLOSSARY_ENTRIES = [
   {
     id: 'saving-roll',
     term: 'Saving Roll',
-    aliases: ['saving throw', 'save'],
+    aliases: ['saving throw', 'save', 'super easy', 'extreme save'],
     category: 'Effects & gear',
-    summary: 'A GM-set roll to resist an effect or succeed at an improvised action.',
-    detail: 'When the table needs a check that is not a normal Accuracy attack — resisting a curse, improvising a bandage from torn cloth, and similar — the GM sets a target number for a Saving Roll. Roll as the GM directs; the app does not automate most Saving Rolls.'
+    summary: 'GM-set 1d20 check — Super Easy 3 through Extreme 17.',
+    detail: 'When the table needs a check that is not a normal Accuracy attack — resisting a curse, improvising a bandage from torn cloth, and similar — the GM picks a Saving Roll target from the ladder: Super Easy 3 · Easy 8 · Normal 11 · Hard 14 · Extreme 17 (meet or beat on 1d20; roughly 90% / 65% / 50% / 35% / 20% before modifiers). The GM may grant Advantage, Disadvantage, a relevant stat bonus, automatic success, or automatic failure based on approach, race, background, career, skills, gear, and circumstances. Recovery Rolls while Knocked Out remain a fixed 11+ and are not this ladder. The app does not automate most Saving Rolls — see also the GM Tools reference card.'
   },
   {
     id: 'background',

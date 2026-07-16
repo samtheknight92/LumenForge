@@ -1,0 +1,22 @@
+/* Play / Guided Create / Active Encounter extras */
+.play-tab .play-resource-row { gap: 12px; }
+.play-tab .play-resource { display: flex; flex-direction: column; gap: 6px; min-width: 140px; }
+.play-tab .play-skill-card { padding: 10px 12px; }
+.play-tab .play-skill-card summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.play-tab .play-item-row { display: flex; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px solid color-mix(in srgb, var(--border, #444) 60%, transparent); }
+.play-tab .play-item-row:last-child { border-bottom: 0; }
+
+.modal-backdrop { position: fixed; inset: 0; z-index: 80; background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.modal-card { width: min(720px, 100%); max-height: min(90vh, 900px); display: flex; flex-direction: column; overflow: hidden; }
+.modal-card .guided-create-body { overflow: auto; flex: 1; padding-right: 4px; }
+.guided-progress { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+.guided-progress .pill { opacity: .55; }
+.guided-progress .pill.active { opacity: 1; }
+.guided-choice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.guided-choice-btn { text-align: left; }
+.guided-choice-btn.active { outline: 2px solid var(--accent, #7eb8ff); }
+
+.encounter-sticky-bar { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--panel, #1a1a22) 92%, transparent); padding: 8px 0; margin-bottom: 8px; }
+.encounter-combatant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.encounter-combatant-card.defeated { opacity: .65; }
+.encounter-combatant-card.is-active-turn { outline: 2px solid var(--accent, #7eb8ff); }

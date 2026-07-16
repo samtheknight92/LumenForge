@@ -37,7 +37,7 @@ import {
   switchTab,
   activateGmModeToggle as doActivateGmModeToggle,
   spawnPremadeCharacter as doSpawnPremadeCharacter,
-  markMoved as doMarkMoved,
+  beginNewCombat as doBeginNewCombat,
   generateNpcTurn as doGenerateNpcTurn,
   printCharacterSheet as doPrintCharacterSheet,
   toggleGmTurnCharacter as doToggleGmTurnCharacter,
@@ -161,6 +161,7 @@ import {
   toggleCatalogItemStar as doToggleCatalogItemStar,
   toggleSkillStar as doToggleSkillStar,
   togglePinnedSkill as doTogglePinnedSkill,
+  setSkillViewMode as doSetSkillViewMode,
   toggleRecipeStar as doToggleRecipeStar,
   setActiveNotePage as doSetActiveNotePage,
   addNotePage as doAddNotePage,
@@ -175,8 +176,32 @@ import {
   rollRecoveryCheck as doRollRecoveryCheck,
   beginManualRevival as doBeginManualRevival,
   continueManualRevival as doContinueManualRevival,
-  clearManualRevival as doClearManualRevival
+  clearManualRevival as doClearManualRevival,
+  openGuidedCreate as doOpenGuidedCreate,
+  cancelGuidedCreate as doCancelGuidedCreate,
+  guidedCreateNext as doGuidedCreateNext,
+  guidedCreateBack as doGuidedCreateBack,
+  guidedCreateFinish as doGuidedCreateFinish,
+  startActiveEncounter as doStartActiveEncounter,
+  endActiveEncounterAction as doEndActiveEncounter,
+  encounterNextTurn as doEncounterNextTurn,
+  encounterPrevTurn as doEncounterPrevTurn,
+  encounterAdvanceRound as doEncounterAdvanceRound,
+  encounterProcessActiveTurn as doEncounterProcessActive,
+  encounterProcessTurn as doEncounterProcessTurn,
+  encounterAdjustResource as doEncounterAdjustResource,
+  encounterToggleDefeated as doEncounterToggleDefeated,
+  encounterRemove as doEncounterRemove,
+  encounterDuplicate as doEncounterDuplicate,
+  encounterToggleExpand as doEncounterToggleExpand
 } from '../ui/actions.js'
+import {
+  learnSkillOnDraft,
+  refundSkillOnDraft,
+  buyItemOnDraft,
+  upgradeStatOnDraft,
+  syncDraftFromIdentityForm,
+} from '../ui/guided-create.js'
 import { stepNumberInput } from '../ui/number-stepper.js'
 import { render } from '../ui/render.js'
 import { state, activeCharacter, resetItemFilters } from './state.js'
@@ -472,6 +497,7 @@ const clickActions = {
   refundSkill(target) { doRefundSkill(target.dataset.refundSkill) },
   toggleSkill(target) { doToggleSkill(target.dataset.toggleSkill) },
   useSkill(target) { doUseSkill(target.dataset.useSkill) },
+  skillViewMode(target) { doSetSkillViewMode(target.dataset.skillViewMode) },
   skillCategory(target) {
     state.skillCategory = target.dataset.skillCategory || state.skillCategory
     const character = activeCharacter()
@@ -512,7 +538,7 @@ const clickActions = {
   removeItem(target) { doRemoveInventoryEntry(target.dataset.removeItem) },
   equipItem(target) { doEquipItem(target.dataset.equipItem) },
   equipOffhand(target) { doEquipItem(target.dataset.equipOffhand, 'offhand') },
-  markMoved() { doMarkMoved() },
+  beginNewCombat() { doBeginNewCombat() },
   stopPerformance() { doStopPerformance() },
   unequip(target) { doUnequip(target.dataset.unequip) },
   removeEnchant(target) {
@@ -807,6 +833,81 @@ const clickActions = {
     const input = wrap?.querySelector('input[type="number"]')
     if (!input) return
     stepNumberInput(input, Number(target.dataset.numberStepperDelta || 0))
+  },
+  startActiveEncounter() { doStartActiveEncounter() },
+  endActiveEncounter() { doEndActiveEncounter() },
+  encounterNextTurn() { doEncounterNextTurn() },
+  encounterPrevTurn() { doEncounterPrevTurn() },
+  encounterAdvanceRound() { doEncounterAdvanceRound() },
+  encounterProcessActive() { doEncounterProcessActive() },
+  encounterProcessTurn(target) { doEncounterProcessTurn(target.dataset.encounterProcessTurn) },
+  encounterAdjustHp(target) {
+    doEncounterAdjustResource(target.dataset.encounterAdjustHp, 'hp', Number(target.dataset.amount || 0))
+  },
+  encounterAdjustSta(target) {
+    doEncounterAdjustResource(target.dataset.encounterAdjustSta, 'stamina', Number(target.dataset.amount || 0))
+  },
+  encounterToggleDefeated(target) { doEncounterToggleDefeated(target.dataset.encounterToggleDefeated) },
+  encounterRemove(target) { doEncounterRemove(target.dataset.encounterRemove) },
+  encounterDuplicate(target) { doEncounterDuplicate(target.dataset.encounterDuplicate) },
+  encounterExpand(target) { doEncounterToggleExpand(target.dataset.encounterExpand) },
+  encounterFilter(target) {
+    state.encounterCombatantFilter = target.dataset.encounterFilter || 'all'
+    render({ content: true })
+  },
+  guidedNext() { doGuidedCreateNext() },
+  guidedBack() { doGuidedCreateBack() },
+  guidedFinish() { doGuidedCreateFinish() },
+  guidedCancel() { doCancelGuidedCreate() },
+  guidedDismiss(target, event) {
+    if (event.target === target) doCancelGuidedCreate()
+  },
+  guidedPlaystyle(target) {
+    if (!state.guidedCreate) return
+    state.guidedCreate.playstyle = target.dataset.guidedPlaystyle || ''
+    state.guidedCreate.dirty = true
+    render({ content: true })
+  },
+  guidedBrowseSkills() {
+    if (!state.guidedCreate) return
+    state.guidedCreate.browseSkills = !state.guidedCreate.browseSkills
+    render({ content: true })
+  },
+  guidedBrowseItems() {
+    if (!state.guidedCreate) return
+    state.guidedCreate.browseItems = !state.guidedCreate.browseItems
+    render({ content: true })
+  },
+  guidedLearnSkill(target) {
+    const draft = state.guidedCreate?.draftCharacter
+    if (!draft) return
+    const result = learnSkillOnDraft(draft, target.dataset.guidedLearnSkill)
+    if (!result.ok) return toast(result.reason)
+    state.guidedCreate.dirty = true
+    render({ content: true })
+  },
+  guidedRefundSkill(target) {
+    const draft = state.guidedCreate?.draftCharacter
+    if (!draft) return
+    refundSkillOnDraft(draft, target.dataset.guidedRefundSkill)
+    state.guidedCreate.dirty = true
+    render({ content: true })
+  },
+  guidedBuyItem(target) {
+    const draft = state.guidedCreate?.draftCharacter
+    if (!draft) return
+    const result = buyItemOnDraft(draft, target.dataset.guidedBuyItem)
+    if (!result.ok) return toast(result.reason)
+    state.guidedCreate.dirty = true
+    render({ content: true })
+  },
+  guidedUpgradeStat(target) {
+    const draft = state.guidedCreate?.draftCharacter
+    if (!draft) return
+    const result = upgradeStatOnDraft(draft, target.dataset.guidedUpgradeStat)
+    if (!result.ok) return toast(result.reason)
+    state.guidedCreate.dirty = true
+    render({ content: true })
   }
 }
 
@@ -862,6 +963,7 @@ function handleTabShortcut(event) {
 
 function initStaticEvents() {
   document.querySelector('#create-character')?.addEventListener('click', handleCreateCharacter)
+  document.querySelector('#guided-create')?.addEventListener('click', () => doOpenGuidedCreate())
 
   document.querySelector('#new-name')?.addEventListener('keydown', event => {
     if (event.key === 'Enter') handleCreateCharacter()
@@ -956,6 +1058,10 @@ function initStaticEvents() {
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
+      if (state.guidedCreate?.open) {
+        doCancelGuidedCreate()
+        return
+      }
       if (!document.querySelector('#action-bar-skill-sheet')?.hidden) {
         closeActionBarSkillSheet()
         return
@@ -1000,6 +1106,17 @@ function initDelegatedEvents() {
 
     if (target.id === 'skill-search') {
       debouncedSkillSearch(target.value || '')
+      return
+    }
+    if (target.matches('[data-guided-name]')) {
+      if (!state.guidedCreate) return
+      state.guidedCreate.form.name = target.value || ''
+      state.guidedCreate.dirty = true
+      return
+    }
+    if (target.matches('[data-encounter-search]')) {
+      state.encounterCombatantSearch = target.value || ''
+      render({ content: true })
       return
     }
     if (target.id === 'gm-premade-search') {
@@ -1123,6 +1240,33 @@ function initDelegatedEvents() {
     if (target.id === 'skill-starred-only') {
       state.skillStarredOnly = Boolean(target.checked)
       render({ content: true })
+      return
+    }
+    if (target.matches('[data-guided-race]')) {
+      if (!state.guidedCreate) return
+      state.guidedCreate.form.raceId = target.value || 'human'
+      state.guidedCreate.form.elementalAffinity = ''
+      state.guidedCreate.form.humanStarterSkill = ''
+      state.guidedCreate.dirty = true
+      render({ content: true })
+      return
+    }
+    if (target.matches('[data-guided-background]')) {
+      if (!state.guidedCreate) return
+      state.guidedCreate.form.background = target.value || 'wanderer'
+      state.guidedCreate.dirty = true
+      return
+    }
+    if (target.matches('[data-guided-affinity]')) {
+      if (!state.guidedCreate) return
+      state.guidedCreate.form.elementalAffinity = target.value || ''
+      state.guidedCreate.dirty = true
+      return
+    }
+    if (target.matches('[data-guided-human-skill]')) {
+      if (!state.guidedCreate) return
+      state.guidedCreate.form.humanStarterSkill = target.value || ''
+      state.guidedCreate.dirty = true
       return
     }
     if (target.id === 'craft-starred-only') {

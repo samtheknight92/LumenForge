@@ -224,7 +224,9 @@ function trimSkillTargets(skillIds, cap) {
 }
 
 function targetSkillCount(threatLevel) {
-  return Math.min(16, 2 + Math.floor(Number(threatLevel || 1) / 3))
+  const level = Number(threatLevel || 1)
+  const maxForThreat = Math.max(0, level - 1)
+  return Math.min(maxForThreat, Math.min(16, Math.floor(level * 0.45)))
 }
 
 function lumenDropForLevel(level) {
@@ -289,7 +291,9 @@ export function mergeBuilderTemplates(draft) {
     ...specialTemplates.flatMap(row => row.skillIds || [])
   ], skillCap)
 
-  const expandedSkills = expandSkillTargets(rawSkillIds)
+  let expandedSkills = expandSkillTargets(rawSkillIds)
+  const maxSkills = Math.max(0, targetThreatLevel - 1)
+  if (expandedSkills.length > maxSkills) expandedSkills = expandedSkills.slice(0, maxSkills)
   const activeToggles = expandedSkills.filter(id => {
     const skill = getSkill(id)
     return skill && isToggleSkill(skill)

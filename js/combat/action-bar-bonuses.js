@@ -15,6 +15,8 @@ import {
   isBasicAttackSkill
 } from './damage-breakdown.js'
 import { weatherAccuracyBonuses } from './weather-effects.js'
+import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
+import { willQuickDrawActivate } from './quick-draw.js'
 
 const ATTACK_STATS = new Set(['magicPower', 'accuracy', 'strength', 'speed'])
 
@@ -348,8 +350,11 @@ export function actionBarSkillTooltipHtml(skill, character) {
     `<div class="action-bar-tip-meta">${escapeHtml(displayCategory(skill.category))} / ${escapeHtml(titleCase(skill.subcategory))} · Tier ${skill.tier || 1}</div>`
   )
   lines.push(
-    `<div class="action-bar-tip-meta">Stamina: ${Number(skill.staminaCost || 0)}</div>`
+    `<div class="action-bar-tip-meta">Stamina: ${getEffectiveSkillStaminaCost(character, skill)}</div>`
   )
+  if (character && willQuickDrawActivate(character, skill)) {
+    lines.push('<div class="action-bar-tip-meta">Quick Draw ready: Advantage + −1 Stamina</div>')
+  }
   if (skill.desc) {
     lines.push(`<div class="action-bar-tip-desc">${formatDescWithBonusTotals(skill.desc, totals)}</div>`)
   }

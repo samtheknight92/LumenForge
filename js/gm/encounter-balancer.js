@@ -1,7 +1,7 @@
 /**
- * Encounter Balancer — dual pressure (Power + Technique) shared by the enemy
- * comparison list and quantity guide. Combined rating = average of both indices
- * (rounded). Not exact — consistent GM guidance, easy to retune via constants.
+ * Encounter Balancer — compare party Threat Level to enemy Threat Level.
+ * Threat Level = Skill Level + Combat Power (same for PCs and premades).
+ * Rating is guidance, not exact math — easy to retune via breakpoints.
  */
 
 export const DIFFICULTY_LABELS = [
@@ -16,11 +16,8 @@ export const DIFFICULTY_LABELS = [
   'Deadly'
 ]
 
-/** Enemy-threat-per-player ÷ party-average-Combat-Power ratio breakpoints. */
-const POWER_RATIO_BREAKPOINTS = [0.35, 0.55, 0.7, 0.85, 1.15, 1.4, 1.7, 2.2]
-
-/** Enemy-threat-per-player ÷ party-average-Skill-Level ratio breakpoints. */
-const TECHNIQUE_RATIO_BREAKPOINTS = [0.35, 0.55, 0.7, 0.85, 1.15, 1.4, 1.7, 2.2]
+/** Enemy-threat-per-player ÷ party-average-Threat-Level ratio breakpoints. */
+const THREAT_RATIO_BREAKPOINTS = [0.35, 0.55, 0.7, 0.85, 1.15, 1.4, 1.7, 2.2]
 
 const MAX_INDEX = DIFFICULTY_LABELS.length - 1
 
@@ -39,13 +36,22 @@ function baseDifficultyIndex(ratio, breakpoints) {
   return found === -1 ? MAX_INDEX : found
 }
 
+/** Prefer explicit party TL; else Skill Level + Combat Power. */
+export function resolvePartyAvgThreatLevel({
+  partyAvgThreatLevel,
+  partyAvgCombatPower,
+  partyAvgSkillLevel
+} = {}) {
+  if (Number.isFinite(Number(partyAvgThreatLevel))) return Number(partyAvgThreatLevel)
+  return Number(partyAvgSkillLevel || 0) + Number(partyAvgCombatPower || 0)
+}
+
 function computePressure({
   partyAverage,
   partyCount,
   enemyThreatLevel,
   enemyCount,
-  soloBossCapable,
-  breakpoints
+  soloBossCapable
 }) {
   const safeAverage = Math.max(1, Number(partyAverage) || 0)
   const safePartyCount = Math.max(1, Number(partyCount) || 0)
@@ -53,7 +59,7 @@ function computePressure({
   const totalEnemyThreat = Number(enemyThreatLevel || 0) * safeEnemyCount
 
   const ratio = (totalEnemyThreat / safePartyCount) / safeAverage
-  let index = baseDifficultyIndex(ratio, breakpoints)
+  let index = baseDifficultyIndex(ratio, THREAT_RATIO_BREAKPOINTS)
 
   const actionRatio = safeEnemyCount / safePartyCount
   const warnings = []
@@ -83,21 +89,12 @@ function computePressure({
   }
 }
 
-function combinePressures(power, technique) {
-  const index = clampIndex(Math.round((power.index + technique.index) / 2))
-  const warnings = [...new Set([...(power.warnings || []), ...(technique.warnings || [])])]
-  return {
-    label: DIFFICULTY_LABELS[index],
-    index,
-    warnings
-  }
-}
-
 /**
- * Core comparison: power (Combat Power) and technique (Skill Level) pressures
- * plus combined overall rating.
+ * Core comparison: party Threat Level vs enemy Threat Level.
+ * `power` / `technique` mirror the overall rating for older UI call sites.
  */
 export function computeEncounterDifficulty({
+  partyAvgThreatLevel,
   partyAvgCombatPower,
   partyAvgSkillLevel,
   partyCount,
@@ -109,40 +106,37 @@ export function computeEncounterDifficulty({
   const safeEnemyCount = Math.max(0, Number(enemyCount) || 0)
   const totalEnemyThreat = Number(enemyThreatLevel || 0) * safeEnemyCount
   const avgThreat = safeEnemyCount ? totalEnemyThreat / safeEnemyCount : 0
+  const partyThreat = resolvePartyAvgThreatLevel({
+    partyAvgThreatLevel,
+    partyAvgCombatPower,
+    partyAvgSkillLevel
+  })
 
-  const power = computePressure({
-    partyAverage: partyAvgCombatPower,
+  const pressure = computePressure({
+    partyAverage: partyThreat,
     partyCount: safePartyCount,
     enemyThreatLevel: avgThreat,
     enemyCount: safeEnemyCount,
-    soloBossCapable,
-    breakpoints: POWER_RATIO_BREAKPOINTS
+    soloBossCapable
   })
 
-  const technique = computePressure({
-    partyAverage: partyAvgSkillLevel ?? partyAvgCombatPower,
-    partyCount: safePartyCount,
-    enemyThreatLevel: avgThreat,
-    enemyCount: safeEnemyCount,
-    soloBossCapable,
-    breakpoints: TECHNIQUE_RATIO_BREAKPOINTS
-  })
-
-  const combined = combinePressures(power, technique)
+  const mirrored = { label: pressure.label, index: pressure.index, ratio: pressure.ratio }
 
   return {
-    label: combined.label,
-    index: combined.index,
-    power: { label: power.label, index: power.index, ratio: power.ratio },
-    technique: { label: technique.label, index: technique.index, ratio: technique.ratio },
-    ratio: power.ratio,
+    label: pressure.label,
+    index: pressure.index,
+    power: mirrored,
+    technique: mirrored,
+    ratio: pressure.ratio,
     actionRatio: safeEnemyCount / safePartyCount,
     totalEnemyThreat,
-    warnings: combined.warnings
+    partyAvgThreatLevel: partyThreat,
+    warnings: pressure.warnings
   }
 }
 
 export function suggestEnemyQuantities({
+  partyAvgThreatLevel,
   partyAvgCombatPower,
   partyAvgSkillLevel,
   partyCount,
@@ -155,6 +149,7 @@ export function suggestEnemyQuantities({
     return {
       enemyCount,
       ...computeEncounterDifficulty({
+        partyAvgThreatLevel,
         partyAvgCombatPower,
         partyAvgSkillLevel,
         partyCount,
@@ -167,6 +162,7 @@ export function suggestEnemyQuantities({
 }
 
 export function summarizeEncounter({
+  partyAvgThreatLevel,
   partyAvgCombatPower,
   partyAvgSkillLevel,
   partyCount,
@@ -179,6 +175,7 @@ export function summarizeEncounter({
     : enemyGroups.some(group => group.soloBossCapable)
 
   const difficulty = computeEncounterDifficulty({
+    partyAvgThreatLevel,
     partyAvgCombatPower,
     partyAvgSkillLevel,
     partyCount,
@@ -191,6 +188,7 @@ export function summarizeEncounter({
 }
 
 export function generateEncounterWarnings({
+  partyAvgThreatLevel,
   partyAvgCombatPower,
   partyAvgSkillLevel,
   partyCount,
@@ -201,13 +199,20 @@ export function generateEncounterWarnings({
 
   const totalEnemyCount = enemyGroups.reduce((sum, group) => sum + Number(group.count || 0), 0)
   const safePartyCount = Math.max(1, Number(partyCount) || 0)
-  const safeAvgPower = Math.max(1, Number(partyAvgCombatPower) || 0)
-  const safeAvgSkill = Math.max(1, Number(partyAvgSkillLevel) || safeAvgPower)
+  const partyThreat = Math.max(1, resolvePartyAvgThreatLevel({
+    partyAvgThreatLevel,
+    partyAvgCombatPower,
+    partyAvgSkillLevel
+  }))
+  const safeAvgSkill = Math.max(0, Number(partyAvgSkillLevel) || 0)
+  const safeAvgPower = Math.max(1, Number(partyAvgCombatPower) || 1)
 
   for (const group of enemyGroups) {
     if (!group.count) continue
-    const defenseHeavy = group.base > 0 && group.abilityBonus < group.base * 0.25
-    const offenseHeavy = group.abilityBonus > group.base * 0.75 && group.threatLevel >= safeAvgPower
+    const enemyCp = Number(group.combatPower ?? group.base) || 0
+    const enemySl = Number(group.skillLevel ?? group.abilityBonus) || 0
+    const defenseHeavy = enemyCp > 0 && enemySl < enemyCp * 0.25
+    const offenseHeavy = enemySl > enemyCp * 0.75 && group.threatLevel >= partyThreat
     if (defenseHeavy && group.count <= 2) {
       warnings.push(`${group.name || 'This enemy'} may be too defensive and could create a slow fight.`)
     }
@@ -218,17 +223,21 @@ export function generateEncounterWarnings({
 
   if (totalEnemyCount >= safePartyCount * 3) {
     const avgThreat = enemyGroups.reduce((sum, group) => sum + Number(group.threatLevel || 0) * Number(group.count || 0), 0) / Math.max(1, totalEnemyCount)
-    if (avgThreat < safeAvgPower * 0.5) {
+    if (avgThreat < partyThreat * 0.5) {
       warnings.push('This fight may be safe but very slow — a lot of weak enemies to chew through.')
     }
   }
 
-  if (totalEnemyCount >= 3 && enemyGroups.some(group => group.abilityBonus > group.base * 0.5)) {
+  if (totalEnemyCount >= 3 && enemyGroups.some(group => {
+    const enemySl = Number(group.skillLevel ?? group.abilityBonus) || 0
+    const enemyCp = Number(group.combatPower ?? group.base) || 0
+    return enemySl > enemyCp * 0.5
+  })) {
     warnings.push('This fight may be deadly if enemies focus one player — consider spreading their attention at the table.')
   }
 
   const avgThreat = enemyGroups.reduce((sum, group) => sum + Number(group.threatLevel || 0) * Number(group.count || 0), 0) / Math.max(1, totalEnemyCount)
-  if (avgThreat > safeAvgSkill * 1.5 && safeAvgSkill < safeAvgPower * 0.6) {
+  if (avgThreat > Math.max(1, safeAvgSkill) * 1.5 && safeAvgSkill < safeAvgPower * 0.6) {
     warnings.push('Enemies may outclass the party\'s skill breadth — few abilities, healing, or control options.')
   }
 
