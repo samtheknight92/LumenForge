@@ -74,6 +74,7 @@ import {
 } from '../character/premade-characters.js'
 import { filterCatalogItems, paginateItems, isShopPurchaseItem, shopMinLevelForItem, shopPurchaseCheck, ITEM_CATALOG_CATEGORIES, catalogCategoryCounts, catalogSourceCounts, activeCatalogFilterLabels, itemHasCounter, itemCounterLabel, inventoryCounterValue } from '../items/items.js'
 import { renderGuidedCreateModal } from './guided-create.js'
+import { renderHowToPlayTab } from './how-to-play.js'
 import {
   manualEffectList,
   groupedManualEffects,
