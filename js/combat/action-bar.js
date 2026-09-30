@@ -38,6 +38,7 @@ function resourceMeter(resource, label, icon, value, max, tone) {
         <span class="action-bar-meter-icon">${icon}</span>
         <span class="action-bar-meter-label">${esc(label)}</span>
         <span class="action-bar-meter-value">${value}/${max}</span>
+        <button type="button" class="action-bar-full" data-full-resource="${esc(resource)}" aria-label="${esc(`Fill ${label}`)}"${value >= max ? ' disabled' : ''}>Full</button>
       </div>
       <div class="action-bar-meter-body">
         <button type="button" class="action-bar-adjust action-bar-adjust-minus" data-adjust-resource="${esc(resource)}" data-amount="-1" aria-label="${esc(`${label} minus 1`)}">−</button>
