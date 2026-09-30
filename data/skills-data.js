@@ -5110,7 +5110,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "power_shot",
                         "fireball"
                     ]
                 },
@@ -5138,7 +5138,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "fire_wall"
+                        "explosion"
                     ]
                 },
                 "fusionType": "bow_fire",
@@ -5164,8 +5164,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_arrow",
-                        "inferno_volley"
+                        "homing_shot",
+                        "fire_tornado"
                     ]
                 },
                 "fusionType": "bow_fire",
@@ -5191,7 +5191,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "aimed_shot",
                         "ice_shard"
                     ]
                 },
@@ -5219,7 +5219,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "ice_wall"
+                        "ice_spear"
                     ]
                 },
                 "fusionType": "bow_ice",
@@ -5245,8 +5245,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_arrow",
-                        "glacier_volley"
+                        "siege_shot",
+                        "ice_age"
                     ]
                 },
                 "fusionType": "bow_ice",
@@ -5272,7 +5272,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "aimed_shot",
                         "spark"
                     ]
                 },
@@ -5326,8 +5326,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_arrow",
-                        "thunder_volley"
+                        "piercing_shot",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "bow_lightning",
@@ -5353,7 +5353,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "power_shot",
                         "stone_throw"
                     ]
                 },
@@ -5372,7 +5372,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "stone_wall"
+                        "stone_spear"
                     ]
                 },
                 "fusionType": "bow_earth",
@@ -5398,8 +5398,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_arrow",
-                        "crystal_volley"
+                        "siege_shot",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "bow_earth",
@@ -5425,7 +5425,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "steady_aim",
                         "gust"
                     ]
                 },
@@ -5444,7 +5444,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "wind_barrier"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "bow_wind",
@@ -5470,8 +5470,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_arrow",
-                        "gale_volley"
+                        "parting_shot",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "bow_wind",
@@ -5497,7 +5497,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "covering_fire",
                         "water_splash"
                     ]
                 },
@@ -5516,7 +5516,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "water_shield"
+                        "water_whip"
                     ]
                 },
                 "fusionType": "bow_water",
@@ -5542,8 +5542,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_arrow",
-                        "tide_volley"
+                        "explosive_shot",
+                        "tsunami"
                     ]
                 },
                 "fusionType": "bow_water",
@@ -5569,7 +5569,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "covering_fire",
                         "shadow_bolt"
                     ]
                 },
@@ -5597,7 +5597,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "bow_darkness",
@@ -5623,8 +5623,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_arrow",
-                        "void_volley"
+                        "homing_shot",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "bow_darkness",
@@ -5650,7 +5650,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "steady_aim",
                         "light_ray"
                     ]
                 },
@@ -5678,7 +5678,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "light_shield"
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "bow_light",
@@ -5704,8 +5704,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_arrow",
-                        "radiant_volley"
+                        "homing_shot",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "bow_light",
@@ -5760,8 +5760,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
-                        "fire_wall"
+                        "riposte",
+                        "fire_shield"
                     ]
                 },
                 "fusionType": "sword_fire",
@@ -5787,8 +5787,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_edge",
-                        "inferno_parry"
+                        "whirlwind",
+                        "inferno"
                     ]
                 },
                 "fusionType": "sword_fire",
@@ -5841,8 +5841,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
-                        "ice_wall"
+                        "riposte",
+                        "freeze"
                     ]
                 },
                 "fusionType": "sword_ice",
@@ -5868,8 +5868,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frostbrand",
-                        "glacial_riposte"
+                        "sweeping_slash",
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "sword_ice",
@@ -5922,7 +5922,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "riposte",
                         "thunder_clap"
                     ]
                 },
@@ -5949,8 +5949,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_blade",
-                        "thunder_parry"
+                        "sweeping_slash",
+                        "ball_lightning"
                     ]
                 },
                 "fusionType": "sword_lightning",
@@ -5994,7 +5994,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "parry",
                         "stone_wall"
                     ]
                 },
@@ -6021,8 +6021,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stonecutter",
-                        "earthen_guard"
+                        "piercing_thrust",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "sword_earth",
@@ -6048,7 +6048,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_strike",
+                        "lunge_attack",
                         "gust"
                     ]
                 },
@@ -6066,7 +6066,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "parry",
                         "wind_barrier"
                     ]
                 },
@@ -6093,8 +6093,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gale_blade",
-                        "cyclone_parry"
+                        "blade_dance",
+                        "tornado"
                     ]
                 },
                 "fusionType": "sword_wind",
@@ -6120,7 +6120,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_strike",
+                        "lunge_attack",
                         "water_splash"
                     ]
                 },
@@ -6138,7 +6138,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "parry",
                         "water_shield"
                     ]
                 },
@@ -6165,8 +6165,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "tidecutter",
-                        "aqua_parry"
+                        "whirlwind",
+                        "maelstrom"
                     ]
                 },
                 "fusionType": "sword_water",
@@ -6219,7 +6219,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "riposte",
                         "shadow_armor"
                     ]
                 },
@@ -6246,8 +6246,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_edge",
-                        "night_parry"
+                        "whirlwind",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "sword_darkness",
@@ -6300,8 +6300,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
-                        "light_shield"
+                        "parry",
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "sword_light",
@@ -6327,8 +6327,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "radiant_blade",
-                        "solar_parry"
+                        "piercing_thrust",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "sword_light",
@@ -6354,8 +6354,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
-                        "fireball"
+                        "poison_blade",
+                        "ignite"
                     ]
                 },
                 "fusionType": "dagger_fire",
@@ -6382,7 +6382,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "fire_wall"
+                        "fireball"
                     ]
                 },
                 "fusionType": "dagger_fire",
@@ -6408,8 +6408,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_dagger",
-                        "inferno_strike"
+                        "thousand_cuts",
+                        "inferno"
                     ]
                 },
                 "fusionType": "dagger_fire",
@@ -6436,7 +6436,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "dual_wield",
-                        "ice_shard"
+                        "freeze"
                     ]
                 },
                 "fusionType": "dagger_ice",
@@ -6463,7 +6463,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "ice_wall"
+                        "ice_spear"
                     ]
                 },
                 "fusionType": "dagger_ice",
@@ -6489,8 +6489,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_dagger",
-                        "freezing_strike"
+                        "flurry",
+                        "blizzard"
                     ]
                 },
                 "fusionType": "dagger_ice",
@@ -6517,7 +6517,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "dual_wield",
-                        "spark"
+                        "static_charge"
                     ]
                 },
                 "fusionType": "dagger_lightning",
@@ -6544,7 +6544,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "thunder_clap"
+                        "lightning_bolt"
                     ]
                 },
                 "fusionType": "dagger_lightning",
@@ -6570,8 +6570,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_dagger",
-                        "thunder_strike"
+                        "thousand_cuts",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "dagger_lightning",
@@ -6597,7 +6597,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
+                        "dagger_basics",
                         "stone_throw"
                     ]
                 },
@@ -6616,7 +6616,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "stone_wall"
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "dagger_earth",
@@ -6642,8 +6642,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_dagger",
-                        "crystal_strike"
+                        "flurry",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "dagger_earth",
@@ -6669,7 +6669,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
+                        "light_step",
                         "gust"
                     ]
                 },
@@ -6688,7 +6688,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "wind_barrier"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "dagger_wind",
@@ -6714,8 +6714,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_dagger",
-                        "zephyr_strike"
+                        "flurry",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "dagger_wind",
@@ -6741,7 +6741,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
+                        "poison_blade",
                         "water_splash"
                     ]
                 },
@@ -6760,7 +6760,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "water_shield"
+                        "water_whip"
                     ]
                 },
                 "fusionType": "dagger_water",
@@ -6786,8 +6786,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_dagger",
-                        "tide_strike"
+                        "thousand_cuts",
+                        "tsunami"
                     ]
                 },
                 "fusionType": "dagger_water",
@@ -6841,7 +6841,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "shadow_armor"
+                        "nightmare"
                     ]
                 },
                 "fusionType": "dagger_darkness",
@@ -6867,8 +6867,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_dagger",
-                        "void_strike"
+                        "flurry",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "dagger_darkness",
@@ -6894,7 +6894,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
+                        "dagger_basics",
                         "light_ray"
                     ]
                 },
@@ -6922,7 +6922,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "light_shield"
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "dagger_light",
@@ -6948,8 +6948,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_dagger",
-                        "radiant_strike"
+                        "thousand_cuts",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "dagger_light",
@@ -7003,7 +7003,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "fire_wall"
+                        "explosion"
                     ]
                 },
                 "fusionType": "polearm_fire",
@@ -7029,8 +7029,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_glaive",
-                        "blazing_sweep"
+                        "impale",
+                        "fire_whip"
                     ]
                 },
                 "fusionType": "polearm_fire",
@@ -7056,8 +7056,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thrust_attack",
-                        "ice_shard"
+                        "reach_advantage",
+                        "frost_touch"
                     ]
                 },
                 "fusionType": "polearm_ice",
@@ -7084,7 +7084,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "ice_wall"
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "polearm_ice",
@@ -7110,8 +7110,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_halberd",
-                        "glacier_sweep"
+                        "impale",
+                        "ice_prison"
                     ]
                 },
                 "fusionType": "polearm_ice",
@@ -7191,8 +7191,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_glaive",
-                        "thunder_sweep"
+                        "polearm_charge_attack",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "polearm_lightning",
@@ -7237,7 +7237,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "stone_wall"
+                        "earthquake"
                     ]
                 },
                 "fusionType": "polearm_earth",
@@ -7263,8 +7263,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_halberd",
-                        "earthen_sweep"
+                        "impale",
+                        "stone_spear"
                     ]
                 },
                 "fusionType": "polearm_earth",
@@ -7290,7 +7290,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thrust_attack",
+                        "reach_advantage",
                         "gust"
                     ]
                 },
@@ -7309,7 +7309,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "wind_barrier"
+                        "tornado"
                     ]
                 },
                 "fusionType": "polearm_wind",
@@ -7335,8 +7335,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_glaive",
-                        "cyclone_sweep"
+                        "polearm_charge_attack",
+                        "suffocate"
                     ]
                 },
                 "fusionType": "polearm_wind",
@@ -7362,8 +7362,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thrust_attack",
-                        "water_splash"
+                        "reach_advantage",
+                        "water_whip"
                     ]
                 },
                 "fusionType": "polearm_water",
@@ -7381,7 +7381,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "water_shield"
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "polearm_water",
@@ -7407,8 +7407,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_glaive",
-                        "wave_sweep"
+                        "whirlwind_sweep",
+                        "maelstrom"
                     ]
                 },
                 "fusionType": "polearm_water",
@@ -7434,7 +7434,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thrust_attack",
+                        "reach_advantage",
                         "shadow_bolt"
                     ]
                 },
@@ -7462,7 +7462,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "polearm_darkness",
@@ -7488,8 +7488,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_glaive",
-                        "void_sweep"
+                        "polearm_charge_attack",
+                        "life_drain"
                     ]
                 },
                 "fusionType": "polearm_darkness",
@@ -7543,7 +7543,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "light_shield"
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "polearm_light",
@@ -7569,8 +7569,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_glaive",
-                        "radiant_sweep"
+                        "impale",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "polearm_light",
@@ -7597,7 +7597,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "armor_crusher",
-                        "fireball"
+                        "ignite"
                     ]
                 },
                 "fusionType": "hammer_fire",
@@ -7623,8 +7623,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ground_slam",
-                        "fire_wall"
+                        "berserker_swing",
+                        "explosion"
                     ]
                 },
                 "fusionType": "hammer_fire",
@@ -7650,8 +7650,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_hammer",
-                        "magma_smash"
+                        "apocalypse_slam",
+                        "meteor"
                     ]
                 },
                 "fusionType": "hammer_fire",
@@ -7677,8 +7677,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
-                        "ice_shard"
+                        "heavy_impact",
+                        "frost_touch"
                     ]
                 },
                 "fusionType": "hammer_ice",
@@ -7705,7 +7705,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ground_slam",
-                        "ice_wall"
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "hammer_ice",
@@ -7731,8 +7731,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_hammer",
-                        "glacial_pound"
+                        "berserker_swing",
+                        "ice_prison"
                     ]
                 },
                 "fusionType": "hammer_ice",
@@ -7758,8 +7758,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
-                        "spark"
+                        "stunning_blow",
+                        "static_charge"
                     ]
                 },
                 "fusionType": "hammer_lightning",
@@ -7785,7 +7785,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ground_slam",
+                        "thunderstrike",
                         "thunder_clap"
                     ]
                 },
@@ -7812,8 +7812,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_hammer",
-                        "thunder_slam"
+                        "thunderstrike",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "hammer_lightning",
@@ -7857,8 +7857,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ground_slam",
-                        "stone_wall"
+                        "earth_shaker",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "hammer_earth",
@@ -7884,8 +7884,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "earthshaker_hammer",
-                        "tectonic_slam"
+                        "earth_shaker",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "hammer_earth",
@@ -7911,7 +7911,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
+                        "heavy_impact",
                         "gust"
                     ]
                 },
@@ -7930,7 +7930,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ground_slam",
-                        "wind_barrier"
+                        "tornado"
                     ]
                 },
                 "fusionType": "hammer_wind",
@@ -7956,8 +7956,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gale_hammer",
-                        "cyclone_slam"
+                        "thunderstrike",
+                        "tornado"
                     ]
                 },
                 "fusionType": "hammer_wind",
@@ -8001,8 +8001,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ground_slam",
-                        "water_shield"
+                        "stunning_blow",
+                        "heal_wounds"
                     ]
                 },
                 "fusionType": "hammer_water",
@@ -8028,8 +8028,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "tide_hammer",
-                        "wave_slam"
+                        "earth_shaker",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "hammer_water",
@@ -8055,8 +8055,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
-                        "shadow_bolt"
+                        "heavy_impact",
+                        "fear"
                     ]
                 },
                 "fusionType": "hammer_darkness",
@@ -8083,7 +8083,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ground_slam",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "hammer_darkness",
@@ -8109,8 +8109,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_hammer",
-                        "void_slam"
+                        "berserker_swing",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "hammer_darkness",
@@ -8136,7 +8136,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
+                        "hammer_basics",
                         "light_ray"
                     ]
                 },
@@ -8164,7 +8164,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ground_slam",
-                        "light_shield"
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "hammer_light",
@@ -8190,8 +8190,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "radiant_hammer",
-                        "solar_slam"
+                        "mjolnir_strike",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "hammer_light",
@@ -8218,7 +8218,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "cleave",
-                        "fireball"
+                        "ignite"
                     ]
                 },
                 "fusionType": "axe_fire",
@@ -8245,7 +8245,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "fire_wall"
+                        "fire_whip"
                     ]
                 },
                 "fusionType": "axe_fire",
@@ -8271,8 +8271,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_axe",
-                        "inferno_cleave"
+                        "crushing_blow",
+                        "meteor"
                     ]
                 },
                 "fusionType": "axe_fire",
@@ -8298,8 +8298,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
-                        "ice_shard"
+                        "heavy_swing",
+                        "frost_touch"
                     ]
                 },
                 "fusionType": "axe_ice",
@@ -8326,7 +8326,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "ice_wall"
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "axe_ice",
@@ -8352,8 +8352,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_axe",
-                        "frozen_cleave"
+                        "crushing_blow",
+                        "ice_age"
                     ]
                 },
                 "fusionType": "axe_ice",
@@ -8380,7 +8380,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "cleave",
-                        "spark"
+                        "static_charge"
                     ]
                 },
                 "fusionType": "axe_lightning",
@@ -8406,7 +8406,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
+                        "armor_break",
                         "stone_throw"
                     ]
                 },
@@ -8424,7 +8424,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
+                        "heavy_swing",
                         "gust"
                     ]
                 },
@@ -8442,7 +8442,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
+                        "armor_break",
                         "water_splash"
                     ]
                 },
@@ -8460,8 +8460,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
-                        "shadow_bolt"
+                        "heavy_swing",
+                        "fear"
                     ]
                 },
                 "fusionType": "axe_darkness",
@@ -8515,7 +8515,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "electric_field"
+                        "chain_lightning"
                     ]
                 },
                 "fusionType": "axe_lightning",
@@ -8541,8 +8541,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_axe",
-                        "thunder_cleave"
+                        "berserker_rage",
+                        "ball_lightning"
                     ]
                 },
                 "fusionType": "axe_lightning",
@@ -8569,7 +8569,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "earth_shield"
+                        "earthquake"
                     ]
                 },
                 "fusionType": "axe_earth",
@@ -8595,8 +8595,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_axe",
-                        "earthen_cleave"
+                        "earthquake_slam",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "axe_earth",
@@ -8649,8 +8649,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_axe",
-                        "gale_cleave"
+                        "berserker_rage",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "axe_wind",
@@ -8677,7 +8677,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "water_shield"
+                        "water_whip"
                     ]
                 },
                 "fusionType": "axe_water",
@@ -8703,8 +8703,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_axe",
-                        "tidal_cleave"
+                        "crushing_blow",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "axe_water",
@@ -8731,7 +8731,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "axe_darkness",
@@ -8757,8 +8757,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_axe",
-                        "void_cleave"
+                        "berserker_rage",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "axe_darkness",
@@ -8811,8 +8811,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_axe",
-                        "radiant_cleave"
+                        "crushing_blow",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "axe_light",
@@ -8865,8 +8865,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "staff_strike",
-                        "fire_wall"
+                        "elemental_staff",
+                        "fireball"
                     ]
                 },
                 "fusionType": "staff_fire",
@@ -8892,8 +8892,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_staff",
-                        "inferno_channel"
+                        "staff_of_power",
+                        "inferno"
                     ]
                 },
                 "fusionType": "staff_fire",
@@ -8946,8 +8946,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "staff_strike",
-                        "ice_wall"
+                        "elemental_staff",
+                        "ice_spear"
                     ]
                 },
                 "fusionType": "staff_ice",
@@ -8973,8 +8973,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_staff",
-                        "glacial_focus"
+                        "elemental_staff",
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "staff_ice",
@@ -9054,8 +9054,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_staff",
-                        "thunder_focus"
+                        "staff_of_power",
+                        "ball_lightning"
                     ]
                 },
                 "fusionType": "staff_lightning",
@@ -9100,7 +9100,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "staff_strike",
-                        "stone_wall"
+                        "stone_spear"
                     ]
                 },
                 "fusionType": "staff_earth",
@@ -9126,8 +9126,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_staff",
-                        "crystal_focus"
+                        "staff_of_power",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "staff_earth",
@@ -9172,7 +9172,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "staff_strike",
-                        "wind_barrier"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "staff_wind",
@@ -9198,8 +9198,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_staff",
-                        "gale_focus"
+                        "mana_burn",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "staff_wind",
@@ -9243,8 +9243,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "staff_strike",
-                        "water_shield"
+                        "mana_burn",
+                        "water_whip"
                     ]
                 },
                 "fusionType": "staff_water",
@@ -9270,8 +9270,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_staff",
-                        "tide_focus"
+                        "staff_of_power",
+                        "tsunami"
                     ]
                 },
                 "fusionType": "staff_water",
@@ -9325,7 +9325,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "staff_strike",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "staff_darkness",
@@ -9351,8 +9351,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_staff",
-                        "void_focus"
+                        "staff_of_power",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "staff_darkness",
@@ -9405,8 +9405,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "staff_strike",
-                        "light_shield"
+                        "spell_penetration",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "staff_light",
@@ -9432,8 +9432,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_staff",
-                        "radiant_focus"
+                        "staff_of_power",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "staff_light",
@@ -9486,8 +9486,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "fire_wall"
+                        "feint_strike",
+                        "explosion"
                     ]
                 },
                 "fusionType": "striker_fire",
@@ -9513,8 +9513,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ember_fists",
-                        "inferno_palm"
+                        "flurry_of_blows",
+                        "inferno"
                     ]
                 },
                 "fusionType": "striker_fire",
@@ -9567,8 +9567,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "ice_wall"
+                        "joint_lock",
+                        "ice_prison"
                     ]
                 },
                 "fusionType": "striker_ice",
@@ -9594,8 +9594,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_fists",
-                        "glacial_palm"
+                        "striker_volley",
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "striker_ice",
@@ -9648,8 +9648,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "electric_field"
+                        "feint_strike",
+                        "shock"
                     ]
                 },
                 "fusionType": "striker_lightning",
@@ -9675,8 +9675,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_fists",
-                        "thunder_palm"
+                        "flurry_of_blows",
+                        "thunder_clap"
                     ]
                 },
                 "fusionType": "striker_lightning",
@@ -9702,7 +9702,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "striker_basics",
+                        "stone_fists",
                         "stone_throw"
                     ]
                 },
@@ -9720,8 +9720,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "earth_shield"
+                        "iron_palm",
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "striker_earth",
@@ -9747,8 +9747,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "granite_fists",
-                        "earthen_palm"
+                        "striker_volley",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "striker_earth",
@@ -9792,8 +9792,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "tornado"
+                        "feint_strike",
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "striker_wind",
@@ -9819,8 +9819,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gale_fists",
-                        "cyclone_palm"
+                        "flurry_of_blows",
+                        "tornado"
                     ]
                 },
                 "fusionType": "striker_wind",
@@ -9864,8 +9864,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "water_shield"
+                        "joint_lock",
+                        "blood_control"
                     ]
                 },
                 "fusionType": "striker_water",
@@ -9891,8 +9891,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "tide_fists",
-                        "tidal_palm"
+                        "striker_volley",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "striker_water",
@@ -9945,8 +9945,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "shadow_armor"
+                        "feint_strike",
+                        "fear"
                     ]
                 },
                 "fusionType": "striker_darkness",
@@ -9972,8 +9972,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_fists",
-                        "umbral_palm"
+                        "flurry_of_blows",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "striker_darkness",
@@ -10026,7 +10026,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
+                        "iron_palm",
                         "holy_weapon"
                     ]
                 },
@@ -10053,8 +10053,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "radiant_fists",
-                        "solar_palm"
+                        "striker_volley",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "striker_light",
@@ -10082,8 +10082,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
-                        "acid_vials"
+                        "piercing_thrust",
+                        "explosive_compounds"
                     ]
                 },
                 "fusionType": "sword_alchemy",
@@ -10109,7 +10109,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "rune_apprentice"
+                        "artifact_shaping"
                     ]
                 },
                 "fusionType": "bow_enchanting",
@@ -10135,7 +10135,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sword_mastery",
-                        "holy_weapon"
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "weapon_light",
@@ -10207,8 +10207,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "duelists_edge",
-                        "crimson_flourish"
+                        "piercing_thrust",
+                        "dueling_stance"
                     ]
                 },
                 "fusionType": "sword_duelist",
@@ -10291,8 +10291,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "hunters_mark_shot",
-                        "trailblazer_volley"
+                        "homing_shot",
+                        "camouflage_net"
                     ]
                 },
                 "fusionType": "bow_ranger",
@@ -10381,8 +10381,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "blood_cleave",
-                        "rampage_chop"
+                        "crushing_blow",
+                        "executioner"
                     ]
                 },
                 "fusionType": "axe_berserker",
@@ -10408,7 +10408,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "spell_power",
+                        "staff_strike",
                         "mana_font"
                     ]
                 },
@@ -10427,7 +10427,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dispel_ward",
+                        "arcane_shield",
                         "ward_circle"
                     ]
                 },
@@ -10454,8 +10454,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "conduit_staff",
-                        "wardens_circle"
+                        "staff_of_power",
+                        "amplified_healing"
                     ]
                 },
                 "fusionType": "staff_mage",
@@ -10482,7 +10482,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sneak_attack",
-                        "dirty_trick"
+                        "light_fingers"
                     ]
                 },
                 "fusionType": "dagger_thief",
@@ -10501,7 +10501,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "shadowstep",
-                        "escape_artist"
+                        "hit_and_run"
                     ]
                 },
                 "fusionType": "dagger_thief",
@@ -10527,8 +10527,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cutpurse_strike",
-                        "vanishing_stab"
+                        "shadow_clone",
+                        "filch"
                     ]
                 },
                 "fusionType": "dagger_thief",
@@ -10555,7 +10555,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "polearm_defensive_stance",
+                        "thrust_attack",
                         "shield_wall"
                     ]
                 },
@@ -10593,8 +10593,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shieldline_thrust",
-                        "iron_phalanx"
+                        "fortress_stance",
+                        "commanders_presence"
                     ]
                 },
                 "fusionType": "polearm_soldier",
@@ -10639,7 +10639,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shield_breaker",
+                        "earth_shaker",
                         "tempered_steel"
                     ]
                 },
@@ -10667,8 +10667,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "forge_strike",
-                        "tempered_quake"
+                        "thunderstrike",
+                        "master_alloy"
                     ]
                 },
                 "fusionType": "hammer_blacksmith",
@@ -10694,7 +10694,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "slip_parry",
+                        "feint_strike",
                         "triage"
                     ]
                 },
@@ -10750,8 +10750,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "pressure_point",
-                        "nerve_strike"
+                        "flurry_of_blows",
+                        "surgical_touch"
                     ]
                 },
                 "fusionType": "striker_medic",
@@ -10769,7 +10769,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "long_set",
+                        "work_song",
                         "ignite"
                     ]
                 },
@@ -10878,7 +10878,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "revival_draft",
-                        "overcharge"
+                        "lightning_speed"
                     ]
                 },
                 "fusionKind": "career",
@@ -10939,7 +10939,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "slip_away",
+                        "light_fingers",
                         "levitate"
                     ]
                 },
@@ -10957,8 +10957,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "battle_anthem",
-                        "wind_walk"
+                        "marching_tune",
+                        "flight"
                     ]
                 },
                 "fusionKind": "career",
@@ -10983,7 +10983,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "label_reader",
+                        "apothecary",
                         "heal_wounds"
                     ]
                 },
@@ -11001,8 +11001,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "artifact_shaping",
-                        "water_shield"
+                        "ward_scribe",
+                        "water_breathing"
                     ]
                 },
                 "fusionKind": "career",
@@ -11046,7 +11046,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "soul_bind",
-                        "shadow_armor"
+                        "life_drain"
                     ]
                 },
                 "fusionKind": "career",
@@ -11096,8 +11096,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "encore",
-                        "sanctuary"
+                        "soothing_hymn",
+                        "healing_light"
                     ]
                 },
                 "fusionKind": "career",
@@ -11116,7 +11116,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "fire_breath",
+                        "size_change",
                         "fire_supremacy"
                     ]
                 },
@@ -11143,8 +11143,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "razor_claws",
-                        "monster_shadow_step"
+                        "monster_shadow_step",
+                        "shadow_armor"
                     ]
                 },
                 "fusionType": "monster_darkness",
@@ -11170,8 +11170,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "roar",
-                        "spell_power"
+                        "fear_aura",
+                        "staff_of_power"
                     ]
                 },
                 "fusionType": "monster_arcane",
@@ -11225,7 +11225,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "armored_plates",
-                        "fire_wall"
+                        "fire_shield"
                     ]
                 },
                 "fusionType": "monster_fire",
@@ -11242,8 +11242,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cinder_claws",
-                        "magma_hide"
+                        "trample",
+                        "inferno"
                     ]
                 },
                 "fusionType": "monster_fire",
@@ -11297,7 +11297,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "metal_skin",
-                        "ice_wall"
+                        "ice_armor"
                     ]
                 },
                 "fusionType": "monster_ice",
@@ -11322,8 +11322,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frostbite_maw",
-                        "glacial_carapace"
+                        "ice_breath",
+                        "blizzard"
                     ]
                 },
                 "fusionType": "monster_ice",
@@ -11350,7 +11350,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "pounce",
-                        "chain_lightning"
+                        "lightning_bolt"
                     ]
                 },
                 "fusionType": "monster_lightning",
@@ -11394,8 +11394,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_pounce",
-                        "thunderhide"
+                        "multiattack",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "monster_lightning",
@@ -11475,8 +11475,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "burrow_ambush",
-                        "quake_trample"
+                        "monster_earthquake",
+                        "petrify"
                     ]
                 },
                 "fusionType": "monster_earth",
@@ -11562,8 +11562,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "screeching_gale",
-                        "cyclone_tail"
+                        "rend",
+                        "flight"
                     ]
                 },
                 "fusionType": "monster_wind",
@@ -11616,8 +11616,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "rend",
-                        "tidal_wave"
+                        "spiked_tail",
+                        "blood_control"
                     ]
                 },
                 "fusionType": "monster_water",
@@ -11643,8 +11643,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "riptide_jaws",
-                        "abyssal_coils"
+                        "trample",
+                        "tsunami"
                     ]
                 },
                 "fusionType": "monster_water",
@@ -11724,8 +11724,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "night_terror_howl",
-                        "soul_rend"
+                        "invisibility",
+                        "nightmare"
                     ]
                 },
                 "fusionType": "monster_darkness",
@@ -11785,7 +11785,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "pack_leader",
-                        "sanctuary"
+                        "healing_light"
                     ]
                 },
                 "fusionType": "monster_light",
@@ -11810,8 +11810,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "radiant_horn",
-                        "seraph_plumage"
+                        "size_change",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "monster_light",
@@ -11866,8 +11866,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "steam_burst",
-                        "ice_wall"
+                        "fire_whip",
+                        "ice_prison"
                     ]
                 },
                 "fusionType": "fire_ice",
@@ -11893,8 +11893,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thermal_shock",
-                        "inferno"
+                        "inferno",
+                        "blizzard"
                     ]
                 },
                 "fusionType": "fire_ice",
@@ -11947,7 +11947,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "plasma_bolt",
+                        "explosion",
                         "thunder_clap"
                     ]
                 },
@@ -11974,8 +11974,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_of_cinders",
-                        "chain_lightning"
+                        "inferno",
+                        "ball_lightning"
                     ]
                 },
                 "fusionType": "fire_lightning",
@@ -12028,8 +12028,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "magma_surge",
-                        "stone_wall"
+                        "explosion",
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "fire_earth",
@@ -12055,7 +12055,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "volcanic_rupture",
+                        "inferno",
                         "earthquake"
                     ]
                 },
@@ -12109,7 +12109,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "static_freeze",
+                        "ice_spear",
                         "thunder_clap"
                     ]
                 },
@@ -12136,8 +12136,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "crystalline_surge",
-                        "blizzard"
+                        "blizzard",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "ice_lightning",
@@ -12190,8 +12190,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "twilight_balance",
-                        "shadow_armor"
+                        "life_drain",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "darkness_light",
@@ -12217,8 +12217,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "duality_surge",
-                        "dawn_dance"
+                        "eclipse",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "darkness_light",
@@ -12245,7 +12245,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "stone_throw",
-                        "gust"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "earth_wind",
@@ -12277,8 +12277,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sandstorm",
-                        "wind_barrier"
+                        "stone_spear",
+                        "suffocate"
                     ]
                 },
                 "fusionType": "earth_wind",
@@ -12310,8 +12310,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "desert_winds",
-                        "earthquake"
+                        "earthquake",
+                        "tornado"
                     ]
                 },
                 "fusionType": "earth_wind",
@@ -12343,7 +12343,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gust",
+                        "wind_blade",
                         "water_splash"
                     ]
                 },
@@ -12370,8 +12370,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "typhoon_strike",
-                        "water_shield"
+                        "wind_blade",
+                        "water_whip"
                     ]
                 },
                 "fusionType": "wind_water",
@@ -12397,7 +12397,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "monsoon",
+                        "hurricane",
                         "tsunami"
                     ]
                 },
@@ -12451,8 +12451,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "mud_slash",
-                        "stone_wall"
+                        "water_whip",
+                        "mud_trap"
                     ]
                 },
                 "fusionType": "water_earth",
@@ -12478,8 +12478,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quicksand",
-                        "tsunami"
+                        "tsunami",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "water_earth",
@@ -12506,7 +12506,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "fireball",
-                        "water_splash"
+                        "water_whip"
                     ]
                 },
                 "fusionType": "fire_water",
@@ -12532,8 +12532,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "scalding_jet",
-                        "water_shield"
+                        "explosion",
+                        "water_whip"
                     ]
                 },
                 "fusionType": "fire_water",
@@ -12559,8 +12559,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "steam_cloud",
-                        "inferno"
+                        "explosion",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "fire_water",
@@ -12586,7 +12586,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gust",
+                        "wind_blade",
                         "shadow_bolt"
                     ]
                 },
@@ -12613,8 +12613,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_wind",
-                        "shadow_armor"
+                        "suffocate",
+                        "life_drain"
                     ]
                 },
                 "fusionType": "wind_darkness",
@@ -12640,8 +12640,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "void_tempest",
-                        "hurricane"
+                        "hurricane",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "wind_darkness",
@@ -12667,7 +12667,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gust",
+                        "wind_blade",
                         "light_ray"
                     ]
                 },
@@ -12694,8 +12694,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "prismatic_breeze",
-                        "light_shield"
+                        "wind_blade",
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "wind_light",
@@ -12721,8 +12721,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "rainbow_gale",
-                        "dawn_dance"
+                        "tornado",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "wind_light",
@@ -12748,8 +12748,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "fireball",
-                        "gust"
+                        "fire_spark",
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "fire_wind",
@@ -12775,8 +12775,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "inferno_cyclone",
-                        "wind_barrier"
+                        "fireball",
+                        "suffocate"
                     ]
                 },
                 "fusionType": "fire_wind",
@@ -12802,8 +12802,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "heat_vacuum",
-                        "inferno"
+                        "fire_tornado",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "fire_wind",
@@ -12856,8 +12856,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadowflame",
-                        "shadow_armor"
+                        "fire_whip",
+                        "fear"
                     ]
                 },
                 "fusionType": "fire_darkness",
@@ -12883,8 +12883,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dark_pyre",
-                        "inferno"
+                        "meteor",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "fire_darkness",
@@ -12911,7 +12911,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ice_shard",
-                        "stone_throw"
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "ice_earth",
@@ -12937,8 +12937,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "glacial_spike",
-                        "stone_wall"
+                        "ice_prison",
+                        "stone_spear"
                     ]
                 },
                 "fusionType": "ice_earth",
@@ -12964,8 +12964,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "permafrost",
-                        "blizzard"
+                        "blizzard",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "ice_earth",
@@ -13024,8 +13024,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_current",
-                        "water_shield"
+                        "ice_spear",
+                        "blood_control"
                     ]
                 },
                 "fusionType": "ice_water",
@@ -13057,7 +13057,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ice_flow",
+                        "frost_nova",
                         "tsunami"
                     ]
                 },
@@ -13090,7 +13090,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ice_shard",
+                        "frost_touch",
                         "shadow_bolt"
                     ]
                 },
@@ -13117,8 +13117,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dark_frost",
-                        "shadow_armor"
+                        "ice_prison",
+                        "nightmare"
                     ]
                 },
                 "fusionType": "ice_darkness",
@@ -13144,8 +13144,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "void_freeze",
-                        "blizzard"
+                        "blizzard",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "ice_darkness",
@@ -13198,8 +13198,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "crystal_ray",
-                        "light_shield"
+                        "ice_spear",
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "ice_light",
@@ -13225,8 +13225,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "aurora_flash",
-                        "blizzard"
+                        "frost_nova",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "ice_light",
@@ -13252,8 +13252,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "spark",
-                        "gust"
+                        "lightning_bolt",
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "lightning_wind",
@@ -13285,8 +13285,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_front",
-                        "wind_barrier"
+                        "chain_lightning",
+                        "tornado"
                     ]
                 },
                 "fusionType": "lightning_wind",
@@ -13318,8 +13318,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "charged_cyclone",
-                        "chain_lightning"
+                        "lightning_storm",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "lightning_wind",
@@ -13384,8 +13384,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "conductivity",
-                        "water_shield"
+                        "thunder_clap",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "lightning_water",
@@ -13417,8 +13417,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "lightning_water_storm_surge",
-                        "chain_lightning"
+                        "ball_lightning",
+                        "maelstrom"
                     ]
                 },
                 "fusionType": "lightning_water",
@@ -13477,8 +13477,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dark_lightning",
-                        "shadow_armor"
+                        "lightning_bolt",
+                        "life_drain"
                     ]
                 },
                 "fusionType": "lightning_darkness",
@@ -13504,8 +13504,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "void_thunder",
-                        "chain_lightning"
+                        "ball_lightning",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "lightning_darkness",
@@ -13558,8 +13558,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "radiant_bolt",
-                        "light_shield"
+                        "thunder_clap",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "lightning_light",
@@ -13585,8 +13585,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "divine_thunder",
-                        "chain_lightning"
+                        "lightning_storm",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "lightning_light",
@@ -13639,8 +13639,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_stone",
-                        "shadow_armor"
+                        "stone_spear",
+                        "fear"
                     ]
                 },
                 "fusionType": "earth_darkness",
@@ -13666,8 +13666,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "obsidian_strike",
-                        "earthquake"
+                        "earthquake",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "earth_darkness",
@@ -13693,8 +13693,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_throw",
-                        "light_ray"
+                        "earth_spike",
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "earth_light",
@@ -13720,8 +13720,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "crystal_light",
-                        "light_shield"
+                        "stone_spear",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "earth_light",
@@ -13747,8 +13747,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "prismatic_earth",
-                        "earthquake"
+                        "earthquake",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "earth_light",
@@ -13774,7 +13774,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_splash",
+                        "water_whip",
                         "shadow_bolt"
                     ]
                 },
@@ -13801,8 +13801,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "abyssal_current",
-                        "shadow_armor"
+                        "blood_control",
+                        "nightmare"
                     ]
                 },
                 "fusionType": "water_darkness",
@@ -13828,8 +13828,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "deep_surge",
-                        "tsunami"
+                        "maelstrom",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "water_darkness",
@@ -13882,8 +13882,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "holy_spring",
-                        "light_shield"
+                        "water_whip",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "water_light",
@@ -13909,8 +13909,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "purifying_wave",
-                        "tsunami"
+                        "tsunami",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "water_light",
@@ -13963,8 +13963,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sunspark",
-                        "holy_weapon"
+                        "fireball",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "fire_light",
@@ -13990,7 +13990,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "purifying_flame",
+                        "inferno",
                         "solar_flare"
                     ]
                 },
@@ -14018,7 +14018,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ice_shard",
-                        "gust"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "ice_wind",
@@ -14050,7 +14050,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_gale",
+                        "ice_spear",
                         "tornado"
                     ]
                 },
@@ -14083,7 +14083,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "blizzard_squall",
+                        "blizzard",
                         "hurricane"
                     ]
                 },
@@ -14143,8 +14143,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "tremor_spark",
-                        "earth_shield"
+                        "chain_lightning",
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "lightning_earth",
@@ -14170,7 +14170,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "magnet_storm",
+                        "thunder_clap",
                         "earthquake"
                     ]
                 },

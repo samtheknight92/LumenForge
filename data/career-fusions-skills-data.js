@@ -13,7 +13,7 @@ const CAREER_FUSIONS_DATA = {
                 "type": "AND",
                 "skills": [
                     "camp_cook",
-                    "fireball"
+                    "warm_hands"
                 ]
             },
             "fusionKind": "career",
@@ -30,11 +30,8 @@ const CAREER_FUSIONS_DATA = {
             "prerequisites": {
                 "type": "AND",
                 "skills": [
-                    "ice_armor"
-                ],
-                "anyOfSkills": [
-                    "camp_cook",
-                    "hearty_rations"
+                    "hearty_rations",
+                    "freeze"
                 ]
             },
             "fusionKind": "career",
@@ -51,8 +48,8 @@ const CAREER_FUSIONS_DATA = {
             "prerequisites": {
                 "type": "AND",
                 "skills": [
-                    "field_medic",
-                    "lightning_bolt"
+                    "clean_bandage",
+                    "static_charge"
                 ]
             },
             "fusionKind": "career",
@@ -77,7 +74,6 @@ const CAREER_FUSIONS_DATA = {
                 "type": "AND",
                 "skills": [
                     "keen_eye",
-                    "shadow_step",
                     "darkness"
                 ]
             },
@@ -95,8 +91,8 @@ const CAREER_FUSIONS_DATA = {
             "prerequisites": {
                 "type": "AND",
                 "skills": [
-                    "blinding_flash",
-                    "interview"
+                    "interview",
+                    "blinding_flash"
                 ]
             },
             "fusionKind": "career",
@@ -113,12 +109,7 @@ const CAREER_FUSIONS_DATA = {
             "prerequisites": {
                 "type": "AND",
                 "skills": [
-                    "camp_cook"
-                ],
-                "anyOfSkills": [
-                    "oathbound",
-                    "lay_on_hands",
-                    "healing_light",
+                    "camp_cook",
                     "purify"
                 ]
             },
@@ -136,12 +127,8 @@ const CAREER_FUSIONS_DATA = {
             "prerequisites": {
                 "type": "AND",
                 "skills": [
-                    "trail_warden"
-                ],
-                "anyOfSkills": [
-                    "darkvision",
-                    "earth_sense",
-                    "illuminate"
+                    "trail_warden",
+                    "earth_sense"
                 ]
             },
             "fusionKind": "career",
@@ -153,13 +140,13 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Craft (Snares & Ambush + Rune Inscription): Snares that trigger a minor rune (alarm + 1d4 magic damage).",
+            "desc": "Craft (Snares & Ambush + Spark): Snares that trigger a crackling charge (alarm + 1d4 lightning damage).",
             "icon": "🪤✨",
             "prerequisites": {
                 "type": "AND",
                 "skills": [
                     "snare_craft",
-                    "rune_apprentice"
+                    "spark"
                 ]
             },
             "fusionKind": "career",
@@ -176,8 +163,8 @@ const CAREER_FUSIONS_DATA = {
             "prerequisites": {
                 "type": "AND",
                 "skills": [
-                    "apothecary",
-                    "ice_armor"
+                    "acid_vials",
+                    "freeze"
                 ]
             },
             "fusionKind": "career",
@@ -189,16 +176,13 @@ const CAREER_FUSIONS_DATA = {
             "tier": 2,
             "cost": 20,
             "staminaCost": 0,
-            "desc": "Action (Wilderness Tracking + Harmony): Calm one hostile beast for 1 minute (GM save).",
+            "desc": "Action (Wilderness Tracking + Dread): Read one hostile beast and cloud its mind with shadow — it stops attacking and keeps its distance for 1 minute (GM save).",
             "icon": "🐾🌲",
             "prerequisites": {
                 "type": "AND",
                 "skills": [
-                    "trail_warden"
-                ],
-                "anyOfSkills": [
-                    "earth_sense",
-                    "gust"
+                    "trail_warden",
+                    "fear"
                 ]
             },
             "fusionKind": "career",

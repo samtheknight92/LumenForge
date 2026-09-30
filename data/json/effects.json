@@ -4541,7 +4541,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Craft (Snares & Ambush + Rune Inscription): Snares that trigger a minor rune (alarm + 1d4 magic damage).",
+    "desc": "Craft (Snares & Ambush + Spark): Snares that trigger a crackling charge (alarm + 1d4 lightning damage).",
     "stackable": false,
     "manual": false
   },
@@ -4760,7 +4760,7 @@
     "type": "utility",
     "duration": 0,
     "potency": 0,
-    "desc": "Action (Wilderness Tracking + Harmony): Calm one hostile beast for 1 minute (GM save).",
+    "desc": "Action (Wilderness Tracking + Dread): Read one hostile beast and cloud its mind with shadow — it stops attacking and keeps its distance for 1 minute (GM save).",
     "stackable": false,
     "manual": false
   },
