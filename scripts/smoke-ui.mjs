@@ -222,6 +222,25 @@ await test('skills tab: switch tree, learn, refund and search', async page => {
     /fire/i.test(document.querySelector('#app-content').innerText))
 })
 
+await test('homebrew tab: create a custom item and open each editor', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="homebrew"]')
+  for (const opener of ['data-homebrew-skill-new', 'data-homebrew-race-new']) {
+    await page.locator(`[${opener}]`).first().click()
+    await page.locator('#app-content form').first().waitFor()
+    await page.locator('[data-homebrew-cancel]').first().click()
+  }
+  await page.locator('[data-homebrew-new]').first().click()
+  await page.fill('#homebrew-form [name="hb-name"]', 'Smoke Blade')
+  await page.fill('#homebrew-form [name="hb-desc"]', 'A test blade.')
+  await page.click('#homebrew-form button[type="submit"]')
+  await assertText(page, '#app-content', 'Smoke Blade')
+  await page.reload()
+  await page.click('#tabbar [data-tab="homebrew"]')
+  await assertText(page, '#app-content', 'Smoke Blade')
+})
+
 await test('folder can be created and persists', async page => {
   await open(page)
   await createCharacter(page)
