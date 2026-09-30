@@ -20,3 +20,13 @@
 .encounter-combatant-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
 .encounter-combatant-card.defeated { opacity: .65; }
 .encounter-combatant-card.is-active-turn { outline: 2px solid var(--accent, #7eb8ff); }
+
+/* Send Feedback dialog */
+.feedback-dialog { width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; padding: 18px; border: 0; color: inherit; }
+.feedback-dialog::backdrop { background: rgba(0,0,0,.55); }
+.feedback-form { display: flex; flex-direction: column; gap: 10px; }
+.feedback-form h2 { margin: 0; }
+.feedback-form label { display: flex; flex-direction: column; gap: 4px; }
+.feedback-form textarea { resize: vertical; }
+.feedback-form .feedback-check { flex-direction: row; align-items: flex-start; gap: 8px; font-size: .9em; }
+.feedback-actions { display: flex; flex-wrap: wrap; gap: 8px; }

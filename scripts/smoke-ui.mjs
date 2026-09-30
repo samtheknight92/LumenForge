@@ -2,7 +2,7 @@
 /**
  * Browser smoke tests — boots the real app in headless Chromium and clicks through
  * the flows the Node checks cannot reach: tabs, character creation, save/load,
- * combat toasts, folders, export/import and unreadable-save protection.
+ * combat toasts, feedback, folders, export/import and unreadable-save protection.
  *
  * Needs Playwright with Chromium: `npm install` then `npx playwright install chromium`.
  * Run: npm run test:ui
@@ -256,6 +256,26 @@ await test('gm tools: activate GM mode, spawn a premade and build a monster', as
   await page.locator('#app-content [data-randomise-gm-monster]').first().click()
   await page.locator('#app-content [data-save-gm-monster]').first().click()
   await page.waitForFunction(n => window.LumenForge.state.characters.length > n, afterSpawn)
+})
+
+await test('feedback button builds a pre-filled GitHub issue', async page => {
+  await open(page)
+  await page.evaluate(() => { window.open = url => { window.__openedUrl = url } })
+  await page.click('#open-feedback')
+  await page.selectOption('#feedback-dialog select[name="kind"]', 'idea')
+  await page.fill('#feedback-dialog textarea', 'Add a dice tray')
+  await page.click('[data-feedback-send="github"]')
+  const url = new URL(await page.evaluate(() => window.__openedUrl))
+  assert.equal(url.origin + url.pathname, 'https://github.com/samtheknight92/LumenForge/issues/new')
+  assert.equal(url.searchParams.get('title'), 'Idea: Add a dice tray')
+  assert.match(url.searchParams.get('body'), /^Add a dice tray\n\n---\nApp: LumenForge/)
+  assert.equal(await page.locator('#feedback-dialog').isVisible(), false)
+
+  await page.click('#open-feedback')
+  await page.fill('#feedback-dialog textarea', 'Shop search is slow')
+  await page.click('[data-feedback-send="email"]')
+  const mail = await page.evaluate(() => window.__openedUrl)
+  assert.match(mail, /^mailto:lumenforge\.feedback@gmail\.com\?subject=LumenForge%20Bug%3A%20Shop%20search%20is%20slow&body=/)
 })
 
 await test('folder can be created and persists', async page => {

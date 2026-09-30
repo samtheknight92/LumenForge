@@ -119,6 +119,10 @@ npm test
 
 These commands rebuild generated JSON, validate content references, run project audits, and test core systems such as saving, imports, race passives, Homebrew items, cursed equipment, inventory navigation, note pages, unidentified equipment, weather, and GM monster generation.
 
+### Player feedback
+
+The sidebar's **Send Feedback** button opens a short form. Players can send it as a pre-filled GitHub issue, by email to `FEEDBACK_EMAIL` (set in `js/core/constants.js`, currently lumenforge.feedback@gmail.com), or copy the text. Blanking `FEEDBACK_EMAIL` hides the email option.
+
 ### Automatic checks
 
 Every pull request (and every push to `main`) runs `npm test`, `npm run validate`, `npm run audit` and `npm run test:ui` on GitHub Actions (`.github/workflows/tests.yml`). The result shows as a tick or cross on the PR.
