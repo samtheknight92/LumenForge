@@ -1,0 +1,186 @@
+import { esc } from '../core/utils.js'
+import { getSkill, getItem } from '../core/cache.js'
+import { computeStats, getEffect } from '../character/character.js'
+import { getEquippedWeapon, getWeaponKind } from '../items/equipment.js'
+import { weaponKindDisplayLabel } from '../homebrew/homebrew.js'
+import { itemHasCounter } from '../items/items.js'
+import { renderItemCounterControls, renderKnockoutPanel } from './shared-panels.js'
+import { effectDurationLabel, effectTone, effectTooltip } from '../effects/effects.js'
+import { fallbackIcon } from './format.js'
+import { resolveItemPresentation } from '../items/item-presentation.js'
+import { getPinnedActionBarSkills, getSkillActivationType } from '../skills/skill-activation.js'
+import { getBasicAttackSkill } from '../combat/combat.js'
+import { formatSkillEffectBreakdownPlain, resolveSkillEffectBreakdown, skillHasEffectBreakdown } from '../combat/damage-breakdown.js'
+import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
+
+/** Play tab — session controls, equipped weapon, pinned skills, ongoing effects and combat kit. */
+
+export function renderPlayTab(character) {
+  const stats = computeStats(character)
+  const weapon = getEquippedWeapon(character)
+  const weaponEntry = character.inventory.find(inv => inv.uid === character.equipped.weapon)
+  const basic = getBasicAttackSkill(character)
+  const basicBreakdown = skillHasEffectBreakdown(basic)
+    ? formatSkillEffectBreakdownPlain(resolveSkillEffectBreakdown(character, basic))
+    : ''
+  const pinned = getPinnedActionBarSkills(character)
+  const toggleSkills = (character.activeToggles || [])
+    .map(id => getSkill(id))
+    .filter(Boolean)
+  const statuses = (character.statusEffects || [])
+    .map(status => {
+      const effect = getEffect(status.id)
+      if (!effect) return null
+      return `<span class="pill ${effectTone(effect)}" data-tooltip="${esc(effectTooltip(effect))}" tabindex="0">${esc(effect.icon || '✦')} ${esc(effect.name)} · ${esc(effectDurationLabel(status.duration))}</span>`
+    })
+    .filter(Boolean)
+    .join('')
+  const weather = (character.weatherEffects || [])
+    .map(status => {
+      const effect = getEffect(status.id)
+      if (!effect) return null
+      return `<span class="pill warn">${esc(effect.icon || '☁')} ${esc(effect.name)}</span>`
+    })
+    .filter(Boolean)
+    .join('')
+
+  const combatItems = (character.inventory || []).filter(entry => {
+    const item = getItem(entry.itemId)
+    if (!item) return false
+    const type = String(item.type || '').toLowerCase()
+    const isConsumable = type.includes('consumable') || type.includes('potion') || type.includes('food')
+    const equipped = Object.values(character.equipped || {}).includes(entry.uid)
+    return isConsumable || itemHasCounter(item) || equipped
+  })
+
+  const pinnedHtml = pinned.length
+    ? pinned.map(skill => {
+        const type = getSkillActivationType(skill)
+        const cost = type === 'activatable'
+          ? getEffectiveSkillStaminaCost(character, skill)
+          : Number(skill.staminaCost || 0)
+        const active = type === 'toggle' && character.activeToggles?.includes(skill.id)
+        const breakdown = skillHasEffectBreakdown(skill)
+          ? formatSkillEffectBreakdownPlain(resolveSkillEffectBreakdown(character, skill))
+          : ''
+        const useBtn = type === 'toggle'
+          ? `<button type="button" class="chip-btn tiny" data-toggle-skill="${esc(skill.id)}">${active ? 'Switch Off' : 'Switch On'}</button>`
+          : type === 'activatable'
+            ? `<button type="button" class="primary-btn tiny" data-use-skill="${esc(skill.id)}">Use Skill</button>`
+            : ''
+        return `
+          <details class="play-skill-card card">
+            <summary>
+              <strong>${esc(skill.icon || '✦')} ${esc(skill.name)}</strong>
+              <span class="pill warn">${cost} STA</span>
+              ${active ? '<span class="pill good">Active</span>' : ''}
+            </summary>
+            <p class="mt-8">${esc(skill.desc || '')}</p>
+            ${breakdown ? `<p class="subtle mt-8">${esc(breakdown)}</p>` : ''}
+            <div class="wrap mt-12">${useBtn}</div>
+          </details>
+        `
+      }).join('')
+    : '<p class="subtle">Pin skills on the Skills tab to show them here.</p>'
+
+  const itemsHtml = combatItems.length
+    ? combatItems.map(entry => {
+        const item = getItem(entry.itemId)
+        const presentation = resolveItemPresentation(item, entry)
+        const equippedSlot = Object.entries(character.equipped || {}).find(([, uid]) => uid === entry.uid)?.[0]
+        return `
+          <div class="play-item-row">
+            <div>
+              <strong>${fallbackIcon(item)} ${esc(presentation.displayName)}</strong>
+              <div class="subtle">${esc(item.type)}${equippedSlot ? ` · equipped (${esc(equippedSlot)})` : ''} · qty ${entry.qty || 1}</div>
+              ${renderItemCounterControls(entry, item, { showWhenEquipped: true })}
+            </div>
+          </div>
+        `
+      }).join('')
+    : '<p class="subtle">No combat consumables or counter items.</p>'
+
+  return `
+    <div class="play-tab">
+      <section class="card play-session-card">
+        <div class="card-header">
+          <div>
+            <div class="kicker">Session</div>
+            <h3>${esc(character.name)}</h3>
+            <p class="tab-intro">Compact combat view — full inventory stays on Character.</p>
+          </div>
+          <div class="wrap">
+            <button type="button" class="ghost-btn tiny" data-process-turn>Process Turn</button>
+            <button type="button" class="primary-btn tiny" data-begin-new-combat>New Combat</button>
+          </div>
+        </div>
+        <div class="play-resource-row wrap mt-12">
+          <div class="play-resource">
+            <strong>HP ${character.hp}/${stats.hp}</strong>
+            <div class="wrap">
+              <button type="button" class="ghost-btn tiny" data-adjust-resource="hp" data-amount="-1">−1</button>
+              <button type="button" class="ghost-btn tiny" data-adjust-resource="hp" data-amount="1">+1</button>
+              <button type="button" class="primary-btn tiny" data-full-resource="hp">Full</button>
+            </div>
+          </div>
+          <div class="play-resource">
+            <strong>STA ${character.stamina}/${stats.stamina}</strong>
+            <div class="wrap">
+              <button type="button" class="ghost-btn tiny" data-adjust-resource="stamina" data-amount="-1">−1</button>
+              <button type="button" class="ghost-btn tiny" data-adjust-resource="stamina" data-amount="1">+1</button>
+              <button type="button" class="primary-btn tiny" data-full-resource="stamina">Full</button>
+            </div>
+          </div>
+        </div>
+        <div class="wrap mt-12 play-stat-strip">
+          <span class="pill">ACC ${stats.accuracy}</span>
+          <span class="pill">SPD ${stats.speed}</span>
+          <span class="pill">STR ${stats.strength}</span>
+          <span class="pill">MP ${stats.magicPower}</span>
+          <span class="pill">PD ${stats.physicalDefence}</span>
+          <span class="pill">MD ${stats.magicalDefence}</span>
+        </div>
+      </section>
+
+      <section class="card mt-16">
+        <div class="kicker">Weapon</div>
+        <h3>${weapon ? `${fallbackIcon(weapon)} ${esc(weapon.name)}` : 'Unarmed / Striker'}</h3>
+        <p class="subtle">${weapon ? esc(weaponKindDisplayLabel(getWeaponKind(weapon) || weapon.weaponKind || '')) : 'Empty hands'}${weaponEntry ? ` · ${esc(weapon.damage || '')}` : ''}</p>
+        ${basic ? `
+          <div class="mt-12">
+            <strong>${esc(basic.icon || '⚔')} ${esc(basic.name)}</strong>
+            <p class="subtle mt-8">${esc(basic.desc || '')}</p>
+            ${basicBreakdown ? `<p class="subtle mt-8">${esc(basicBreakdown)}</p>` : ''}
+            <button type="button" class="primary-btn tiny mt-12" data-use-skill="${esc(basic.id)}">Basic Attack</button>
+          </div>
+        ` : ''}
+      </section>
+
+      <section class="card mt-16">
+        <div class="kicker">Pinned skills</div>
+        <h3>Ready actions</h3>
+        <div class="stack mt-12">${pinnedHtml}</div>
+      </section>
+
+      <section class="card mt-16">
+        <div class="kicker">Ongoing</div>
+        <h3>Toggles, statuses &amp; weather</h3>
+        <div class="wrap mt-12">
+          ${toggleSkills.length
+            ? toggleSkills.map(skill => `<span class="pill warn">${esc(skill.icon || '✦')} ${esc(skill.name)}</span>`).join('')
+            : '<span class="subtle">No active toggles.</span>'}
+        </div>
+        <div class="wrap mt-12">${statuses || '<span class="subtle">No status effects.</span>'}</div>
+        <div class="wrap mt-12">${weather || '<span class="subtle">No weather.</span>'}</div>
+      </section>
+
+      <section class="card mt-16">
+        <div class="kicker">Combat kit</div>
+        <h3>Consumables &amp; counters</h3>
+        <div class="stack mt-12">${itemsHtml}</div>
+      </section>
+
+      ${renderKnockoutPanel(character)}
+    </div>
+  `
+}
