@@ -158,6 +158,18 @@ await test('shop tab: search, star, page and buy', async page => {
   await page.waitForFunction(before => document.querySelector('#coin-pill').innerText !== before, gilBefore)
 })
 
+await test('craft tab: filters and recipe stars', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="craft"]')
+  if (await page.locator('#craft-learned-only').isChecked()) await page.click('#craft-learned-only')
+  await page.locator('#app-content .item-card').first().waitFor()
+  await page.locator('.item-card [data-toggle-recipe-star]').first().click()
+  await page.waitForFunction(() => document.querySelector('.item-card [data-toggle-recipe-star]').innerText.includes('⭐'))
+  await page.click('#craft-starred-only')
+  await page.waitForFunction(() => document.querySelectorAll('.item-card').length === 1)
+})
+
 await test('folder can be created and persists', async page => {
   await open(page)
   await createCharacter(page)
