@@ -203,8 +203,7 @@ import {
   learnSkillOnDraft,
   refundSkillOnDraft,
   buyItemOnDraft,
-  upgradeStatOnDraft,
-  syncDraftFromIdentityForm,
+  upgradeStatOnDraft
 } from '../ui/guided-create.js'
 import { stepNumberInput } from '../ui/number-stepper.js'
 import { render } from '../ui/render.js'
@@ -212,7 +211,7 @@ import { state, activeCharacter, resetItemFilters } from './state.js'
 import { TAB_IDS } from './constants.js'
 import { DEFAULT_BACKGROUND } from '../character/backgrounds.js'
 import { closeActionBarSkillSheet, tryOpenActionBarSkillSheet } from '../combat/action-bar-sheet.js'
-import { debounce, toast, toastCombat } from './utils.js'
+import { debounce, toast } from './utils.js'
 import { trackPendingEditDebouncer } from './pending-edits.js'
 import { syncHomebrewDraftFromForm, syncHomebrewSkillDraftFromForm, syncHomebrewRaceDraftFromForm, syncHomebrewMonsterDraftFromForm, alignHomebrewSkillSubcategory } from '../homebrew/homebrew.js'
 import { applyTheme, applyAppearance } from '../ui/themes.js'

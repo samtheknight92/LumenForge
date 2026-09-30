@@ -1,7 +1,7 @@
 import { $, $$, esc, titleCase } from '../core/utils.js'
 import { DRAGONBORN_AFFINITIES } from '../core/constants.js'
 import { state, activeCharacter } from '../core/state.js'
-import { raceOptions, getRace, cache } from '../core/cache.js'
+import { raceOptions, getRace } from '../core/cache.js'
 import { computeStats } from '../character/character.js'
 import {
   humanStarterWeaponOptions
@@ -10,9 +10,6 @@ import { computeSkillLevel } from '../character/skill-level.js'
 import { computeCombatPower } from '../character/combat-power.js'
 import { knockoutStatusLabel } from '../character/knockout.js'
 import { isGmMode } from '../gm/gm-mode.js'
-import {
-  getPremadeCharacter
-} from '../character/premade-characters.js'
 import { renderGuidedCreateModal } from './guided-create.js'
 import { renderHowToPlayTab } from './how-to-play.js?v=5.2.2-howtoplay-fix'
 import { renderNotesTab } from './notes-tab.js'
@@ -24,9 +21,6 @@ import { renderHomebrewTab } from './homebrew-tab.js'
 import { renderSkillsTab } from './skills-tab.js'
 import { renderPlayTab } from './play-tab.js'
 import { renderCharacterTab } from './character-tab.js'
-import {
-  manualEffectList
-} from '../effects/effects.js'
 import { formatCurrency } from './format.js'
 import { renderActionBar } from '../combat/action-bar.js'
 import { backgroundOptions, getBackground, backgroundRewardSummary, DEFAULT_BACKGROUND } from '../character/backgrounds.js'
