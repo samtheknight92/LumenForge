@@ -1,24 +1,8 @@
 import {
   createAndSelectCharacter,
   selectCharacter as selectCharacterById,
-  learnSkill as doLearnSkill,
-  refundSkill as doRefundSkill,
-  toggleSkill as doToggleSkill,
-  useSkill as doUseSkill,
-  processTurn as doProcessTurn,
-  addStatusEffect as doAddStatusEffect,
-  removeStatusEffect as doRemoveStatusEffect,
   setRace as doSetRace,
   setElementalAffinity as doSetElementalAffinity,
-  buyItem as doBuyItem,
-  craftRecipe as doCraftRecipe,
-  grantCraftRecipe as doGrantCraftRecipe,
-  applyEnchantment as doApplyEnchantment,
-  removeEnchantment as doRemoveEnchantment,
-  recordEnchantShieldAbsorption as doRecordEnchantShieldAbsorption,
-  removeInventoryEntry as doRemoveInventoryEntry,
-  equipItem as doEquipItem,
-  unequip as doUnequip,
   upgradeStat as doUpgradeStat,
   refundStat as doRefundStat,
   setResource as doSetResource,
@@ -32,10 +16,8 @@ import {
   deleteCharacter as doDeleteCharacter,
   exportData,
   importData,
-  saveNotes as persistNotes,
   renameCharacter as doRenameCharacter,
   switchTab,
-  beginNewCombat as doBeginNewCombat,
   printCharacterSheet as doPrintCharacterSheet,
   setCharacterFolder as doSetCharacterFolder,
   createCharacterFolder as doCreateCharacterFolder,
@@ -44,8 +26,44 @@ import {
   copyCharacterFolder as doCopyCharacterFolder,
   deleteCharacterFolder as doDeleteCharacterFolder,
   setGmSpawnFolder as doSetGmSpawnFolder,
-  adjustInventoryCounter as doAdjustInventoryCounter,
+  openGuidedCreate as doOpenGuidedCreate,
+  cancelGuidedCreate as doCancelGuidedCreate,
+  guidedCreateNext as doGuidedCreateNext,
+  guidedCreateBack as doGuidedCreateBack,
+  guidedCreateFinish as doGuidedCreateFinish
+} from '../ui/actions.js'
+import {
+  learnSkill as doLearnSkill,
+  refundSkill as doRefundSkill,
+  toggleSkill as doToggleSkill,
+  useSkill as doUseSkill,
+  processTurn as doProcessTurn,
+  addStatusEffect as doAddStatusEffect,
+  removeStatusEffect as doRemoveStatusEffect,
+  beginNewCombat as doBeginNewCombat,
   stopPerformance as doStopPerformance,
+  toggleSkillStar as doToggleSkillStar,
+  togglePinnedSkill as doTogglePinnedSkill,
+  setSkillViewMode as doSetSkillViewMode,
+  addWeatherEffect as doAddWeatherEffect,
+  removeWeatherEffect as doRemoveWeatherEffect,
+  setWeatherCombatRoll as doSetWeatherCombatRoll,
+  rollRecoveryCheck as doRollRecoveryCheck,
+  beginManualRevival as doBeginManualRevival,
+  continueManualRevival as doContinueManualRevival,
+  clearManualRevival as doClearManualRevival
+} from '../ui/combat-actions.js'
+import {
+  buyItem as doBuyItem,
+  craftRecipe as doCraftRecipe,
+  grantCraftRecipe as doGrantCraftRecipe,
+  applyEnchantment as doApplyEnchantment,
+  removeEnchantment as doRemoveEnchantment,
+  recordEnchantShieldAbsorption as doRecordEnchantShieldAbsorption,
+  removeInventoryEntry as doRemoveInventoryEntry,
+  equipItem as doEquipItem,
+  unequip as doUnequip,
+  adjustInventoryCounter as doAdjustInventoryCounter,
   toggleInventoryEntryStar as doToggleInventoryEntryStar,
   toggleInventoryEntryLock as doToggleInventoryEntryLock,
   updateInventoryEntryPlayerNotes as doUpdateInventoryEntryPlayerNotes,
@@ -54,30 +72,18 @@ import {
   setInventoryTagFilter as doSetInventoryTagFilter,
   setInventoryCursedOnly as doSetInventoryCursedOnly,
   toggleCatalogItemStar as doToggleCatalogItemStar,
-  toggleSkillStar as doToggleSkillStar,
-  togglePinnedSkill as doTogglePinnedSkill,
-  setSkillViewMode as doSetSkillViewMode,
-  toggleRecipeStar as doToggleRecipeStar,
+  toggleRecipeStar as doToggleRecipeStar
+} from '../ui/inventory-actions.js'
+import {
+  saveNotes as persistNotes,
   setActiveNotePage as doSetActiveNotePage,
   addNotePage as doAddNotePage,
   renameNotePage as doRenameNotePage,
   deleteNotePage as doDeleteNotePage,
   addQuestEntry as doAddQuestEntry,
   updateQuestEntry as doUpdateQuestEntry,
-  removeQuestEntry as doRemoveQuestEntry,
-  addWeatherEffect as doAddWeatherEffect,
-  removeWeatherEffect as doRemoveWeatherEffect,
-  setWeatherCombatRoll as doSetWeatherCombatRoll,
-  rollRecoveryCheck as doRollRecoveryCheck,
-  beginManualRevival as doBeginManualRevival,
-  continueManualRevival as doContinueManualRevival,
-  clearManualRevival as doClearManualRevival,
-  openGuidedCreate as doOpenGuidedCreate,
-  cancelGuidedCreate as doCancelGuidedCreate,
-  guidedCreateNext as doGuidedCreateNext,
-  guidedCreateBack as doGuidedCreateBack,
-  guidedCreateFinish as doGuidedCreateFinish
-} from '../ui/actions.js'
+  removeQuestEntry as doRemoveQuestEntry
+} from '../ui/notes-actions.js'
 import {
   activateGmModeToggle as doActivateGmModeToggle,
   spawnPremadeCharacter as doSpawnPremadeCharacter,
@@ -203,8 +209,7 @@ import {
   learnSkillOnDraft,
   refundSkillOnDraft,
   buyItemOnDraft,
-  upgradeStatOnDraft,
-  syncDraftFromIdentityForm,
+  upgradeStatOnDraft
 } from '../ui/guided-create.js'
 import { stepNumberInput } from '../ui/number-stepper.js'
 import { render } from '../ui/render.js'
@@ -212,7 +217,7 @@ import { state, activeCharacter, resetItemFilters } from './state.js'
 import { TAB_IDS } from './constants.js'
 import { DEFAULT_BACKGROUND } from '../character/backgrounds.js'
 import { closeActionBarSkillSheet, tryOpenActionBarSkillSheet } from '../combat/action-bar-sheet.js'
-import { debounce, toast, toastCombat } from './utils.js'
+import { debounce, toast } from './utils.js'
 import { trackPendingEditDebouncer } from './pending-edits.js'
 import { syncHomebrewDraftFromForm, syncHomebrewSkillDraftFromForm, syncHomebrewRaceDraftFromForm, syncHomebrewMonsterDraftFromForm, alignHomebrewSkillSubcategory } from '../homebrew/homebrew.js'
 import { applyTheme, applyAppearance } from '../ui/themes.js'

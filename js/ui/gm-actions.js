@@ -62,7 +62,7 @@ import {
 } from '../gm/gm-monster-builder.js'
 import { normalizeBuilderElementId } from '../combat/elemental-affinity.js'
 import { touch } from './action-helpers.js'
-import { processTurn } from './actions.js'
+import { processTurn } from './combat-actions.js'
 
 export function activateGmModeToggle() {
   const enabled = flipGmMode()

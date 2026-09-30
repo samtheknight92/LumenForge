@@ -1,6 +1,7 @@
 /**
  * Small helpers shared by the action modules.
  */
+import { state, activeCharacter } from '../core/state.js'
 import { save } from '../core/storage.js'
 import { render } from './render.js'
 import { invalidateCharacterCache } from '../character/character.js'
@@ -20,4 +21,14 @@ export function downloadJson(payload, filename) {
   a.download = filename
   a.click()
   URL.revokeObjectURL(a.href)
+}
+
+export function silentCharacterSave(character) {
+  if (character) invalidateCharacterCache(character)
+  save()
+}
+
+export function characterById(characterId) {
+  if (!characterId) return activeCharacter()
+  return state.characters.find(row => row.id === characterId) || null
 }
