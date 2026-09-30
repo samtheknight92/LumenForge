@@ -330,3 +330,45 @@ html[data-appearance="light"] .play-stat b { color: #0f172a; }
 .inventory-item-notes-wrap > summary { cursor: pointer; font-size: 11.5px; font-weight: 700; color: var(--muted); list-style: none; }
 .inventory-item-notes-wrap > summary::-webkit-details-marker { display: none; }
 .inventory-item-notes-wrap[open] > summary { margin-bottom: 4px; }
+
+/* ========== Skills & Shop ========== */
+/* Segmented pickers (Focused/Browse, skill trees, weapon types): rounder, playful active state */
+.segmented { gap: 4px; margin-bottom: 6px; }
+.segmented button { border-radius: 999px; padding: 4px 11px; font-family: var(--display); font-weight: 500; font-size: 13px; }
+.segmented button.active {
+  border-color: var(--pop-yellow);
+  background: var(--pop-yellow);
+  color: #120f33;
+  font-weight: 600;
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--pop-yellow) 55%, #000);
+}
+
+/* Skills toolbar: one row on wide screens */
+.skills-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 6px; }
+.skills-toolbar > .segmented { margin: 0; }
+.skills-toolbar > .input { flex: 1 1 220px; grid-column: auto; }
+.skills-toolbar .pill { font-size: 11.5px; min-height: 30px; padding: 3px 10px; }
+.tier-lane { padding: 8px 10px; border-radius: 14px; }
+.tier-lane > h3 { font-family: var(--display); font-size: 1rem; margin-bottom: 6px; }
+.skill-tree { display: grid; gap: 8px; }
+.skill-tree > .tier-lane { margin: 0; }
+html[data-appearance="dark"][data-theme="midnight"] :is(.tier-lane, .skill-card, .item-card, .effect-card, .effect-add-box, .stat-row, .equip-row, .inventory-row) {
+  background: linear-gradient(180deg, rgba(50, 54, 120, 0.5), rgba(30, 32, 82, 0.55));
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Shop filters: tighter rows */
+.shop-filters { display: grid; gap: 6px; margin: 6px 0; }
+.shop-filters-primary,
+.shop-filters-secondary { gap: 6px; }
+.catalogue-summary { gap: 6px; margin-bottom: 6px; }
+.catalogue-card .tab-intro { display: none; }
+@media (max-width: 760px) {
+  .shop-filters-primary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .shop-filters-primary > .shop-search { grid-column: 1 / -1; }
+  .shop-filters-primary > select { font-size: 12.5px; padding-left: 8px; padding-right: 4px; min-width: 0; }
+  .shop-filters-secondary { display: flex; flex-wrap: wrap; align-items: center; }
+  .shop-filters-secondary > select { flex: 1 1 120px; }
+  .shop-active-filters { display: none; }
+  .skills-toolbar > .segmented { flex: 1 1 100%; }
+}
