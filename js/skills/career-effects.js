@@ -1,6 +1,7 @@
 import { cache, getSkill, getItem } from '../core/cache.js'
 import { characterWieldsWeaponKind } from '../items/equipment.js'
 import { willQuickDrawActivate } from '../combat/quick-draw.js'
+import { getSkillRank, rankStaminaCost } from './skill-ranks.js'
 
 function getEffectDefinition(effectId) {
   return cache.effectDefinitions?.[effectId] || null
@@ -161,7 +162,9 @@ export function getCareerStaminaDiscount(character, skill) {
 export function getEffectiveSkillStaminaCost(character, skill) {
   const careerDiscount = getCareerStaminaDiscount(character, skill)
   const quickDrawDiscount = willQuickDrawActivate(character, skill) ? 1 : 0
-  return Math.max(0, Number(skill?.staminaCost || 0) - careerDiscount - quickDrawDiscount)
+  const trained = rankStaminaCost(Number(skill?.staminaCost || 0), getSkillRank(character, skill?.id))
+  if (trained <= 0) return 0
+  return Math.max(0, trained - careerDiscount - quickDrawDiscount)
 }
 
 export function resolveCareerActionBuffs(skill) {

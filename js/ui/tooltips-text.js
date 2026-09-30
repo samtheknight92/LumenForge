@@ -36,6 +36,7 @@ import { resolveItemPresentation, itemGmTooltipLines } from '../items/item-prese
 import { isUnidentifiedCatalogItem } from '../items/unidentified-items.js'
 import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
 import { willQuickDrawActivate } from '../combat/quick-draw.js'
+import { getSkillRank, rankStatusChance, rankBonusSummary } from '../skills/skill-ranks.js'
 
 export function itemTooltip(item, character = null, entry = null) {
   if (!item) return ''
@@ -143,6 +144,7 @@ export function skillTooltip(skill, character = null) {
     `Cost: ${skill.cost || 0} Lumens · Stamina: ${character ? getEffectiveSkillStaminaCost(character, skill) : Number(skill.staminaCost || 0)}`
   ]
   if (skill.desc) lines.push('', skill.desc)
+  if (owned && getSkillRank(character, skill.id) > 1) lines.push('', rankBonusSummary(getSkillRank(character, skill.id)))
   if (character && willQuickDrawActivate(character, skill)) {
     lines.push('', 'Quick Draw ready: Advantage + −1 Stamina on this attack')
   }
@@ -167,7 +169,8 @@ export function skillTooltip(skill, character = null) {
     lines.push(...preview.map(entry => {
       const effect = cache.effectDefinitions[entry.effectId]
       const label = effect?.name || entry.effectId
-      const chance = entry.chance < 1 ? ` · ${Math.round(entry.chance * 100)}% chance` : ''
+      const trained = owned ? rankStatusChance(entry.chance, getSkillRank(character, skill.id)) : entry.chance
+      const chance = trained < 1 ? ` · ${Math.round(trained * 100)}% chance` : ''
       return `• ${label} (${entry.duration} turn${entry.duration === 1 ? '' : 's'})${chance}`
     }))
   }

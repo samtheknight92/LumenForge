@@ -197,6 +197,10 @@ export function renderHowToPlayTab() {
       'Learn skills when you have enough Lumens and meet requirements. Use <strong>Focused</strong> to see trees that match your race, weapon, and started paths, or <strong>Browse All</strong> for the full catalogue. Search always looks everywhere and marks results outside Focused. <strong>Ascension</strong> (~20 breakthroughs, hidden until you qualify — T3 Lv10 · T4 Lv15 · T5 Lv22). <strong>Ultimate</strong> splits into Rare Legends, Weapon Mastery, and Element Mastery — T5 Lv22 · T6 Lv30.'
     ),
     tip(
+      'Skill ranks',
+      'Every skill you can use (not passives) can be trained from <strong>Rank 1</strong> up to <strong>Rank 10</strong> with the <strong>Rank up</strong> button on its card. Each rank costs more than the last (a 20L skill costs 20L, then 30L, 40L… up to 100L for Rank 10) and adds <strong>half a Skill Level</strong>. Each rank above 1 gives <strong>+1 damage</strong> and <strong>+5% status chance</strong> (max 95%), with an extra <strong>+1d6</strong> damage at Ranks 3, 6 and 9. Rank 5 costs 1 less Stamina, and <strong>Rank 10 is mastered: no Stamina cost</strong>. The − button undoes a rank for a full refund.'
+    ),
+    tip(
       'Notes tab',
       'Your private scratch pad plus the term dictionary for statuses and damage types.'
     ),

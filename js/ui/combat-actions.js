@@ -77,6 +77,14 @@ import {
   isDead
 } from '../character/knockout.js'
 import { touch } from './action-helpers.js'
+import {
+  MAX_SKILL_RANK,
+  getSkillRank,
+  rankUpCost,
+  totalRankSpend,
+  rankStatusChance,
+  rankBonusSummary
+} from '../skills/skill-ranks.js'
 
 export function learnSkill(skillId) {
   const character = activeCharacter()
@@ -100,7 +108,9 @@ export function refundSkill(skillId) {
     : []
   character.skills = character.skills.filter(id => id !== skill.id && !stripCrossCultural.includes(id))
   character.activeToggles = character.activeToggles.filter(id => id !== skill.id && !stripCrossCultural.includes(id))
-  if (!isGmMode()) character.lumens += skill.cost
+  const rankSpend = totalRankSpend(skill, getSkillRank({ ...character, skills: [skill.id] }, skill.id))
+  for (const id of [skill.id, ...stripCrossCultural]) delete character.skillRanks?.[id]
+  if (!isGmMode()) character.lumens += skill.cost + rankSpend
   const computed = computeStats(character)
   character.hp = clamp(character.hp, 0, computed.hp)
   character.stamina = clamp(character.stamina, 0, computed.stamina)
@@ -110,6 +120,42 @@ export function refundSkill(skillId) {
     return
   }
   toast(`${skill.name} refunded.`)
+}
+
+/** Why this learned skill can't be ranked up right now ('' when it can). */
+export function rankUpBlockReason(character, skill) {
+  if (!character || !skill || !character.skills.includes(skill.id)) return 'Learn it first'
+  if (getSkillActivationType(skill) === 'passive') return 'Passive skills don\'t rank'
+  const rank = getSkillRank(character, skill.id)
+  if (rank >= MAX_SKILL_RANK) return 'Mastered'
+  if (!isGmMode() && character.lumens < rankUpCost(skill, rank + 1)) return 'Not enough lumens'
+  return ''
+}
+
+export function rankUpSkill(skillId) {
+  const character = activeCharacter()
+  const skill = getSkill(skillId)
+  const blocked = rankUpBlockReason(character, skill)
+  if (blocked) return toast(blocked)
+  const next = getSkillRank(character, skill.id) + 1
+  if (!isGmMode()) character.lumens -= rankUpCost(skill, next)
+  character.skillRanks = { ...(character.skillRanks || {}), [skill.id]: next }
+  touch(character)
+  toast(next >= MAX_SKILL_RANK
+    ? `${skill.name} mastered! Rank ${next}: no Stamina cost.`
+    : `${skill.name} trained. ${rankBonusSummary(next)}`)
+}
+
+export function rankDownSkill(skillId) {
+  const character = activeCharacter()
+  const skill = getSkill(skillId)
+  const rank = getSkillRank(character, skill?.id)
+  if (!character || !skill || rank < 2) return
+  if (!isGmMode()) character.lumens += rankUpCost(skill, rank)
+  if (rank - 1 <= 1) delete character.skillRanks[skill.id]
+  else character.skillRanks = { ...character.skillRanks, [skill.id]: rank - 1 }
+  touch(character)
+  toast(`${skill.name} back to Rank ${rank - 1}.`)
 }
 
 export function toggleSkill(skillId) {
@@ -230,12 +276,13 @@ export function useSkill(skillId) {
   for (const payload of activations) {
     const effect = getEffect(payload.effectId)
     if (!effect) continue
-    const procRoll = rollSkillProc(payload.chance ?? 1)
+    const chance = rankStatusChance(payload.chance, getSkillRank(character, skill.id))
+    const procRoll = rollSkillProc(chance ?? 1)
     const applyToTarget = payload.applyTo === 'target'
     const applyToSelf = payload.applyTo === 'self'
     if (!applyToSelf && (applyToTarget || isTargetFacingEffect(effect))) {
-      const pct = payload.chance != null && payload.chance < 1
-        ? `${Math.round(payload.chance * 100)}% `
+      const pct = chance != null && chance < 1
+        ? `${Math.round(chance * 100)}% `
         : ''
       if (procRoll) {
         targetProcs.push(
