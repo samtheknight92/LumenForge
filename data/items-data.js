@@ -2844,7 +2844,7 @@ const ITEMS_DATA = {
                 "heal_3"
             ],
             "desc": "Aged cheese. Restores 3 HP and 2 Stamina when consumed. GRANTS: Heal 3, Restore Stamina 2.",
-            "icon": "ï¿½",
+            "icon": "🧀",
             "price": {
                 "copper": 8
             },
