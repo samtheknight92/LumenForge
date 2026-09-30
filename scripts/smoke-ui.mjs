@@ -187,6 +187,25 @@ await test('stats tab: upgrade, refund and resource editor', async page => {
   await page.waitForFunction(before => document.querySelector('#coin-pill').innerText !== before, gil)
 })
 
+await test('character tab: equip gear, add and remove effects and weather', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="shop"]')
+  await page.fill('#item-search', 'dagger')
+  await assertText(page, '.item-card strong', 'Bronze Dagger')
+  await page.locator('.item-card', { hasText: 'Bronze Dagger' }).locator('[data-buy-item]').click()
+  await page.locator('#toast', { hasText: 'Bronze Dagger bought' }).waitFor()
+  await page.click('#tabbar [data-tab="character"]')
+  await page.locator('#app-content [data-equip-item]').first().click()
+  await page.locator('#app-content [data-unequip]').first().waitFor()
+  await page.click('#app-content [data-add-effect]')
+  await page.locator('#app-content [data-remove-effect]').first().waitFor()
+  await page.click('#app-content [data-add-weather]')
+  await page.locator('#app-content [data-remove-weather]').first().waitFor()
+  await page.locator('#app-content [data-remove-effect]').first().click()
+  await page.waitForFunction(() => !document.querySelector('#app-content [data-remove-effect]'))
+})
+
 await test('folder can be created and persists', async page => {
   await open(page)
   await createCharacter(page)
