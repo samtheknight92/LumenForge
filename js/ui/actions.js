@@ -2,7 +2,7 @@ import { DEFAULT_STATS, STAT_RULES, SAVE_VERSION, HOMEBREW_ID_PREFIX, TIER_LUMEN
 import { resolveSkillUseDamage } from '../homebrew/homebrew-combat.js'
 import { getMaxStatReward } from '../character/max-stat-rewards.js'
 import { state, activeCharacter } from '../core/state.js'
-import { save, saveNow, serializeSave, applySavePayload, isFullSaveExport } from '../core/storage.js'
+import { save, saveNow, serializeSave, applySavePayload, isFullSaveExport, recordFullExport } from '../core/storage.js'
 import { flushPendingCharacterEdits } from '../core/pending-edits.js'
 import { render } from './render.js'
 import { toast, toastCombat, clamp, deepClone, uid, titleCase } from '../core/utils.js'
@@ -1249,6 +1249,7 @@ export function exportData(all = true) {
   if (all) {
     const payload = serializeSave()
     downloadJson(payload, 'lumenforge-save.json')
+    recordFullExport()
     return
   }
   const character = activeCharacter()

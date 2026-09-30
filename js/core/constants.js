@@ -2,6 +2,12 @@ export const SAVE_VERSION = 3
 export const STORAGE_KEY = 'lumenforge_save_v3'
 export const LEGACY_V2_STORAGE_KEY = 'lumenforge_save_v2'
 export const LEGACY_STORAGE_KEY = 'lumenforge_characters_v1'
+/** Copy of a save that failed to load, kept so autosave never overwrites the only copy. */
+export const UNREADABLE_SAVE_BACKUP_KEY = 'lumenforge_save_v3_unreadable'
+/** Timestamps (ms) used by the export-backup reminder. */
+export const LAST_FULL_EXPORT_KEY = 'lumenforge_last_full_export'
+export const FIRST_SEEN_KEY = 'lumenforge_first_seen'
+export const EXPORT_REMINDER_DAYS = 7
 export const LEGACY_ACTIVE_KEY = 'lumenforge_active_character_v1'
 /** Legacy item prices still use gold/silver/copper — 1 gil = 1 copper equivalent. */
 export const CURRENCY_RATE = { gold: 2500, silver: 100, copper: 1 }

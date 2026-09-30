@@ -1,4 +1,4 @@
-import { SAVE_VERSION, STORAGE_KEY, LEGACY_V2_STORAGE_KEY, LEGACY_STORAGE_KEY, LEGACY_ACTIVE_KEY, RETIRED_SKILL_SUBCATEGORIES } from './constants.js'
+import { SAVE_VERSION, STORAGE_KEY, LEGACY_V2_STORAGE_KEY, LEGACY_STORAGE_KEY, LEGACY_ACTIVE_KEY, RETIRED_SKILL_SUBCATEGORIES, UNREADABLE_SAVE_BACKUP_KEY, LAST_FULL_EXPORT_KEY, FIRST_SEEN_KEY, EXPORT_REMINDER_DAYS } from './constants.js'
 import { state } from './state.js'
 import { applyFusionNavigationState, parseFusionFiltersFromUrl } from '../skills/fusion-nav.js'
 import { debounce, toast } from './utils.js'
@@ -239,8 +239,21 @@ export function applySavePayload(parsed, { replace = false } = {}) {
   }
 }
 
+/** True when a save failed to load and could not be backed up — autosave stays off so it cannot overwrite it. */
+let autosavePaused = false
+let lastSaveErrorToastAt = 0
+
 function writeSave() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeSave()))
+  if (autosavePaused) return
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeSave()))
+  } catch (error) {
+    console.error(error)
+    const now = Date.now()
+    if (now - lastSaveErrorToastAt < 60000) return
+    lastSaveErrorToastAt = now
+    toast('Autosave failed, probably because browser storage is full. Use Export Save in the sidebar now so nothing is lost.', { combat: true })
+  }
 }
 
 export const save = debounce(writeSave, 300)
@@ -250,8 +263,10 @@ export function saveNow() {
 }
 
 export function load() {
+  let unreadableRaw = null
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
+    unreadableRaw = raw || localStorage.getItem(LEGACY_V2_STORAGE_KEY)
     if (raw) {
       const parsed = JSON.parse(raw)
       if (parsed.version === SAVE_VERSION || parsed.version === 2) {
@@ -277,7 +292,59 @@ export function load() {
     console.error(error)
     state.characters = []
     state.activeId = null
+    preserveUnreadableSave(unreadableRaw)
+  }
+}
+
+/**
+ * A save that fails to load must never be overwritten by the next autosave.
+ * Copy it aside (or pause autosave if that fails) and offer it as a download.
+ */
+function preserveUnreadableSave(raw) {
+  if (!raw) {
     toast('Save data could not be loaded, so I started clean.')
+    return
+  }
+  let backedUp = false
+  try {
+    localStorage.setItem(UNREADABLE_SAVE_BACKUP_KEY, raw)
+    backedUp = true
+  } catch (error) {
+    console.error(error)
+    autosavePaused = true
+  }
+  const url = URL.createObjectURL(new Blob([raw], { type: 'application/json' }))
+  const download = `<a href="${url}" download="lumenforge-unreadable-save.json">Download the old save</a>`
+  const detail = backedUp
+    ? 'A copy was kept in this browser.'
+    : 'Autosave is paused this session so it is not overwritten.'
+  toast(`Your save could not be loaded. ${detail} ${download} and keep it safe.`, { combat: true, html: true })
+}
+
+/** Called after a full-save export so the backup reminder resets. */
+export function recordFullExport() {
+  try {
+    localStorage.setItem(LAST_FULL_EXPORT_KEY, String(Date.now()))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+/** Nudge players to export when their only copy has lived in this browser for a while. */
+export function remindToExportIfStale() {
+  if (!state.characters.length) return
+  try {
+    const now = Date.now()
+    const firstSeen = Number(localStorage.getItem(FIRST_SEEN_KEY)) || 0
+    if (!firstSeen) localStorage.setItem(FIRST_SEEN_KEY, String(now))
+    const lastExport = Number(localStorage.getItem(LAST_FULL_EXPORT_KEY)) || 0
+    const since = lastExport || firstSeen || now
+    const days = Math.floor((now - since) / 86400000)
+    if (days < EXPORT_REMINDER_DAYS) return
+    const when = lastExport ? `It has been ${days} days since your last export.` : 'You have not exported a backup yet.'
+    toast(`${when} Saves only live in this browser, so use Export Save in the sidebar to keep a copy.`, { combat: true })
+  } catch (error) {
+    console.error(error)
   }
 }
 
