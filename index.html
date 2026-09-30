@@ -125,7 +125,7 @@
     <form method="dialog" class="feedback-form">
       <div class="kicker">Feedback</div>
       <h2 id="feedback-title">Tell us what you think</h2>
-      <p class="muted">Found a bug or have an idea? Write it here, then choose how to send it.</p>
+      <p class="muted">Found a bug or have an idea? Write it here and press Send.</p>
       <label>What is it?
         <select name="kind">
           <option value="bug">Something is broken</option>
@@ -136,10 +136,16 @@
       <label>Message
         <textarea name="message" rows="6" maxlength="4000" placeholder="What happened, or what would you like?"></textarea>
       </label>
+      <label>Your name (optional)
+        <input type="text" name="name" class="input" maxlength="80" autocomplete="name" />
+      </label>
+      <label>Your email (optional, only if you'd like a reply)
+        <input type="email" name="email" class="input" maxlength="120" autocomplete="email" />
+      </label>
+      <input type="checkbox" name="botcheck" class="feedback-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
       <label class="feedback-check"><input type="checkbox" name="includeInfo" checked /> Include the app version, current tab and browser (no character data)</label>
       <div class="feedback-actions">
-        <button type="button" class="primary-btn" data-feedback-send="github">Send via GitHub</button>
-        <button type="button" class="ghost-btn" data-feedback-send="email">Send by email</button>
+        <button type="button" class="primary-btn" data-feedback-send="submit">Send</button>
         <button type="button" class="ghost-btn" data-feedback-send="copy">Copy text</button>
         <button type="button" class="ghost-btn" data-feedback-cancel>Cancel</button>
       </div>

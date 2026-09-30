@@ -30,3 +30,4 @@
 .feedback-form textarea { resize: vertical; }
 .feedback-form .feedback-check { flex-direction: row; align-items: flex-start; gap: 8px; font-size: .9em; }
 .feedback-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.feedback-form .feedback-botcheck { display: none; }

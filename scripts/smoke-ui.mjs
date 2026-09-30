@@ -258,24 +258,34 @@ await test('gm tools: activate GM mode, spawn a premade and build a monster', as
   await page.waitForFunction(n => window.LumenForge.state.characters.length > n, afterSpawn)
 })
 
-await test('feedback button builds a pre-filled GitHub issue', async page => {
+await test('feedback form sends to Web3Forms and falls back on failure', async page => {
+  const posts = []
+  let fail = false
+  await page.route('https://api.web3forms.com/submit', route => {
+    posts.push(JSON.parse(route.request().postData()))
+    return route.fulfill({ status: fail ? 500 : 200, contentType: 'application/json', body: JSON.stringify({ success: !fail }) })
+  })
   await open(page)
-  await page.evaluate(() => { window.open = url => { window.__openedUrl = url } })
   await page.click('#open-feedback')
   await page.selectOption('#feedback-dialog select[name="kind"]', 'idea')
   await page.fill('#feedback-dialog textarea', 'Add a dice tray')
-  await page.click('[data-feedback-send="github"]')
-  const url = new URL(await page.evaluate(() => window.__openedUrl))
-  assert.equal(url.origin + url.pathname, 'https://github.com/samtheknight92/LumenForge/issues/new')
-  assert.equal(url.searchParams.get('title'), 'Idea: Add a dice tray')
-  assert.match(url.searchParams.get('body'), /^Add a dice tray\n\n---\nApp: LumenForge/)
+  await page.fill('#feedback-dialog input[name="email"]', 'player@example.com')
+  await page.click('[data-feedback-send="submit"]')
+  await assertText(page, '#toast', 'Thanks! Your feedback was sent.')
+  assert.equal(posts.length, 1)
+  assert.equal(posts[0].access_key, 'a2188469-57f5-4dc3-81c7-e84bbf76f983')
+  assert.equal(posts[0].subject, 'LumenForge Idea: Add a dice tray')
+  assert.equal(posts[0].email, 'player@example.com')
+  assert.match(posts[0].message, /^Add a dice tray\n\n---\nApp: LumenForge/)
   assert.equal(await page.locator('#feedback-dialog').isVisible(), false)
 
+  fail = true
   await page.click('#open-feedback')
-  await page.fill('#feedback-dialog textarea', 'Shop search is slow')
-  await page.click('[data-feedback-send="email"]')
-  const mail = await page.evaluate(() => window.__openedUrl)
-  assert.match(mail, /^mailto:lumenforge\.feedback@gmail\.com\?subject=LumenForge%20Bug%3A%20Shop%20search%20is%20slow&body=/)
+  await page.fill('#feedback-dialog textarea', 'Second try')
+  await page.click('[data-feedback-send="submit"]')
+  await assertText(page, '#toast', 'Could not send right now')
+  assert.equal(await page.locator('#feedback-dialog').isVisible(), true)
+  assert.equal(await page.inputValue('#feedback-dialog textarea'), 'Second try')
 })
 
 await test('folder can be created and persists', async page => {

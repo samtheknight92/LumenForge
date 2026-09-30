@@ -121,7 +121,7 @@ These commands rebuild generated JSON, validate content references, run project 
 
 ### Player feedback
 
-The sidebar's **Send Feedback** button opens a short form. Players can send it as a pre-filled GitHub issue, by email to `FEEDBACK_EMAIL` (set in `js/core/constants.js`, currently lumenforge.feedback@gmail.com), or copy the text. Blanking `FEEDBACK_EMAIL` hides the email option.
+The sidebar's **Send Feedback** button opens a short form. Pressing **Send** posts it to [Web3Forms](https://web3forms.com), which emails it to `FEEDBACK_EMAIL` (lumenforge.feedback@gmail.com). Players never leave the app. The access key in `js/core/constants.js` is public by design. If sending fails, the player can use **Copy text** instead.
 
 ### Automatic checks
 

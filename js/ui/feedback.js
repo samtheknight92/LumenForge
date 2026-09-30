@@ -1,21 +1,25 @@
 /**
- * Sidebar "Send Feedback" dialog. There is no server, so sending opens a
- * pre-filled GitHub issue or the player's email app; "Copy" is the fallback.
+ * Sidebar "Send Feedback" dialog. The static site has no server, so the form
+ * posts to Web3Forms, which emails it to FEEDBACK_EMAIL. "Copy text" is the
+ * fallback when sending fails.
  */
-import { FEEDBACK_ISSUES_URL, FEEDBACK_EMAIL } from '../core/constants.js'
+import { FEEDBACK_ENDPOINT, FEEDBACK_ACCESS_KEY, FEEDBACK_EMAIL } from '../core/constants.js'
 import { state } from '../core/state.js'
 import { toast } from '../core/utils.js'
 
 const APP_LABEL = 'LumenForge v5 (build 5.2.2)'
-// Browsers and GitHub cap URL length; keep the message well under it.
 const MAX_MESSAGE_LENGTH = 4000
 const KIND_LABELS = { bug: 'Bug', idea: 'Idea', other: 'Feedback' }
 
 function readForm(form) {
   const kind = KIND_LABELS[form.elements.kind.value] ? form.elements.kind.value : 'other'
-  const message = form.elements.message.value.trim().slice(0, MAX_MESSAGE_LENGTH)
-  const includeInfo = form.elements.includeInfo.checked
-  return { kind, message, includeInfo }
+  return {
+    kind,
+    message: form.elements.message.value.trim().slice(0, MAX_MESSAGE_LENGTH),
+    name: form.elements.name.value.trim(),
+    email: form.elements.email.value.trim(),
+    includeInfo: form.elements.includeInfo.checked
+  }
 }
 
 export function buildFeedback({ kind, message, includeInfo }, context = {}) {
@@ -29,27 +33,35 @@ export function buildFeedback({ kind, message, includeInfo }, context = {}) {
   return { title, body: lines.join('\n') }
 }
 
-export function githubIssueUrl(feedback) {
-  const params = new URLSearchParams({ title: feedback.title, body: feedback.body })
-  return `${FEEDBACK_ISSUES_URL}?${params}`
+/** The JSON Web3Forms expects; `email` becomes the reply-to address when given. */
+export function buildSubmission(fields, context = {}) {
+  const feedback = buildFeedback(fields, context)
+  const payload = {
+    access_key: FEEDBACK_ACCESS_KEY,
+    subject: `LumenForge ${feedback.title}`,
+    from_name: fields.name || 'LumenForge player',
+    message: feedback.body
+  }
+  if (fields.email) payload.email = fields.email
+  return payload
 }
 
-export function mailtoUrl(feedback, address = FEEDBACK_EMAIL) {
-  const params = new URLSearchParams({ subject: `LumenForge ${feedback.title}`, body: feedback.body })
-  // mailto wants %20 for spaces, not +.
-  return `mailto:${address}?${params.toString().replace(/\+/g, '%20')}`
-}
-
-function currentFeedback(form) {
-  return buildFeedback(readForm(form), { tab: state.tab, userAgent: navigator.userAgent })
+async function submitFeedback(payload) {
+  const response = await fetch(FEEDBACK_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  const result = await response.json().catch(() => ({}))
+  if (!response.ok || !result.success) throw new Error(result.message || `HTTP ${response.status}`)
 }
 
 export function setupFeedback() {
   const dialog = document.querySelector('#feedback-dialog')
   const form = dialog?.querySelector('form')
   if (!dialog || !form) return
-  const emailButton = form.querySelector('[data-feedback-send="email"]')
-  if (emailButton) emailButton.hidden = !FEEDBACK_EMAIL
+  const sendButton = form.querySelector('[data-feedback-send="submit"]')
+  const context = () => ({ tab: state.tab, userAgent: navigator.userAgent })
 
   document.querySelector('#open-feedback')?.addEventListener('click', () => {
     dialog.showModal()
@@ -63,29 +75,45 @@ export function setupFeedback() {
       dialog.close()
       return
     }
-    const target = button.dataset.feedbackSend
-    if (!target) return
+    const action = button.dataset.feedbackSend
+    if (!action) return
     event.preventDefault()
     if (!form.elements.message.value.trim()) {
       toast('Write a message first.')
       form.elements.message.focus()
       return
     }
-    const feedback = currentFeedback(form)
-    if (target === 'copy') {
+    const fields = readForm(form)
+    if (action === 'copy') {
+      const feedback = buildFeedback(fields, context())
       try {
         await navigator.clipboard.writeText(`${feedback.title}\n\n${feedback.body}`)
-        toast('Feedback copied. Paste it wherever you talk to your GM.')
+        toast(`Feedback copied. You can paste it into an email to ${FEEDBACK_EMAIL}.`)
       } catch {
         toast('Could not copy automatically. Select the message and copy it by hand.')
       }
       return
     }
-    const url = target === 'email' ? mailtoUrl(feedback) : githubIssueUrl(feedback)
-    window.open(url, '_blank', 'noopener')
-    form.reset()
-    dialog.close()
-    toast(target === 'email' ? 'Opening your email app...' : 'Opening GitHub. Press "Create" there to send it.')
+    // Hidden field only bots fill in; pretend it worked.
+    if (form.elements.botcheck.checked) {
+      form.reset()
+      dialog.close()
+      return
+    }
+    sendButton.disabled = true
+    sendButton.textContent = 'Sending...'
+    try {
+      await submitFeedback(buildSubmission(fields, context()))
+      form.reset()
+      dialog.close()
+      toast('Thanks! Your feedback was sent.')
+    } catch (error) {
+      console.warn('Feedback send failed', error)
+      toast(`Could not send right now. Use Copy text and email it to ${FEEDBACK_EMAIL}.`)
+    } finally {
+      sendButton.disabled = false
+      sendButton.textContent = 'Send'
+    }
   })
 
   // Clicking the dimmed area outside the card closes the dialog.

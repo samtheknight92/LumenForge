@@ -189,6 +189,10 @@ export const RETIRED_SKILL_SUBCATEGORIES = {
   career_fusion: 'career_fusions'
 }
 
-/** Where the sidebar "Send Feedback" button sends players. Leave the email blank to hide that option. */
-export const FEEDBACK_ISSUES_URL = 'https://github.com/samtheknight92/LumenForge/issues/new'
+/**
+ * The sidebar "Send Feedback" form posts to Web3Forms, which emails it to FEEDBACK_EMAIL.
+ * The access key is public by design (it only allows sending to that inbox).
+ */
+export const FEEDBACK_ENDPOINT = 'https://api.web3forms.com/submit'
+export const FEEDBACK_ACCESS_KEY = 'a2188469-57f5-4dc3-81c7-e84bbf76f983'
 export const FEEDBACK_EMAIL = 'lumenforge.feedback@gmail.com'
