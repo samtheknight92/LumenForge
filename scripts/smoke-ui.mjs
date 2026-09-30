@@ -124,6 +124,18 @@ await test('play tab: basic attack toast, HP buttons and Process Turn', async pa
   await page.locator('#app-content [data-process-turn]').first().click()
 })
 
+await test('bottom bar: HP minus and Full refill', async page => {
+  await open(page)
+  await createCharacter(page)
+  const hp = () => page.locator('#action-bar .action-bar-meter-hp .action-bar-meter-value').innerText()
+  const full = await hp()
+  await page.click('#action-bar [data-adjust-resource="hp"][data-amount="-1"]')
+  await page.waitForFunction(before => document.querySelector('#action-bar .action-bar-meter-hp .action-bar-meter-value').innerText !== before, full)
+  await page.click('#action-bar [data-full-resource="hp"]')
+  await page.waitForFunction(expected => document.querySelector('#action-bar .action-bar-meter-hp .action-bar-meter-value').innerText === expected, full)
+  assert.ok(await page.locator('#action-bar [data-full-resource="hp"]').isDisabled(), 'Full stays clickable at max HP')
+})
+
 await test('notes tab: pages, quests and glossary search', async page => {
   await open(page)
   await createCharacter(page)

@@ -1,0 +1,264 @@
+/*
+ * 2026 refresh — brighter, playful, tighter.
+ * Loaded last so it layers on top of the older sheets. Colours that only make
+ * sense on a dark background are scoped to html[data-appearance="dark"].
+ */
+
+@font-face {
+  font-family: 'Fredoka';
+  font-weight: 500 700;
+  font-display: swap;
+  src: url(../fonts/fredoka-latin.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-weight: 500 800;
+  font-display: swap;
+  src: url(../fonts/nunito-latin.woff2) format('woff2');
+}
+
+:root {
+  --display: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  --sans: 'Nunito', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --pop-pink: #ff5fa2;
+  --pop-orange: #ffa53d;
+  --pop-yellow: #ffd84d;
+  --pop-green: #3ee39a;
+  --pop-cyan: #3fd4ff;
+  --pop-purple: #9b7bff;
+}
+
+/* Default theme: deep indigo with colourful glows instead of near-black */
+html[data-appearance="dark"][data-theme="midnight"] {
+  --body-glow-1: rgba(120, 90, 255, 0.45);
+  --body-glow-2: rgba(255, 95, 162, 0.28);
+  --body-glow-3: rgba(63, 212, 255, 0.25);
+  --body-glow-4: rgba(62, 227, 154, 0.16);
+  --body-gradient-top: #120f33;
+  --body-gradient-mid: #0d1433;
+  --body-gradient-bottom: #0a0f26;
+  --panel-bg-top: rgba(22, 24, 64, 0.82);
+  --panel-bg-bottom: rgba(14, 16, 44, 0.82);
+  --surface-card-top: rgba(38, 42, 98, 0.72);
+  --surface-card-bottom: rgba(26, 28, 72, 0.72);
+  --surface-row-top: rgba(50, 54, 120, 0.55);
+  --surface-row-bottom: rgba(30, 32, 82, 0.6);
+}
+
+body { font-family: var(--sans); font-size: 14px; }
+
+/* ---------- Headings ---------- */
+.brand-block h1,
+.current-hero h2,
+.card h3,
+.notice-card h2,
+.tier-lane > h3,
+.create-card h2,
+.side-section h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.brand-block h1 {
+  font-size: 1.15rem;
+  background: linear-gradient(90deg, var(--pop-orange), var(--pop-pink) 55%, var(--pop-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.brand-block p { display: none; }
+.current-hero h2 { font-size: 1.15rem; }
+.current-hero p { font-size: 11.5px; }
+.card h3 { font-size: 1rem; }
+.kicker {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--pop-cyan);
+}
+html[data-appearance="light"] .kicker { color: #0a84b8; }
+
+/* ---------- Layout density ---------- */
+.app-shell { padding: 6px; gap: 8px; }
+@media (min-width: 901px) {
+  .app-shell { grid-template-columns: 240px minmax(0, 1fr); }
+  .sidebar { top: 6px; height: calc(100vh - 12px); }
+}
+.sidebar { padding: 8px; }
+.sidebar, .main-panel { border-radius: 22px; }
+.brand-block { padding: 2px 2px 6px; margin-bottom: 6px; grid-template-columns: 32px 1fr; gap: 8px; }
+.brand-mark { width: 32px; height: 32px; font-size: 16px; border-radius: 10px; }
+.appearance-btn { padding: 3px 8px; font-size: 11px; }
+
+.card,
+.create-card,
+.side-section,
+.side-actions,
+.notice-card {
+  padding: 9px 11px;
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+html[data-appearance="dark"] :is(.card, .create-card, .side-section, .side-actions, .notice-card) {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.create-card, .side-section, .side-actions { margin-bottom: 6px; }
+.content { padding: 8px 10px; }
+.mt-8 { margin-top: 5px; }
+.mt-12 { margin-top: 7px; }
+.mt-16 { margin-top: 8px; }
+
+.field-label { margin: 6px 0 3px; font-size: 10px; }
+.input { padding: 6px 10px; min-height: 32px; font-size: 14px; border-radius: 10px; }
+.create-preview { font-size: 12px; margin: 4px 0 6px; }
+.card p, .subtle { font-size: 13px; line-height: 1.4; }
+.pill { padding: 2px 8px; font-size: 11.5px; }
+
+/* ---------- Buttons ---------- */
+.primary-btn,
+.ghost-btn {
+  font-family: var(--display);
+  border-radius: 12px;
+  padding: 6px 12px;
+  min-height: 32px;
+  font-size: 14px;
+}
+.primary-btn { font-weight: 600; }
+.ghost-btn { font-weight: 500; }
+.primary-btn.full, .ghost-btn.full { min-height: 34px; }
+.primary-btn.tiny, .ghost-btn.tiny { padding: 3px 9px; min-height: 26px; font-size: 12.5px; }
+.primary-btn {
+  border: 0;
+  color: #fff;
+  background: linear-gradient(180deg, #ff7ab6, var(--pop-pink));
+  box-shadow: 0 3px 0 #b8306d, 0 6px 16px rgba(255, 95, 162, 0.3);
+}
+.primary-btn:hover { filter: brightness(1.06); }
+.primary-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 #b8306d; }
+
+/* ---------- Top bar ---------- */
+.topbar { padding: 6px 10px; gap: 8px; }
+.avatar { width: 38px; height: 38px; font-size: 20px; }
+/* Health & Stamina live in the bottom bar; the top bar keeps Lumens and Gil */
+.resource-strip .resource-hp,
+.resource-strip .resource-stamina { display: none; }
+.resource-strip { flex-wrap: nowrap; }
+.resource {
+  position: relative;
+  border: 0;
+  border-radius: 999px;
+  padding: 3px 12px 3px 32px;
+  min-height: 0;
+  background: rgba(255, 255, 255, 0.08);
+}
+html[data-appearance="light"] .resource { background: rgba(15, 23, 42, 0.06); }
+.resource span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.resource strong { font-family: var(--display); font-size: 15px; font-weight: 600; }
+.resource::before {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 900;
+}
+.resource-lumens::before { content: "✦"; background: radial-gradient(circle at 35% 30%, #fff, var(--pop-cyan) 55%); color: #04304a; }
+.resource-gil::before { content: "G"; background: radial-gradient(circle at 35% 30%, #fff, var(--pop-yellow) 55%); color: #5a3a00; }
+
+/* ---------- Tabs: each its own colour and icon ---------- */
+.tabbar { gap: 4px; padding: 5px 10px; }
+.tabbar button {
+  --c: var(--pop-cyan);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  padding: 4px 11px;
+  min-height: 30px;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 13.5px;
+}
+html[data-appearance="dark"] .tabbar button { background: rgba(255, 255, 255, 0.06); color: #dfe4ff; }
+.tabbar button::before { margin-right: 5px; }
+.tabbar button:hover { border-color: var(--c); }
+.tabbar button.active,
+html[data-appearance="dark"] .tabbar button.active {
+  background: var(--c);
+  border-color: var(--c);
+  color: #120f33;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 55%, #000), 0 6px 16px color-mix(in srgb, var(--c) 40%, transparent);
+}
+.tabbar [data-tab="character"] { --c: var(--pop-purple); }
+.tabbar [data-tab="play"] { --c: var(--pop-pink); }
+.tabbar [data-tab="skills"] { --c: var(--pop-yellow); }
+.tabbar [data-tab="stats"] { --c: var(--pop-green); }
+.tabbar [data-tab="shop"] { --c: var(--pop-orange); }
+.tabbar [data-tab="craft"] { --c: var(--pop-orange); }
+.tabbar [data-tab="homebrew"] { --c: var(--pop-green); }
+.tabbar [data-tab="gm"] { --c: var(--pop-purple); }
+.tabbar [data-tab="notes"] { --c: var(--pop-yellow); }
+.tabbar [data-tab="howtoplay"] { --c: var(--pop-cyan); }
+.tabbar [data-tab="character"]::before { content: "🧙"; }
+.tabbar [data-tab="play"]::before { content: "⚔️"; }
+.tabbar [data-tab="skills"]::before { content: "✨"; }
+.tabbar [data-tab="stats"]::before { content: "📈"; }
+.tabbar [data-tab="shop"]::before { content: "🛒"; }
+.tabbar [data-tab="craft"]::before { content: "🔨"; }
+.tabbar [data-tab="homebrew"]::before { content: "🧪"; }
+.tabbar [data-tab="gm"]::before { content: "🐉"; }
+.tabbar [data-tab="notes"]::before { content: "📜"; }
+.tabbar [data-tab="howtoplay"]::before { content: "❓"; }
+html[data-appearance="light"] .tabbar button.active { color: #120f33; }
+
+/* ---------- Skill & item cards ---------- */
+.skill-grid, .item-grid { gap: 8px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.skill-card, .item-card { padding: 9px 10px; gap: 5px; border-radius: 12px; }
+
+/* ---------- Bottom bar: the one home for Health & Stamina ---------- */
+html[data-appearance="dark"][data-theme="midnight"] .action-bar-inner {
+  background: linear-gradient(180deg, rgba(40, 36, 100, 0.96), rgba(22, 20, 60, 0.97));
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.action-bar-meter { border-radius: 14px; padding: 5px 8px; }
+.action-bar-meter-label,
+.action-bar-meter-value { font-family: var(--display); font-weight: 600; font-size: 13.5px; }
+.action-bar-meter-value { margin-left: auto; }
+.action-bar-meter-track { height: 10px; border-radius: 999px; }
+.action-bar-meter-hp .action-bar-meter-fill { background: linear-gradient(90deg, #ff3d7f, #ff8fb8); }
+.action-bar-meter-stamina .action-bar-meter-fill { background: linear-gradient(90deg, #1fcf82, #7bf5bf); }
+.action-bar-adjust { width: 30px; height: 30px; min-height: 0; }
+.action-bar-full {
+  margin-left: 6px;
+  padding: 1px 8px;
+  border: 0;
+  border-radius: 999px;
+  font: 600 11px var(--display);
+  background: rgba(255, 255, 255, 0.14);
+  color: inherit;
+}
+.action-bar-full:hover:not(:disabled) { background: rgba(255, 255, 255, 0.24); }
+html[data-appearance="light"] .action-bar-full { background: rgba(15, 23, 42, 0.08); }
+
+@media (max-width: 760px) {
+  .app-shell { padding: 4px; }
+  .current-hero p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .action-bar-adjust { width: 34px; height: 30px; }
+  .action-bar-meter { padding: 4px 6px; }
+  /* Still finger-sized, just less padding */
+  .input, textarea, select, .primary-btn, .ghost-btn, .danger-btn, .chip-btn { padding-top: 7px; padding-bottom: 7px; }
+}
+
+/* ---------- Light mode: fix pale-on-white labels ---------- */
+html[data-appearance="light"] .pill:not(.good):not(.warn):not(.bad):not(.gold) { color: #334155; }
+html[data-appearance="light"] .pill.good { color: #047857; }
+html[data-appearance="light"] .pill.warn { color: #a16207; }
+html[data-appearance="light"] .pill.bad { color: #be123c; }
+html[data-appearance="light"] .action-bar-skills-label { color: #64748b; }
+html[data-appearance="light"] .action-bar-meter-hp .action-bar-meter-label { color: #e11d48; }
+html[data-appearance="light"] .action-bar-meter-stamina .action-bar-meter-label { color: #059669; }
