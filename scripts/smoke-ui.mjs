@@ -206,6 +206,22 @@ await test('character tab: equip gear, add and remove effects and weather', asyn
   await page.waitForFunction(() => !document.querySelector('#app-content [data-remove-effect]'))
 })
 
+await test('skills tab: switch tree, learn, refund and search', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="skills"]')
+  await page.locator('[data-skill-category]').nth(1).click()
+  await page.locator('[data-skill-category].active, [data-skill-category][aria-selected="true"]').first().waitFor()
+  const start = await page.locator('#lumens-pill').innerText()
+  await page.locator('[data-learn-skill]:not([disabled])').first().click()
+  await page.waitForFunction(before => document.querySelector('#lumens-pill').innerText !== before, start)
+  await page.locator('[data-refund-skill]').first().click()
+  await page.waitForFunction(before => document.querySelector('#lumens-pill').innerText === before, start)
+  await page.fill('#skill-search', 'fire')
+  await page.waitForFunction(() => document.querySelectorAll('[data-learn-skill], [data-refund-skill]').length > 0 &&
+    /fire/i.test(document.querySelector('#app-content').innerText))
+})
+
 await test('folder can be created and persists', async page => {
   await open(page)
   await createCharacter(page)
