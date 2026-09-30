@@ -241,6 +241,23 @@ await test('homebrew tab: create a custom item and open each editor', async page
   await assertText(page, '#app-content', 'Smoke Blade')
 })
 
+await test('gm tools: activate GM mode, spawn a premade and build a monster', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="gm"]')
+  await page.locator('#app-content [data-toggle-gm-mode]').first().click()
+  await page.locator('#app-content [data-spawn-premade]').first().waitFor()
+  const count = () => page.evaluate(() => window.LumenForge.state.characters.length)
+  const before = await count()
+  await page.locator('#app-content [data-spawn-premade]').first().click()
+  await page.waitForFunction(n => window.LumenForge.state.characters.length > n, before)
+  const afterSpawn = await count()
+  await page.click('#tabbar [data-tab="gm"]')
+  await page.locator('#app-content [data-randomise-gm-monster]').first().click()
+  await page.locator('#app-content [data-save-gm-monster]').first().click()
+  await page.waitForFunction(n => window.LumenForge.state.characters.length > n, afterSpawn)
+})
+
 await test('folder can be created and persists', async page => {
   await open(page)
   await createCharacter(page)
