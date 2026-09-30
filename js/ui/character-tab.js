@@ -13,7 +13,7 @@ import { isGmMode } from '../gm/gm-mode.js'
 import { renderEffectPill, renderItemCounterControls, renderKnockoutPanel } from './shared-panels.js'
 import { groupedManualEffects, groupedWeatherEffects, effectDurationLabel, effectTypeLabel, effectTone, effectTooltip, effectUsesPotency, effectPotencyLabel, characterEffectSources, statusStatModifiers } from '../effects/effects.js'
 import { weatherGameplayLines } from '../combat/weather-effects.js'
-import { formatCurrency, formatStatModifiers, fallbackIcon } from './format.js'
+import { formatStatModifiers, fallbackIcon } from './format.js'
 import { renderNumberStepper } from './number-stepper.js'
 import { itemTooltip, skillTooltip, statTooltip } from './tooltips-text.js'
 import { resolveItemPresentation, renderCursedBadgeHtml, renderItemStatusIcons, itemCardClass, itemCursedNameClass } from '../items/item-presentation.js'
@@ -218,15 +218,13 @@ function renderEffectsManager(character) {
         <div>
           <div class="kicker">Rules Brain</div>
           <h3>Effects & Status Manager</h3>
-          <p class="effects-manager-intro">Hover any effect to see what it does. Shows ongoing passives from gear, weapon-matched skills, active toggles, max-stat hidden rewards, and resistances — not one-shot attack spells.</p>
+          <p class="effects-manager-intro">Hover any effect to see what it does. Press <strong>Process Turn</strong> at the end of your turn and <strong>New Combat</strong> when a fight starts.</p>
         </div>
         <div class="wrap">
-          <button type="button" class="ghost-btn tiny" data-process-turn title="Press at the End of Turn after you act">Process Turn</button>
-          <button type="button" class="ghost-btn tiny" data-begin-new-combat title="Reset once-per-combat uses like Quick Draw">New Combat</button>
+          <button type="button" class="ghost-btn tiny" data-process-turn title="Press at the End of Turn, after you move, attack or act: applies ticks, then reduces durations">Process Turn</button>
+          <button type="button" class="ghost-btn tiny" data-begin-new-combat title="Press when a fight starts: resets once-per-combat uses (Quick Draw, Encore, Homing Shot, Rage, Feint and similar)">New Combat</button>
         </div>
       </div>
-      <p class="subtle mt-8">Press <strong>Process Turn</strong> at the <strong>End of Turn</strong> — after you move, attack, or act — to apply ticks, then reduce durations. Press <strong>New Combat</strong> when a fight starts to reset once-per-combat uses (Quick Draw, Encore, Homing Shot, Rage, Feint, and similar).</p>
-
       ${renderKnockoutPanel(character)}
 
       <div class="grid two effects-sections">
@@ -240,6 +238,7 @@ function renderEffectsManager(character) {
         </div>
       </div>
 
+      <div class="effect-add-pair">
       <div class="effect-add-box">
         <h3 class="effects-section-title">Add Effect</h3>
         <p class="effect-add-intro">Track combat statuses, skill buffs, and potion effects here. For Temp Strength, Temp Magic, and similar, enter the duration and potency from the item or skill text (e.g. potency 3, 8 turns).</p>
@@ -252,7 +251,7 @@ function renderEffectsManager(character) {
         <button type="button" class="primary-btn full" data-add-effect>Add Effect</button>
       </div>
 
-      <div class="effect-add-box weather-section mt-16">
+      <div class="effect-add-box weather-section">
         <h3 class="effects-section-title">Weather</h3>
         <p class="effect-add-intro">Track scene weather for the party — one scene weather at a time; manual duration like status effects.</p>
         <div class="effect-grid">${weatherCards || '<div class="empty effects-empty">No active weather.</div>'}</div>
@@ -262,6 +261,7 @@ function renderEffectsManager(character) {
           <label><span class="field-label">Notes</span><input class="input" id="weather-notes" placeholder="Optional scene note" /></label>
         </div>
         <button type="button" class="primary-btn full" data-add-weather>Add weather</button>
+      </div>
       </div>
     </section>
   `
@@ -351,21 +351,9 @@ export function renderCharacterTab(character) {
             <div class="progress-bar level-xp-bar"><div class="progress-fill" style="width:${combatPower.pct}%"></div></div>
           </div>
         </div>
-        <div class="wrap mt-14">
-          <span class="pill gold">${character.lumens} Lumens</span>
-          <span class="pill">${formatCurrency(character.gil)}</span>
-          <span class="pill good">${character.hp}/${stats.hp} HP</span>
-          <span class="pill warn">${character.stamina}/${stats.stamina} Stamina</span>
-        </div>
         ${renderEffectsSnapshot(character)}
       </section>
     </div>
-
-    ${renderElementalAffinitySection(character)}
-
-    ${renderEffectsManager(character)}
-
-    ${renderPerformanceBanner(character)}
 
     <div class="grid three char-gear-grid mt-16">
       <section class="card">
@@ -389,6 +377,13 @@ export function renderCharacterTab(character) {
       <h3>Unlocked Skills</h3>
       ${unlocked.length ? `<div class="wrap">${unlocked.map(skill => `<span class="pill ${isToggleSkill(skill) ? 'warn' : 'good'}" data-tooltip="${esc(skillTooltip(skill, character))}" tabindex="0">${esc(skill.icon || '✦')} ${esc(skill.name)}</span>`).join('')}</div>` : '<div class="empty">No skills yet. Time to spend shiny brain-money.</div>'}
     </section>
+
+    ${renderElementalAffinitySection(character)}
+
+    ${renderEffectsManager(character)}
+
+    ${renderPerformanceBanner(character)}
+
   `
 }
 
@@ -476,9 +471,10 @@ function renderInventoryRows(character) {
           ${(item.tags || []).length ? `<div class="wrap inventory-item-tags">${(item.tags || []).map(tag => `<span class="pill subtle-pill">${esc(tag)}</span>`).join('')}</div>` : ''}
           ${renderItemCounterControls(entry, item, { showWhenEquipped: Boolean(equippedSlot) })}
           <div class="subtle inventory-item-desc detail-line">${esc(presentation.displayDesc || 'No description provided.')}</div>
-          <label class="field-label compact mt-12">Your notes
-            <textarea class="input tiny inventory-item-notes" data-entry-player-notes="${esc(entry.uid)}" rows="2" placeholder="Personal notes…">${esc(entry.playerNotes || '')}</textarea>
-          </label>
+          <details class="inventory-item-notes-wrap"${entry.playerNotes ? ' open' : ''}>
+            <summary>📝 Your notes</summary>
+            <textarea class="input tiny inventory-item-notes" data-entry-player-notes="${esc(entry.uid)}" rows="2" placeholder="Personal notes…" aria-label="Your notes">${esc(entry.playerNotes || '')}</textarea>
+          </details>
         </div>
         <div class="wrap inventory-item-actions">
           <button type="button" class="ghost-btn tiny" data-toggle-entry-star="${esc(entry.uid)}" aria-label="Star item">${entry.starred ? '⭐' : '☆'}</button>
