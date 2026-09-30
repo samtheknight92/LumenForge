@@ -276,6 +276,7 @@ await test('feedback form sends to Web3Forms and falls back on failure', async p
   assert.equal(posts[0].access_key, 'a2188469-57f5-4dc3-81c7-e84bbf76f983')
   assert.equal(posts[0].subject, 'LumenForge Idea: Add a dice tray')
   assert.equal(posts[0].email, 'player@example.com')
+  assert.equal(posts[0].name, 'LumenForge player')
   assert.match(posts[0].message, /^Add a dice tray\n\n---\nApp: LumenForge/)
   assert.equal(await page.locator('#feedback-dialog').isVisible(), false)
 
@@ -284,6 +285,7 @@ await test('feedback form sends to Web3Forms and falls back on failure', async p
   await page.fill('#feedback-dialog textarea', 'Second try')
   await page.click('[data-feedback-send="submit"]')
   await assertText(page, '#toast', 'Could not send right now')
+  assert.equal(posts[1].email, 'lumenforge.feedback@gmail.com')
   assert.equal(await page.locator('#feedback-dialog').isVisible(), true)
   assert.equal(await page.inputValue('#feedback-dialog textarea'), 'Second try')
 })

@@ -33,17 +33,22 @@ export function buildFeedback({ kind, message, includeInfo }, context = {}) {
   return { title, body: lines.join('\n') }
 }
 
-/** The JSON Web3Forms expects; `email` becomes the reply-to address when given. */
+/**
+ * The JSON Web3Forms expects. Web3Forms stored but did not email submissions
+ * without `name` and `email`, so both are always sent; with no player email the
+ * reply-to falls back to the feedback inbox itself.
+ */
 export function buildSubmission(fields, context = {}) {
   const feedback = buildFeedback(fields, context)
-  const payload = {
+  const name = fields.name || 'LumenForge player'
+  return {
     access_key: FEEDBACK_ACCESS_KEY,
     subject: `LumenForge ${feedback.title}`,
-    from_name: fields.name || 'LumenForge player',
+    from_name: name,
+    name,
+    email: fields.email || FEEDBACK_EMAIL,
     message: feedback.body
   }
-  if (fields.email) payload.email = fields.email
-  return payload
 }
 
 async function submitFeedback(payload) {
