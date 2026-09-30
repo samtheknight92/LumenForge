@@ -1,7 +1,7 @@
 import { loadGameData } from './core/data.js'
 import { initCache, flattenSkills, itemSources } from './core/cache.js'
 import { loadHomebrewStore, registerHomebrewInCache } from './homebrew/homebrew.js'
-import { load, saveNow } from './core/storage.js'
+import { load, saveNow, remindToExportIfStale } from './core/storage.js'
 import { state, activeCharacter, applyUrlState } from './core/state.js'
 /** Query bump forces browsers to reload render.js (child modules ignore main.js?v=). */
 import { render } from './ui/render.js?v=5.2.2-howtoplay-fix'
@@ -28,6 +28,7 @@ async function boot() {
     render({ all: true })
     syncUrlState()
     initUrlState(() => render({ content: true, header: true, tabs: true, actionBar: true }))
+    remindToExportIfStale()
   } catch (error) {
     console.error(error)
     const content = document.querySelector('#app-content')

@@ -85,9 +85,21 @@ if (badProf.length) {
   add('ERROR', 'craft', `${badProf.length} profession-items still use retired profession keys (e.g. ${badProf.slice(0, 3).map(i => `${i.id}=${i.profession}`).join(', ')})`)
 }
 
-// ── Level 1 baseline ──
-if (minLevelForTier(1) !== 1) add('ERROR', 'level', `tier 1 min level is ${minLevelForTier(1)}, expected 1`)
-if (minLevelForTier(5) !== 21) add('ERROR', 'level', `tier 5 min level is ${minLevelForTier(5)}, expected 21`)
+// ── Skill Level tier gates (design ladder: 1 learned skill = +1 Skill Level, starting at 0) ──
+const DESIGN_TIER_GATES = { 1: 0, 2: 5, 3: 12, 4: 20, 5: 35, 6: 50 }
+const appConstantsSrc = fs.readFileSync(path.join(root, 'js/core/constants.js'), 'utf8')
+const appTierLine = appConstantsSrc.match(/export const TIER_MIN_LEVEL = (\{[^}]*\})/)
+for (const [tier, expected] of Object.entries(DESIGN_TIER_GATES)) {
+  if (minLevelForTier(tier) !== expected) add('ERROR', 'level', `tier ${tier} min level is ${minLevelForTier(tier)}, expected ${expected}`)
+}
+if (!appTierLine) {
+  add('ERROR', 'level', 'could not find TIER_MIN_LEVEL in js/core/constants.js')
+} else {
+  const appGates = Function(`return ${appTierLine[1]}`)()
+  if (JSON.stringify(appGates) !== JSON.stringify(DESIGN_TIER_GATES)) {
+    add('ERROR', 'level', `app TIER_MIN_LEVEL ${appTierLine[1]} does not match build scripts ${JSON.stringify(DESIGN_TIER_GATES)}`)
+  }
+}
 
 const CURRENCY = { gold: 2500, silver: 100, copper: 1 }
 const toGil = p => (Number(p?.gold || 0) * CURRENCY.gold) + (Number(p?.silver || 0) * CURRENCY.silver) + Number(p?.copper || 0)
