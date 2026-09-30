@@ -111,13 +111,11 @@ await test('created character survives a reload', async page => {
   assert.deepEqual(await savedCharacters(page), ['Persisted Pip'])
 })
 
-await test('play tab: basic attack toast, HP buttons and Process Turn', async page => {
+await test('play tab: stat tiles, basic attack toast and Process Turn', async page => {
   await open(page)
   await createCharacter(page)
   await page.click('#tabbar [data-tab="play"]')
-  const hpBefore = await page.locator('#hp-pill').innerText()
-  await page.locator('#app-content button', { hasText: /^−1$/ }).first().click()
-  await page.waitForFunction(before => document.querySelector('#hp-pill').innerText !== before, hpBefore)
+  assert.equal(await page.locator('#app-content .play-stat').count(), 6, 'play tab is missing its stat tiles')
   await page.locator('#app-content button', { hasText: 'Basic Attack' }).first().click()
   await page.locator('#toast.show').waitFor()
   assert.match(await page.locator('#toast').innerText(), /\d/, 'attack toast has no roll numbers')
