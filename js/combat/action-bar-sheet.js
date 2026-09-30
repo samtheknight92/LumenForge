@@ -3,7 +3,7 @@ import { getSkill } from '../skills/skills.js'
 import { getSkillActivationType } from '../skills/skill-activation.js'
 import { actionBarSkillTooltipHtml } from './action-bar-bonuses.js'
 import { BASIC_ATTACK_ID, getBasicAttackSkill, getActionBarBlockReason } from './combat.js'
-import { useSkill, toggleSkill } from '../ui/actions.js'
+import { useSkill, toggleSkill } from '../ui/combat-actions.js'
 
 const MOBILE_MQ = '(max-width: 760px)'
 let sheetSkillId = null
