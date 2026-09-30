@@ -121,7 +121,7 @@ These commands rebuild generated JSON, validate content references, run project 
 
 ### Player feedback
 
-The sidebar's **Send Feedback** button opens a short form. Players can send it as a pre-filled GitHub issue, or copy the text. To also offer email, set `FEEDBACK_EMAIL` in `js/core/constants.js`; the email option stays hidden while it is blank.
+The sidebar's **Send Feedback** button opens a short form. Players can send it as a pre-filled GitHub issue, by email to `FEEDBACK_EMAIL` (set in `js/core/constants.js`, currently lumenforge.feedback@gmail.com), or copy the text. Blanking `FEEDBACK_EMAIL` hides the email option.
 
 ### Automatic checks
 

@@ -191,4 +191,4 @@ export const RETIRED_SKILL_SUBCATEGORIES = {
 
 /** Where the sidebar "Send Feedback" button sends players. Leave the email blank to hide that option. */
 export const FEEDBACK_ISSUES_URL = 'https://github.com/samtheknight92/LumenForge/issues/new'
-export const FEEDBACK_EMAIL = ''
+export const FEEDBACK_EMAIL = 'lumenforge.feedback@gmail.com'

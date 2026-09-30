@@ -270,6 +270,12 @@ await test('feedback button builds a pre-filled GitHub issue', async page => {
   assert.equal(url.searchParams.get('title'), 'Idea: Add a dice tray')
   assert.match(url.searchParams.get('body'), /^Add a dice tray\n\n---\nApp: LumenForge/)
   assert.equal(await page.locator('#feedback-dialog').isVisible(), false)
+
+  await page.click('#open-feedback')
+  await page.fill('#feedback-dialog textarea', 'Shop search is slow')
+  await page.click('[data-feedback-send="email"]')
+  const mail = await page.evaluate(() => window.__openedUrl)
+  assert.match(mail, /^mailto:lumenforge\.feedback@gmail\.com\?subject=LumenForge%20Bug%3A%20Shop%20search%20is%20slow&body=/)
 })
 
 await test('folder can be created and persists', async page => {
