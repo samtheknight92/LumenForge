@@ -265,8 +265,18 @@ html[data-appearance="light"] .action-bar-meter-stamina .action-bar-meter-label 
 
 /* ========== Play screen ========== */
 @media (min-width: 1000px) {
-  .play-tab { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start; }
-  .play-tab > .play-session-card,
+  .play-tab {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "session session" "weapon pinned" "weapon kit";
+    gap: 8px;
+    align-items: start;
+  }
+  .play-tab > .play-session-card { grid-area: session; }
+  .play-tab > .play-weapon-card { grid-area: weapon; }
+  .play-tab > .play-pinned-card { grid-area: pinned; }
+  .play-tab > .play-kit-card { grid-area: kit; }
+  .play-tab > .status-panel,
   .play-tab > :not(.card) { grid-column: 1 / -1; }
 }
 @media (max-width: 999px) {

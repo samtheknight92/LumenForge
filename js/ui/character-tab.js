@@ -10,11 +10,9 @@ import { computeSkillLevel, skillLevelTooltip } from '../character/skill-level.j
 import { computeCombatPower, combatPowerTooltip } from '../character/combat-power.js'
 import { isTableRuleRacePassive, racePassiveTooltip } from '../character/race-passives.js'
 import { isGmMode } from '../gm/gm-mode.js'
-import { renderEffectPill, renderItemCounterControls, renderKnockoutPanel } from './shared-panels.js'
-import { groupedManualEffects, groupedWeatherEffects, effectDurationLabel, effectTypeLabel, effectTone, effectTooltip, effectUsesPotency, effectPotencyLabel, characterEffectSources, statusStatModifiers } from '../effects/effects.js'
-import { weatherGameplayLines } from '../combat/weather-effects.js'
+import { renderEffectPill, renderItemCounterControls } from './shared-panels.js'
+import { effectDurationLabel, effectTypeLabel, effectTone, effectTooltip, effectUsesPotency, effectPotencyLabel, characterEffectSources } from '../effects/effects.js'
 import { formatStatModifiers, fallbackIcon } from './format.js'
-import { renderNumberStepper } from './number-stepper.js'
 import { itemTooltip, skillTooltip, statTooltip } from './tooltips-text.js'
 import { resolveItemPresentation, renderCursedBadgeHtml, renderItemStatusIcons, itemCardClass, itemCursedNameClass } from '../items/item-presentation.js'
 import { filterInventoryEntries, inventoryTagOptions, INVENTORY_SORT_OPTIONS, INVENTORY_FILTER_OPTIONS } from '../items/inventory-nav.js'
@@ -23,7 +21,7 @@ import { craftedByLabel } from '../items/craft-bonuses.js'
 import { maxEnchantmentSlots, entryEnchantments, enchantmentTooltip, isEnhancementItem, compatibleEquippedGearForEnhancement, applyEnchantTargetLabel, enchantDisplayLabel, isShieldEnchant } from '../items/enchantments.js'
 import { computeElementalAffinity, elementalAffinityTooltip, elementalAffinityTone, isElementalAffinityRowVisible, ELEMENTS } from '../combat/elemental-affinity.js'
 
-/** Character tab — overview, equipment, inventory, effects manager and affinities. */
+/** Character tab — overview, equipment, inventory, skill & gear effects and affinities. */
 
 export function renderEquipSlots(character, emptyLabel = 'Empty') {
   const slots = ['weapon', 'offhand', 'armor', 'accessory']
@@ -107,20 +105,6 @@ function renderEquipEnchantSlots(character, entry, item) {
   return `<div class="enchant-slot-row">${chips.join('')}</div>`
 }
 
-function effectOptionsMarkup() {
-  return groupedManualEffects().map(([group, effects]) => `
-    <optgroup label="${esc(group)}">
-      ${effects.map(effect => `<option value="${esc(effect.id)}">${esc(effect.icon || '✦')} ${esc(effect.name)}</option>`).join('')}
-    </optgroup>
-  `).join('')
-}
-
-function weatherOptionsMarkup() {
-  return groupedWeatherEffects().map(effect =>
-    `<option value="${esc(effect.id)}">${esc(effect.icon || '✦')} ${esc(effect.name)}</option>`
-  ).join('')
-}
-
 function sourceEffectStatus(entry) {
   return {
     duration: entry.duration,
@@ -151,10 +135,8 @@ function renderEffectsSnapshot(character) {
   `
 }
 
-function renderEffectsManager(character) {
+function renderGearEffects(character) {
   const sourced = characterEffectSources(character)
-  const active = character.statusEffects || []
-  const weather = character.weatherEffects || []
   const sourceCards = sourced.map(entry => {
     const potencyText = effectPotencyLabel(entry.effect, entry.potency)
     return `
@@ -170,99 +152,12 @@ function renderEffectsManager(character) {
     </article>
   `
   }).join('')
-  const activeCards = active.map(status => {
-    const effect = getEffect(status.effectId)
-    if (!effect) return ''
-    return `
-      <article class="effect-card effect-card-active ${effectTone(effect)}" data-tooltip="${esc(effectTooltip(effect.id, 'Applied status', status))}" tabindex="0">
-        <div class="effect-card-title"><strong>${esc(effect.icon || '✦')} ${esc(effect.name)}</strong><button type="button" class="danger-btn tiny" data-remove-effect="${esc(status.uid)}">Remove</button></div>
-        <p class="effect-card-desc">${esc(effect.desc)}</p>
-        <div class="wrap effect-card-tags">
-          <span class="pill">Remaining: ${esc(effectDurationLabel(status.duration))}</span>
-          ${status.potency !== undefined && status.potency !== null && status.potency !== 0 ? `<span class="pill warn">Potency ${esc(status.potency)}</span>` : ''}
-          ${Object.keys(statusStatModifiers(status, effect)).length ? `<span class="pill ${effectTone(effect)}">${esc(formatStatModifiers(statusStatModifiers(status, effect)))}</span>` : ''}
-        </div>
-          ${status.notes ? `<div class="subtle effect-card-meta">${esc(status.notes)}</div>` : ''}
-          ${status.performance ? `<div class="subtle effect-card-meta good">${esc(formatPerformanceMeta(status.performance))}</div>` : ''}
-        </article>
-    `
-  }).join('')
-  const weatherCards = weather.map(status => {
-    const effect = getEffect(status.effectId)
-    if (!effect) return ''
-    const gameplay = weatherGameplayLines(effect)
-    const manaStormRoll = effect.manaStorm ? `
-      <label class="field-label compact mt-12">Combat round roll (1d6)
-        <select class="input tiny" data-weather-combat-roll="${esc(status.uid)}">
-          <option value="">Not set</option>
-          ${[1, 2, 3, 4, 5, 6].map(roll => `<option value="${roll}" ${Number(status.combatRoll) === roll ? 'selected' : ''}>${roll}</option>`).join('')}
-        </select>
-      </label>` : ''
-    return `
-      <article class="effect-card effect-card-active ${effectTone(effect)}" data-tooltip="${esc(effectTooltip(effect.id, 'Weather', status))}" tabindex="0">
-        <div class="effect-card-title"><strong>${esc(effect.icon || '✦')} ${esc(effect.name)}</strong><button type="button" class="danger-btn tiny" data-remove-weather="${esc(status.uid)}">Remove</button></div>
-        <p class="effect-card-desc">${esc(effect.desc)}</p>
-        <div class="wrap effect-card-tags">
-          <span class="pill">Remaining: ${esc(effectDurationLabel(status.duration))}</span>
-          ${Object.keys(statusStatModifiers(status, effect)).length ? `<span class="pill ${effectTone(effect)}">${esc(formatStatModifiers(statusStatModifiers(status, effect)))}</span>` : ''}
-          ${gameplay.map(line => `<span class="pill warn">${esc(line)}</span>`).join('')}
-        </div>
-        ${manaStormRoll}
-        ${status.notes ? `<div class="subtle effect-card-meta">${esc(status.notes)}</div>` : ''}
-      </article>
-    `
-  }).join('')
   return `
     <section class="card effects-manager mt-16">
-      <div class="card-header effects-manager-header">
-        <div>
-          <div class="kicker">Rules Brain</div>
-          <h3>Effects & Status Manager</h3>
-          <p class="effects-manager-intro">Hover any effect to see what it does. Press <strong>Process Turn</strong> at the end of your turn and <strong>New Combat</strong> when a fight starts.</p>
-        </div>
-        <div class="wrap">
-          <button type="button" class="ghost-btn tiny" data-process-turn title="Press at the End of Turn, after you move, attack or act: applies ticks, then reduces durations">Process Turn</button>
-          <button type="button" class="ghost-btn tiny" data-begin-new-combat title="Press when a fight starts: resets once-per-combat uses (Quick Draw, Encore, Homing Shot, Rage, Feint and similar)">New Combat</button>
-        </div>
-      </div>
-      ${renderKnockoutPanel(character)}
-
-      <div class="grid two effects-sections">
-        <div class="effects-section">
-          <h3 class="effects-section-title">Applied Status Effects</h3>
-          <div class="effect-grid">${activeCards || '<div class="empty effects-empty">No active status effects. Suspiciously healthy.</div>'}</div>
-        </div>
-        <div class="effects-section">
-          <h3 class="effects-section-title">Skill & Gear Effects</h3>
-          <div class="effect-grid">${sourceCards || '<div class="empty effects-empty">No skill/gear special effects detected yet.</div>'}</div>
-        </div>
-      </div>
-
-      <div class="effect-add-pair">
-      <div class="effect-add-box">
-        <h3 class="effects-section-title">Add Effect</h3>
-        <p class="effect-add-intro">Track combat statuses, skill buffs, and potion effects here. For Temp Strength, Temp Magic, and similar, enter the duration and potency from the item or skill text (e.g. potency 3, 8 turns).</p>
-        <div class="effect-add-grid">
-          <label><span class="field-label">Effect</span><select class="input" id="effect-select">${effectOptionsMarkup()}</select></label>
-          <label><span class="field-label">Duration</span>${renderNumberStepper({ id: 'effect-duration', min: 0, placeholder: 'Default', decreaseLabel: 'Decrease duration', increaseLabel: 'Increase duration' })}</label>
-          <label><span class="field-label">Potency</span>${renderNumberStepper({ id: 'effect-potency', placeholder: 'Default', decreaseLabel: 'Decrease potency', increaseLabel: 'Increase potency' })}</label>
-          <label><span class="field-label">Notes</span><input class="input" id="effect-notes" placeholder="Optional source/variant" /></label>
-        </div>
-        <button type="button" class="primary-btn full" data-add-effect>Add Effect</button>
-      </div>
-
-      <div class="effect-add-box weather-section">
-        <h3 class="effects-section-title">Weather</h3>
-        <p class="effect-add-intro">Track scene weather for the party — one scene weather at a time; manual duration like status effects.</p>
-        <div class="effect-grid">${weatherCards || '<div class="empty effects-empty">No active weather.</div>'}</div>
-        <div class="effect-add-grid mt-12">
-          <label><span class="field-label">Weather</span><select class="input" id="weather-select">${weatherOptionsMarkup()}</select></label>
-          <label><span class="field-label">Duration</span>${renderNumberStepper({ id: 'weather-duration', min: 0, placeholder: 'Ongoing', decreaseLabel: 'Decrease duration', increaseLabel: 'Increase duration' })}</label>
-          <label><span class="field-label">Notes</span><input class="input" id="weather-notes" placeholder="Optional scene note" /></label>
-        </div>
-        <button type="button" class="primary-btn full" data-add-weather>Add weather</button>
-      </div>
-      </div>
+      <div class="kicker">Always on</div>
+      <h3>Skill &amp; gear effects</h3>
+      <p class="effects-manager-intro">Ongoing passives from your race, gear, weapon-matched skills and toggles. Statuses and weather you add in a fight live on the Play tab.</p>
+      <div class="effect-grid">${sourceCards || '<div class="empty effects-empty">No skill/gear special effects detected yet.</div>'}</div>
     </section>
   `
 }
@@ -380,7 +275,7 @@ export function renderCharacterTab(character) {
 
     ${renderElementalAffinitySection(character)}
 
-    ${renderEffectsManager(character)}
+    ${renderGearEffects(character)}
 
     ${renderPerformanceBanner(character)}
 

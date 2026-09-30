@@ -1,11 +1,11 @@
 import { esc } from '../core/utils.js'
-import { getSkill, getItem } from '../core/cache.js'
-import { computeStats, getEffect } from '../character/character.js'
+import { getItem } from '../core/cache.js'
+import { computeStats } from '../character/character.js'
 import { getEquippedWeapon, getWeaponKind } from '../items/equipment.js'
 import { weaponKindDisplayLabel } from '../homebrew/homebrew.js'
 import { itemHasCounter } from '../items/items.js'
 import { renderItemCounterControls, renderKnockoutPanel } from './shared-panels.js'
-import { effectDurationLabel, effectTone, effectTooltip } from '../effects/effects.js'
+import { renderStatusPanel } from './status-panel.js'
 import { fallbackIcon } from './format.js'
 import { resolveItemPresentation } from '../items/item-presentation.js'
 import { getPinnedActionBarSkills, getSkillActivationType } from '../skills/skill-activation.js'
@@ -33,26 +33,6 @@ export function renderPlayTab(character) {
     ? formatSkillEffectBreakdownPlain(resolveSkillEffectBreakdown(character, basic))
     : ''
   const pinned = getPinnedActionBarSkills(character)
-  const toggleSkills = (character.activeToggles || [])
-    .map(id => getSkill(id))
-    .filter(Boolean)
-  const statuses = (character.statusEffects || [])
-    .map(status => {
-      const effect = getEffect(status.id)
-      if (!effect) return null
-      return `<span class="pill ${effectTone(effect)}" data-tooltip="${esc(effectTooltip(effect))}" tabindex="0">${esc(effect.icon || '✦')} ${esc(effect.name)} · ${esc(effectDurationLabel(status.duration))}</span>`
-    })
-    .filter(Boolean)
-    .join('')
-  const weather = (character.weatherEffects || [])
-    .map(status => {
-      const effect = getEffect(status.id)
-      if (!effect) return null
-      return `<span class="pill warn">${esc(effect.icon || '☁')} ${esc(effect.name)}</span>`
-    })
-    .filter(Boolean)
-    .join('')
-
   const combatItems = (character.inventory || []).filter(entry => {
     const item = getItem(entry.itemId)
     if (!item) return false
@@ -127,7 +107,7 @@ export function renderPlayTab(character) {
         </div>
       </section>
 
-      <section class="card">
+      <section class="card play-weapon-card">
         <div class="kicker">Weapon</div>
         <h3>${weapon ? `${fallbackIcon(weapon)} ${esc(weapon.name)}` : 'Unarmed / Striker'}</h3>
         <p class="subtle">${weapon ? esc(weaponKindDisplayLabel(getWeaponKind(weapon) || weapon.weaponKind || '')) : 'Empty hands'}${weaponEntry ? ` · ${esc(weapon.damage || '')}` : ''}</p>
@@ -141,31 +121,21 @@ export function renderPlayTab(character) {
         ` : ''}
       </section>
 
-      <section class="card">
+      <section class="card play-pinned-card">
         <div class="kicker">Pinned skills</div>
         <h3>Ready actions</h3>
         <div class="stack mt-12">${pinnedHtml}</div>
       </section>
 
-      <section class="card">
-        <div class="kicker">Ongoing</div>
-        <h3>Toggles, statuses &amp; weather</h3>
-        <div class="wrap mt-12">
-          ${toggleSkills.length
-            ? toggleSkills.map(skill => `<span class="pill warn">${esc(skill.icon || '✦')} ${esc(skill.name)}</span>`).join('')
-            : '<span class="subtle">No active toggles.</span>'}
-        </div>
-        <div class="wrap mt-12">${statuses || '<span class="subtle">No status effects.</span>'}</div>
-        <div class="wrap mt-12">${weather || '<span class="subtle">No weather.</span>'}</div>
-      </section>
-
-      <section class="card">
+      <section class="card play-kit-card">
         <div class="kicker">Combat kit</div>
         <h3>Consumables &amp; counters</h3>
         <div class="stack mt-12">${itemsHtml}</div>
       </section>
 
       ${renderKnockoutPanel(character)}
+
+      ${renderStatusPanel(character)}
     </div>
   `
 }
