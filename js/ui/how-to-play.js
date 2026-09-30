@@ -107,7 +107,7 @@ function actionBarBlock() {
   const choices = [
     'Tap a skill to roll what the app supports and spend Stamina — only apply damage or target effects after the GM confirms the attack hit',
     'Roll accuracy and damage on your own dice — tap the skill only to deduct Stamina, or skip the button entirely',
-    'Track everything manually with HP/Stamina +/- on the Character or Stats tab'
+    'Track everything manually with HP/Stamina +/- on the bottom bar or the Stats tab'
   ]
 
   return `
@@ -143,7 +143,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Ranged weapons',
-      'Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover. <strong>Quick Draw</strong>: your first ranged weapon attack each combat gains Advantage and costs 1 less Stamina (minimum 0) — press <strong>New Combat</strong> on the Character tab when a fight starts. Ranged Basic Attacks and ranged weapon skills can also trigger Double Natural 20. See <strong>Skills → Weapons → Ranged</strong> for the full summary.'
+      'Range is based on line of sight, but the GM decides whether the shot is practical, too far, blocked, or affected by cover. <strong>Quick Draw</strong>: your first ranged weapon attack each combat gains Advantage and costs 1 less Stamina (minimum 0) — press <strong>New Combat</strong> on the Play tab when a fight starts. Ranged Basic Attacks and ranged weapon skills can also trigger Double Natural 20. See <strong>Skills → Weapons → Ranged</strong> for the full summary.'
     ),
     tip(
       'Harmonies &amp; careers',
@@ -151,15 +151,15 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Status effects',
-      'Buffs, debuffs, poison, Burn, and similar show on the <strong>Character</strong> tab under Applied Status Effects. The GM or player adds them from the effects list (pick effect, duration, optional note). Use the dictionary on the <strong>Notes</strong> tab if you need a reminder what one does.'
+      'Buffs, debuffs, poison, Burn, and similar show on the <strong>Play</strong> tab under Applied Status Effects. The GM or player adds them from the effects list (pick effect, duration, optional note). Use the dictionary on the <strong>Notes</strong> tab if you need a reminder what one does.'
     ),
     tip(
       'Process Turn',
-      'Press <strong>Process Turn</strong> on the Character tab at the <strong>End of Turn</strong> — after you move, attack, use an item, or finish your action. On <em>your</em> sheet it: pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses (Bleeding, Poison, Burn, regeneration, Mana Focus, and similar); then ticks each effect\'s remaining duration down by 1 — a 1-round effect like Blind stays for your action, then expires on this press. In combat, do this every turn after you act; out of combat, only when the GM says to and you have effects or toggles to process. When a new fight starts, press <strong>New Combat</strong> to reset once-per-combat uses like Quick Draw.'
+      'Press <strong>Process Turn</strong> on the Play tab at the <strong>End of Turn</strong> — after you move, attack, use an item, or finish your action. On <em>your</em> sheet it: pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses (Bleeding, Poison, Burn, regeneration, Mana Focus, and similar); then ticks each effect\'s remaining duration down by 1 — a 1-round effect like Blind stays for your action, then expires on this press. In combat, do this every turn after you act; out of combat, only when the GM says to and you have effects or toggles to process. When a new fight starts, press <strong>New Combat</strong> to reset once-per-combat uses like Quick Draw.'
     ),
     tip(
       'Knocked Out &amp; Revival',
-      'At <strong>0 HP</strong> you are <strong>Knocked Out</strong> — you cannot move, attack, use items, or use skills, but you stay in initiative. On each of your turns you may make one <strong>Recovery Roll</strong> (1d20): <strong>11+</strong> success, <strong>10 or lower</strong> failure. Two successes <em>in a row</em> → <strong>Revived</strong> at 1 HP. Three failures <em>in a row</em> → <strong>Dead</strong>. A failure resets the success streak; a success resets the failure streak. Track streaks on the Character tab. <strong>Manual revival</strong> by another character takes two of the helper\'s turns (step 1 begin CPR/first aid, step 2 finish) and Revives at 1 HP. A healing item or healing skill restores its full HP amount immediately, clears Recovery streaks, and removes Knocked Out (example: a 25 HP potion Revives and restores up to 25 HP, not merely 1 HP).'
+      'At <strong>0 HP</strong> you are <strong>Knocked Out</strong> — you cannot move, attack, use items, or use skills, but you stay in initiative. On each of your turns you may make one <strong>Recovery Roll</strong> (1d20): <strong>11+</strong> success, <strong>10 or lower</strong> failure. Two successes <em>in a row</em> → <strong>Revived</strong> at 1 HP. Three failures <em>in a row</em> → <strong>Dead</strong>. A failure resets the success streak; a success resets the failure streak. Track streaks on the Play tab. <strong>Manual revival</strong> by another character takes two of the helper\'s turns (step 1 begin CPR/first aid, step 2 finish) and Revives at 1 HP. A healing item or healing skill restores its full HP amount immediately, clears Recovery streaks, and removes Knocked Out (example: a 25 HP potion Revives and restores up to 25 HP, not merely 1 HP).'
     ),
     tip(
       'Improvised actions &amp; Rule of Cool',
@@ -178,7 +178,7 @@ export function renderHowToPlayTab() {
   const player = tips([
     tip(
       'Play tab',
-      'During a fight, open the <strong>Play</strong> tab for a compact session view: HP/Stamina, key stats, Basic Attack, pinned skills, statuses, combat consumables, <strong>Process Turn</strong>, and <strong>New Combat</strong>. Full inventory and identity stay on the Character tab. The footer action bar still works everywhere.'
+      'During a fight, open the <strong>Play</strong> tab for a compact session view: key stats, Basic Attack, pinned skills, statuses and weather, combat consumables, <strong>Process Turn</strong>, and <strong>New Combat</strong>. Full inventory and identity stay on the Character tab. HP and Stamina live in the bottom bar, which works on every tab.'
     ),
     tip(
       'Setup',
@@ -241,7 +241,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Applying effects',
-      'Add status effects from the Character tab (pick effect, duration, optional note). Players press <strong>Process Turn</strong> at the End of Turn to tick timers — see <strong>Everyone</strong> above. Track Knocked Out Recovery Rolls and manual revival on that character\'s sheet.'
+      'Add status effects and weather from the Play tab (pick effect, duration, optional note). Players press <strong>Process Turn</strong> at the End of Turn to tick timers — see <strong>Everyone</strong> above. Track Knocked Out Recovery Rolls and manual revival on that character\'s sheet.'
     ),
     tip(
       'Homebrew',
