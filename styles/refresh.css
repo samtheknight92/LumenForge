@@ -265,8 +265,18 @@ html[data-appearance="light"] .action-bar-meter-stamina .action-bar-meter-label 
 
 /* ========== Play screen ========== */
 @media (min-width: 1000px) {
-  .play-tab { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start; }
-  .play-tab > .play-session-card,
+  .play-tab {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "session session" "weapon pinned" "weapon kit";
+    gap: 8px;
+    align-items: start;
+  }
+  .play-tab > .play-session-card { grid-area: session; }
+  .play-tab > .play-weapon-card { grid-area: weapon; }
+  .play-tab > .play-pinned-card { grid-area: pinned; }
+  .play-tab > .play-kit-card { grid-area: kit; }
+  .play-tab > .status-panel,
   .play-tab > :not(.card) { grid-column: 1 / -1; }
 }
 @media (max-width: 999px) {
@@ -304,3 +314,19 @@ html[data-appearance="light"] .play-stat b { color: #0f172a; }
   .play-attack { grid-template-columns: 1fr; }
   .play-attack-btn { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 4px; }
 }
+
+/* ========== Character screen ========== */
+.effect-add-pair { display: grid; gap: 8px; margin-top: 8px; }
+@media (min-width: 1000px) {
+  .effect-add-pair { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+.effect-add-pair .effect-add-box { margin: 0; }
+.effects-manager-intro { font-size: 12.5px; }
+.level-split-grid { gap: 10px; }
+.char-gear-grid { gap: 8px; }
+.stat-row-compact { padding: 6px 8px; }
+.stat-row-compact .stat-value { font-family: var(--display); }
+.inventory-item-notes-wrap { margin-top: 4px; }
+.inventory-item-notes-wrap > summary { cursor: pointer; font-size: 11.5px; font-weight: 700; color: var(--muted); list-style: none; }
+.inventory-item-notes-wrap > summary::-webkit-details-marker { display: none; }
+.inventory-item-notes-wrap[open] > summary { margin-bottom: 4px; }

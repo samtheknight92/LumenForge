@@ -197,7 +197,7 @@ await test('stats tab: upgrade, refund and resource editor', async page => {
   await page.waitForFunction(before => document.querySelector('#coin-pill').innerText !== before, gil)
 })
 
-await test('character tab: equip gear, add and remove effects and weather', async page => {
+await test('character tab: equip gear; play tab: add and remove effects and weather', async page => {
   await open(page)
   await createCharacter(page)
   await page.click('#tabbar [data-tab="shop"]')
@@ -208,6 +208,7 @@ await test('character tab: equip gear, add and remove effects and weather', asyn
   await page.click('#tabbar [data-tab="character"]')
   await page.locator('#app-content [data-equip-item]').first().click()
   await page.locator('#app-content [data-unequip]').first().waitFor()
+  await page.click('#tabbar [data-tab="play"]')
   await page.click('#app-content [data-add-effect]')
   await page.locator('#app-content [data-remove-effect]').first().waitFor()
   await page.click('#app-content [data-add-weather]')
