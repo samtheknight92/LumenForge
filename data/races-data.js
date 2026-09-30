@@ -525,7 +525,7 @@ try {
             "cost": 5,
             "staminaCost": 0,
             "desc": "Passive: +1 to all saving throws, resistance to Incapacitated. Unlocks Cross-Cultural Learning and Tier 1 monster skills.",
-            "icon": "�",
+            "icon": "💪",
             "prerequisites": {
                 "type": "NONE",
                 "skills": []
