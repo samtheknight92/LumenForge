@@ -12,6 +12,7 @@ import { computeStats } from './character/character.js'
 
 import { initTheme, applyTheme } from './ui/themes.js'
 import { setupActionBarSkillSheet } from './combat/action-bar-sheet.js'
+import { setupFeedback } from './ui/feedback.js'
 
 async function boot() {
   try {
@@ -25,6 +26,7 @@ async function boot() {
     initEvents()
     setupTooltips()
     setupActionBarSkillSheet()
+    setupFeedback()
     render({ all: true })
     syncUrlState()
     initUrlState(() => render({ content: true, header: true, tabs: true, actionBar: true }))

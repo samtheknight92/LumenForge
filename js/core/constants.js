@@ -188,3 +188,7 @@ export const RETIRED_SKILL_SUBCATEGORIES = {
   utility_combat: 'career_fusions',
   career_fusion: 'career_fusions'
 }
+
+/** Where the sidebar "Send Feedback" button sends players. Leave the email blank to hide that option. */
+export const FEEDBACK_ISSUES_URL = 'https://github.com/samtheknight92/LumenForge/issues/new'
+export const FEEDBACK_EMAIL = ''

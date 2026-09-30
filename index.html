@@ -65,6 +65,7 @@
       <section class="side-actions">
         <button type="button" id="export-all" class="ghost-btn full">Export Save</button>
         <label class="ghost-btn full file-label">Import Save<input id="import-save" type="file" accept="application/json" hidden /></label>
+        <button type="button" id="open-feedback" class="ghost-btn full">Send Feedback</button>
       </section>
     </aside>
 
@@ -120,6 +121,30 @@
   <div id="hover-tooltip" class="floating-tooltip" role="tooltip" aria-hidden="true"></div>
 
   <!-- Bump ?v= when deploying so browsers pick up new JS modules (GitHub Pages caches aggressively). -->
+  <dialog id="feedback-dialog" class="card feedback-dialog" aria-labelledby="feedback-title">
+    <form method="dialog" class="feedback-form">
+      <div class="kicker">Feedback</div>
+      <h2 id="feedback-title">Tell us what you think</h2>
+      <p class="muted">Found a bug or have an idea? Write it here, then choose how to send it.</p>
+      <label>What is it?
+        <select name="kind">
+          <option value="bug">Something is broken</option>
+          <option value="idea">An idea or request</option>
+          <option value="other">Something else</option>
+        </select>
+      </label>
+      <label>Message
+        <textarea name="message" rows="6" maxlength="4000" placeholder="What happened, or what would you like?"></textarea>
+      </label>
+      <label class="feedback-check"><input type="checkbox" name="includeInfo" checked /> Include the app version, current tab and browser (no character data)</label>
+      <div class="feedback-actions">
+        <button type="button" class="primary-btn" data-feedback-send="github">Send via GitHub</button>
+        <button type="button" class="ghost-btn" data-feedback-send="email">Send by email</button>
+        <button type="button" class="ghost-btn" data-feedback-send="copy">Copy text</button>
+        <button type="button" class="ghost-btn" data-feedback-cancel>Cancel</button>
+      </div>
+    </form>
+  </dialog>
   <script type="module" src="js/main.js?v=5.2.2-howtoplay-fix"></script>
 </body>
 </html>
