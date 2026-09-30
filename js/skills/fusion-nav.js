@@ -86,6 +86,7 @@ export function elementsFromFusionType(fusionType) {
 }
 
 export function careerKindFromSkill(skill) {
+  if (skill?.fusionKind === 'career_weapons') return 'weapons'
   if (skill?.fusionType && ['sword_alchemy', 'bow_enchanting', 'weapon_light'].includes(skill.fusionType)) {
     return 'weapons'
   }

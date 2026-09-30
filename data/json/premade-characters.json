@@ -4518,14 +4518,14 @@
     "lumens": 75,
     "gil": 5000,
     "stats": {
-      "hp": 9,
-      "stamina": 9,
-      "strength": -5,
-      "magicPower": -5,
-      "accuracy": -5,
+      "hp": 10,
+      "stamina": 10,
+      "strength": -3,
+      "magicPower": -3,
+      "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
-      "magicalDefence": 7
+      "magicalDefence": 8
     },
     "skills": [
       "sword_basics",
@@ -4541,9 +4541,6 @@
       "sword_stance",
       "parry",
       "riposte",
-      "defensive_stance",
-      "master_parry",
-      "sword_mastery",
       "inferno_parry"
     ],
     "activeToggles": [],
@@ -5521,11 +5518,11 @@
     "lumens": 90,
     "gil": 6000,
     "stats": {
-      "hp": 10,
+      "hp": 9,
       "stamina": 10,
-      "strength": -2,
-      "magicPower": -2,
-      "accuracy": -2,
+      "strength": -4,
+      "magicPower": -5,
+      "accuracy": -5,
       "speed": 2,
       "physicalDefence": 8,
       "magicalDefence": 8
@@ -5544,10 +5541,14 @@
       "sword_stance",
       "parry",
       "riposte",
-      "defensive_stance",
-      "master_parry",
-      "sword_mastery",
       "inferno_parry",
+      "sweeping_slash",
+      "lunge_attack",
+      "blade_dance",
+      "whirlwind",
+      "phoenix_form",
+      "fire_whip",
+      "inferno",
       "blazing_tempest"
     ],
     "activeToggles": [],
@@ -5590,7 +5591,7 @@
       "armor": "premade_fire_robes_2",
       "accessory": "premade_headband_of_intellect_3"
     },
-    "notes": "Master Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Strength and Magic Power (Threat Level 30), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Frost Sword, Star Chart Folio, Fire Robes and Headband of Intellect. Defeat loot: 90 Lumens, 6000 Gil."
+    "notes": "Master Battle Mage channels fire through the blade — half swordsman, half pyromancer. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Frost Sword, Star Chart Folio, Fire Robes and Headband of Intellect. Defeat loot: 90 Lumens, 6000 Gil."
   },
   {
     "premadeId": "npc_assassin_lv30_2h",
@@ -6540,14 +6541,14 @@
     "lumens": 102,
     "gil": 6800,
     "stats": {
-      "hp": 11,
-      "stamina": 11,
-      "strength": -2,
-      "magicPower": -1,
-      "accuracy": -1,
+      "hp": 9,
+      "stamina": 10,
+      "strength": -4,
+      "magicPower": -5,
+      "accuracy": -5,
       "speed": 2,
       "physicalDefence": 8,
-      "magicalDefence": 9
+      "magicalDefence": 8
     },
     "skills": [
       "sword_basics",
@@ -6563,10 +6564,14 @@
       "sword_stance",
       "parry",
       "riposte",
-      "defensive_stance",
-      "master_parry",
-      "sword_mastery",
       "inferno_parry",
+      "sweeping_slash",
+      "lunge_attack",
+      "blade_dance",
+      "whirlwind",
+      "phoenix_form",
+      "fire_whip",
+      "inferno",
       "blazing_tempest"
     ],
     "activeToggles": [],
@@ -6609,7 +6614,7 @@
       "armor": "premade_void_armor_2",
       "accessory": "premade_amulet_of_mana_3"
     },
-    "notes": "Legendary Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Magic Power and Accuracy (Threat Level 34), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Frost Sword, Mage's Codex, Void Armor and Amulet of Mana. Defeat loot: 102 Lumens, 6800 Gil."
+    "notes": "Legendary Battle Mage channels fire through the blade — half swordsman, half pyromancer. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Frost Sword, Mage's Codex, Void Armor and Amulet of Mana. Defeat loot: 102 Lumens, 6800 Gil."
   },
   {
     "premadeId": "npc_assassin_lv35_2v",
@@ -7571,13 +7576,13 @@
     "lumens": 117,
     "gil": 7800,
     "stats": {
-      "hp": 12,
+      "hp": 11,
       "stamina": 11,
-      "strength": 1,
-      "magicPower": 3,
-      "accuracy": 2,
+      "strength": -1,
+      "magicPower": 0,
+      "accuracy": -1,
       "speed": 2,
-      "physicalDefence": 9,
+      "physicalDefence": 8,
       "magicalDefence": 9
     },
     "skills": [
@@ -7594,10 +7599,14 @@
       "sword_stance",
       "parry",
       "riposte",
-      "defensive_stance",
-      "master_parry",
-      "sword_mastery",
       "inferno_parry",
+      "sweeping_slash",
+      "lunge_attack",
+      "blade_dance",
+      "whirlwind",
+      "phoenix_form",
+      "fire_whip",
+      "inferno",
       "blazing_tempest"
     ],
     "activeToggles": [],
@@ -7640,7 +7649,7 @@
       "armor": "premade_void_armor_2",
       "accessory": "premade_amulet_of_mana_3"
     },
-    "notes": "Legendary Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Magic Power and Accuracy (Threat Level 39), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Wind Blade, Mage's Codex, Void Armor and Amulet of Mana. Defeat loot: 117 Lumens, 7800 Gil."
+    "notes": "Legendary Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Magic Power and Strength (Threat Level 39), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Wind Blade, Mage's Codex, Void Armor and Amulet of Mana. Defeat loot: 117 Lumens, 7800 Gil."
   },
   {
     "premadeId": "npc_assassin_lv39_39",
@@ -8618,14 +8627,14 @@
     "lumens": 132,
     "gil": 8800,
     "stats": {
-      "hp": 13,
-      "stamina": 13,
-      "strength": 3,
-      "magicPower": 9,
-      "accuracy": 6,
+      "hp": 12,
+      "stamina": 12,
+      "strength": 2,
+      "magicPower": 6,
+      "accuracy": 3,
       "speed": 2,
-      "physicalDefence": 10,
-      "magicalDefence": 11
+      "physicalDefence": 9,
+      "magicalDefence": 10
     },
     "skills": [
       "sword_basics",
@@ -8641,10 +8650,14 @@
       "sword_stance",
       "parry",
       "riposte",
-      "defensive_stance",
-      "master_parry",
-      "sword_mastery",
       "inferno_parry",
+      "sweeping_slash",
+      "lunge_attack",
+      "blade_dance",
+      "whirlwind",
+      "phoenix_form",
+      "fire_whip",
+      "inferno",
       "blazing_tempest"
     ],
     "activeToggles": [],
@@ -9726,14 +9739,14 @@
     "lumens": 144,
     "gil": 9600,
     "stats": {
-      "hp": 12,
-      "stamina": 12,
-      "strength": 2,
-      "magicPower": 6,
-      "accuracy": 3,
+      "hp": 11,
+      "stamina": 11,
+      "strength": 0,
+      "magicPower": 2,
+      "accuracy": 1,
       "speed": 2,
       "physicalDefence": 9,
-      "magicalDefence": 10
+      "magicalDefence": 9
     },
     "skills": [
       "sword_basics",
@@ -9749,10 +9762,14 @@
       "sword_stance",
       "parry",
       "riposte",
-      "defensive_stance",
-      "master_parry",
-      "sword_mastery",
       "inferno_parry",
+      "sweeping_slash",
+      "lunge_attack",
+      "blade_dance",
+      "whirlwind",
+      "phoenix_form",
+      "fire_whip",
+      "inferno",
       "blazing_tempest"
     ],
     "activeToggles": [],

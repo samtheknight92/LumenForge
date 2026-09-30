@@ -83,6 +83,7 @@ fs.mkdirSync(jsonDir, { recursive: true })
 
 execSync('node scripts/generate-career-effects.mjs', { cwd: root, stdio: 'inherit' })
 execSync('node scripts/generate-careers.mjs', { cwd: root, stdio: 'inherit' })
+execSync('node scripts/apply-fusion-prereqs.mjs', { cwd: root, stdio: 'inherit' })
 execSync('node scripts/attach-activation-effects.mjs', { cwd: root, stdio: 'inherit' })
 execSync('node scripts/adjust-skill-costs.mjs', { cwd: root, stdio: 'inherit' })
 

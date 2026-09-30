@@ -5110,7 +5110,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "power_shot",
                         "fireball"
                     ]
                 },
@@ -5138,7 +5138,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "fire_wall"
+                        "explosion"
                     ]
                 },
                 "fusionType": "bow_fire",
@@ -5164,8 +5164,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_arrow",
-                        "inferno_volley"
+                        "homing_shot",
+                        "fire_tornado"
                     ]
                 },
                 "fusionType": "bow_fire",
@@ -5191,7 +5191,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "aimed_shot",
                         "ice_shard"
                     ]
                 },
@@ -5219,7 +5219,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "ice_wall"
+                        "ice_spear"
                     ]
                 },
                 "fusionType": "bow_ice",
@@ -5245,8 +5245,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_arrow",
-                        "glacier_volley"
+                        "siege_shot",
+                        "ice_age"
                     ]
                 },
                 "fusionType": "bow_ice",
@@ -5272,7 +5272,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "aimed_shot",
                         "spark"
                     ]
                 },
@@ -5326,8 +5326,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_arrow",
-                        "thunder_volley"
+                        "piercing_shot",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "bow_lightning",
@@ -5353,7 +5353,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "power_shot",
                         "stone_throw"
                     ]
                 },
@@ -5372,7 +5372,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "stone_wall"
+                        "stone_spear"
                     ]
                 },
                 "fusionType": "bow_earth",
@@ -5398,8 +5398,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_arrow",
-                        "crystal_volley"
+                        "siege_shot",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "bow_earth",
@@ -5425,7 +5425,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "steady_aim",
                         "gust"
                     ]
                 },
@@ -5444,7 +5444,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "wind_barrier"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "bow_wind",
@@ -5470,8 +5470,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_arrow",
-                        "gale_volley"
+                        "parting_shot",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "bow_wind",
@@ -5497,7 +5497,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "covering_fire",
                         "water_splash"
                     ]
                 },
@@ -5516,7 +5516,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "water_shield"
+                        "water_whip"
                     ]
                 },
                 "fusionType": "bow_water",
@@ -5542,8 +5542,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_arrow",
-                        "tide_volley"
+                        "explosive_shot",
+                        "tsunami"
                     ]
                 },
                 "fusionType": "bow_water",
@@ -5569,7 +5569,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "covering_fire",
                         "shadow_bolt"
                     ]
                 },
@@ -5597,7 +5597,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "bow_darkness",
@@ -5623,8 +5623,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_arrow",
-                        "void_volley"
+                        "homing_shot",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "bow_darkness",
@@ -5650,7 +5650,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_draw",
+                        "steady_aim",
                         "light_ray"
                     ]
                 },
@@ -5678,7 +5678,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "light_shield"
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "bow_light",
@@ -5704,8 +5704,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_arrow",
-                        "radiant_volley"
+                        "homing_shot",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "bow_light",
@@ -5760,8 +5760,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
-                        "fire_wall"
+                        "riposte",
+                        "fire_shield"
                     ]
                 },
                 "fusionType": "sword_fire",
@@ -5787,8 +5787,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_edge",
-                        "inferno_parry"
+                        "whirlwind",
+                        "inferno"
                     ]
                 },
                 "fusionType": "sword_fire",
@@ -5841,8 +5841,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
-                        "ice_wall"
+                        "riposte",
+                        "freeze"
                     ]
                 },
                 "fusionType": "sword_ice",
@@ -5868,8 +5868,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frostbrand",
-                        "glacial_riposte"
+                        "sweeping_slash",
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "sword_ice",
@@ -5922,7 +5922,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "riposte",
                         "thunder_clap"
                     ]
                 },
@@ -5949,8 +5949,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_blade",
-                        "thunder_parry"
+                        "sweeping_slash",
+                        "ball_lightning"
                     ]
                 },
                 "fusionType": "sword_lightning",
@@ -5994,7 +5994,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "parry",
                         "stone_wall"
                     ]
                 },
@@ -6021,8 +6021,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stonecutter",
-                        "earthen_guard"
+                        "piercing_thrust",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "sword_earth",
@@ -6048,7 +6048,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_strike",
+                        "lunge_attack",
                         "gust"
                     ]
                 },
@@ -6066,7 +6066,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "parry",
                         "wind_barrier"
                     ]
                 },
@@ -6093,8 +6093,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gale_blade",
-                        "cyclone_parry"
+                        "blade_dance",
+                        "tornado"
                     ]
                 },
                 "fusionType": "sword_wind",
@@ -6120,7 +6120,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quick_strike",
+                        "lunge_attack",
                         "water_splash"
                     ]
                 },
@@ -6138,7 +6138,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "parry",
                         "water_shield"
                     ]
                 },
@@ -6165,8 +6165,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "tidecutter",
-                        "aqua_parry"
+                        "whirlwind",
+                        "maelstrom"
                     ]
                 },
                 "fusionType": "sword_water",
@@ -6219,7 +6219,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
+                        "riposte",
                         "shadow_armor"
                     ]
                 },
@@ -6246,8 +6246,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_edge",
-                        "night_parry"
+                        "whirlwind",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "sword_darkness",
@@ -6300,8 +6300,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
-                        "light_shield"
+                        "parry",
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "sword_light",
@@ -6327,8 +6327,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "radiant_blade",
-                        "solar_parry"
+                        "piercing_thrust",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "sword_light",
@@ -6354,8 +6354,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
-                        "fireball"
+                        "poison_blade",
+                        "ignite"
                     ]
                 },
                 "fusionType": "dagger_fire",
@@ -6382,7 +6382,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "fire_wall"
+                        "fireball"
                     ]
                 },
                 "fusionType": "dagger_fire",
@@ -6408,8 +6408,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_dagger",
-                        "inferno_strike"
+                        "thousand_cuts",
+                        "inferno"
                     ]
                 },
                 "fusionType": "dagger_fire",
@@ -6436,7 +6436,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "dual_wield",
-                        "ice_shard"
+                        "freeze"
                     ]
                 },
                 "fusionType": "dagger_ice",
@@ -6463,7 +6463,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "ice_wall"
+                        "ice_spear"
                     ]
                 },
                 "fusionType": "dagger_ice",
@@ -6489,8 +6489,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_dagger",
-                        "freezing_strike"
+                        "flurry",
+                        "blizzard"
                     ]
                 },
                 "fusionType": "dagger_ice",
@@ -6517,7 +6517,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "dual_wield",
-                        "spark"
+                        "static_charge"
                     ]
                 },
                 "fusionType": "dagger_lightning",
@@ -6544,7 +6544,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "thunder_clap"
+                        "lightning_bolt"
                     ]
                 },
                 "fusionType": "dagger_lightning",
@@ -6570,8 +6570,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_dagger",
-                        "thunder_strike"
+                        "thousand_cuts",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "dagger_lightning",
@@ -6597,7 +6597,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
+                        "dagger_basics",
                         "stone_throw"
                     ]
                 },
@@ -6616,7 +6616,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "stone_wall"
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "dagger_earth",
@@ -6642,8 +6642,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_dagger",
-                        "crystal_strike"
+                        "flurry",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "dagger_earth",
@@ -6669,7 +6669,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
+                        "light_step",
                         "gust"
                     ]
                 },
@@ -6688,7 +6688,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "wind_barrier"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "dagger_wind",
@@ -6714,8 +6714,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_dagger",
-                        "zephyr_strike"
+                        "flurry",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "dagger_wind",
@@ -6741,7 +6741,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
+                        "poison_blade",
                         "water_splash"
                     ]
                 },
@@ -6760,7 +6760,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "water_shield"
+                        "water_whip"
                     ]
                 },
                 "fusionType": "dagger_water",
@@ -6786,8 +6786,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_dagger",
-                        "tide_strike"
+                        "thousand_cuts",
+                        "tsunami"
                     ]
                 },
                 "fusionType": "dagger_water",
@@ -6841,7 +6841,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "shadow_armor"
+                        "nightmare"
                     ]
                 },
                 "fusionType": "dagger_darkness",
@@ -6867,8 +6867,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_dagger",
-                        "void_strike"
+                        "flurry",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "dagger_darkness",
@@ -6894,7 +6894,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dual_wield",
+                        "dagger_basics",
                         "light_ray"
                     ]
                 },
@@ -6922,7 +6922,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "vital_strike",
-                        "light_shield"
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "dagger_light",
@@ -6948,8 +6948,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_dagger",
-                        "radiant_strike"
+                        "thousand_cuts",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "dagger_light",
@@ -7003,7 +7003,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "fire_wall"
+                        "explosion"
                     ]
                 },
                 "fusionType": "polearm_fire",
@@ -7029,8 +7029,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_glaive",
-                        "blazing_sweep"
+                        "impale",
+                        "fire_whip"
                     ]
                 },
                 "fusionType": "polearm_fire",
@@ -7056,8 +7056,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thrust_attack",
-                        "ice_shard"
+                        "reach_advantage",
+                        "frost_touch"
                     ]
                 },
                 "fusionType": "polearm_ice",
@@ -7084,7 +7084,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "ice_wall"
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "polearm_ice",
@@ -7110,8 +7110,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_halberd",
-                        "glacier_sweep"
+                        "impale",
+                        "ice_prison"
                     ]
                 },
                 "fusionType": "polearm_ice",
@@ -7191,8 +7191,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_glaive",
-                        "thunder_sweep"
+                        "polearm_charge_attack",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "polearm_lightning",
@@ -7237,7 +7237,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "stone_wall"
+                        "earthquake"
                     ]
                 },
                 "fusionType": "polearm_earth",
@@ -7263,8 +7263,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_halberd",
-                        "earthen_sweep"
+                        "impale",
+                        "stone_spear"
                     ]
                 },
                 "fusionType": "polearm_earth",
@@ -7290,7 +7290,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thrust_attack",
+                        "reach_advantage",
                         "gust"
                     ]
                 },
@@ -7309,7 +7309,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "wind_barrier"
+                        "tornado"
                     ]
                 },
                 "fusionType": "polearm_wind",
@@ -7335,8 +7335,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_glaive",
-                        "cyclone_sweep"
+                        "polearm_charge_attack",
+                        "suffocate"
                     ]
                 },
                 "fusionType": "polearm_wind",
@@ -7362,8 +7362,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thrust_attack",
-                        "water_splash"
+                        "reach_advantage",
+                        "water_whip"
                     ]
                 },
                 "fusionType": "polearm_water",
@@ -7381,7 +7381,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "water_shield"
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "polearm_water",
@@ -7407,8 +7407,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_glaive",
-                        "wave_sweep"
+                        "whirlwind_sweep",
+                        "maelstrom"
                     ]
                 },
                 "fusionType": "polearm_water",
@@ -7434,7 +7434,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thrust_attack",
+                        "reach_advantage",
                         "shadow_bolt"
                     ]
                 },
@@ -7462,7 +7462,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "polearm_darkness",
@@ -7488,8 +7488,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_glaive",
-                        "void_sweep"
+                        "polearm_charge_attack",
+                        "life_drain"
                     ]
                 },
                 "fusionType": "polearm_darkness",
@@ -7543,7 +7543,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sweep_attack",
-                        "light_shield"
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "polearm_light",
@@ -7569,8 +7569,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_glaive",
-                        "radiant_sweep"
+                        "impale",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "polearm_light",
@@ -7597,7 +7597,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "armor_crusher",
-                        "fireball"
+                        "ignite"
                     ]
                 },
                 "fusionType": "hammer_fire",
@@ -7623,8 +7623,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ground_slam",
-                        "fire_wall"
+                        "berserker_swing",
+                        "explosion"
                     ]
                 },
                 "fusionType": "hammer_fire",
@@ -7650,8 +7650,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_hammer",
-                        "magma_smash"
+                        "apocalypse_slam",
+                        "meteor"
                     ]
                 },
                 "fusionType": "hammer_fire",
@@ -7677,8 +7677,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
-                        "ice_shard"
+                        "heavy_impact",
+                        "frost_touch"
                     ]
                 },
                 "fusionType": "hammer_ice",
@@ -7705,7 +7705,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ground_slam",
-                        "ice_wall"
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "hammer_ice",
@@ -7731,8 +7731,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_hammer",
-                        "glacial_pound"
+                        "berserker_swing",
+                        "ice_prison"
                     ]
                 },
                 "fusionType": "hammer_ice",
@@ -7758,8 +7758,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
-                        "spark"
+                        "stunning_blow",
+                        "static_charge"
                     ]
                 },
                 "fusionType": "hammer_lightning",
@@ -7785,7 +7785,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ground_slam",
+                        "thunderstrike",
                         "thunder_clap"
                     ]
                 },
@@ -7812,8 +7812,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_hammer",
-                        "thunder_slam"
+                        "thunderstrike",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "hammer_lightning",
@@ -7857,8 +7857,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ground_slam",
-                        "stone_wall"
+                        "earth_shaker",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "hammer_earth",
@@ -7884,8 +7884,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "earthshaker_hammer",
-                        "tectonic_slam"
+                        "earth_shaker",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "hammer_earth",
@@ -7911,7 +7911,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
+                        "heavy_impact",
                         "gust"
                     ]
                 },
@@ -7930,7 +7930,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ground_slam",
-                        "wind_barrier"
+                        "tornado"
                     ]
                 },
                 "fusionType": "hammer_wind",
@@ -7956,8 +7956,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gale_hammer",
-                        "cyclone_slam"
+                        "thunderstrike",
+                        "tornado"
                     ]
                 },
                 "fusionType": "hammer_wind",
@@ -8001,8 +8001,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ground_slam",
-                        "water_shield"
+                        "stunning_blow",
+                        "heal_wounds"
                     ]
                 },
                 "fusionType": "hammer_water",
@@ -8028,8 +8028,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "tide_hammer",
-                        "wave_slam"
+                        "earth_shaker",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "hammer_water",
@@ -8055,8 +8055,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
-                        "shadow_bolt"
+                        "heavy_impact",
+                        "fear"
                     ]
                 },
                 "fusionType": "hammer_darkness",
@@ -8083,7 +8083,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ground_slam",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "hammer_darkness",
@@ -8109,8 +8109,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_hammer",
-                        "void_slam"
+                        "berserker_swing",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "hammer_darkness",
@@ -8136,7 +8136,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "armor_crusher",
+                        "hammer_basics",
                         "light_ray"
                     ]
                 },
@@ -8164,7 +8164,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ground_slam",
-                        "light_shield"
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "hammer_light",
@@ -8190,8 +8190,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "radiant_hammer",
-                        "solar_slam"
+                        "mjolnir_strike",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "hammer_light",
@@ -8218,7 +8218,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "cleave",
-                        "fireball"
+                        "ignite"
                     ]
                 },
                 "fusionType": "axe_fire",
@@ -8245,7 +8245,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "fire_wall"
+                        "fire_whip"
                     ]
                 },
                 "fusionType": "axe_fire",
@@ -8271,8 +8271,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_axe",
-                        "inferno_cleave"
+                        "crushing_blow",
+                        "meteor"
                     ]
                 },
                 "fusionType": "axe_fire",
@@ -8298,8 +8298,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
-                        "ice_shard"
+                        "heavy_swing",
+                        "frost_touch"
                     ]
                 },
                 "fusionType": "axe_ice",
@@ -8326,7 +8326,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "ice_wall"
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "axe_ice",
@@ -8352,8 +8352,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_axe",
-                        "frozen_cleave"
+                        "crushing_blow",
+                        "ice_age"
                     ]
                 },
                 "fusionType": "axe_ice",
@@ -8380,7 +8380,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "cleave",
-                        "spark"
+                        "static_charge"
                     ]
                 },
                 "fusionType": "axe_lightning",
@@ -8406,7 +8406,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
+                        "armor_break",
                         "stone_throw"
                     ]
                 },
@@ -8424,7 +8424,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
+                        "heavy_swing",
                         "gust"
                     ]
                 },
@@ -8442,7 +8442,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
+                        "armor_break",
                         "water_splash"
                     ]
                 },
@@ -8460,8 +8460,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "cleave",
-                        "shadow_bolt"
+                        "heavy_swing",
+                        "fear"
                     ]
                 },
                 "fusionType": "axe_darkness",
@@ -8515,7 +8515,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "electric_field"
+                        "chain_lightning"
                     ]
                 },
                 "fusionType": "axe_lightning",
@@ -8541,8 +8541,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_axe",
-                        "thunder_cleave"
+                        "berserker_rage",
+                        "ball_lightning"
                     ]
                 },
                 "fusionType": "axe_lightning",
@@ -8569,7 +8569,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "earth_shield"
+                        "earthquake"
                     ]
                 },
                 "fusionType": "axe_earth",
@@ -8595,8 +8595,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_axe",
-                        "earthen_cleave"
+                        "earthquake_slam",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "axe_earth",
@@ -8649,8 +8649,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_axe",
-                        "gale_cleave"
+                        "berserker_rage",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "axe_wind",
@@ -8677,7 +8677,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "water_shield"
+                        "water_whip"
                     ]
                 },
                 "fusionType": "axe_water",
@@ -8703,8 +8703,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_axe",
-                        "tidal_cleave"
+                        "crushing_blow",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "axe_water",
@@ -8731,7 +8731,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "wide_cleave",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "axe_darkness",
@@ -8757,8 +8757,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_axe",
-                        "void_cleave"
+                        "berserker_rage",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "axe_darkness",
@@ -8811,8 +8811,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_axe",
-                        "radiant_cleave"
+                        "crushing_blow",
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "axe_light",
@@ -8865,8 +8865,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "staff_strike",
-                        "fire_wall"
+                        "elemental_staff",
+                        "fireball"
                     ]
                 },
                 "fusionType": "staff_fire",
@@ -8892,8 +8892,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flame_staff",
-                        "inferno_channel"
+                        "staff_of_power",
+                        "inferno"
                     ]
                 },
                 "fusionType": "staff_fire",
@@ -8946,8 +8946,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "staff_strike",
-                        "ice_wall"
+                        "elemental_staff",
+                        "ice_spear"
                     ]
                 },
                 "fusionType": "staff_ice",
@@ -8973,8 +8973,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_staff",
-                        "glacial_focus"
+                        "elemental_staff",
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "staff_ice",
@@ -9054,8 +9054,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_staff",
-                        "thunder_focus"
+                        "staff_of_power",
+                        "ball_lightning"
                     ]
                 },
                 "fusionType": "staff_lightning",
@@ -9100,7 +9100,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "staff_strike",
-                        "stone_wall"
+                        "stone_spear"
                     ]
                 },
                 "fusionType": "staff_earth",
@@ -9126,8 +9126,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_staff",
-                        "crystal_focus"
+                        "staff_of_power",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "staff_earth",
@@ -9172,7 +9172,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "staff_strike",
-                        "wind_barrier"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "staff_wind",
@@ -9198,8 +9198,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "wind_staff",
-                        "gale_focus"
+                        "mana_burn",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "staff_wind",
@@ -9243,8 +9243,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "staff_strike",
-                        "water_shield"
+                        "mana_burn",
+                        "water_whip"
                     ]
                 },
                 "fusionType": "staff_water",
@@ -9270,8 +9270,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_staff",
-                        "tide_focus"
+                        "staff_of_power",
+                        "tsunami"
                     ]
                 },
                 "fusionType": "staff_water",
@@ -9325,7 +9325,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "staff_strike",
-                        "shadow_armor"
+                        "fear"
                     ]
                 },
                 "fusionType": "staff_darkness",
@@ -9351,8 +9351,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_staff",
-                        "void_focus"
+                        "staff_of_power",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "staff_darkness",
@@ -9405,8 +9405,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "staff_strike",
-                        "light_shield"
+                        "spell_penetration",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "staff_light",
@@ -9432,8 +9432,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "light_staff",
-                        "radiant_focus"
+                        "staff_of_power",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "staff_light",
@@ -9486,8 +9486,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "fire_wall"
+                        "feint_strike",
+                        "explosion"
                     ]
                 },
                 "fusionType": "striker_fire",
@@ -9513,8 +9513,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ember_fists",
-                        "inferno_palm"
+                        "flurry_of_blows",
+                        "inferno"
                     ]
                 },
                 "fusionType": "striker_fire",
@@ -9567,8 +9567,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "ice_wall"
+                        "joint_lock",
+                        "ice_prison"
                     ]
                 },
                 "fusionType": "striker_ice",
@@ -9594,8 +9594,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_fists",
-                        "glacial_palm"
+                        "striker_volley",
+                        "frost_nova"
                     ]
                 },
                 "fusionType": "striker_ice",
@@ -9648,8 +9648,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "electric_field"
+                        "feint_strike",
+                        "shock"
                     ]
                 },
                 "fusionType": "striker_lightning",
@@ -9675,8 +9675,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_fists",
-                        "thunder_palm"
+                        "flurry_of_blows",
+                        "thunder_clap"
                     ]
                 },
                 "fusionType": "striker_lightning",
@@ -9702,7 +9702,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "striker_basics",
+                        "stone_fists",
                         "stone_throw"
                     ]
                 },
@@ -9720,8 +9720,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "earth_shield"
+                        "iron_palm",
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "striker_earth",
@@ -9747,8 +9747,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "granite_fists",
-                        "earthen_palm"
+                        "striker_volley",
+                        "earthquake"
                     ]
                 },
                 "fusionType": "striker_earth",
@@ -9792,8 +9792,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "tornado"
+                        "feint_strike",
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "striker_wind",
@@ -9819,8 +9819,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gale_fists",
-                        "cyclone_palm"
+                        "flurry_of_blows",
+                        "tornado"
                     ]
                 },
                 "fusionType": "striker_wind",
@@ -9864,8 +9864,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "water_shield"
+                        "joint_lock",
+                        "blood_control"
                     ]
                 },
                 "fusionType": "striker_water",
@@ -9891,8 +9891,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "tide_fists",
-                        "tidal_palm"
+                        "striker_volley",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "striker_water",
@@ -9945,8 +9945,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
-                        "shadow_armor"
+                        "feint_strike",
+                        "fear"
                     ]
                 },
                 "fusionType": "striker_darkness",
@@ -9972,8 +9972,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_fists",
-                        "umbral_palm"
+                        "flurry_of_blows",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "striker_darkness",
@@ -10026,7 +10026,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "flurry_of_blows",
+                        "iron_palm",
                         "holy_weapon"
                     ]
                 },
@@ -10053,8 +10053,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "radiant_fists",
-                        "solar_palm"
+                        "striker_volley",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "striker_light",
@@ -10082,8 +10082,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sword_mastery",
-                        "acid_vials"
+                        "piercing_thrust",
+                        "explosive_compounds"
                     ]
                 },
                 "fusionType": "sword_alchemy",
@@ -10109,7 +10109,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "multi_shot",
-                        "rune_apprentice"
+                        "artifact_shaping"
                     ]
                 },
                 "fusionType": "bow_enchanting",
@@ -10135,7 +10135,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "sword_mastery",
-                        "holy_weapon"
+                        "divine_judgment"
                     ]
                 },
                 "fusionType": "weapon_light",
@@ -10148,6 +10148,960 @@ const SKILLS_DATA = {
                         "applyTo": "self"
                     }
                 ]
+            },
+            {
+                "id": "duelists_edge",
+                "name": "Duelist's Edge",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Reaction (Duelist): When a single foe misses you with a melee attack, riposte. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 1d6.",
+                "icon": "⚔️🤺",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "parry",
+                        "parry_riposte"
+                    ]
+                },
+                "fusionType": "sword_duelist",
+                "fusionKind": "career_weapons",
+                "specialEffects": []
+            },
+            {
+                "id": "crimson_flourish",
+                "name": "Crimson Flourish",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Duelist): A showy three-cut combo. Make up to three sword attacks against one target (d20 + accuracy vs Physical Defence each); each hit deals weapon damage. Has a 40% chance to apply Bleeding.",
+                "icon": "⚔️🌹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "blade_dance",
+                        "flourish"
+                    ]
+                },
+                "fusionType": "sword_duelist",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "bleeding",
+                        "duration": 3,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "perfect_duel",
+                "name": "Perfect Duel",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Duelist): Challenge one foe for 3 turns. Against them you gain +2 accuracy and +2 Physical Defence, and your first hit each turn deals an extra 2d6 damage. Has a 75% chance to apply Weakened.",
+                "icon": "🤺✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "piercing_thrust",
+                        "dueling_stance"
+                    ]
+                },
+                "fusionType": "sword_duelist",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 3,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "hunters_mark_shot",
+                "name": "Hunter's Mark Shot",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action (Ranger): Pin a target with a barbed arrow. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage and allies gain +1 accuracy against it until your next turn. Has a 20% chance to apply Immobilized.",
+                "icon": "🏹🎯",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "aimed_shot",
+                        "snare_craft"
+                    ]
+                },
+                "fusionType": "bow_ranger",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "trailblazer_volley",
+                "name": "Trailblazer Volley",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Ranger): Call targets and loose a volley into a 15ft area within range. One attack roll per enemy (d20 + accuracy vs Physical Defence); on each hit, weapon damage. Has a 40% chance to apply Bleeding.",
+                "icon": "🏹🌲",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multi_shot",
+                        "volley_call"
+                    ]
+                },
+                "fusionType": "bow_ranger",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "bleeding",
+                        "duration": 3,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "apex_hunter",
+                "name": "Apex Hunter",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Ranger): Vanish into cover and gain Stealth Mastery for 2 turns. Your next ranged attack from hiding gains +2 accuracy and deals an extra 3d6 damage. Has a 75% chance to apply Immobilized.",
+                "icon": "🦌🏹",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "homing_shot",
+                        "camouflage_net"
+                    ]
+                },
+                "fusionType": "bow_ranger",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stealth_mastery",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "self"
+                    },
+                    {
+                        "effectId": "immobilized",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "blood_cleave",
+                "name": "Blood Cleave",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action (Berserker): A savage swing at up to two adjacent foes. Separate attack roll each (d20 + accuracy vs Physical Defence); on each hit, weapon damage + 1d4. Has a 20% chance to apply Bleeding.",
+                "icon": "🪓🩸",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "cleave",
+                        "bloodlust"
+                    ]
+                },
+                "fusionType": "axe_berserker",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "bleeding",
+                        "duration": 3,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "rampage_chop",
+                "name": "Rampage Chop",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Berserker): Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6. If this drops the target to 0 HP, move 10ft and make one more basic axe attack for free. Has a 40% chance to apply Fear.",
+                "icon": "🪓😤",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "berserker_rage",
+                        "rage"
+                    ]
+                },
+                "fusionType": "axe_berserker",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "fear",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "headsmans_fury",
+                "name": "Headsman's Fury",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Berserker): Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 3d6, doubled against a target below half HP. You are Exhausted for 1 turn afterwards.",
+                "icon": "🪓💀",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "crushing_blow",
+                        "executioner"
+                    ]
+                },
+                "fusionType": "axe_berserker",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "exhausted",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "conduit_staff",
+                "name": "Conduit Staff",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action (Mage): Strike with your staff and channel the blow into an ally within 30ft. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage and the ally regains 2 Stamina.",
+                "icon": "🪄🔮",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_strike",
+                        "mana_font"
+                    ]
+                },
+                "fusionType": "staff_mage",
+                "fusionKind": "career_weapons",
+                "specialEffects": []
+            },
+            {
+                "id": "wardens_circle",
+                "name": "Warden's Circle",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Mage): Plant your staff and draw a 10ft circle. Allies inside gain Spell Warded for 3 turns while you stay in the circle.",
+                "icon": "🪄🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "arcane_shield",
+                        "ward_circle"
+                    ]
+                },
+                "fusionType": "staff_mage",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "spell_warded",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "archmages_rod",
+                "name": "Archmage's Rod",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Mage): Overload your staff. Attack roll d20 + accuracy vs Magical Defence against a foe within 60ft; on a hit, 4d6 force damage + Magic Power. Allies within 15ft of you gain Empowered for 2 turns.",
+                "icon": "🪄✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "staff_of_power",
+                        "amplified_healing"
+                    ]
+                },
+                "fusionType": "staff_mage",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "empowered",
+                        "duration": 2,
+                        "potency": 3,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "cutpurse_strike",
+                "name": "Cutpurse Strike",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Action (Thief): Stab and snatch. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage and you may steal one small unequipped item or a handful of Gil (GM decides what is in reach).",
+                "icon": "🗡️👛",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "sneak_attack",
+                        "light_fingers"
+                    ]
+                },
+                "fusionType": "dagger_thief",
+                "fusionKind": "career_weapons",
+                "specialEffects": []
+            },
+            {
+                "id": "vanishing_stab",
+                "name": "Vanishing Stab",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Thief): Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage + 2d6. Then move up to 15ft without provoking attacks and gain Stealth Mastery for 1 turn.",
+                "icon": "🗡️💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadowstep",
+                        "hit_and_run"
+                    ]
+                },
+                "fusionType": "dagger_thief",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stealth_mastery",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "perfect_heist",
+                "name": "Perfect Heist",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Thief): Blur between up to three foes within 20ft. Separate attack roll each (d20 + accuracy vs Physical Defence); on each hit, weapon damage + 1d6 and steal one small item. Has a 75% chance to apply Blinded.",
+                "icon": "💰🗡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "shadow_clone",
+                        "filch"
+                    ]
+                },
+                "fusionType": "dagger_thief",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "shieldline_thrust",
+                "name": "Shieldline Thrust",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action (Soldier): Thrust from behind your guard. Attack roll d20 + accuracy vs Physical Defence at 10ft reach; on a hit, weapon damage, and an adjacent ally gains +1 Physical Defence until your next turn.",
+                "icon": "🔱🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thrust_attack",
+                        "shield_wall"
+                    ]
+                },
+                "fusionType": "polearm_soldier",
+                "fusionKind": "career_weapons",
+                "specialEffects": []
+            },
+            {
+                "id": "iron_phalanx",
+                "name": "Iron Phalanx",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Toggle (Soldier): Lock spears with your allies. While active, you and allies adjacent to you gain +2 Physical Defence, and foes that enter your reach provoke a free polearm attack. Costs stamina per turn while active.",
+                "icon": "🔱🧱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "phalanx_formation",
+                        "phalanx"
+                    ]
+                },
+                "fusionType": "polearm_soldier",
+                "fusionKind": "career_weapons",
+                "specialEffects": []
+            },
+            {
+                "id": "unbreakable_line",
+                "name": "Unbreakable Line",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Soldier): Plant your weapon and rally the line. You and allies within 15ft gain Protected for 3 turns and cannot be pushed or knocked down while it lasts.",
+                "icon": "🏰🔱",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "fortress_stance",
+                        "commanders_presence"
+                    ]
+                },
+                "fusionType": "polearm_soldier",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "protected",
+                        "duration": 3,
+                        "potency": 3,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "forge_strike",
+                "name": "Forge Strike",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action (Blacksmith): A smith's precise blow at a weak joint. Attack roll d20 + accuracy vs Physical Defence; on a hit, weapon damage and the target loses 1 Physical Defence until the end of the encounter (max −3).",
+                "icon": "🔨🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armor_crusher",
+                        "weaponwright"
+                    ]
+                },
+                "fusionType": "hammer_blacksmith",
+                "fusionKind": "career_weapons",
+                "specialEffects": []
+            },
+            {
+                "id": "tempered_quake",
+                "name": "Tempered Quake",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Blacksmith): Slam the ground like an anvil. One attack roll per creature within 10ft (d20 + accuracy vs Physical Defence); on each hit, weapon damage + 1d6. Has a 40% chance to apply Stagger.",
+                "icon": "🔨🌋",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "earth_shaker",
+                        "tempered_steel"
+                    ]
+                },
+                "fusionType": "hammer_blacksmith",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stagger",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "anvil_of_war",
+                "name": "Anvil of War",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Blacksmith): Re-temper your party's gear mid-fight. You and allies within 15ft gain Weapon Enchanted for 3 turns, then make one hammer attack (d20 + accuracy vs Physical Defence) for weapon damage + 3d6.",
+                "icon": "⚒️🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "thunderstrike",
+                        "master_alloy"
+                    ]
+                },
+                "fusionType": "hammer_blacksmith",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weapon_enchanted",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "pressure_point",
+                "name": "Pressure Point",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Action (Medic): Your anatomy knowledge cuts both ways. Strike a foe (d20 + accuracy vs Physical Defence) for unarmed damage + 1d4, or tap an ally to restore 1d6 HP instead. Has a 20% chance to apply Weakened.",
+                "icon": "🥊🩺",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "feint_strike",
+                        "triage"
+                    ]
+                },
+                "fusionType": "striker_medic",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "nerve_strike",
+                "name": "Nerve Strike",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Medic): Hit a nerve cluster. Attack roll d20 + accuracy vs Physical Defence; on a hit, unarmed damage + 2d6. Has a 40% chance to apply Incapacitated.",
+                "icon": "🥊⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "joint_lock",
+                        "surgical_touch"
+                    ]
+                },
+                "fusionType": "striker_medic",
+                "fusionKind": "career_weapons",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "incapacitated",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "hand_of_mercy",
+                "name": "Hand of Mercy",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action (Medic): A flurry that heals and harms. Make two unarmed attacks (d20 + accuracy vs Physical Defence each) for unarmed damage + 1d6 per hit; for each hit, one ally within 15ft regains 2d6 HP.",
+                "icon": "🤲✨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "flurry_of_blows",
+                        "surgical_touch"
+                    ]
+                },
+                "fusionType": "striker_medic",
+                "fusionKind": "career_weapons",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_burning_ballad",
+                "name": "Burning Ballad",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Performance (Musician + Fire): Play a searing tune. Allies within 30ft add +1d4 fire damage to their next hit; enemies within 15ft have a 20% chance to apply Burn.",
+                "icon": "🎶🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "work_song",
+                        "ignite"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "fusion_flambe_feast",
+                "name": "Flambé Feast",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Craft (Chef + Fire): Cook a spectacular flaming meal during a rest. Everyone who eats gains Fire Resistance until the next long rest and restores 2d6 HP.",
+                "icon": "🍳🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "banquet_planner",
+                        "fire_attunement"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_cryo_surgeon",
+                "name": "Cryo Surgeon",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action (Medic + Ice): Chill a wound shut. Touch an ally: they restore 1d6 + 2 HP and remove Burn or Bleeding.",
+                "icon": "🩺❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "clean_bandage",
+                        "ice_armor"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_frozen_evidence",
+                "name": "Frozen Evidence",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Investigation (Detective + Ice): Freeze a scene solid for 1 hour so nothing decays or is disturbed. You gain +2 on every roll to examine it, and learn one clue the GM would otherwise hide.",
+                "icon": "🔍🧊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "reconstruct",
+                        "ice_prison"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_shock_trap",
+                "name": "Shock Trap",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action (Ranger + Lightning): Set a charged snare in a 5ft square within 30ft. The first enemy to enter takes 2d6 lightning damage and has a 20% chance to apply Stagger.",
+                "icon": "🪤⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "snare_craft",
+                        "shock"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stagger",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "fusion_galvanic_revival",
+                "name": "Galvanic Revival",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Medic + Lightning): Jolt a Knocked Out ally back to their feet at once with 2d6 HP. They gain Haste for 2 turns.",
+                "icon": "💓⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "revival_draft",
+                        "lightning_speed"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_stoneforged_arms",
+                "name": "Stoneforged Arms",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Craft (Blacksmith + Earth): Fold stone into metal while smithing. Armour you craft gives +1 extra Physical Defence; weapons you craft deal +1 earth damage.",
+                "icon": "⚒️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armourer",
+                        "stone_armor"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_bulwark_of_stone",
+                "name": "Bulwark of Stone",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action (Paladin + Earth): Raise a stone rampart around your oath. You and allies within 10ft gain Stone Skin for 3 turns.",
+                "icon": "🛡️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "aura_of_protection",
+                        "earth_shield"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stone_skin",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "fusion_featherlight_fingers",
+                "name": "Featherlight Fingers",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 2,
+                "desc": "Utility (Thief + Wind): Float a small object up to 30ft to your hand without touching it. Pickpocketing or lifting keys this way gets +2 on the roll.",
+                "icon": "🪶🤏",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "light_fingers",
+                        "levitate"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_gale_chorus",
+                "name": "Gale Chorus",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Performance (Musician + Wind): A rousing song on the wind. Allies within 30ft gain Enhanced Mobility for 3 turns and ignore difficult terrain.",
+                "icon": "🎶💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "marching_tune",
+                        "flight"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "enhanced_mobility",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "fusion_healing_tide_brew",
+                "name": "Healing Tide Brew",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 0,
+                "desc": "Craft (Alchemist + Water): Brew a Tide Tonic during a rest (1 per rest). Drinking it restores 2d6 HP and removes Poison.",
+                "icon": "⚗️💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "apothecary",
+                        "heal_wounds"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_tide_runes",
+                "name": "Tide Runes",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Enchant (Enchanter + Water): Etch flowing runes on an ally's armour. They gain Regeneration for 3 turns and can breathe underwater for 1 hour.",
+                "icon": "🔣🌊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ward_scribe",
+                        "water_breathing"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "regeneration",
+                        "duration": 3,
+                        "potency": 2,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "fusion_nightmare_interrogation",
+                "name": "Nightmare Interrogation",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Social (Detective + Darkness): Fill a suspect's mind with shadows while you question them. You gain +2 on rolls to spot lies; if they fail a Normal Saving Roll (11), they answer one question truthfully.",
+                "icon": "🔍🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "interview",
+                        "fear"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_shadow_contract",
+                "name": "Shadow Contract",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Enchant (Enchanter + Darkness): Bind a willing ally to a shadow pact. For 3 turns their attacks heal them for 1d4, but they take 1 darkness damage at the end of each turn.",
+                "icon": "📜🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "soul_bind",
+                        "life_drain"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
+            },
+            {
+                "id": "fusion_radiant_oath",
+                "name": "Radiant Oath",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action (Paladin + Light): Speak your oath aloud. One ally within 30ft gains Protected for 2 turns; undead or fiends within 15ft have a 20% chance to apply Fear.",
+                "icon": "⚜️☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "rebuke",
+                        "purify"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "protected",
+                        "duration": 2,
+                        "potency": 3,
+                        "applyTo": "self"
+                    },
+                    {
+                        "effectId": "fear",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "fusion_dawn_anthem",
+                "name": "Dawn Anthem",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Performance (Musician + Light): A hymn like sunrise. Allies within 30ft restore 2d6 HP and remove one Fear or Charm effect.",
+                "icon": "🎶🌅",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "soothing_hymn",
+                        "healing_light"
+                    ]
+                },
+                "fusionKind": "career",
+                "specialEffects": []
             }
         ],
         "monster_fusion": [
@@ -10162,7 +11116,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "fire_breath",
+                        "size_change",
                         "fire_supremacy"
                     ]
                 },
@@ -10189,8 +11143,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "razor_claws",
-                        "monster_shadow_step"
+                        "monster_shadow_step",
+                        "shadow_armor"
                     ]
                 },
                 "fusionType": "monster_darkness",
@@ -10216,8 +11170,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "roar",
-                        "spell_power"
+                        "fear_aura",
+                        "staff_of_power"
                     ]
                 },
                 "fusionType": "monster_arcane",
@@ -10227,6 +11181,646 @@ const SKILLS_DATA = {
                         "effectId": "intimidating_aura",
                         "duration": 3,
                         "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "cinder_claws",
+                "name": "Cinder Claws",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action: Rake with white-hot claws. Attack roll d20 + accuracy vs Physical Defence; on a hit, claw damage + 1d6 fire damage. Has a 20% chance to apply Burn.",
+                "icon": "🐾🔥",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "razor_claws",
+                        "fireball"
+                    ]
+                },
+                "fusionType": "monster_fire",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "magma_hide",
+                "name": "Magma Hide",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Toggle: Your plates glow with molten rock. While active, gain +2 Physical Defence and melee attackers who hit you take 1d6 fire damage. Costs stamina per turn while active.",
+                "icon": "🌋🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "armored_plates",
+                        "fire_shield"
+                    ]
+                },
+                "fusionType": "monster_fire",
+                "specialEffects": []
+            },
+            {
+                "id": "volcanic_rampage",
+                "name": "Volcanic Rampage",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action: Charge up to 30ft leaving a trail of lava, then erupt. One attack roll per creature within 10ft of where you stop (d20 + accuracy vs Physical Defence); on each hit, claw damage + 3d6 fire damage. Has a 75% chance to apply Burn.",
+                "icon": "🌋🐾",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "trample",
+                        "inferno"
+                    ]
+                },
+                "fusionType": "monster_fire",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "burn",
+                        "duration": 4,
+                        "potency": 1,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "frostbite_maw",
+                "name": "Frostbite Maw",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action: A freezing bite. Attack roll d20 + accuracy vs Physical Defence; on a hit, bite damage + 1d6 ice damage. Has a 20% chance to apply Immobilized.",
+                "icon": "🦷❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "crushing_bite",
+                        "ice_spear"
+                    ]
+                },
+                "fusionType": "monster_ice",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "glacial_carapace",
+                "name": "Glacial Carapace",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action: Grow a shell of living ice. Gain Stone Skin for 3 turns; your Speed drops by 1 while the shell lasts.",
+                "icon": "🧊🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "metal_skin",
+                        "ice_armor"
+                    ]
+                },
+                "fusionType": "monster_ice",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stone_skin",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "rime_tyrant_howl",
+                "name": "Rime Tyrant Howl",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action: A howl that freezes the air in a 30ft cone. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 ice damage + Magic Power. Has a 75% chance to apply Immobilized.",
+                "icon": "🐺❄️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "ice_breath",
+                        "blizzard"
+                    ]
+                },
+                "fusionType": "monster_ice",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "storm_pounce",
+                "name": "Storm Pounce",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action: Leap up to 20ft in a crackle of static. Attack roll d20 + accuracy vs Physical Defence; on a hit, claw damage + 1d6 lightning damage. Has a 20% chance to apply Stagger.",
+                "icon": "🐆⚡",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "pounce",
+                        "lightning_bolt"
+                    ]
+                },
+                "fusionType": "monster_lightning",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stagger",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "thunderhide",
+                "name": "Thunderhide",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Toggle: Your hide hums with charge. While active, melee attackers who hit you take 1d6 lightning damage and must beat a Normal Saving Roll (11) or lose their next movement. Costs stamina per turn while active.",
+                "icon": "⚡🛡️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "damage_reduction",
+                        "electric_field"
+                    ]
+                },
+                "fusionType": "monster_lightning",
+                "specialEffects": []
+            },
+            {
+                "id": "tempest_beast",
+                "name": "Tempest Beast",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action: Become a living storm and strike up to three different foes within 30ft, moving between them. Separate attack roll per foe (d20 + accuracy vs Physical Defence); on each hit, claw damage + 2d6 lightning damage. Has a 75% chance to apply Stagger.",
+                "icon": "🌩️🐾",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "multiattack",
+                        "lightning_storm"
+                    ]
+                },
+                "fusionType": "monster_lightning",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stagger",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "burrow_ambush",
+                "name": "Burrow Ambush",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action: Tunnel up to 20ft and burst out beneath a foe. Attack roll d20 + accuracy + 2 vs Physical Defence; on a hit, claw damage + 1d6 earth damage. Has a 20% chance to apply Knockdown.",
+                "icon": "🕳️🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "burrow",
+                        "earth_spike"
+                    ]
+                },
+                "fusionType": "monster_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "knockdown",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "quake_trample",
+                "name": "Quake Trample",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action: Stampede in a 30ft line, cracking the ground. One attack roll per creature in the line (d20 + accuracy vs Physical Defence); on each hit, 2d6 earth damage + Strength. Has a 40% chance to apply Knockdown.",
+                "icon": "🦏🪨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "trample",
+                        "earthquake"
+                    ]
+                },
+                "fusionType": "monster_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "knockdown",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "colossus_awakening",
+                "name": "Colossus Awakening",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action: Rock armour erupts across your body. Gain Stone Skin for 4 turns, then slam the ground: one attack roll per creature within 15ft (d20 + accuracy vs Physical Defence); on each hit, 3d6 earth damage. Has a 75% chance to apply Immobilized.",
+                "icon": "🗿🐾",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "monster_earthquake",
+                        "petrify"
+                    ]
+                },
+                "fusionType": "monster_earth",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stone_skin",
+                        "duration": 4,
+                        "potency": 0,
+                        "applyTo": "self"
+                    },
+                    {
+                        "effectId": "immobilized",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "screeching_gale",
+                "name": "Screeching Gale",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action: A sonic shriek carried on a gust in a 15ft cone. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 1d6 wind damage and push 10ft. Has a 20% chance to apply Blinded.",
+                "icon": "🦇💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "echolocation",
+                        "wind_blade"
+                    ]
+                },
+                "fusionType": "monster_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "cyclone_tail",
+                "name": "Cyclone Tail",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action: Spin your tail into a whirlwind. One attack roll per creature within 10ft (d20 + accuracy vs Physical Defence); on each hit, tail damage + 2d6 wind damage and push 15ft. Has a 40% chance to apply Knockdown.",
+                "icon": "🌪️🦎",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spiked_tail",
+                        "tornado"
+                    ]
+                },
+                "fusionType": "monster_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "knockdown",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "sky_tyrant_dive",
+                "name": "Sky Tyrant Dive",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action: Ride a downdraft up to 40ft and crash into a foe. Attack roll d20 + accuracy + 2 vs Physical Defence; on a hit, claw damage + 4d6 wind damage, then return up to 20ft without provoking attacks. Has a 75% chance to apply Knockdown.",
+                "icon": "🦅💨",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "rend",
+                        "flight"
+                    ]
+                },
+                "fusionType": "monster_wind",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "knockdown",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "riptide_jaws",
+                "name": "Riptide Jaws",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action: Lunge from a surge of water and drag your prey 10ft toward you. Attack roll d20 + accuracy vs Physical Defence; on a hit, bite damage + 1d6 water damage. Has a 20% chance to apply Immobilized.",
+                "icon": "🦈💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "swim",
+                        "water_whip"
+                    ]
+                },
+                "fusionType": "monster_water",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "immobilized",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "abyssal_coils",
+                "name": "Abyssal Coils",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action: Wrap a foe in crushing, water-slick coils. Attack roll d20 + accuracy vs Physical Defence; on a hit, 2d6 water damage + Strength, and the target is held until it beats a Hard Saving Roll (14). Has a 40% chance to apply Exhausted.",
+                "icon": "🐙💧",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "spiked_tail",
+                        "blood_control"
+                    ]
+                },
+                "fusionType": "monster_water",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "exhausted",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "leviathan_surge",
+                "name": "Leviathan Surge",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action: Summon a crushing wave and ride it through your enemies in a 40ft line. One attack roll per creature (d20 + accuracy vs Physical Defence); on each hit, bite damage + 3d6 water damage and push 15ft. Has a 75% chance to apply Knockdown.",
+                "icon": "🐋🌊",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "trample",
+                        "tsunami"
+                    ]
+                },
+                "fusionType": "monster_water",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "knockdown",
+                        "duration": 1,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "night_terror_howl",
+                "name": "Night Terror Howl",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action: A howl that echoes from every shadow within 20ft. One attack roll per enemy (d20 + accuracy vs Magical Defence); on each hit, 1d6 darkness damage. Has a 20% chance to apply Fear.",
+                "icon": "🐺🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "roar",
+                        "fear"
+                    ]
+                },
+                "fusionType": "monster_darkness",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "fear",
+                        "duration": 3,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "soul_rend",
+                "name": "Soul Rend",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action: Tear at body and spirit alike. Attack roll d20 + accuracy vs Physical Defence; on a hit, claw damage + 2d6 darkness damage and you heal half the darkness damage dealt. Has a 40% chance to apply Weakened.",
+                "icon": "🩸🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "rend",
+                        "life_drain"
+                    ]
+                },
+                "fusionType": "monster_darkness",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "weakened",
+                        "duration": 4,
+                        "potency": 2,
+                        "applyTo": "target",
+                        "chance": 0.4
+                    }
+                ]
+            },
+            {
+                "id": "umbral_predator",
+                "name": "Umbral Predator",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action: Melt into the dark and hunt. Gain Stealth Mastery for 2 turns; your next attack while hidden gains +2 accuracy and deals an extra 3d6 darkness damage. Has a 75% chance to apply Fear.",
+                "icon": "👁️🌑",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "invisibility",
+                        "nightmare"
+                    ]
+                },
+                "fusionType": "monster_darkness",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "stealth_mastery",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "self"
+                    },
+                    {
+                        "effectId": "fear",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.75
+                    }
+                ]
+            },
+            {
+                "id": "radiant_horn",
+                "name": "Radiant Horn",
+                "tier": 2,
+                "cost": 20,
+                "staminaCost": 3,
+                "desc": "Action: Charge with a blazing horn. Attack roll d20 + accuracy vs Physical Defence; on a hit, gore damage + 1d6 light damage. Has a 20% chance to apply Blinded.",
+                "icon": "🦄☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "gore",
+                        "blinding_flash"
+                    ]
+                },
+                "fusionType": "monster_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
+                        "applyTo": "target",
+                        "chance": 0.2
+                    }
+                ]
+            },
+            {
+                "id": "seraph_plumage",
+                "name": "Seraph Plumage",
+                "tier": 3,
+                "cost": 40,
+                "staminaCost": 5,
+                "desc": "Action: Spread shining feathers. You and allies within 15ft gain Regeneration for 3 turns; undead and fiends in range take 2d6 light damage.",
+                "icon": "🪽☀️",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "pack_leader",
+                        "healing_light"
+                    ]
+                },
+                "fusionType": "monster_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "regeneration",
+                        "duration": 3,
+                        "potency": 2,
+                        "applyTo": "self"
+                    }
+                ]
+            },
+            {
+                "id": "solar_behemoth",
+                "name": "Solar Behemoth",
+                "tier": 4,
+                "cost": 65,
+                "staminaCost": 8,
+                "desc": "Action: Grow to blazing size and roar sunlight in a 30ft cone. One attack roll per creature (d20 + accuracy vs Magical Defence); on each hit, 3d6 light damage + Magic Power (double against undead). Has a 75% chance to apply Blinded.",
+                "icon": "🌞🐾",
+                "prerequisites": {
+                    "type": "AND",
+                    "skills": [
+                        "size_change",
+                        "solar_flare"
+                    ]
+                },
+                "fusionType": "monster_light",
+                "specialEffects": [],
+                "activationEffects": [
+                    {
+                        "effectId": "blinded",
+                        "duration": 2,
+                        "potency": 0,
                         "applyTo": "target",
                         "chance": 0.75
                     }
@@ -10272,8 +11866,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "steam_burst",
-                        "ice_wall"
+                        "fire_whip",
+                        "ice_prison"
                     ]
                 },
                 "fusionType": "fire_ice",
@@ -10299,8 +11893,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "thermal_shock",
-                        "inferno"
+                        "inferno",
+                        "blizzard"
                     ]
                 },
                 "fusionType": "fire_ice",
@@ -10353,7 +11947,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "plasma_bolt",
+                        "explosion",
                         "thunder_clap"
                     ]
                 },
@@ -10380,8 +11974,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_of_cinders",
-                        "chain_lightning"
+                        "inferno",
+                        "ball_lightning"
                     ]
                 },
                 "fusionType": "fire_lightning",
@@ -10434,8 +12028,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "magma_surge",
-                        "stone_wall"
+                        "explosion",
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "fire_earth",
@@ -10461,7 +12055,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "volcanic_rupture",
+                        "inferno",
                         "earthquake"
                     ]
                 },
@@ -10515,7 +12109,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "static_freeze",
+                        "ice_spear",
                         "thunder_clap"
                     ]
                 },
@@ -10542,8 +12136,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "crystalline_surge",
-                        "blizzard"
+                        "blizzard",
+                        "lightning_storm"
                     ]
                 },
                 "fusionType": "ice_lightning",
@@ -10596,8 +12190,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "twilight_balance",
-                        "shadow_armor"
+                        "life_drain",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "darkness_light",
@@ -10623,8 +12217,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "duality_surge",
-                        "dawn_dance"
+                        "eclipse",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "darkness_light",
@@ -10651,7 +12245,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "stone_throw",
-                        "gust"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "earth_wind",
@@ -10683,8 +12277,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sandstorm",
-                        "wind_barrier"
+                        "stone_spear",
+                        "suffocate"
                     ]
                 },
                 "fusionType": "earth_wind",
@@ -10716,8 +12310,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "desert_winds",
-                        "earthquake"
+                        "earthquake",
+                        "tornado"
                     ]
                 },
                 "fusionType": "earth_wind",
@@ -10749,7 +12343,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gust",
+                        "wind_blade",
                         "water_splash"
                     ]
                 },
@@ -10776,8 +12370,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "typhoon_strike",
-                        "water_shield"
+                        "wind_blade",
+                        "water_whip"
                     ]
                 },
                 "fusionType": "wind_water",
@@ -10803,7 +12397,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "monsoon",
+                        "hurricane",
                         "tsunami"
                     ]
                 },
@@ -10857,8 +12451,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "mud_slash",
-                        "stone_wall"
+                        "water_whip",
+                        "mud_trap"
                     ]
                 },
                 "fusionType": "water_earth",
@@ -10884,8 +12478,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "quicksand",
-                        "tsunami"
+                        "tsunami",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "water_earth",
@@ -10912,7 +12506,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "fireball",
-                        "water_splash"
+                        "water_whip"
                     ]
                 },
                 "fusionType": "fire_water",
@@ -10938,8 +12532,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "scalding_jet",
-                        "water_shield"
+                        "explosion",
+                        "water_whip"
                     ]
                 },
                 "fusionType": "fire_water",
@@ -10965,8 +12559,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "steam_cloud",
-                        "inferno"
+                        "explosion",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "fire_water",
@@ -10992,7 +12586,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gust",
+                        "wind_blade",
                         "shadow_bolt"
                     ]
                 },
@@ -11019,8 +12613,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_wind",
-                        "shadow_armor"
+                        "suffocate",
+                        "life_drain"
                     ]
                 },
                 "fusionType": "wind_darkness",
@@ -11046,8 +12640,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "void_tempest",
-                        "hurricane"
+                        "hurricane",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "wind_darkness",
@@ -11073,7 +12667,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "gust",
+                        "wind_blade",
                         "light_ray"
                     ]
                 },
@@ -11100,8 +12694,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "prismatic_breeze",
-                        "light_shield"
+                        "wind_blade",
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "wind_light",
@@ -11127,8 +12721,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "rainbow_gale",
-                        "dawn_dance"
+                        "tornado",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "wind_light",
@@ -11154,8 +12748,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "fireball",
-                        "gust"
+                        "fire_spark",
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "fire_wind",
@@ -11181,8 +12775,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "inferno_cyclone",
-                        "wind_barrier"
+                        "fireball",
+                        "suffocate"
                     ]
                 },
                 "fusionType": "fire_wind",
@@ -11208,8 +12802,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "heat_vacuum",
-                        "inferno"
+                        "fire_tornado",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "fire_wind",
@@ -11262,8 +12856,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadowflame",
-                        "shadow_armor"
+                        "fire_whip",
+                        "fear"
                     ]
                 },
                 "fusionType": "fire_darkness",
@@ -11289,8 +12883,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dark_pyre",
-                        "inferno"
+                        "meteor",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "fire_darkness",
@@ -11317,7 +12911,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ice_shard",
-                        "stone_throw"
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "ice_earth",
@@ -11343,8 +12937,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "glacial_spike",
-                        "stone_wall"
+                        "ice_prison",
+                        "stone_spear"
                     ]
                 },
                 "fusionType": "ice_earth",
@@ -11370,8 +12964,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "permafrost",
-                        "blizzard"
+                        "blizzard",
+                        "mountain_crush"
                     ]
                 },
                 "fusionType": "ice_earth",
@@ -11430,8 +13024,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_current",
-                        "water_shield"
+                        "ice_spear",
+                        "blood_control"
                     ]
                 },
                 "fusionType": "ice_water",
@@ -11463,7 +13057,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ice_flow",
+                        "frost_nova",
                         "tsunami"
                     ]
                 },
@@ -11496,7 +13090,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "ice_shard",
+                        "frost_touch",
                         "shadow_bolt"
                     ]
                 },
@@ -11523,8 +13117,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dark_frost",
-                        "shadow_armor"
+                        "ice_prison",
+                        "nightmare"
                     ]
                 },
                 "fusionType": "ice_darkness",
@@ -11550,8 +13144,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "void_freeze",
-                        "blizzard"
+                        "blizzard",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "ice_darkness",
@@ -11604,8 +13198,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "crystal_ray",
-                        "light_shield"
+                        "ice_spear",
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "ice_light",
@@ -11631,8 +13225,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "aurora_flash",
-                        "blizzard"
+                        "frost_nova",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "ice_light",
@@ -11658,8 +13252,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "spark",
-                        "gust"
+                        "lightning_bolt",
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "lightning_wind",
@@ -11691,8 +13285,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "storm_front",
-                        "wind_barrier"
+                        "chain_lightning",
+                        "tornado"
                     ]
                 },
                 "fusionType": "lightning_wind",
@@ -11724,8 +13318,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "charged_cyclone",
-                        "chain_lightning"
+                        "lightning_storm",
+                        "hurricane"
                     ]
                 },
                 "fusionType": "lightning_wind",
@@ -11790,8 +13384,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "conductivity",
-                        "water_shield"
+                        "thunder_clap",
+                        "tidal_wave"
                     ]
                 },
                 "fusionType": "lightning_water",
@@ -11823,8 +13417,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "lightning_water_storm_surge",
-                        "chain_lightning"
+                        "ball_lightning",
+                        "maelstrom"
                     ]
                 },
                 "fusionType": "lightning_water",
@@ -11883,8 +13477,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "dark_lightning",
-                        "shadow_armor"
+                        "lightning_bolt",
+                        "life_drain"
                     ]
                 },
                 "fusionType": "lightning_darkness",
@@ -11910,8 +13504,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "void_thunder",
-                        "chain_lightning"
+                        "ball_lightning",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "lightning_darkness",
@@ -11964,8 +13558,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "radiant_bolt",
-                        "light_shield"
+                        "thunder_clap",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "lightning_light",
@@ -11991,8 +13585,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "divine_thunder",
-                        "chain_lightning"
+                        "lightning_storm",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "lightning_light",
@@ -12045,8 +13639,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "shadow_stone",
-                        "shadow_armor"
+                        "stone_spear",
+                        "fear"
                     ]
                 },
                 "fusionType": "earth_darkness",
@@ -12072,8 +13666,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "obsidian_strike",
-                        "earthquake"
+                        "earthquake",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "earth_darkness",
@@ -12099,8 +13693,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "stone_throw",
-                        "light_ray"
+                        "earth_spike",
+                        "blinding_flash"
                     ]
                 },
                 "fusionType": "earth_light",
@@ -12126,8 +13720,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "crystal_light",
-                        "light_shield"
+                        "stone_spear",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "earth_light",
@@ -12153,8 +13747,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "prismatic_earth",
-                        "earthquake"
+                        "earthquake",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "earth_light",
@@ -12180,7 +13774,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "water_splash",
+                        "water_whip",
                         "shadow_bolt"
                     ]
                 },
@@ -12207,8 +13801,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "abyssal_current",
-                        "shadow_armor"
+                        "blood_control",
+                        "nightmare"
                     ]
                 },
                 "fusionType": "water_darkness",
@@ -12234,8 +13828,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "deep_surge",
-                        "tsunami"
+                        "maelstrom",
+                        "eclipse"
                     ]
                 },
                 "fusionType": "water_darkness",
@@ -12288,8 +13882,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "holy_spring",
-                        "light_shield"
+                        "water_whip",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "water_light",
@@ -12315,8 +13909,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "purifying_wave",
-                        "tsunami"
+                        "tsunami",
+                        "solar_flare"
                     ]
                 },
                 "fusionType": "water_light",
@@ -12369,8 +13963,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "sunspark",
-                        "holy_weapon"
+                        "fireball",
+                        "laser_beam"
                     ]
                 },
                 "fusionType": "fire_light",
@@ -12396,7 +13990,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "purifying_flame",
+                        "inferno",
                         "solar_flare"
                     ]
                 },
@@ -12424,7 +14018,7 @@ const SKILLS_DATA = {
                     "type": "AND",
                     "skills": [
                         "ice_shard",
-                        "gust"
+                        "wind_blade"
                     ]
                 },
                 "fusionType": "ice_wind",
@@ -12456,7 +14050,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "frost_gale",
+                        "ice_spear",
                         "tornado"
                     ]
                 },
@@ -12489,7 +14083,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "blizzard_squall",
+                        "blizzard",
                         "hurricane"
                     ]
                 },
@@ -12549,8 +14143,8 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "tremor_spark",
-                        "earth_shield"
+                        "chain_lightning",
+                        "earth_spike"
                     ]
                 },
                 "fusionType": "lightning_earth",
@@ -12576,7 +14170,7 @@ const SKILLS_DATA = {
                 "prerequisites": {
                     "type": "AND",
                     "skills": [
-                        "magnet_storm",
+                        "thunder_clap",
                         "earthquake"
                     ]
                 },
