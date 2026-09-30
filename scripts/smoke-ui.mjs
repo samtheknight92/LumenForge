@@ -124,6 +124,20 @@ await test('play tab: basic attack toast, HP buttons and Process Turn', async pa
   await page.locator('#app-content [data-process-turn]').first().click()
 })
 
+await test('notes tab: pages, quests and glossary search', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="notes"]')
+  const pagesBefore = await page.locator('[data-set-note-page]').count()
+  await page.click('[data-add-note-page]')
+  await page.waitForFunction(n => document.querySelectorAll('[data-set-note-page]').length === n + 1, pagesBefore)
+  await page.click('[data-add-quest]')
+  await page.locator('.quest-row').first().waitFor()
+  await page.fill('#glossary-search', 'burn')
+  await page.waitForFunction(() => /burn/i.test(document.querySelector('.glossary-results')?.innerText || '') &&
+    document.querySelectorAll('.glossary-entry').length > 0)
+})
+
 await test('folder can be created and persists', async page => {
   await open(page)
   await createCharacter(page)
