@@ -119,6 +119,10 @@ npm test
 
 These commands rebuild generated JSON, validate content references, run project audits, and test core systems such as saving, imports, race passives, Homebrew items, cursed equipment, inventory navigation, note pages, unidentified equipment, weather, and GM monster generation.
 
+### Automatic checks
+
+Every pull request (and every push to `main`) runs `npm test`, `npm run validate`, `npm run audit` and `npm run test:ui` on GitHub Actions (`.github/workflows/tests.yml`). The result shows as a tick or cross on the PR.
+
 ### Browser smoke tests
 
 ```bash
