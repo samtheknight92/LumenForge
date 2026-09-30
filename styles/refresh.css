@@ -372,3 +372,114 @@ html[data-appearance="dark"][data-theme="midnight"] :is(.tier-lane, .skill-card,
   .shop-active-filters { display: none; }
   .skills-toolbar > .segmented { flex: 1 1 100%; }
 }
+
+/* ========== Shared toolbars (Craft, Homebrew, GM Tools): one wrapping row ========== */
+.toolbar,
+.catalogue-card .item-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.toolbar > * { flex: 0 0 auto; margin: 0; }
+.toolbar > input.input { flex: 1 1 220px; min-width: 0; }
+.toolbar > select.input { flex: 0 1 200px; min-width: 0; }
+.toolbar > label.pill { min-height: 30px; padding: 3px 10px; font-size: 11.5px; }
+.toolbar > .primary-btn.tiny,
+.toolbar > .ghost-btn.tiny,
+.toolbar > .danger-btn.tiny { padding: 5px 10px; }
+@media (max-width: 760px) {
+  .toolbar > input.input { flex-basis: 100%; }
+  .toolbar > select.input { flex: 1 1 140px; }
+}
+
+/* ========== Stats ========== */
+.resource-card .stack { display: grid; gap: 8px; }
+html[data-appearance="light"] .resource-card { background: linear-gradient(180deg, var(--panel-bg-top, #fff), var(--panel-bg-bottom, #f5f7ff)); }
+html[data-appearance="light"] .resource-card h3 { color: #1e3a8a; }
+@media (min-width: 1000px) {
+  .resource-card .stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.resource-card .card-header { margin-bottom: 6px; }
+.resource-editor { display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 6px 10px; border-radius: 14px; }
+.resource-editor strong { font-family: var(--display); font-size: 14px; display: inline; }
+.resource-editor > div:first-child { display: flex; align-items: baseline; gap: 8px; }
+.resource-editor .subtle { font-size: 11.5px; }
+.resource-editor .resource-control-row { justify-content: flex-start; flex-wrap: wrap; gap: 4px; }
+.resource-editor .money-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.resource-editor .money-grid label { display: contents; }
+.resource-editor .money-grid .field-label { display: none; }
+.resource-editor .money-grid .input { width: 110px; }
+.resource-editor .mini-input { width: 72px; padding: 4px 6px; }
+
+.stat-upgrade-grid.grid.two { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+.stat-upgrade-grid.mt-16 { margin-top: 6px; }
+.stat-upgrade-card { padding: 8px 10px; }
+.stat-upgrade-card .stat-row-upgrade { padding: 0; }
+.stat-upgrade-card h3 { font-size: 1rem; margin: 0; }
+.stat-upgrade-card .stat-value { font-family: var(--display); font-size: 24px; }
+.stat-upgrade-card .subtle.mt-8 { margin-top: 2px; font-size: 11.5px; }
+.stat-upgrade-card .stat-breakdown-pills { margin-top: 4px; }
+.stat-upgrade-card .stat-breakdown-pills:empty { display: none; }
+.stat-upgrade-card .stat-actions { margin-top: 6px; gap: 6px; }
+.stat-upgrade-card .stat-actions button { padding: 5px 8px; font-size: 12.5px; min-height: 0; }
+@media (max-width: 760px) {
+  .stat-upgrade-grid.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .stat-upgrade-card .stat-actions { display: flex; gap: 4px; }
+  .stat-upgrade-card .stat-actions button { white-space: nowrap; font-size: 11px; padding: 5px 6px; min-width: 0; }
+  .stat-upgrade-card .stat-actions .ghost-btn { flex: 0 0 auto; }
+  .stat-upgrade-card .stat-actions .primary-btn { flex: 1 1 auto; }
+}
+
+/* ========== GM Tools ========== */
+.premade-grid { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+.premade-card { padding: 8px 10px; border-radius: 14px; }
+.premade-card-top { margin-bottom: 4px; }
+.gm-tools .premade-spawn-row,
+.premade-spawn-row { flex-wrap: nowrap; align-items: center; gap: 4px; margin-top: 6px; }
+.gm-tools .premade-count-label,
+.premade-count-label { flex-direction: row; align-items: center; min-width: 0; gap: 4px; }
+.premade-count-input { width: 48px; padding: 3px 6px; font-size: 13px; }
+.premade-spawn-row > button { padding: 5px 9px; }
+html[data-appearance="dark"][data-theme="midnight"] .premade-card {
+  background: linear-gradient(180deg, rgba(50, 54, 120, 0.5), rgba(30, 32, 82, 0.55));
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ========== Notes ========== */
+.notes-grid { gap: 8px; }
+.notes-grid > .stack { gap: 8px; }
+.glossary-card .field-label { display: none; }
+.glossary-meta { margin: 4px 0; font-size: 11.5px; }
+.glossary-category-title { font-family: var(--display); font-size: 13px; margin: 8px 0 4px; }
+.glossary-entries { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 4px; }
+.glossary-entry { border-radius: 10px; }
+.glossary-entry[open] { grid-column: 1 / -1; }
+.glossary-entry-summary { padding: 5px 8px; gap: 1px; }
+.glossary-entry-term { font-size: 13px; }
+.glossary-entry-blurb { font-size: 11.5px; }
+.glossary-entry-body { padding: 0 8px 8px; font-size: 12.5px; line-height: 1.45; }
+.quest-row { gap: 4px; }
+
+/* ========== How to Play ========== */
+.how-to-section { padding: 10px 14px; }
+.how-to-section + .how-to-section { margin-top: 8px; }
+.how-to-section > h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.how-to-items { gap: 8px; }
+.how-to-item, .how-to-block { padding-bottom: 8px; }
+.how-to-item-label { font-family: var(--display); font-size: 12px; margin-bottom: 2px; color: var(--pop-cyan); }
+html[data-appearance="light"] .how-to-item-label { color: #0369a1; }
+.how-to-item-text { font-size: 13px; line-height: 1.45; }
+@media (min-width: 1100px) {
+  .how-to-items { display: block; column-count: 2; column-gap: 20px; }
+  .how-to-items > * { break-inside: avoid; margin-bottom: 8px; }
+}
+.how-to-play { max-width: none; }
+.how-to-hero { padding: 10px 14px; }
+.how-to-sublist { margin: 4px 0 0; padding-left: 18px; }
+.how-to-sublist li { font-size: 13px; line-height: 1.4; margin: 2px 0; }
+.how-to-resource-grid, .how-to-type-grid { gap: 6px; margin-top: 4px; }
+.how-to-resource-card, .how-to-type-card { padding: 6px 10px; border-radius: 12px; font-size: 12.5px; line-height: 1.4; }
+.how-to-resource-card strong { font-size: 13px; }
+.how-to-type-card p { font-size: 12.5px; margin: 4px 0 0; }
