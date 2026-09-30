@@ -2140,7 +2140,7 @@ const SKILLS_DATA = {
                 "cost": 100,
                 "staminaCost": 15,
                 "desc": "Action (3 uses per day): Become one with fire for 3 rounds. Gain immunity to fire damage, +50% fire spell damage, all attacks apply Burn, and regenerate 3 HP/turn. Can ignite objects by touch.",
-                "icon": "�",
+                "icon": "🔥",
                 "prerequisites": {
                     "type": "AND",
                     "skills": [

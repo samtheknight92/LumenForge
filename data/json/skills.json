@@ -2095,7 +2095,7 @@
         "cost": 100,
         "staminaCost": 15,
         "desc": "Action (3 uses per day): Become one with fire for 3 rounds. Gain immunity to fire damage, +50% fire spell damage, all attacks apply Burn, and regenerate 3 HP/turn. Can ignite objects by touch.",
-        "icon": "",
+        "icon": "🔥",
         "prerequisites": {
           "type": "AND",
           "skills": [
@@ -14881,7 +14881,7 @@
         "cost": 5,
         "staminaCost": 0,
         "desc": "Passive: +1 to all saving throws, resistance to Incapacitated. Unlocks Cross-Cultural Learning and Tier 1 monster skills.",
-        "icon": "",
+        "icon": "💪",
         "prerequisites": {
           "type": "NONE",
           "skills": []

@@ -12,7 +12,7 @@ const ITEMS_DATA = {
             "specialEffects": [],
             "enchantmentSlots": 0,
             "desc": "A simple bronze sword. +1 Strength when equipped. Damage: 1d4",
-            "icon": "ðŸ—¡ï¸",
+            "icon": "🗡️",
             "price": {
                 "silver": 3
             },
@@ -29,7 +29,7 @@ const ITEMS_DATA = {
             "specialEffects": [],
             "enchantmentSlots": 0,
             "desc": "A basic iron sword. +2 Strength when equipped. Damage: 1d6",
-            "icon": "ðŸ—¡ï¸",
+            "icon": "🗡️",
             "price": {
                 "silver": 8
             },
@@ -60,7 +60,7 @@ const ITEMS_DATA = {
             "specialEffects": [],
             "enchantmentSlots": 0,
             "desc": "A well-forged steel sword. +3 Strength when equipped. Damage: 1d8",
-            "icon": "âš”ï¸",
+            "icon": "⚔️",
             "price": {
                 "silver": 15
             },
@@ -80,7 +80,7 @@ const ITEMS_DATA = {
             ],
             "enchantmentSlots": 1,
             "desc": "A blessed silver sword. +2 Strength, +1 Magical Defence. Damage: 1d8. Extra damage vs undead. GRANTS: Undead Bane.",
-            "icon": "ðŸ—¡ï¸",
+            "icon": "🗡️",
             "price": {
                 "silver": 25
             },
@@ -109,7 +109,7 @@ const ITEMS_DATA = {
                 }
             },
             "desc": "A magical sword wreathed in flames. +3 Strength, +1 Magic Power. Attacks may burn enemies. Damage: 1d12 GRANTS: Burn On Hit.",
-            "icon": "ðŸ”¥",
+            "icon": "🔥",
             "price": {
                 "gold": 1,
                 "silver": 20
@@ -130,7 +130,7 @@ const ITEMS_DATA = {
             ],
             "enchantmentSlots": 2,
             "desc": "An ice-enchanted blade. +3 Strength, +1 Magic Power. Damage: 1d10. Attacks may freeze enemies. GRANTS: Freeze On Hit.",
-            "icon": "â„ï¸",
+            "icon": "❄️",
             "price": {
                 "gold": 1,
                 "silver": 20
@@ -150,7 +150,7 @@ const ITEMS_DATA = {
                 "wind_slash"
             ],
             "desc": "A sword light as air. +2 Strength, +3 Speed. Damage: 1d8. GRANTS: Wind Slash (20ft wind blade — 1d6 slashing; push target 10ft on hit).",
-            "icon": "ðŸŒªï¸",
+            "icon": "🌪️",
             "price": {
                 "gold": 1,
                 "silver": 18
@@ -171,7 +171,7 @@ const ITEMS_DATA = {
                 "bleeding"
             ],
             "desc": "A razor-sharp obsidian blade. +4 Strength, +1 Speed. Damage: 1d10. Causes bleeding wounds.",
-            "icon": "ðŸ–¤",
+            "icon": "🖤",
             "price": {
                 "gold": 1,
                 "silver": 40
@@ -194,7 +194,7 @@ const ITEMS_DATA = {
             ],
             "enchantmentSlots": 1,
             "desc": "Forged from dragon scales. +4 Strength, +3 Magic Power, +1 Physical Defence. Damage: 4d12. GRANTS: Dragon Fire (+1d6 fire; 75% Burn on hit).",
-            "icon": "ðŸ‰",
+            "icon": "🐉",
             "price": {
                 "gold": 3,
                 "silver": 75
@@ -212,7 +212,7 @@ const ITEMS_DATA = {
             "specialEffects": [],
             "enchantmentSlots": 0,
             "desc": "A basic bronze dagger. +1 Speed when equipped. Damage: 1d4",
-            "icon": "ðŸ—¡ï¸",
+            "icon": "🗡️",
             "price": {
                 "silver": 2
             },
@@ -229,7 +229,7 @@ const ITEMS_DATA = {
             "specialEffects": [],
             "enchantmentSlots": 0,
             "desc": "A sturdy iron dagger. +1 Speed when equipped. Damage: 1d6",
-            "icon": "ðŸ—¡ï¸",
+            "icon": "🗡️",
             "price": {
                 "silver": 6
             },
@@ -270,7 +270,7 @@ const ITEMS_DATA = {
             ],
             "enchantmentSlots": 1,
             "desc": "A blessed silver dagger. +2 Speed, +1 Magical Defence. Damage: 1d8. Extra damage vs undead. GRANTS: Undead Bane.",
-            "icon": "ðŸ—¡ï¸",
+            "icon": "🗡️",
             "price": {
                 "silver": 15
             },
@@ -289,7 +289,7 @@ const ITEMS_DATA = {
                 "poison"
             ],
             "desc": "A venomous dagger. +2 Speed. Damage: 1d8. Attacks may poison enemies. GRANTS: Poison On Hit.",
-            "icon": "ðŸ",
+            "icon": "🐍",
             "price": {
                 "silver": 30
             },
@@ -311,7 +311,7 @@ const ITEMS_DATA = {
             ],
             "enchantmentSlots": 2,
             "desc": "A dagger forged from shadow. +2 Speed, +1 Magic Power. Damage: 1d8. GRANTS: Stealth Strike (first attack from hidden: +2 Accuracy, +1d6 damage).",
-            "icon": "ðŸ—¡ï¸",
+            "icon": "🗡️",
             "price": {
                 "gold": 1,
                 "silver": 15
@@ -332,7 +332,7 @@ const ITEMS_DATA = {
             ],
             "enchantmentSlots": 2,
             "desc": "A deadly assassin's weapon. +3 Speed, +1 Strength. Damage: 2d6. GRANTS: Critical Strike (crit on 19–20; +1 weapon damage die on crit).",
-            "icon": "ðŸ—¡ï¸",
+            "icon": "🗡️",
             "price": {
                 "gold": 1,
                 "silver": 0
@@ -353,7 +353,7 @@ const ITEMS_DATA = {
             ],
             "enchantmentSlots": 2,
             "desc": "A dagger from the void realm. +3 Speed, +2 Magic Power. Damage: 1d10. GRANTS: Phase Strike (ignore 3 Physical Defence and 3 Magical Defence on this attack).",
-            "icon": "ðŸ–¤",
+            "icon": "🖤",
             "price": {
                 "gold": 2,
                 "silver": 0
@@ -373,7 +373,7 @@ const ITEMS_DATA = {
                 "shadow_step"
             ],
             "desc": "A dagger forged in shadows. +4 Speed, +2 Magic Power. Damage: 2d6. GRANTS: Shadow Step (Action: teleport up to 30ft in dim light or darkness).",
-            "icon": "ðŸŒ‘",
+            "icon": "🌑",
             "price": {
                 "gold": 3,
                 "silver": 50
@@ -394,7 +394,7 @@ const ITEMS_DATA = {
                 "time_strike"
             ],
             "desc": "A blade that cuts through time. +4 Speed, +2 Magic Power. Damage: 2d10. GRANTS: Time Strike (once per scene: extra weapon attack after this hit lands).",
-            "icon": "â°",
+            "icon": "⏰",
             "price": {
                 "gold": 4,
                 "silver": 0
@@ -412,7 +412,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A simple training bow. +1 Speed when equipped. Damage: 1d4",
-            "icon": "ðŸ¹",
+            "icon": "🏹",
             "price": {
                 "silver": 5
             },
@@ -429,7 +429,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A reliable hunting bow. +2 Speed when equipped. Damage: 1d6",
-            "icon": "ðŸ¹",
+            "icon": "🏹",
             "price": {
                 "silver": 10
             },
@@ -449,7 +449,7 @@ const ITEMS_DATA = {
                 "piercing"
             ],
             "desc": "A mechanical crossbow. +1 Strength, +1 Speed. Piercing shots.",
-            "icon": "ðŸ¹",
+            "icon": "🏹",
             "price": {
                 "silver": 16
             },
@@ -467,7 +467,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A reinforced composite bow. +2 Speed, +1 Strength when equipped. Damage: 1d8. 1 enchantment slot.",
-            "icon": "ðŸ¹",
+            "icon": "🏹",
             "price": {
                 "silver": 20
             },
@@ -487,7 +487,7 @@ const ITEMS_DATA = {
                 "shock_on_hit"
             ],
             "desc": "A bow that crackles with electricity. +2 Speed, +2 Magic Power. Damage: 1d10. Attacks may shock enemies. GRANTS: Shock On Hit.",
-            "icon": "ðŸ¹",
+            "icon": "🏹",
             "price": {
                 "gold": 1,
                 "silver": 10
@@ -508,7 +508,7 @@ const ITEMS_DATA = {
                 "nature_blessing"
             ],
             "desc": "An elegant elvish bow. +3 Speed, +1 Magic Power. Damage: 1d10. GRANTS: Nature Blessing (+2 Accuracy, +1 Magic Power outdoors for 8 turns; heal 1 HP at End of outdoor turns).",
-            "icon": "ðŸ§",
+            "icon": "🧝",
             "price": {
                 "gold": 1,
                 "silver": 25
@@ -530,7 +530,7 @@ const ITEMS_DATA = {
                 "piercing"
             ],
             "desc": "A bow carved from pure crystal. +3 Speed, +2 Magic Power. Damage: 1d12. Shoots light arrows. GRANTS: Piercing Light.",
-            "icon": "ðŸ’Ž",
+            "icon": "💎",
             "price": {
                 "gold": 1,
                 "silver": 30
@@ -551,7 +551,7 @@ const ITEMS_DATA = {
                 "lightning_arrows"
             ],
             "desc": "A bow that commands storms. +3 Speed, +2 Magic Power. Damage: 2d6. Arrows become lightning. GRANTS: Lightning Arrows.",
-            "icon": "âš¡",
+            "icon": "⚡",
             "price": {
                 "gold": 2,
                 "silver": 0
@@ -572,7 +572,7 @@ const ITEMS_DATA = {
                 "star_arrows"
             ],
             "desc": "A bow crafted from starlight. +4 Speed, +3 Magic Power. Damage: 2d8. GRANTS: Star Arrows (+1d6 radiant; +2 Accuracy in darkness).",
-            "icon": "âœ¨",
+            "icon": "✨",
             "price": {
                 "gold": 5,
                 "silver": 0
@@ -590,7 +590,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A crude stone hammer. +2 Strength when equipped. Damage: 1d4",
-            "icon": "ðŸ”¨",
+            "icon": "🔨",
             "price": {
                 "silver": 6
             },
@@ -608,7 +608,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A solid iron mace. +3 Strength, +1 Physical Defence when equipped. Damage: 1d6",
-            "icon": "âš’ï¸",
+            "icon": "⚒️",
             "price": {
                 "silver": 12
             },
@@ -628,7 +628,7 @@ const ITEMS_DATA = {
                 "armor_pierce"
             ],
             "desc": "A heavy war hammer. +4 Strength, -1 Speed. Damage: 1d10. GRANTS: Armor Pierce (−2 target Physical Defence for this attack).",
-            "icon": "ðŸ”¨",
+            "icon": "🔨",
             "price": {
                 "silver": 18
             },
@@ -648,7 +648,7 @@ const ITEMS_DATA = {
                 "holy_strike"
             ],
             "desc": "A mace blessed by divine power. +3 Strength, +1 Magic Power. Damage: 1d10. Holy damage vs undead. GRANTS: Holy Strike.",
-            "icon": "âœï¸",
+            "icon": "✝️",
             "price": {
                 "silver": 35
             },
@@ -668,7 +668,7 @@ const ITEMS_DATA = {
                 "freeze_on_hit"
             ],
             "desc": "A hammer of eternal ice. +4 Strength, +1 Magic Power. Damage: 1d10. Freezes enemies on impact. GRANTS: Freeze On Hit.",
-            "icon": "â„ï¸",
+            "icon": "❄️",
             "price": {
                 "gold": 1,
                 "silver": 30
@@ -689,7 +689,7 @@ const ITEMS_DATA = {
                 "earthquake"
             ],
             "desc": "A hammer imbued with earth magic. +4 Strength, +2 Physical Defence. Damage: 1d10. GRANTS: Earthquake (10ft burst — 2d6 earth; Knockdown on failed Speed save).",
-            "icon": "ðŸŒ",
+            "icon": "🌍",
             "price": {
                 "gold": 1,
                 "silver": 25
@@ -710,7 +710,7 @@ const ITEMS_DATA = {
                 "thunder_strike"
             ],
             "desc": "A hammer that roars with thunder. +5 Strength, +2 Magic Power. Damage: 1d12. GRANTS: Thunder Strike (+1d6 thunder; 40% Incapacitated for 1 turn).",
-            "icon": "âš¡",
+            "icon": "⚡",
             "price": {
                 "gold": 2,
                 "silver": 50
@@ -732,7 +732,7 @@ const ITEMS_DATA = {
                 "earth_shatter"
             ],
             "desc": "The legendary hammer of titans. +6 Strength, +5 HP, -1 Speed. Damage: 2d8. GRANTS: Earth Shatter (+1d8 earth; −2 target Physical Defence until end of next turn).",
-            "icon": "ðŸ”ï¸",
+            "icon": "🏔️",
             "price": {
                 "gold": 6,
                 "silver": 0
@@ -754,7 +754,7 @@ const ITEMS_DATA = {
                 "void_impact"
             ],
             "desc": "A void-forged war hammer. +7 Strength, +3 Magic Power, -2 HP. Damage: 2d10. GRANTS: Void Impact (+1d6 void; push target 10ft on hit).",
-            "icon": "ðŸ•³ï¸",
+            "icon": "🕳️",
             "price": {
                 "gold": 8,
                 "silver": 0
@@ -772,7 +772,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A simple bronze axe. +2 Strength when equipped. Damage: 1d4",
-            "icon": "ðŸª“",
+            "icon": "🪓",
             "price": {
                 "silver": 7
             },
@@ -789,7 +789,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A sturdy iron axe. +3 Strength when equipped. Damage: 1d6",
-            "icon": "ðŸª“",
+            "icon": "🪓",
             "price": {
                 "silver": 13
             },
@@ -809,7 +809,7 @@ const ITEMS_DATA = {
                 "cleave"
             ],
             "desc": "A brutal battle axe. +3 Strength, -1 Speed. Damage: 1d8. GRANTS: Cleave (on drop or crit: half rolled damage to one adjacent enemy).",
-            "icon": "ðŸª“",
+            "icon": "🪓",
             "price": {
                 "silver": 14
             },
@@ -829,7 +829,7 @@ const ITEMS_DATA = {
                 "double_strike"
             ],
             "desc": "A double-headed axe. +4 Strength, -1 Speed. Damage: 1d10. GRANTS: Double Strike (two attack rolls with one action; second hit uses same modifiers).",
-            "icon": "ðŸª“",
+            "icon": "🪓",
             "price": {
                 "silver": 40
             },
@@ -850,7 +850,7 @@ const ITEMS_DATA = {
                 "lifesteal"
             ],
             "desc": "A cursed demonic axe. +5 Strength, -1 Speed, -2 HP. Damage: 1d12. GRANTS: Lifesteal (heal half the damage this attack deals).",
-            "icon": "ðŸ‘¹",
+            "icon": "👹",
             "price": {
                 "gold": 2,
                 "silver": 50
@@ -872,7 +872,7 @@ const ITEMS_DATA = {
                 "rage_mode"
             ],
             "desc": "An axe that fuels bloodlust. +5 Strength, +1 Speed, -1 HP. Damage: 1d10. GRANTS: Rage Mode (+2 Strength, +2 Speed, −1 Physical Defence for 8 turns).",
-            "icon": "ðŸ’€",
+            "icon": "💀",
             "price": {
                 "gold": 1,
                 "silver": 50
@@ -893,7 +893,7 @@ const ITEMS_DATA = {
                 "execution"
             ],
             "desc": "A massive executioner's axe. +6 Strength, -2 Speed. Damage: 2d6. GRANTS: Execution (+1d6 damage vs targets below half HP).",
-            "icon": "âš”ï¸",
+            "icon": "⚔️",
             "price": {
                 "gold": 3,
                 "silver": 0
@@ -915,7 +915,7 @@ const ITEMS_DATA = {
                 "chaos_strike"
             ],
             "desc": "An axe of wild magic. +7 Strength, +2 Magic Power, -3 HP. Damage: 2d8. GRANTS: Chaos Strike (+1d6 random element — fire, ice, lightning, or void — each hit).",
-            "icon": "ðŸŒ€",
+            "icon": "🌀",
             "price": {
                 "gold": 5,
                 "silver": 50
@@ -937,7 +937,7 @@ const ITEMS_DATA = {
                 "reality_cut"
             ],
             "desc": "A world-shattering greataxe. +8 Strength, +2 Physical Defence, -3 Speed. Damage: 3d8. GRANTS: Reality Cut (once per scene: ignore all defence and cover; +2d6 force).",
-            "icon": "ðŸŒ",
+            "icon": "🌍",
             "price": {
                 "gold": 10,
                 "silver": 0
@@ -955,7 +955,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A simple wooden staff. +1 Magic Power when equipped. Damage: 1d4",
-            "icon": "ðŸª„",
+            "icon": "🪄",
             "price": {
                 "silver": 4
             },
@@ -974,7 +974,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A versatile wooden staff. +1 Strength, +1 Magic Power, +1 Physical Defence. Damage: 1d4",
-            "icon": "ðŸ¥¢",
+            "icon": "🥢",
             "price": {
                 "silver": 9
             },
@@ -991,7 +991,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A wooden staff carved with mystical runes. +2 Magic Power when equipped. Damage: 1d6. Enables staff skill bonuses.",
-            "icon": "ðŸª„",
+            "icon": "🪄",
             "price": {
                 "silver": 12
             },
@@ -1009,7 +1009,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A staff topped with pure crystal. +3 Magic Power, +2 Stamina when equipped. Damage: 1d8",
-            "icon": "ðŸ’Ž",
+            "icon": "💎",
             "price": {
                 "silver": 28
             },
@@ -1029,7 +1029,7 @@ const ITEMS_DATA = {
                 "mana_efficiency"
             ],
             "desc": "A staff humming with arcane energy. +4 Magic Power, +2 Magical Defence. Damage: 1d10. Reduces mana costs. GRANTS: Mana Efficiency.",
-            "icon": "ðŸ”®",
+            "icon": "🔮",
             "price": {
                 "gold": 1,
                 "silver": 35
@@ -1050,7 +1050,7 @@ const ITEMS_DATA = {
                 "drain_mana"
             ],
             "desc": "A staff channeling dark energy. +4 Magic Power, +1 Magical Defence. Damage: 1d10. Drains enemy mana. GRANTS: Drain Mana.",
-            "icon": "ðŸ–¤",
+            "icon": "🖤",
             "price": {
                 "gold": 2,
                 "silver": 10
@@ -1072,7 +1072,7 @@ const ITEMS_DATA = {
                 "elemental_mastery_passive"
             ],
             "desc": "A staff attuned to all elements. +5 Magic Power, +3 Stamina. Damage: 1d12. Elemental spell mastery. GRANTS: Elemental Mastery.",
-            "icon": "ðŸŒŸ",
+            "icon": "🌟",
             "price": {
                 "gold": 2,
                 "silver": 25
@@ -1094,7 +1094,7 @@ const ITEMS_DATA = {
                 "cosmic_power"
             ],
             "desc": "A staff channeling cosmic forces. +6 Magic Power, +5 Stamina, +2 HP. Damage: 2d6. GRANTS: Cosmic Power (+4 Magic Power, +2 Magical Defence for 6 turns).",
-            "icon": "ðŸŒŒ",
+            "icon": "🌌",
             "price": {
                 "gold": 7,
                 "silver": 0
@@ -1117,7 +1117,7 @@ const ITEMS_DATA = {
                 "creation_magic"
             ],
             "desc": "Rod of creation. +7 Magic Power, +6 Stamina, +3 HP, +1 Speed. Damage: 2d8. GRANTS: Creation Magic (+3 Magic Power for 8 turns; minor objects or barriers — GM).",
-            "icon": "âœ¨",
+            "icon": "✨",
             "price": {
                 "gold": 12,
                 "silver": 0
@@ -1136,7 +1136,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A basic bronze spear. +1 Strength, +1 Physical Defence when equipped. Damage: 1d4",
-            "icon": "ðŸ”±",
+            "icon": "🔱",
             "price": {
                 "silver": 6
             },
@@ -1154,7 +1154,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A sturdy iron spear. +2 Strength, +1 Physical Defence when equipped. Damage: 1d6",
-            "icon": "ðŸ”±",
+            "icon": "🔱",
             "price": {
                 "silver": 10
             },
@@ -1174,7 +1174,7 @@ const ITEMS_DATA = {
                 "reach"
             ],
             "desc": "A long spear. +2 Strength, +1 Physical Defence. Damage: 1d6. Extended reach.",
-            "icon": "ðŸ”±",
+            "icon": "🔱",
             "price": {
                 "silver": 11
             },
@@ -1196,7 +1196,7 @@ const ITEMS_DATA = {
                 "cleave"
             ],
             "desc": "A versatile halberd. +3 Strength, +2 Physical Defence, -1 Speed. Damage: 1d10. GRANTS: Reach (+5ft melee for 10 turns), Cleave (on drop/crit: half damage to one adjacent enemy).",
-            "icon": "âš”ï¸",
+            "icon": "⚔️",
             "price": {
                 "silver": 25
             },
@@ -1217,7 +1217,7 @@ const ITEMS_DATA = {
                 "anti_cavalry"
             ],
             "desc": "A long pike for formation fighting. +2 Strength, +3 Physical Defence, -1 Speed. Damage: 1d8. Extra damage vs mounted foes. GRANTS: Anti Cavalry.",
-            "icon": "ðŸ”±",
+            "icon": "🔱",
             "price": {
                 "silver": 20
             },
@@ -1238,7 +1238,7 @@ const ITEMS_DATA = {
                 "sweeping_strikes"
             ],
             "desc": "An elegant glaive. +4 Strength, +1 Speed, +1 Physical Defence. Damage: 1d12. Sweeping attack patterns. GRANTS: Sweeping Strikes.",
-            "icon": "âš”ï¸",
+            "icon": "⚔️",
             "price": {
                 "gold": 1,
                 "silver": 15
@@ -1260,7 +1260,7 @@ const ITEMS_DATA = {
                 "dragon_slayer"
             ],
             "desc": "A lance forged to slay dragons. +4 Strength, +3 Physical Defence, +2 Magic Power. Damage: 2d6. GRANTS: Dragon Slayer (+2 Accuracy and +1d6 vs dragons and draconic foes).",
-            "icon": "ðŸ²",
+            "icon": "🐲",
             "price": {
                 "gold": 2,
                 "silver": 75
@@ -1283,7 +1283,7 @@ const ITEMS_DATA = {
                 "infinite_reach"
             ],
             "desc": "A legendary reach spear. +5 Strength, +4 Physical Defence, +3 Magic Power, +1 Speed. Damage: 2d8. GRANTS: Infinite Reach (melee attacks reach 30ft for 3 turns).",
-            "icon": "â™¾ï¸",
+            "icon": "♾️",
             "price": {
                 "gold": 8,
                 "silver": 0
@@ -1306,7 +1306,7 @@ const ITEMS_DATA = {
                 "dimension_pierce"
             ],
             "desc": "A dimension-piercing spear. +6 Strength, +5 Physical Defence, +4 Magic Power, +2 Speed. Damage: 2d10. GRANTS: Dimension Pierce (once per scene: ignore barriers and 6 total defence).",
-            "icon": "ðŸ•³ï¸",
+            "icon": "🕳️",
             "price": {
                 "gold": 15,
                 "silver": 0
@@ -1325,7 +1325,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "Simple cloth robes. +1 Magic Power when equipped.",
-            "icon": "ðŸ‘˜",
+            "icon": "👘",
             "price": {
                 "silver": 3
             },
@@ -1341,7 +1341,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "Basic leather protection. +2 Physical Defence when equipped.",
-            "icon": "ðŸ¥¼",
+            "icon": "🥼",
             "price": {
                 "silver": 5
             },
@@ -1368,7 +1368,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "Leather armor with metal studs. +3 Physical Defence, -1 Speed.",
-            "icon": "ðŸ¥¼",
+            "icon": "🥼",
             "price": {
                 "silver": 8
             },
@@ -1385,7 +1385,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "Interlocked metal rings. +4 Physical Defence, -1 Speed.",
-            "icon": "â›“ï¸",
+            "icon": "⛓️",
             "price": {
                 "silver": 15
             },
@@ -1403,7 +1403,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "Overlapping metal scales. +4 Physical Defence, +1 Magical Defence, -1 Speed.",
-            "icon": "ðŸŸ",
+            "icon": "🐟",
             "price": {
                 "silver": 18
             },
@@ -1422,7 +1422,7 @@ const ITEMS_DATA = {
                 "damage_reduction"
             ],
             "desc": "Heavy steel armor. +5 Physical Defence, -1 Speed. Reduces incoming damage. GRANTS: Damage Reduction.",
-            "icon": "ðŸ›¡ï¸",
+            "icon": "🛡️",
             "price": {
                 "gold": 1,
                 "silver": 50
@@ -1443,7 +1443,7 @@ const ITEMS_DATA = {
                 "damage_reduction"
             ],
             "desc": "Full plate armor of a knight. +6 Physical Defence, +1 Magical Defence, -2 Speed. GRANTS: Damage Reduction.",
-            "icon": "ðŸ›¡ï¸",
+            "icon": "🛡️",
             "price": {
                 "gold": 2,
                 "silver": 25
@@ -1464,7 +1464,7 @@ const ITEMS_DATA = {
                 "regeneration"
             ],
             "desc": "Enchanted robes. +4 Magical Defence, +2 Magic Power. Restores stamina over time. GRANTS: Mana Regeneration.",
-            "icon": "ðŸ‘˜",
+            "icon": "👘",
             "price": {
                 "gold": 1,
                 "silver": 30
@@ -1494,7 +1494,7 @@ const ITEMS_DATA = {
                 }
             },
             "desc": "Robes woven with fire magic. +3 Magical Defence, +3 Magic Power. Immune to fire damage. GRANTS: Fire resistance 25% (quarter fire damage); Ice and Water weakness 200% (double damage)",
-            "icon": "ðŸ”¥",
+            "icon": "🔥",
             "price": {
                 "gold": 1,
                 "silver": 40
@@ -1524,7 +1524,7 @@ const ITEMS_DATA = {
                 }
             },
             "desc": "Armor made of magical ice. +3 Physical Defence, +3 Magical Defence, -1 Speed. Freezes attackers. GRANTS: Ice resistance 25% (quarter ice damage); Fire and Lightning weakness 200% (double damage)",
-            "icon": "â„ï¸",
+            "icon": "❄️",
             "price": {
                 "gold": 1,
                 "silver": 45
@@ -1543,7 +1543,7 @@ const ITEMS_DATA = {
                 "stealth"
             ],
             "desc": "A cloak woven from shadows. +2 Speed, +2 Magical Defence. Enhanced stealth.",
-            "icon": "ðŸ¦‡",
+            "icon": "🦇",
             "price": {
                 "gold": 1,
                 "silver": 35
@@ -1565,7 +1565,7 @@ const ITEMS_DATA = {
                 "fire_immunity"
             ],
             "desc": "Armor crafted from ancient dragon scales. +5 Physical Defence, +4 Magical Defence, +5 HP. GRANTS: Fire Immunity, Damage Reduction.",
-            "icon": "ðŸ‰",
+            "icon": "🐉",
             "price": {
                 "gold": 4,
                 "silver": 0
@@ -1587,7 +1587,7 @@ const ITEMS_DATA = {
                 "spell_absorption"
             ],
             "desc": "Armor from the void realm. +3 Physical Defence, +6 Magical Defence, +2 Magic Power, -3 HP. GRANTS: Spell Absorption (once while active: negate one spell targeting you; regain its Stamina cost).",
-            "icon": "ðŸ–¤",
+            "icon": "🖤",
             "price": {
                 "gold": 3,
                 "silver": 50
@@ -1611,7 +1611,7 @@ const ITEMS_DATA = {
                 "light_aura"
             ],
             "desc": "Robes blessed by celestial beings. +5 Magical Defence, +4 Magic Power, +3 HP, +3 Stamina. GRANTS: Light Aura, Mana Regeneration, Regeneration.",
-            "icon": "âœ¨",
+            "icon": "✨",
             "price": {
                 "gold": 5,
                 "silver": 0
@@ -1631,7 +1631,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A simple enchanted ring. +1 Strength, +1 Magic Power when worn.",
-            "icon": "ðŸ’",
+            "icon": "💍",
             "price": {
                 "silver": 25
             },
@@ -1648,7 +1648,7 @@ const ITEMS_DATA = {
                 "haste"
             ],
             "desc": "A ring that quickens movement. +2 Speed. Grants extra actions. GRANTS: Haste.",
-            "icon": "ðŸ’",
+            "icon": "💍",
             "price": {
                 "silver": 30
             },
@@ -1664,7 +1664,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A protective ring. +2 Physical Defence, +2 Magical Defence.",
-            "icon": "ðŸ’",
+            "icon": "💍",
             "price": {
                 "silver": 40
             },
@@ -1692,7 +1692,7 @@ const ITEMS_DATA = {
                 }
             },
             "desc": "A ring wreathed in flames. +3 Magic Power. Fire immunity and burning aura. GRANTS: Fire resistance 50% (half fire damage); Ice weakness 200% (double ice damage)",
-            "icon": "ðŸ”¥",
+            "icon": "🔥",
             "price": {
                 "gold": 1,
                 "silver": 20
@@ -1721,7 +1721,7 @@ const ITEMS_DATA = {
                 }
             },
             "desc": "A ring of eternal frost. +3 Magic Power, +1 Magical Defence. Frost aura. GRANTS: Ice resistance 50% (half ice damage); Fire weakness 200% (double fire damage)",
-            "icon": "â„ï¸",
+            "icon": "❄️",
             "price": {
                 "gold": 1,
                 "silver": 20
@@ -1750,7 +1750,7 @@ const ITEMS_DATA = {
                 }
             },
             "desc": "A ring crackling with electricity. +2 Magic Power, +2 Speed. Lightning attacks. GRANTS: Lightning resistance 50% (half lightning damage); Earth weakness 200% (double earth damage)",
-            "icon": "âš¡",
+            "icon": "⚡",
             "price": {
                 "gold": 1,
                 "silver": 25
@@ -1769,7 +1769,7 @@ const ITEMS_DATA = {
                 "invisibility"
             ],
             "desc": "A ring that bends light. +3 Speed, +1 Magic Power. Can become invisible. GRANTS: Invisibility.",
-            "icon": "ðŸ–¤",
+            "icon": "🖤",
             "price": {
                 "gold": 1,
                 "silver": 35
@@ -1787,7 +1787,7 @@ const ITEMS_DATA = {
                 "extra_movement"
             ],
             "desc": "Enchanted boots that enhance mobility. +3 Speed. Grants extra movement in combat.",
-            "icon": "ðŸ‘¢",
+            "icon": "👢",
             "price": {
                 "silver": 75
             },
@@ -1804,7 +1804,7 @@ const ITEMS_DATA = {
                 "silent_movement"
             ],
             "desc": "Soft-soled boots. +2 Speed. Move without making sound. GRANTS: Silent Movement.",
-            "icon": "ðŸ‘Ÿ",
+            "icon": "👟",
             "price": {
                 "silver": 60
             },
@@ -1822,7 +1822,7 @@ const ITEMS_DATA = {
                 "immovable"
             ],
             "desc": "Heavy iron boots. +3 Physical Defence, -1 Speed. Cannot be knocked down. GRANTS: Immovable.",
-            "icon": "ðŸ¥¾",
+            "icon": "🥾",
             "price": {
                 "silver": 45
             },
@@ -1839,7 +1839,7 @@ const ITEMS_DATA = {
                 "flight"
             ],
             "desc": "Boots with ethereal wings. +4 Speed. Grants limited flight ability.",
-            "icon": "ðŸ‘¼",
+            "icon": "👼",
             "price": {
                 "gold": 2,
                 "silver": 0
@@ -1858,7 +1858,7 @@ const ITEMS_DATA = {
                 "regeneration"
             ],
             "desc": "A life-enhancing amulet. +5 HP, +3 Stamina. Slowly regenerates health. GRANTS: Regeneration.",
-            "icon": "ðŸ”®",
+            "icon": "🔮",
             "price": {
                 "gold": 1,
                 "silver": 25
@@ -1878,7 +1878,7 @@ const ITEMS_DATA = {
                 "regeneration"
             ],
             "desc": "An amulet pulsing with magical energy. +3 Magic Power, +5 Stamina. Restores mana over time. GRANTS: Mana Regeneration.",
-            "icon": "ðŸ”®",
+            "icon": "🔮",
             "price": {
                 "gold": 1,
                 "silver": 30
@@ -1897,7 +1897,7 @@ const ITEMS_DATA = {
                 "spell_resistance"
             ],
             "desc": "A pendant containing ancient knowledge. +2 Magic Power, +3 Magical Defence. GRANTS: Spell Resistance.",
-            "icon": "ðŸ“¿",
+            "icon": "📿",
             "price": {
                 "gold": 1,
                 "silver": 15
@@ -1918,7 +1918,7 @@ const ITEMS_DATA = {
                 "stone_skin"
             ],
             "desc": "An amulet of solid stone. +3 Physical Defence, +3 HP. Stone skin protection. GRANTS: Earth resistance 50% (half earth damage); Wind weakness 200% (double wind damage)",
-            "icon": "ðŸŒ",
+            "icon": "🌍",
             "price": {
                 "gold": 1,
                 "silver": 18
@@ -1939,7 +1939,7 @@ const ITEMS_DATA = {
                 "shadow_stealth"
             ],
             "desc": "An amulet wreathed in darkness. +3 Speed, +2 Magical Defence. Shadow stealth. GRANTS: Darkness resistance 50% (half darkness damage); Light weakness 200% (double light damage)",
-            "icon": "ðŸŒ‘",
+            "icon": "🌑",
             "price": {
                 "gold": 1,
                 "silver": 22
@@ -1961,7 +1961,7 @@ const ITEMS_DATA = {
                 "undead_bane"
             ],
             "desc": "An amulet glowing with holy light. +2 Magic Power, +3 Magical Defence. Radiant aura, extra damage vs undead. GRANTS: Light resistance 50% (half light damage); Darkness weakness 200% (double darkness damage)",
-            "icon": "âœ¨",
+            "icon": "✨",
             "price": {
                 "gold": 1,
                 "silver": 25
@@ -1981,7 +1981,7 @@ const ITEMS_DATA = {
                 "nature_resistance"
             ],
             "desc": "An elven cloak. +2 Speed, +2 Magical Defence. Enhanced stealth and nature resistance.",
-            "icon": "ðŸ§¥",
+            "icon": "🧥",
             "price": {
                 "gold": 1,
                 "silver": 50
@@ -2001,7 +2001,7 @@ const ITEMS_DATA = {
                 "mirror_image"
             ],
             "desc": "A shimmering cloak. +1 Speed, +2 Physical Defence, +2 Magical Defence. Creates mirror images. GRANTS: Mirror Image.",
-            "icon": "ðŸª©",
+            "icon": "🪩",
             "price": {
                 "gold": 2,
                 "silver": 25
@@ -2018,7 +2018,7 @@ const ITEMS_DATA = {
                 "luck"
             ],
             "desc": "An ancient lucky coin. Increases critical hit chance and general luck. GRANTS: Critical Chance, Luck.",
-            "icon": "ðŸª™",
+            "icon": "🪙",
             "price": {
                 "silver": 20
             },
@@ -2036,7 +2036,7 @@ const ITEMS_DATA = {
                 "identify"
             ],
             "desc": "A monocle made of pure crystal. +2 Magic Power. See magical auras and identify items. GRANTS: Magic Sight, Identify.",
-            "icon": "ðŸ§",
+            "icon": "🧐",
             "price": {
                 "gold": 1,
                 "silver": 0
@@ -2055,7 +2055,7 @@ const ITEMS_DATA = {
                 "crush"
             ],
             "desc": "Massive gauntlets. +4 Strength, -1 Speed. Can crush armor and weapons.",
-            "icon": "ðŸ§¤",
+            "icon": "🧤",
             "price": {
                 "gold": 1,
                 "silver": 60
@@ -2072,7 +2072,7 @@ const ITEMS_DATA = {
             },
             "specialEffects": [],
             "desc": "A belt crafted by giants. +3 Strength, +3 HP. Increases carrying capacity.",
-            "icon": "ðŸ”—",
+            "icon": "🔗",
             "price": {
                 "gold": 1,
                 "silver": 40
@@ -2091,7 +2091,7 @@ const ITEMS_DATA = {
                 "spell_memory"
             ],
             "desc": "A scholarly headband. +3 Magic Power, +2 Stamina. Remember more spells. GRANTS: Spell Memory.",
-            "icon": "ðŸŽ¯",
+            "icon": "🎯",
             "price": {
                 "gold": 1,
                 "silver": 35
@@ -2811,7 +2811,7 @@ const ITEMS_DATA = {
                 "heal_2"
             ],
             "desc": "A fresh apple. Restores 2 HP when consumed. GRANTS: Heal 2.",
-            "icon": "ðŸŽ",
+            "icon": "🍎",
             "price": {
                 "copper": 1
             },
@@ -2827,7 +2827,7 @@ const ITEMS_DATA = {
                 "heal_5"
             ],
             "desc": "A simple loaf of bread. Restores 5 HP when consumed. GRANTS: Heal 5.",
-            "icon": "ðŸž",
+            "icon": "🍞",
             "price": {
                 "copper": 5
             },
@@ -2844,7 +2844,7 @@ const ITEMS_DATA = {
                 "heal_3"
             ],
             "desc": "Aged cheese. Restores 3 HP and 2 Stamina when consumed. GRANTS: Heal 3, Restore Stamina 2.",
-            "icon": "ï¿½",
+            "icon": "🧀",
             "price": {
                 "copper": 8
             },
@@ -2861,7 +2861,7 @@ const ITEMS_DATA = {
                 "heal_8"
             ],
             "desc": "Preserved meat. Restores 8 HP and temporarily boosts Strength by 1 for 5 turns. GRANTS: Heal 8, Temp Strength (potency 1, 5 turns).",
-            "icon": "ðŸ¥©",
+            "icon": "🥩",
             "price": {
                 "silver": 1
             },
@@ -2878,7 +2878,7 @@ const ITEMS_DATA = {
                 "temp_magic"
             ],
             "desc": "Fine wine. Restores 5 Stamina and temporarily boosts Magic Power by 1 for 3 turns. GRANTS: Restore Stamina 5, Temp Magic (potency 1, 3 turns).",
-            "icon": "ðŸ·",
+            "icon": "🍷",
             "price": {
                 "silver": 2
             },
@@ -2894,7 +2894,7 @@ const ITEMS_DATA = {
                 "heal_25"
             ],
             "desc": "Restores 25 HP when consumed. GRANTS: Heal 25.",
-            "icon": "ðŸ§ª",
+            "icon": "🧪",
             "price": {
                 "silver": 2
             },
@@ -2920,7 +2920,7 @@ const ITEMS_DATA = {
                 "restore_stamina_15"
             ],
             "desc": "Restores 15 Stamina when consumed. GRANTS: Restore Stamina 15.",
-            "icon": "âš¡",
+            "icon": "⚡",
             "price": {
                 "silver": 1,
                 "copper": 50
@@ -2937,7 +2937,7 @@ const ITEMS_DATA = {
                 "heal_50"
             ],
             "desc": "A more potent healing potion. Restores 50 HP when consumed. GRANTS: Heal 50.",
-            "icon": "ðŸ§ª",
+            "icon": "🧪",
             "price": {
                 "silver": 8
             },
@@ -2953,7 +2953,7 @@ const ITEMS_DATA = {
                 "restore_stamina_30"
             ],
             "desc": "A potent energy potion. Restores 30 Stamina when consumed. GRANTS: Restore Stamina 30.",
-            "icon": "âš¡",
+            "icon": "⚡",
             "price": {
                 "silver": 6
             },
@@ -2969,7 +2969,7 @@ const ITEMS_DATA = {
                 "temp_strength"
             ],
             "desc": "Temporarily increases Strength by 3 for 10 turns. GRANTS: Temp Strength (potency 3, 10 turns).",
-            "icon": "ðŸ’ª",
+            "icon": "💪",
             "price": {
                 "silver": 15
             },
@@ -2985,7 +2985,7 @@ const ITEMS_DATA = {
                 "temp_speed"
             ],
             "desc": "Temporarily increases Speed by 3 for 8 turns. GRANTS: Temp Speed (potency 3, 8 turns).",
-            "icon": "ðŸ’¨",
+            "icon": "💨",
             "price": {
                 "silver": 15
             },
@@ -3001,7 +3001,7 @@ const ITEMS_DATA = {
                 "temp_magic"
             ],
             "desc": "Temporarily increases Magic Power by 3 for 10 turns. GRANTS: Temp Magic (potency 3, 10 turns).",
-            "icon": "âœ¨",
+            "icon": "✨",
             "price": {
                 "silver": 18
             },
@@ -3017,7 +3017,7 @@ const ITEMS_DATA = {
                 "temp_defense"
             ],
             "desc": "Temporarily increases both defenses by 4 for 12 turns. GRANTS: Temp Defense (potency 4, 12 turns).",
-            "icon": "ðŸ›¡ï¸",
+            "icon": "🛡️",
             "price": {
                 "silver": 20
             },
@@ -3033,7 +3033,7 @@ const ITEMS_DATA = {
                 "invisibility"
             ],
             "desc": "Grants invisibility for 5 turns. Enemies cannot target you. GRANTS: Invisibility (5 turns).",
-            "icon": "ðŸ‘»",
+            "icon": "👻",
             "price": {
                 "gold": 1,
                 "silver": 10
@@ -3050,7 +3050,7 @@ const ITEMS_DATA = {
                 "fire_immunity"
             ],
             "desc": "Grants immunity to fire damage for 10 turns. GRANTS: Fire Immunity (10 turns).",
-            "icon": "ðŸ”¥",
+            "icon": "🔥",
             "price": {
                 "silver": 25
             },
@@ -3066,7 +3066,7 @@ const ITEMS_DATA = {
                 "cold_immunity"
             ],
             "desc": "Grants immunity to cold damage for 10 turns. GRANTS: Cold Immunity (10 turns).",
-            "icon": "â„ï¸",
+            "icon": "❄️",
             "price": {
                 "silver": 25
             },
@@ -3084,7 +3084,7 @@ const ITEMS_DATA = {
                 "temp_speed"
             ],
             "desc": "Enter a berserker rage! +5 Strength, +2 Speed, -2 Defense for 8 turns. GRANTS: Temp Strength (potency 5, 8 turns), Temp Speed (potency 2, 8 turns), Temp Defense (potency −2, 8 turns).",
-            "icon": "ðŸ˜¤",
+            "icon": "😤",
             "price": {
                 "gold": 1,
                 "silver": 5
@@ -3101,7 +3101,7 @@ const ITEMS_DATA = {
                 "cast_fireball"
             ],
             "desc": "A magical scroll. Allows casting Fireball spell once, even without magic skills. GRANTS: Cast Fireball.",
-            "icon": "ðŸ“œ",
+            "icon": "📜",
             "price": {
                 "silver": 30
             },
@@ -3118,7 +3118,7 @@ const ITEMS_DATA = {
                 "heal_40"
             ],
             "desc": "A divine scroll. Restores 40 HP and removes poison effects. GRANTS: Heal 40, Remove Poison.",
-            "icon": "ðŸ“œ",
+            "icon": "📜",
             "price": {
                 "silver": 35
             },
@@ -3134,7 +3134,7 @@ const ITEMS_DATA = {
                 "teleport"
             ],
             "desc": "A dimensional scroll. Instantly teleport to a safe location, escaping combat.",
-            "icon": "ðŸ“œ",
+            "icon": "📜",
             "price": {
                 "gold": 1,
                 "silver": 0
@@ -3153,7 +3153,7 @@ const ITEMS_DATA = {
                 "fire_immunity_permanent"
             ],
             "desc": "Legendary feather. Consume: full heal, remove all debuffs, permanent fire immunity.",
-            "icon": "ðŸª¶",
+            "icon": "🪶",
             "price": {
                 "gold": 5,
                 "silver": 0
@@ -3172,7 +3172,7 @@ const ITEMS_DATA = {
                 "dragon_breath"
             ],
             "desc": "Consume: permanently +5 max HP, +2 Strength, and Dragon Breath (30ft cone — 3d6 fire; 75% Burn on each target).",
-            "icon": "â¤ï¸",
+            "icon": "❤️",
             "price": {
                 "gold": 10,
                 "silver": 0
@@ -3191,7 +3191,7 @@ const ITEMS_DATA = {
                 "regeneration"
             ],
             "desc": "Consume: permanently +1 Strength, Magic Power, Accuracy, and Speed; restore 1 HP at the End of Turn.",
-            "icon": "âš—ï¸",
+            "icon": "⚗️",
             "price": {
                 "gold": 25,
                 "silver": 0
@@ -3208,7 +3208,7 @@ const ITEMS_DATA = {
                 "unlock_doors"
             ],
             "desc": "A set of fine lockpicks. Can open locked doors and chests. GRANTS: Unlock Doors.",
-            "icon": "ðŸ—ï¸",
+            "icon": "🗝️",
             "price": {
                 "silver": 8
             },
@@ -3224,7 +3224,7 @@ const ITEMS_DATA = {
                 "climb_assistance"
             ],
             "desc": "50 feet of sturdy rope. Useful for climbing and exploration. GRANTS: Climb Assistance.",
-            "icon": "ðŸª¢",
+            "icon": "🪢",
             "price": {
                 "silver": 3
             },
@@ -3241,7 +3241,7 @@ const ITEMS_DATA = {
                 "fire_damage"
             ],
             "desc": "A burning torch. Provides light and can be used as a weapon. GRANTS: Light Source, Fire Damage.",
-            "icon": "ðŸ”¦",
+            "icon": "🔦",
             "price": {
                 "copper": 50
             },
@@ -3258,7 +3258,7 @@ const ITEMS_DATA = {
                 "undead_damage"
             ],
             "desc": "Blessed water. Deals extra damage to undead and purifies corruption. GRANTS: Undead Damage, Purify.",
-            "icon": "ðŸ’§",
+            "icon": "💧",
             "price": {
                 "silver": 12
             },
@@ -3274,7 +3274,7 @@ const ITEMS_DATA = {
             "statModifiers": {},
             "specialEffects": [],
             "desc": "Raw iron ore. Used for crafting iron weapons and armor.",
-            "icon": "â›ï¸",
+            "icon": "⛏️",
             "price": {
                 "copper": 20
             },
@@ -3288,7 +3288,7 @@ const ITEMS_DATA = {
             "statModifiers": {},
             "specialEffects": [],
             "desc": "Sturdy wood. Used for crafting wooden weapons and tools.",
-            "icon": "ðŸªµ",
+            "icon": "🪵",
             "price": {
                 "copper": 5
             },
@@ -3302,7 +3302,7 @@ const ITEMS_DATA = {
             "statModifiers": {},
             "specialEffects": [],
             "desc": "Tanned leather. Used for crafting light armor and accessories.",
-            "icon": "ðŸ¦¬",
+            "icon": "🦬",
             "price": {
                 "copper": 15
             },
@@ -3316,7 +3316,7 @@ const ITEMS_DATA = {
             "statModifiers": {},
             "specialEffects": [],
             "desc": "Fresh medicinal herbs. Used for brewing potions.",
-            "icon": "ðŸŒ¿",
+            "icon": "🌿",
             "price": {
                 "copper": 8
             },
@@ -3330,7 +3330,7 @@ const ITEMS_DATA = {
             "statModifiers": {},
             "specialEffects": [],
             "desc": "A crystal charged with magical energy. Used for enchanting.",
-            "icon": "ðŸ’Ž",
+            "icon": "💎",
             "price": {
                 "silver": 2
             },

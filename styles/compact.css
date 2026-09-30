@@ -234,7 +234,7 @@ select,
   width: 100%;
 }
 
-/* Core stats â€” dense tile grid, not full-width stacked rows */
+/* Core stats — dense tile grid, not full-width stacked rows */
 @media (max-width: 1100px) {
   .core-stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -264,7 +264,7 @@ select,
   flex-shrink: 0;
 }
 
-/* Stats tab â€” two compact upgrade cards per row */
+/* Stats tab — two compact upgrade cards per row */
 .stat-upgrade-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
@@ -323,7 +323,7 @@ select,
   font-size: 11px;
 }
 
-/* â”€â”€ Skills tab â€” compact cards & filters â”€â”€ */
+/* ── Skills tab — compact cards & filters ── */
 .skills-toolbar,
 .toolbar {
   grid-template-columns: 1fr 1fr;
@@ -457,7 +457,7 @@ select,
   justify-content: center;
 }
 
-/* â”€â”€ Stats tab â€” compact live resource editor â”€â”€ */
+/* ── Stats tab — compact live resource editor ── */
 .tab-intro {
   display: none;
 }
@@ -556,7 +556,7 @@ select,
   display: none;
 }
 
-/* â”€â”€ Shop & Craft â€” compact catalogue â”€â”€ */
+/* ── Shop & Craft — compact catalogue ── */
 .catalogue-card {
   padding: 10px;
 }
@@ -679,7 +679,7 @@ select,
   font-size: 11px;
 }
 
-/* Effects & Status Manager â€” compact mobile layout */
+/* Effects & Status Manager — compact mobile layout */
 .effects-manager.card {
   padding: 12px;
 }
@@ -830,7 +830,7 @@ select,
   padding: 3px 7px;
 }
 
-/* Equipment & Inventory â€” compact mobile layout */
+/* Equipment & Inventory — compact mobile layout */
 .equipment-card,
 .inventory-card {
   padding: 12px;
