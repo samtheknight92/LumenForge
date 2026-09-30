@@ -138,6 +138,26 @@ await test('notes tab: pages, quests and glossary search', async page => {
     document.querySelectorAll('.glossary-entry').length > 0)
 })
 
+await test('shop tab: search, star, page and buy', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="shop"]')
+  await page.locator('#app-content .item-card').first().waitFor()
+  await page.click('[data-item-page-next]')
+  await assertText(page, '.catalogue-summary', 'Page 2/')
+  await page.fill('#item-search', 'apple')
+  await page.waitForFunction(() => {
+    const names = [...document.querySelectorAll('.item-card strong')].map(el => el.innerText)
+    return names.some(name => /apple/i.test(name)) && names.length < 20
+  })
+  const star = page.locator('.item-card [data-toggle-catalog-star]').first()
+  await star.click()
+  await page.waitForFunction(() => document.querySelector('.item-card [data-toggle-catalog-star]').innerText.includes('⭐'))
+  const gilBefore = await page.locator('#coin-pill').innerText()
+  await page.locator('.item-card [data-buy-item]:not([disabled])').first().click()
+  await page.waitForFunction(before => document.querySelector('#coin-pill').innerText !== before, gilBefore)
+})
+
 await test('folder can be created and persists', async page => {
   await open(page)
   await createCharacter(page)
