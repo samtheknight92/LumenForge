@@ -170,6 +170,23 @@ await test('craft tab: filters and recipe stars', async page => {
   await page.waitForFunction(() => document.querySelectorAll('.item-card').length === 1)
 })
 
+await test('stats tab: upgrade, refund and resource editor', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="stats"]')
+  const lumens = () => page.locator('#lumens-pill').innerText()
+  const start = await lumens()
+  await page.locator('[data-upgrade-stat="accuracy"]').click()
+  await page.waitForFunction(before => document.querySelector('#lumens-pill').innerText !== before, start)
+  await page.locator('[data-refund-stat="accuracy"]').click()
+  await page.waitForFunction(before => document.querySelector('#lumens-pill').innerText === before, start)
+  await page.locator('[data-adjust-resource="lumens"][data-amount="5"]').click()
+  await page.waitForFunction(before => Number(document.querySelector('#lumens-pill').innerText) === Number(before) + 5, start)
+  const gil = await page.locator('#coin-pill').innerText()
+  await page.locator('[data-coin="100"]').click()
+  await page.waitForFunction(before => document.querySelector('#coin-pill').innerText !== before, gil)
+})
+
 await test('folder can be created and persists', async page => {
   await open(page)
   await createCharacter(page)
