@@ -13,8 +13,17 @@ import { getBasicAttackSkill } from '../combat/combat.js'
 import { formatSkillEffectBreakdownPlain, resolveSkillEffectBreakdown, skillHasEffectBreakdown } from '../combat/damage-breakdown.js'
 import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
 
-/** Play tab — session controls, equipped weapon, pinned skills, ongoing effects and combat kit. */
+/** Stat tiles on the Play session card: [stats key, label, show a + on positives]. */
+const PLAY_STATS = [
+  ['accuracy', 'Accuracy', true],
+  ['speed', 'Speed', true],
+  ['strength', 'Strength', true],
+  ['magicPower', 'Magic', true],
+  ['physicalDefence', 'Phys Def', false],
+  ['magicalDefence', 'Mag Def', false]
+]
 
+/** Play tab — session controls, equipped weapon, pinned skills, ongoing effects and combat kit. */
 export function renderPlayTab(character) {
   const stats = computeStats(character)
   const weapon = getEquippedWeapon(character)
@@ -104,65 +113,41 @@ export function renderPlayTab(character) {
     <div class="play-tab">
       <section class="card play-session-card">
         <div class="card-header">
-          <div>
-            <div class="kicker">Session</div>
-            <h3>${esc(character.name)}</h3>
-            <p class="tab-intro">Compact combat view — full inventory stays on Character.</p>
-          </div>
+          <div class="kicker">Session</div>
           <div class="wrap">
             <button type="button" class="ghost-btn tiny" data-process-turn>Process Turn</button>
             <button type="button" class="primary-btn tiny" data-begin-new-combat>New Combat</button>
           </div>
         </div>
-        <div class="play-resource-row wrap mt-12">
-          <div class="play-resource">
-            <strong>HP ${character.hp}/${stats.hp}</strong>
-            <div class="wrap">
-              <button type="button" class="ghost-btn tiny" data-adjust-resource="hp" data-amount="-1">−1</button>
-              <button type="button" class="ghost-btn tiny" data-adjust-resource="hp" data-amount="1">+1</button>
-              <button type="button" class="primary-btn tiny" data-full-resource="hp">Full</button>
-            </div>
-          </div>
-          <div class="play-resource">
-            <strong>STA ${character.stamina}/${stats.stamina}</strong>
-            <div class="wrap">
-              <button type="button" class="ghost-btn tiny" data-adjust-resource="stamina" data-amount="-1">−1</button>
-              <button type="button" class="ghost-btn tiny" data-adjust-resource="stamina" data-amount="1">+1</button>
-              <button type="button" class="primary-btn tiny" data-full-resource="stamina">Full</button>
-            </div>
-          </div>
-        </div>
-        <div class="wrap mt-12 play-stat-strip">
-          <span class="pill">ACC ${stats.accuracy}</span>
-          <span class="pill">SPD ${stats.speed}</span>
-          <span class="pill">STR ${stats.strength}</span>
-          <span class="pill">MP ${stats.magicPower}</span>
-          <span class="pill">PD ${stats.physicalDefence}</span>
-          <span class="pill">MD ${stats.magicalDefence}</span>
+        <div class="play-stat-strip">
+          ${PLAY_STATS.map(([key, label, signed]) => {
+            const value = Number(stats[key]) || 0
+            return `<div class="play-stat play-stat-${key}"><small>${label}</small><b>${signed && value > 0 ? '+' : ''}${value}</b></div>`
+          }).join('')}
         </div>
       </section>
 
-      <section class="card mt-16">
+      <section class="card">
         <div class="kicker">Weapon</div>
         <h3>${weapon ? `${fallbackIcon(weapon)} ${esc(weapon.name)}` : 'Unarmed / Striker'}</h3>
         <p class="subtle">${weapon ? esc(weaponKindDisplayLabel(getWeaponKind(weapon) || weapon.weaponKind || '')) : 'Empty hands'}${weaponEntry ? ` · ${esc(weapon.damage || '')}` : ''}</p>
         ${basic ? `
-          <div class="mt-12">
+          <div class="play-attack">
             <strong>${esc(basic.icon || '⚔')} ${esc(basic.name)}</strong>
-            <p class="subtle mt-8">${esc(basic.desc || '')}</p>
-            ${basicBreakdown ? `<p class="subtle mt-8">${esc(basicBreakdown)}</p>` : ''}
-            <button type="button" class="primary-btn tiny mt-12" data-use-skill="${esc(basic.id)}">Basic Attack</button>
+            <p class="subtle">${esc(basic.desc || '')}</p>
+            ${basicBreakdown ? `<p class="subtle">${esc(basicBreakdown)}</p>` : ''}
+            <button type="button" class="primary-btn play-attack-btn" data-use-skill="${esc(basic.id)}">⚔️ Basic Attack</button>
           </div>
         ` : ''}
       </section>
 
-      <section class="card mt-16">
+      <section class="card">
         <div class="kicker">Pinned skills</div>
         <h3>Ready actions</h3>
         <div class="stack mt-12">${pinnedHtml}</div>
       </section>
 
-      <section class="card mt-16">
+      <section class="card">
         <div class="kicker">Ongoing</div>
         <h3>Toggles, statuses &amp; weather</h3>
         <div class="wrap mt-12">
@@ -174,7 +159,7 @@ export function renderPlayTab(character) {
         <div class="wrap mt-12">${weather || '<span class="subtle">No weather.</span>'}</div>
       </section>
 
-      <section class="card mt-16">
+      <section class="card">
         <div class="kicker">Combat kit</div>
         <h3>Consumables &amp; counters</h3>
         <div class="stack mt-12">${itemsHtml}</div>

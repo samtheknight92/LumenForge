@@ -262,3 +262,45 @@ html[data-appearance="light"] .pill.bad { color: #be123c; }
 html[data-appearance="light"] .action-bar-skills-label { color: #64748b; }
 html[data-appearance="light"] .action-bar-meter-hp .action-bar-meter-label { color: #e11d48; }
 html[data-appearance="light"] .action-bar-meter-stamina .action-bar-meter-label { color: #059669; }
+
+/* ========== Play screen ========== */
+@media (min-width: 1000px) {
+  .play-tab { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start; }
+  .play-tab > .play-session-card,
+  .play-tab > :not(.card) { grid-column: 1 / -1; }
+}
+@media (max-width: 999px) {
+  .play-tab > * + * { margin-top: 8px; }
+}
+.play-session-card .card-header { align-items: center; margin: 0; }
+.play-stat-strip { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+.play-stat {
+  --c: var(--pop-cyan);
+  border-radius: 10px;
+  padding: 4px 2px;
+  text-align: center;
+  background: color-mix(in srgb, var(--c) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, transparent);
+}
+.play-stat small { display: block; font-size: 10px; font-weight: 800; color: color-mix(in srgb, var(--c) 70%, var(--text)); }
+.play-stat b { display: block; font-family: var(--display); font-size: 18px; font-weight: 600; line-height: 1.15; color: var(--strong-text, var(--text)); }
+html[data-appearance="light"] .play-stat small { color: color-mix(in srgb, var(--c) 60%, #000); }
+html[data-appearance="light"] .play-stat b { color: #0f172a; }
+.play-stat-accuracy { --c: var(--pop-yellow); }
+.play-stat-speed { --c: var(--pop-green); }
+.play-stat-strength { --c: var(--pop-orange); }
+.play-stat-magicPower { --c: var(--pop-purple); }
+.play-stat-physicalDefence { --c: var(--pop-cyan); }
+.play-stat-magicalDefence { --c: var(--pop-pink); }
+@media (max-width: 760px) {
+  .play-stat-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.play-attack { display: grid; grid-template-columns: 1fr auto; gap: 3px 12px; align-items: center; margin-top: 6px; }
+.play-attack > strong, .play-attack > p { grid-column: 1; }
+.play-attack > p { font-size: 12.5px; }
+.play-attack-btn { grid-column: 2; grid-row: 1 / span 3; padding: 8px 14px; font-size: 15px; }
+@media (max-width: 760px) {
+  .play-attack { grid-template-columns: 1fr; }
+  .play-attack-btn { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 4px; }
+}
