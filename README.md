@@ -119,6 +119,16 @@ npm test
 
 These commands rebuild generated JSON, validate content references, run project audits, and test core systems such as saving, imports, race passives, Homebrew items, cursed equipment, inventory navigation, note pages, unidentified equipment, weather, and GM monster generation.
 
+### Browser smoke tests
+
+```bash
+npm install
+npx playwright install chromium
+npm run test:ui
+```
+
+`npm run test:ui` starts a local server, opens the app in headless Chromium and checks that every tab renders, characters and folders survive a reload, the Play tab's attack/HP/Process Turn buttons work, export/import round-trips, and an unreadable save is kept rather than overwritten.
+
 ## Premade character roster
 
 `data/json/premade-characters.json` contains **349 premade characters**:
