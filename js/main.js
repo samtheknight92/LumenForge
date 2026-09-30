@@ -4,7 +4,7 @@ import { loadHomebrewStore, registerHomebrewInCache } from './homebrew/homebrew.
 import { load, saveNow, remindToExportIfStale } from './core/storage.js'
 import { state, activeCharacter, applyUrlState } from './core/state.js'
 /** Query bump forces browsers to reload render.js (child modules ignore main.js?v=). */
-import { render } from './ui/render.js?v=5.2.2-howtoplay-fix'
+import { render } from './ui/render.js?v=5.3.0-skill-ranks'
 import { initEvents } from './core/events.js'
 import { setupTooltips } from './ui/tooltips.js'
 import { initUrlState, syncUrlState } from './core/url-state.js'

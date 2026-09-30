@@ -7,7 +7,7 @@ import { FEEDBACK_ENDPOINT, FEEDBACK_ACCESS_KEY, FEEDBACK_EMAIL } from '../core/
 import { state } from '../core/state.js'
 import { toast } from '../core/utils.js'
 
-const APP_LABEL = 'LumenForge v5 (build 5.2.2)'
+const APP_LABEL = 'LumenForge v5 (build 5.3.0)'
 const MAX_MESSAGE_LENGTH = 4000
 const KIND_LABELS = { bug: 'Bug', idea: 'Idea', other: 'Feedback' }
 
