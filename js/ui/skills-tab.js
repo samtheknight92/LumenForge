@@ -8,6 +8,9 @@ import { isHomebrewSkill } from '../homebrew/homebrew.js'
 import { isGmMode } from '../gm/gm-mode.js'
 import { skillTooltip } from './tooltips-text.js'
 import { isActionBarSkill } from '../skills/skill-activation.js'
+import { MAX_SKILL_RANK, getSkillRank, rankUpCost, rankBonusSummary } from '../skills/skill-ranks.js'
+import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
+import { rankUpBlockReason } from './combat-actions.js'
 
 /** Skills tab — category/tree navigation, fusion filters and skill cards. */
 
@@ -209,8 +212,18 @@ function renderSkillCard(character, skill, options = {}) {
     ? `<button type="button" class="ghost-btn tiny" data-toggle-skill-pin="${esc(skill.id)}" aria-label="Pin skill">${pinned ? '📌' : '📍'}</button>`
     : ''
   const starBtn = `<button type="button" class="ghost-btn tiny" data-toggle-skill-star="${esc(skill.id)}" aria-label="Star skill">${starred ? '⭐' : '☆'}</button>`
+  const rank = unlocked ? getSkillRank(character, skill.id) : 0
+  const rankable = unlocked && isActionBarSkill(skill)
+  const rankBlock = rankable ? rankUpBlockReason(character, skill) : ''
+  const rankPill = rankable
+    ? `<span class="pill ${rank >= MAX_SKILL_RANK ? 'good' : 'gold'}" data-tooltip="${esc(rankBonusSummary(rank))}">${rank >= MAX_SKILL_RANK ? '★ Mastered' : `Rank ${rank}/${MAX_SKILL_RANK}`}</span>`
+    : ''
+  const rankBtns = rankable
+    ? `${rank > 1 ? `<button type="button" class="ghost-btn tiny" data-rank-down-skill="${esc(skill.id)}" aria-label="Lower rank" data-tooltip="Undo one rank (refunds its Lumens)">−</button>` : ''}${rank < MAX_SKILL_RANK ? `<button type="button" class="primary-btn tiny" data-rank-up-skill="${esc(skill.id)}" ${rankBlock ? 'disabled' : ''} data-tooltip="${esc(`Train to Rank ${rank + 1}. ${rankBonusSummary(rank + 1)}`)}">Rank up · ${isGmMode() ? 'Free' : `${rankUpCost(skill, rank + 1)}L`}</button>` : ''}`
+    : ''
+  const staminaShown = unlocked ? getEffectiveSkillStaminaCost(character, skill) : Number(skill.staminaCost || 0)
   const action = unlocked
-    ? `<button type="button" class="ghost-btn tiny" data-refund-skill="${esc(skill.id)}">Refund</button>${isToggleSkill(skill) ? `<button type="button" class="chip-btn tiny" data-toggle-skill="${esc(skill.id)}">${active ? 'Switch Off' : 'Switch On'}</button>` : ''}`
+    ? `${rankBtns}<button type="button" class="ghost-btn tiny" data-refund-skill="${esc(skill.id)}">Refund</button>${isToggleSkill(skill) ? `<button type="button" class="chip-btn tiny" data-toggle-skill="${esc(skill.id)}">${active ? 'Switch Off' : 'Switch On'}</button>` : ''}`
     : `<button type="button" class="primary-btn tiny" data-learn-skill="${esc(skill.id)}" ${check.ok ? '' : 'disabled'}>Learn</button>`
   return `
     <article class="skill-card ${cls}" data-tooltip="${esc(skillTooltip(skill, unlocked ? character : null))}" tabindex="0">
@@ -220,14 +233,16 @@ function renderSkillCard(character, skill, options = {}) {
           <h4>${esc(skill.name)}</h4>
           <div class="wrap mt-12">
             <span class="pill gold">${isGmMode() && !unlocked ? 'Free' : `${skill.cost}L`}</span>
-            <span class="pill warn">${Number(skill.staminaCost || 0)} STA</span>
+            <span class="pill warn">${staminaShown} STA</span>
             <span class="pill">Tier ${Number(skill.tier || 1)}</span>
+            ${rankPill}
             ${active ? '<span class="pill good">Active</span>' : ''}
             ${options.outsideFocus ? '<span class="pill subtle-pill">Outside focus</span>' : ''}
           </div>
         </div>
       </div>
       <p>${esc(skill.desc)}</p>
+      ${rankable && rank > 1 ? `<p class="subtle rank-bonus">${esc(rankBonusSummary(rank))}</p>` : ''}
       <div class="wrap detail-pills">
         ${isToggleSkill(skill) ? '<span class="pill warn">Toggle</span>' : ''}
         ${skill.elementalType ? `<span class="pill">${titleCase(skill.elementalType)}</span>` : ''}

@@ -11,6 +11,7 @@ import {
 import { parseMultiWeaponAttackCount } from './weapon-combat.js'
 import { enchantmentDamageBonusForEntry, entryEnchantments } from '../items/enchantments.js'
 import { applyHealingToCharacter } from '../character/knockout.js'
+import { getSkillRank, rankDamageBonus } from '../skills/skill-ranks.js'
 
 export const BASIC_ATTACK_ID = '__basic_attack__'
 export { characterHasStrikerBasics } from './striker-combat.js'
@@ -816,6 +817,33 @@ function appendWeaponSkillBaseParts(character, skill, rollDiceFn, parts) {
   return baseTotal
 }
 
+/** Skill rank training: +1 damage per rank above 1, plus +1d6 at Ranks 3, 6 and 9. */
+function appendRankDamagePart(character, skill, rollDiceFn, parts) {
+  const rank = getSkillRank(character, skill?.id)
+  if (rank < 2) return 0
+  const { flat, dice, sides } = rankDamageBonus(rank)
+  let value = flat
+  let detail = ''
+  if (dice) {
+    if (rollDiceFn) {
+      const rolled = rollDiceFn(dice, sides, 0)
+      value += rolled.total
+      detail = `${rolled.rolls?.join('+') || rolled.total}+${flat}`
+    } else {
+      value += diceAverage(dice, sides)
+    }
+  }
+  parts.push({
+    kind: 'base',
+    label: `Rank ${rank} +${dice ? `${dice}d${sides}+` : ''}${flat}`,
+    formula: 'rank',
+    value,
+    ...(detail ? { detail } : {}),
+    average: Boolean(dice) && !rollDiceFn
+  })
+  return value
+}
+
 export function resolveDamageBreakdown(character, skill, options = {}) {
   if (!character || !skill || !skillDealsDirectDamage(skill)) return null
 
@@ -855,6 +883,8 @@ export function resolveDamageBreakdown(character, skill, options = {}) {
       }
     }
   }
+
+  if (!isBasicAttackSkill(skill)) baseTotal += appendRankDamagePart(character, skill, rollDiceFn, parts)
 
   const gearEffects = rollGearAttackEffectDamage(character, skill, rollDiceFn)
   baseTotal += gearEffects.primaryTotal

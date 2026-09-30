@@ -35,6 +35,8 @@ import {
 import {
   learnSkill as doLearnSkill,
   refundSkill as doRefundSkill,
+  rankUpSkill as doRankUpSkill,
+  rankDownSkill as doRankDownSkill,
   toggleSkill as doToggleSkill,
   useSkill as doUseSkill,
   processTurn as doProcessTurn,
@@ -504,6 +506,8 @@ const clickActions = {
   duplicateCharacter(target) { doDuplicateCharacter(target.dataset.duplicateCharacter) },
   learnSkill(target) { doLearnSkill(target.dataset.learnSkill) },
   refundSkill(target) { doRefundSkill(target.dataset.refundSkill) },
+  rankUpSkill(target) { doRankUpSkill(target.dataset.rankUpSkill) },
+  rankDownSkill(target) { doRankDownSkill(target.dataset.rankDownSkill) },
   toggleSkill(target) { doToggleSkill(target.dataset.toggleSkill) },
   useSkill(target) { doUseSkill(target.dataset.useSkill) },
   skillViewMode(target) { doSetSkillViewMode(target.dataset.skillViewMode) },

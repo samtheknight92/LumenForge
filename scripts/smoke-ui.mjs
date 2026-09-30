@@ -233,6 +233,36 @@ await test('skills tab: switch tree, learn, refund and search', async page => {
     /fire/i.test(document.querySelector('#app-content').innerText))
 })
 
+await test('skills tab: rank a skill up to mastery, undo a rank and refund', async page => {
+  await open(page)
+  await createCharacter(page)
+  const lumens = () => page.evaluate(() => window.LumenForge.state.characters.find(c => c.id === window.LumenForge.state.activeId).lumens)
+  await page.evaluate(() => {
+    const c = window.LumenForge.state.characters.find(ch => ch.id === window.LumenForge.state.activeId)
+    c.lumens = 1000
+  })
+  await page.click('#tabbar [data-tab="skills"]')
+  await page.fill('#skill-search', 'Fire Spark')
+  const learn = page.locator('[data-learn-skill="fire_spark"]')
+  await learn.waitFor()
+  await learn.click()
+  const rankUp = page.locator('[data-rank-up-skill="fire_spark"]')
+  for (let rank = 2; rank <= 10; rank++) {
+    await rankUp.waitFor()
+    await rankUp.click()
+    await page.waitForFunction(r => window.LumenForge.state.characters.find(c => c.id === window.LumenForge.state.activeId).skillRanks?.fire_spark === r, rank)
+  }
+  const card = page.locator('.skill-card', { has: page.locator('[data-refund-skill="fire_spark"]') })
+  await card.locator('.pill', { hasText: 'Mastered' }).waitFor()
+  assert.match(await card.innerText(), /\b0 STA\b/, 'mastered skill should cost no Stamina')
+  assert.equal(await lumens(), 1000 - 8 - 216, 'rank prices are 8, 12, 16 … 40')
+  await card.locator('[data-rank-down-skill]').click()
+  await page.waitForFunction(() => window.LumenForge.state.characters.find(c => c.id === window.LumenForge.state.activeId).skillRanks?.fire_spark === 9)
+  await card.locator('[data-refund-skill]').click()
+  await page.waitForFunction(() => !window.LumenForge.state.characters.find(c => c.id === window.LumenForge.state.activeId).skills.includes('fire_spark'))
+  assert.equal(await lumens(), 1000, 'refunding the skill returns its rank Lumens too')
+})
+
 await test('homebrew tab: create a custom item and open each editor', async page => {
   await open(page)
   await createCharacter(page)

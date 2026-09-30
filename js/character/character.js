@@ -17,6 +17,7 @@ import { applyBackgroundToCharacter, DEFAULT_BACKGROUND } from './backgrounds.js
 import { mergeInventoryStacks } from '../items/items.js'
 import { migrateLegacyStatusEffect, statusStatModifiers } from '../effects/status-stat-modifiers.js'
 import { normalizeKnockoutFields } from './knockout.js'
+import { MAX_SKILL_RANK } from '../skills/skill-ranks.js'
 import {
   emptyStatUpgradeHistory,
   normalizeStatUpgradeHistory
@@ -48,6 +49,7 @@ export function createCharacter(name, raceId, options = {}) {
     hp: DEFAULT_STATS.hp,
     stamina: DEFAULT_STATS.stamina,
     skills: [],
+    skillRanks: {},
     activeToggles: [],
     statusEffects: [],
     inventory: [],
@@ -82,6 +84,17 @@ export function createCharacter(name, raceId, options = {}) {
   return character
 }
 
+/** Keep only trained ranks (2–10) for skills the character still knows. */
+function normalizeSkillRanks(ranks, skills) {
+  const out = {}
+  if (!ranks || typeof ranks !== 'object') return out
+  for (const [id, value] of Object.entries(ranks)) {
+    const rank = Math.floor(Number(value))
+    if (skills.includes(id) && rank >= 2) out[id] = Math.min(MAX_SKILL_RANK, rank)
+  }
+  return out
+}
+
 export function normalizeCharacter(character) {
   const base = createCharacter(character?.name || 'Unnamed Hero', character?.race || null)
   const merged = { ...base, ...character }
@@ -91,6 +104,7 @@ export function normalizeCharacter(character) {
   merged.elementalAffinity = normalizeElementalAffinity(merged.race, merged.elementalAffinity)
   merged.background = character?.background || DEFAULT_BACKGROUND
   merged.skills = migrateSkillIds(Array.isArray(character?.skills) ? [...new Set(character.skills)] : migrateOldSkills(character?.unlockedSkills))
+  merged.skillRanks = normalizeSkillRanks(character?.skillRanks, merged.skills)
   merged.activeToggles = Array.isArray(character?.activeToggles) ? character.activeToggles.filter(id => merged.skills.includes(id)) : []
   merged.statusEffects = Array.isArray(character?.statusEffects) ? character.statusEffects.map(normalizeStatusEffect).filter(Boolean) : []
   merged.inventory = Array.isArray(character?.inventory) ? character.inventory.map(normalizeInventoryEntry).filter(Boolean) : []
