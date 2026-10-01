@@ -560,3 +560,17 @@ html[data-appearance="light"] .guided-create-modal .modal-card { background: #ff
   border: 1px solid color-mix(in srgb, var(--pop-cyan) 40%, transparent);
 }
 .stat-upgrade-card .stat-explain { font-size: 12.5px !important; line-height: 1.35; margin: 4px 0 0; }
+/* Guided Create gear step */
+.guided-item-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px; }
+.guided-item-row {
+  padding: 6px 9px; border-radius: 12px;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  background: color-mix(in srgb, currentColor 4%, transparent);
+}
+.guided-item-row.owned { border-color: var(--pop-green); background: color-mix(in srgb, var(--pop-green) 12%, transparent); }
+.guided-item-meta { font-size: 11.5px !important; margin-top: 2px; }
+.guided-item-desc { margin: 2px 0 0; font-size: 12.5px; line-height: 1.35; }
+.guided-item-pills { gap: 4px; margin-top: 4px; }
+.guided-item-locked { font-size: 11.5px !important; color: var(--pop-orange); margin-top: 3px; }
+.guided-bag { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 12.5px; }
+.guided-bag-undo { border: 0; background: none; color: inherit; cursor: pointer; padding: 0 0 0 4px; font-weight: 800; opacity: .8; }

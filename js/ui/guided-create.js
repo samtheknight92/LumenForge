@@ -4,13 +4,14 @@
 import { DRAGONBORN_AFFINITIES, STAT_RULES, STAT_EXPLAINERS, STAT_HOW_ATTACKS_WORK } from '../core/constants.js'
 import { state } from '../core/state.js'
 import { uid, toast, deepClone, esc, titleCase } from '../core/utils.js'
-import { createCharacter, normalizeCharacter, computeStats } from '../character/character.js'
+import { createCharacter, normalizeCharacter, computeStats, invalidateCharacterCache } from '../character/character.js'
 import { getSkill, flattenSkills, getItem, raceOptions, getRace, itemSources } from '../core/cache.js'
 import { canLearnSkill, humanStarterWeaponOptions } from '../skills/skills.js'
 import { PLAYSTYLE_TREE_HINTS } from '../skills/focused-skills.js'
 import { getNextStatUpgradeCost, appendStatPurchase, getLatestStatRefund, popStatPurchase } from '../character/stat-costs.js'
-import { shopPurchaseCheck, addItemToInventory } from '../items/items.js'
-import { itemPriceGil, normalizeGil } from './format.js'
+import { shopPurchaseCheck, addItemToInventory, isShopPurchaseItem, isShopItemLevelUnlocked } from '../items/items.js'
+import { itemPriceGil, normalizeGil, fallbackIcon } from './format.js'
+import { weaponHandednessLabel, offhandTypeLabel, getWeaponKind } from '../items/equipment.js'
 import { backgroundOptions, getBackground, backgroundRewardSummary, DEFAULT_BACKGROUND } from '../character/backgrounds.js'
 import { computeSkillLevel } from '../character/skill-level.js'
 import { computeCombatPower } from '../character/combat-power.js'
@@ -44,6 +45,7 @@ export function emptyGuidedCreateState(prefill = {}) {
     dirty: false,
     browseSkills: false,
     browseItems: false,
+    boughtItems: {},
     form
   }
 }
@@ -81,13 +83,19 @@ export function recommendedItems(playstyle) {
     const type = String(item.type || '').toLowerCase()
     const price = itemPriceGil(item)
     if (price <= 0 || price > 900) continue
-    const kind = item.weaponKind === 'bow' ? 'ranged' : item.weaponKind
+    const rawKind = getWeaponKind(item)
+    const kind = rawKind === 'bow' ? 'ranged' : rawKind
     if (type.includes('weapon') && kind && wantKinds.has(kind)) items.push(item)
     else if ((type.includes('armor') || type.includes('accessory')) && price <= 500) {
       if (['defensive', 'support', 'mixed', 'explore', 'melee'].includes(playstyle || 'explore')) items.push(item)
     } else if ((type.includes('consumable') || type.includes('potion')) && price <= 200) items.push(item)
   }
-  return items.slice(0, 30)
+  // Weapons first, then armour and accessories, then food and potions.
+  const rank = item => {
+    const type = String(item.type || '').toLowerCase()
+    return type.includes('weapon') ? 0 : (type.includes('armor') || type.includes('accessory')) ? 1 : 2
+  }
+  return items.sort((a, b) => rank(a) - rank(b) || itemPriceGil(a) - itemPriceGil(b)).slice(0, 30)
 }
 
 export function canDraftAffordSkill(draft, skill) {
@@ -105,6 +113,7 @@ export function learnSkillOnDraft(draft, skillId) {
   if (draft.lumens < skill.cost) return { ok: false, reason: 'Not enough Lumens' }
   draft.skills.push(skill.id)
   draft.lumens -= skill.cost
+  invalidateCharacterCache(draft) // stat totals are cached on the character
   return { ok: true }
 }
 
@@ -114,6 +123,7 @@ export function refundSkillOnDraft(draft, skillId) {
   draft.skills = draft.skills.filter(id => id !== skillId)
   draft.activeToggles = (draft.activeToggles || []).filter(id => id !== skillId)
   draft.lumens += skill.cost
+  invalidateCharacterCache(draft)
   return { ok: true }
 }
 
@@ -124,6 +134,24 @@ export function buyItemOnDraft(draft, itemId) {
   if (!check.ok) return { ok: false, reason: check.reason }
   draft.gil = normalizeGil(draft.gil) - itemPriceGil(item)
   addItemToInventory(draft, itemId, 1)
+  invalidateCharacterCache(draft)
+  return { ok: true }
+}
+
+/** Undo one guided-create purchase: take the item back out of the bag and refund its full price. */
+export function sellBackItemOnDraft(draft, itemId) {
+  const item = getItem(itemId)
+  const entry = (draft?.inventory || []).find(e => e.itemId === itemId)
+  if (!item || !entry) return { ok: false, reason: 'Not in your bag' }
+  if (Number(entry.qty || 1) > 1) entry.qty = Number(entry.qty) - 1
+  else {
+    draft.inventory = draft.inventory.filter(e => e !== entry)
+    for (const [slot, equippedUid] of Object.entries(draft.equipped || {})) {
+      if (equippedUid === entry.uid) draft.equipped[slot] = null
+    }
+  }
+  draft.gil = normalizeGil(draft.gil) + itemPriceGil(item)
+  invalidateCharacterCache(draft)
   return { ok: true }
 }
 
@@ -138,6 +166,7 @@ export function upgradeStatOnDraft(draft, stat) {
   appendStatPurchase(draft, stat, cost)
   if (stat === 'hp') draft.hp += 1
   if (stat === 'stamina') draft.stamina += 1
+  invalidateCharacterCache(draft)
   return { ok: true }
 }
 
@@ -152,6 +181,7 @@ export function refundStatOnDraft(draft, stat) {
   draft.lumens += refund
   if (stat === 'hp') draft.hp = Math.max(0, draft.hp - 1)
   if (stat === 'stamina') draft.stamina = Math.max(0, draft.stamina - 1)
+  invalidateCharacterCache(draft)
   return { ok: true }
 }
 
@@ -353,27 +383,64 @@ function renderGuidedStepSkills(gc) {
   `
 }
 
+function guidedItemDetails(item) {
+  const meta = [
+    titleCase(item.type || 'item'),
+    item.damage && !/damage/i.test(item.desc || '') ? `Damage ${item.damage}` : '',
+    weaponHandednessLabel(item) || '',
+    offhandTypeLabel(item) || ''
+  ].filter(Boolean).join(' · ')
+  const statPills = Object.entries(item.statModifiers || {}).map(([stat, value]) =>
+    `<span class="pill ${value >= 0 ? 'good' : 'bad'}">${esc(STAT_RULES[stat]?.label || titleCase(stat))} ${value >= 0 ? '+' : ''}${value}</span>`
+  ).join('')
+  const effectPills = (item.specialEffects || []).slice(0, 3).map(effect => `<span class="pill warn">${esc(titleCase(effect))}</span>`).join('')
+  return `
+    <div class="subtle guided-item-meta">${esc(meta)}</div>
+    ${item.desc
+      ? `<p class="guided-item-desc">${esc(item.desc)}</p>`
+      : statPills || effectPills ? `<div class="wrap guided-item-pills">${statPills}${effectPills}</div>` : ''}
+  `
+}
+
 function renderGuidedStepEquipment(gc) {
   const draft = gc.draftCharacter
   if (!draft) return '<p class="subtle">Set identity first.</p>'
   const list = gc.browseItems
     ? itemSources().filter(i => itemPriceGil(i) > 0 && itemPriceGil(i) <= 1200).slice(0, 40)
     : recommendedItems(gc.playstyle || 'explore')
+  // Only show gear a brand-new character can actually buy (no craft-only or high-level stock).
+  const buyable = list.filter(item => isShopPurchaseItem(item) && isShopItemLevelUnlocked(draft, item))
+  const bought = Object.entries(gc.boughtItems || {}).filter(([, n]) => n > 0)
   return `
     <div class="guided-lumens-bar">
       <span>Gil left: <strong>${normalizeGil(draft.gil)}</strong></span>
       <button type="button" class="ghost-btn tiny" data-guided-browse-items>${gc.browseItems ? 'Show recommendations' : 'Browse more gear'}</button>
     </div>
-    <div class="stack mt-12">
-      ${list.map(item => `
-        <div class="play-item-row">
-          <div>
-            <strong>${esc(item.name)}</strong>
-            <div class="subtle">${esc(item.type)} · ${itemPriceGil(item)} Gil</div>
+    ${bought.length ? `
+      <div class="guided-bag mt-8">
+        <strong>🎒 Bought so far:</strong>
+        ${bought.map(([itemId, n]) => {
+          const item = getItem(itemId)
+          return item ? `<span class="pill good">${esc(item.name)}${n > 1 ? ` ×${n}` : ''} <button type="button" class="guided-bag-undo" data-guided-sell-item="${esc(itemId)}" aria-label="Return ${esc(item.name)} for a refund">✕</button></span>` : ''
+        }).join('')}
+      </div>` : ''}
+    <p class="subtle mt-8">You can equip what you buy from the Character tab once you're done.</p>
+    <div class="guided-item-list mt-8">
+      ${buyable.map(item => {
+        const check = shopPurchaseCheck(draft, item, { free: false })
+        const owned = gc.boughtItems?.[item.id] || 0
+        return `
+        <article class="guided-item-row ${owned ? 'owned' : ''}">
+          <div class="guided-skill-head">
+            <strong>${fallbackIcon(item)} ${esc(item.name)}</strong>
+            <span class="pill gold">${itemPriceGil(item)} Gil</span>
+            <button type="button" class="primary-btn tiny" data-guided-buy-item="${esc(item.id)}" ${check.ok ? '' : `disabled title="${esc(check.reason || '')}"`}>${owned ? 'Buy another' : 'Buy'}</button>
           </div>
-          <button type="button" class="primary-btn tiny" data-guided-buy-item="${esc(item.id)}">Buy</button>
-        </div>
-      `).join('')}
+          ${guidedItemDetails(item)}
+          ${check.ok ? '' : `<div class="subtle guided-item-locked">${esc(check.reason || '')}</div>`}
+        </article>
+      `
+      }).join('') || '<p class="subtle">Nothing here you can buy yet. Try Browse more gear.</p>'}
     </div>
   `
 }

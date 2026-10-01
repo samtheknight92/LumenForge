@@ -17,7 +17,7 @@ globalThis.fetch = async url => {
 
 const { loadGameData } = await importJs('data.js')
 const { initCache } = await importJs('cache.js')
-const { createCharacter, normalizeCharacter } = await importJs('character.js')
+const { createCharacter, normalizeCharacter, computeStats } = await importJs('character.js')
 const {
   recommendedTier1Skills,
   recommendedItems,
@@ -27,6 +27,7 @@ const {
   upgradeStatOnDraft,
   refundStatOnDraft,
   emptyGuidedCreateState,
+  sellBackItemOnDraft,
   GUIDED_PLAYSTYLES
 } = await importJs('guided-create.js')
 
@@ -43,6 +44,8 @@ assert.ok(magicSkills.some(s => s.category === 'magic' || s.category === 'weapon
 
 const items = recommendedItems('ranged')
 assert.ok(items.length > 0, 'ranged gear recommendations')
+assert.ok(recommendedItems('melee').some(i => String(i.type).toLowerCase().includes('weapon')), 'melee recommendations include weapons')
+assert.ok(items.some(i => String(i.type).toLowerCase().includes('weapon')), 'ranged recommendations include weapons')
 
 const draft = normalizeCharacter(createCharacter('Guide', 'elf'))
 const beforeL = draft.lumens
@@ -61,12 +64,15 @@ assert.equal(canDraftAffordSkill(draft, expensive), false)
 const statDraft = normalizeCharacter(createCharacter('Stats', 'elf'))
 const startL = statDraft.lumens
 const startStr = statDraft.stats.strength
+const shownBefore = computeStats(statDraft).strength
 assert.equal(upgradeStatOnDraft(statDraft, 'strength').ok, true)
 assert.equal(statDraft.stats.strength, startStr + 1)
+assert.equal(computeStats(statDraft).strength, shownBefore + 1, 'shown total must update after buying')
 assert.ok(statDraft.lumens < startL)
 assert.equal(refundStatOnDraft(statDraft, 'strength').ok, true)
 assert.equal(statDraft.stats.strength, startStr)
 assert.equal(statDraft.lumens, startL)
+assert.equal(computeStats(statDraft).strength, shownBefore, 'shown total must update after undo')
 assert.equal(refundStatOnDraft(statDraft, 'strength').ok, false, 'cannot undo below starting value')
 
 // Sidebar entries carry over into the wizard; race-specific picks only for that race
@@ -76,6 +82,16 @@ assert.equal(pre.form.raceId, 'elf')
 assert.equal(pre.form.humanStarterSkill, '')
 assert.equal(emptyGuidedCreateState({ raceId: 'monster' }).form.raceId, 'human')
 assert.equal(emptyGuidedCreateState().form.name, '')
+
+// Gear step: returning a bought item refunds its full price
+const gearDraft = normalizeCharacter(createCharacter('Gear', 'elf'))
+const gearGil = gearDraft.gil
+const gearItem = items.find(i => buyItemOnDraft(gearDraft, i.id).ok)
+assert.ok(gearItem, 'could buy a recommended item')
+assert.ok(gearDraft.gil < gearGil)
+assert.equal(sellBackItemOnDraft(gearDraft, gearItem.id).ok, true)
+assert.equal(gearDraft.gil, gearGil)
+assert.ok(!gearDraft.inventory.some(e => e.itemId === gearItem.id))
 
 const rosterBefore = 0
 // cancel must not add — finish path tested via pure helpers only (no DOM state)
