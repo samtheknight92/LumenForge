@@ -4,7 +4,7 @@
 import { DRAGONBORN_AFFINITIES, STAT_RULES, STAT_EXPLAINERS, STAT_HOW_ATTACKS_WORK } from '../core/constants.js'
 import { state } from '../core/state.js'
 import { uid, toast, deepClone, esc, titleCase } from '../core/utils.js'
-import { createCharacter, normalizeCharacter, computeStats } from '../character/character.js'
+import { createCharacter, normalizeCharacter, computeStats, invalidateCharacterCache } from '../character/character.js'
 import { getSkill, flattenSkills, getItem, raceOptions, getRace, itemSources } from '../core/cache.js'
 import { canLearnSkill, humanStarterWeaponOptions } from '../skills/skills.js'
 import { PLAYSTYLE_TREE_HINTS } from '../skills/focused-skills.js'
@@ -105,6 +105,7 @@ export function learnSkillOnDraft(draft, skillId) {
   if (draft.lumens < skill.cost) return { ok: false, reason: 'Not enough Lumens' }
   draft.skills.push(skill.id)
   draft.lumens -= skill.cost
+  invalidateCharacterCache(draft) // stat totals are cached on the character
   return { ok: true }
 }
 
@@ -114,6 +115,7 @@ export function refundSkillOnDraft(draft, skillId) {
   draft.skills = draft.skills.filter(id => id !== skillId)
   draft.activeToggles = (draft.activeToggles || []).filter(id => id !== skillId)
   draft.lumens += skill.cost
+  invalidateCharacterCache(draft)
   return { ok: true }
 }
 
@@ -124,6 +126,7 @@ export function buyItemOnDraft(draft, itemId) {
   if (!check.ok) return { ok: false, reason: check.reason }
   draft.gil = normalizeGil(draft.gil) - itemPriceGil(item)
   addItemToInventory(draft, itemId, 1)
+  invalidateCharacterCache(draft)
   return { ok: true }
 }
 
@@ -138,6 +141,7 @@ export function upgradeStatOnDraft(draft, stat) {
   appendStatPurchase(draft, stat, cost)
   if (stat === 'hp') draft.hp += 1
   if (stat === 'stamina') draft.stamina += 1
+  invalidateCharacterCache(draft)
   return { ok: true }
 }
 
@@ -152,6 +156,7 @@ export function refundStatOnDraft(draft, stat) {
   draft.lumens += refund
   if (stat === 'hp') draft.hp = Math.max(0, draft.hp - 1)
   if (stat === 'stamina') draft.stamina = Math.max(0, draft.stamina - 1)
+  invalidateCharacterCache(draft)
   return { ok: true }
 }
 

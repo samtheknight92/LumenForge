@@ -17,7 +17,7 @@ globalThis.fetch = async url => {
 
 const { loadGameData } = await importJs('data.js')
 const { initCache } = await importJs('cache.js')
-const { createCharacter, normalizeCharacter } = await importJs('character.js')
+const { createCharacter, normalizeCharacter, computeStats } = await importJs('character.js')
 const {
   recommendedTier1Skills,
   recommendedItems,
@@ -61,12 +61,15 @@ assert.equal(canDraftAffordSkill(draft, expensive), false)
 const statDraft = normalizeCharacter(createCharacter('Stats', 'elf'))
 const startL = statDraft.lumens
 const startStr = statDraft.stats.strength
+const shownBefore = computeStats(statDraft).strength
 assert.equal(upgradeStatOnDraft(statDraft, 'strength').ok, true)
 assert.equal(statDraft.stats.strength, startStr + 1)
+assert.equal(computeStats(statDraft).strength, shownBefore + 1, 'shown total must update after buying')
 assert.ok(statDraft.lumens < startL)
 assert.equal(refundStatOnDraft(statDraft, 'strength').ok, true)
 assert.equal(statDraft.stats.strength, startStr)
 assert.equal(statDraft.lumens, startL)
+assert.equal(computeStats(statDraft).strength, shownBefore, 'shown total must update after undo')
 assert.equal(refundStatOnDraft(statDraft, 'strength').ok, false, 'cannot undo below starting value')
 
 // Sidebar entries carry over into the wizard; race-specific picks only for that race
