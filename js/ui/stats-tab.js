@@ -1,5 +1,5 @@
 import { esc } from '../core/utils.js'
-import { STAT_RULES } from '../core/constants.js'
+import { STAT_RULES, STAT_EXPLAINERS, STAT_HOW_ATTACKS_WORK } from '../core/constants.js'
 import { getNextStatUpgradeCost, getLatestStatRefund, getPurchasedStatCount, purchasesUntilNextBand } from '../character/stat-costs.js'
 import { computeStats, statBreakdown } from '../character/character.js'
 import { isGmMode } from '../gm/gm-mode.js'
@@ -75,7 +75,8 @@ export function renderStatsTab(character) {
   const computed = computeStats(character)
   return `
     ${renderResourceManager(character)}
-    <p class="subtle mt-12">Early stat upgrades are cheaper. The price rises as you repeatedly improve the same stat. Gear and skill bonuses do not change the upgrade price.</p>
+    <p class="stat-howto mt-12">⚔️ ${esc(STAT_HOW_ATTACKS_WORK)}</p>
+    <p class="subtle mt-8">Early stat upgrades are cheaper. The price rises as you repeatedly improve the same stat. Gear and skill bonuses do not change the upgrade price.</p>
     <div class="grid two stat-upgrade-grid mt-16">
       ${Object.entries(STAT_RULES).map(([stat, rule]) => {
         const rows = statBreakdown(character, stat).map(row => `<span class="pill ${row.value >= 0 ? 'good' : 'bad'}">${esc(row.label)} ${row.value >= 0 ? '+' : ''}${row.value}</span>`).join('')
@@ -92,6 +93,7 @@ export function renderStatsTab(character) {
               </div>
               <div class="stat-value">${computed[stat]}</div>
             </div>
+            <p class="stat-explain">${esc(STAT_EXPLAINERS[stat] || '')}</p>
             <div class="subtle mt-8">Purchased: ${purchased} · Next band in ${untilBand} · Refund: ${isGmMode() ? '—' : `${refund}L`}</div>
             <div class="wrap mt-12 stat-breakdown-pills">${rows}</div>
             <div class="stat-actions">

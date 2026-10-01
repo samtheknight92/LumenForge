@@ -548,3 +548,15 @@ html[data-appearance="light"] .guided-create-modal .modal-card { background: #ff
 .guided-skill-head { display: flex; align-items: center; gap: 6px; }
 .guided-skill-head strong { flex: 1; font-family: var(--display); font-weight: 600; }
 .guided-skill-row p { margin: 3px 0 0; font-size: 12px !important; }
+/* Plain-English stat explainers (guided create + Stats tab) */
+.guided-stat-name { display: flex; flex-direction: column; min-width: 0; }
+.guided-stat-explain { font-family: var(--sans); font-weight: 500; font-size: 11.5px; line-height: 1.3; opacity: .78; margin-top: 1px; }
+.guided-stat-row { align-items: start; padding: 6px 0; }
+.guided-stat-row > :not(.guided-stat-name) { margin-top: 2px; }
+.guided-stat-howto, .stat-howto {
+  font-size: 12.5px !important; line-height: 1.4; margin-bottom: 0;
+  padding: 6px 10px; border-radius: 12px;
+  background: color-mix(in srgb, var(--pop-cyan) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pop-cyan) 40%, transparent);
+}
+.stat-upgrade-card .stat-explain { font-size: 12.5px !important; line-height: 1.35; margin: 4px 0 0; }

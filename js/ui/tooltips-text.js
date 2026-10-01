@@ -1,5 +1,5 @@
 import { titleCase } from '../core/utils.js'
-import { DEFAULT_STATS } from '../core/constants.js'
+import { DEFAULT_STATS, STAT_RULES, STAT_EXPLAINERS } from '../core/constants.js'
 import { isGmMode } from '../gm/gm-mode.js'
 import {
   getNextStatUpgradeCost,
@@ -89,6 +89,8 @@ export function itemTooltip(item, character = null, entry = null) {
 export function statTooltip(rule, { includeCost = false } = {}) {
   if (!rule) return ''
   const lines = [rule.label]
+  const key = Object.keys(STAT_RULES).find(k => STAT_RULES[k] === rule)
+  if (STAT_EXPLAINERS[key]) lines.push(STAT_EXPLAINERS[key])
   if (includeCost) {
     lines.push(`Base cost: ${rule.cost} Lumens`)
     lines.push('Early upgrades are cheaper. The price rises as you repeatedly improve the same stat.')
