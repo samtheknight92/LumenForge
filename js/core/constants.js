@@ -57,6 +57,21 @@ export const STAT_RULES = {
   magicalDefence: { label: 'Magical Defence', cost: 10, min: 1, max: 30, desc: 'Magical AC — spells and magical attacks must roll d20 + accuracy at or above this to hit (otherwise miss/block).' }
 }
 
+/** Plain-English "what does this stat do?" lines for new players (guided create + Stats tab). */
+export const STAT_EXPLAINERS = {
+  hp: 'Your health. Damage takes it away, and at 0 HP you are Knocked Out.',
+  stamina: 'Fuel for skills. Most skills and toggles cost Stamina, so more Stamina means more skills each fight.',
+  strength: 'Added to the damage of weapon attacks (Basic Attack and weapon skills). Below 0, it lowers that damage.',
+  magicPower: 'Added to the damage of spells and to magical healing. Below 0, it lowers them.',
+  accuracy: 'Added to your d20 when you attack. Your total must reach the target\'s Physical or Magical Defence to hit.',
+  speed: 'Higher Speed acts earlier in a fight. You also move 5ft per point each turn (up to 60ft).',
+  physicalDefence: 'How hard you are to hit with weapons. Enemies must roll d20 + their Accuracy and reach this number to hit you.',
+  magicalDefence: 'How hard you are to hit with spells. Enemies must roll d20 + their Accuracy and reach this number to hit you.'
+}
+
+/** One-line summary of how attack stats fit together. */
+export const STAT_HOW_ATTACKS_WORK = 'Attacking: roll d20 + Accuracy. Reach the target\'s Physical Defence (weapons) or Magical Defence (spells) and you hit. Then roll damage and add Strength (weapons) or Magic Power (spells).'
+
 export const TAB_IDS = ['character', 'play', 'skills', 'stats', 'shop', 'craft', 'homebrew', 'gm', 'notes', 'howtoplay']
 
 /** Callout shown above a weapon skill subcategory on the Skills tab. */

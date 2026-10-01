@@ -1,7 +1,7 @@
 /**
  * Guided Character Creator — in-memory draft until Finish.
  */
-import { DRAGONBORN_AFFINITIES, STAT_RULES } from '../core/constants.js'
+import { DRAGONBORN_AFFINITIES, STAT_RULES, STAT_EXPLAINERS, STAT_HOW_ATTACKS_WORK } from '../core/constants.js'
 import { state } from '../core/state.js'
 import { uid, toast, deepClone, esc, titleCase } from '../core/utils.js'
 import { createCharacter, normalizeCharacter, computeStats } from '../character/character.js'
@@ -387,6 +387,7 @@ function renderGuidedStepStats(gc) {
       <span>Lumens left: <strong>${draft.lumens}</strong></span>
       <span class="guided-save-tip">💡 Save some Lumens for Skills on the next page!</span>
     </div>
+    <p class="guided-stat-howto mt-8">⚔️ ${esc(STAT_HOW_ATTACKS_WORK)}</p>
     <p class="subtle mt-8">Each point gets a little pricier the more you buy of the same stat. Tap − to undo.</p>
     <div class="guided-stat-list mt-8">
       ${Object.entries(STAT_RULES).map(([stat, rule]) => {
@@ -394,8 +395,8 @@ function renderGuidedStepStats(gc) {
         const canUndo = getLatestStatRefund(draft, stat) > 0
         const canBuy = draft.lumens >= cost && draft.stats[stat] < rule.max
         return `
-          <div class="guided-stat-row" title="${esc(rule.desc || '')}">
-            <span class="guided-stat-name">${esc(rule.label)}</span>
+          <div class="guided-stat-row">
+            <span class="guided-stat-name">${esc(rule.label)}<small class="guided-stat-explain">${esc(STAT_EXPLAINERS[stat] || '')}</small></span>
             <strong class="guided-stat-value">${stats[stat]}</strong>
             <button type="button" class="ghost-btn tiny" data-guided-refund-stat="${esc(stat)}" aria-label="Undo ${esc(rule.label)}" ${canUndo ? '' : 'disabled'}>−</button>
             <button type="button" class="primary-btn tiny" data-guided-upgrade-stat="${esc(stat)}" aria-label="Buy ${esc(rule.label)} for ${cost} Lumens" ${canBuy ? '' : 'disabled'}>+ ${cost}L</button>
