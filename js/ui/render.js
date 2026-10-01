@@ -11,14 +11,14 @@ import { computeCombatPower } from '../character/combat-power.js'
 import { knockoutStatusLabel } from '../character/knockout.js'
 import { isGmMode } from '../gm/gm-mode.js'
 import { renderGuidedCreateModal } from './guided-create.js'
-import { renderHowToPlayTab } from './how-to-play.js?v=5.3.0-skill-ranks'
+import { renderHowToPlayTab } from './how-to-play.js?v=5.3.1-guided-create'
 import { renderNotesTab } from './notes-tab.js'
 import { renderShopTab } from './shop-tab.js'
 import { renderCraftTab } from './craft-tab.js'
 import { renderStatsTab } from './stats-tab.js'
 import { renderGmTab } from './gm-tab.js'
 import { renderHomebrewTab } from './homebrew-tab.js'
-import { renderSkillsTab } from './skills-tab.js?v=5.3.0-skill-ranks'
+import { renderSkillsTab } from './skills-tab.js?v=5.3.1-guided-create'
 import { renderPlayTab } from './play-tab.js'
 import { renderCharacterTab } from './character-tab.js'
 import { formatCurrency } from './format.js'
@@ -42,7 +42,31 @@ export function render(options = { all: true }) {
   if (opts.header) renderHeader()
   if (opts.actionBar !== false) renderActionBar(activeCharacter())
   if (opts.tabs) syncTabBar()
-  if (opts.content) renderContent()
+  if (opts.content) {
+    renderContent()
+    renderGuidedCreateHost()
+  }
+}
+
+/**
+ * Guided Create lives in its own layer outside the page content, so it always sits
+ * above the sidebar and the action bar (and shows even before any character exists).
+ */
+function renderGuidedCreateHost() {
+  const host = $('#guided-create-root')
+  if (!host) return
+  const open = Boolean(state.guidedCreate?.open)
+  const prevBody = host.querySelector('.guided-create-body')
+  const prevStep = host.querySelector('[data-guided-step]')?.dataset.guidedStep
+  const scrollTop = prevBody?.scrollTop || 0
+  const focusId = host.contains(document.activeElement) ? document.activeElement.id : ''
+  host.innerHTML = renderGuidedCreateModal()
+  document.body.classList.toggle('guided-open', open)
+  if (!open) return
+  const body = host.querySelector('.guided-create-body')
+  // Keep the list where it was after tapping Learn / Buy / +, but start new steps at the top.
+  if (body && String(state.guidedCreate.step) === prevStep) body.scrollTop = scrollTop
+  if (focusId) document.getElementById(focusId)?.focus({ preventScroll: true })
 }
 
 function captureContentFocus() {
@@ -322,7 +346,7 @@ export function renderContent() {
     notes: () => renderNotesTab(character),
     howtoplay: () => renderHowToPlayTab()
   }
-  content.innerHTML = (tabs[state.tab]?.() || '') + renderGuidedCreateModal()
+  content.innerHTML = tabs[state.tab]?.() || ''
   restoreContentFocus(focusCapture)
 }
 

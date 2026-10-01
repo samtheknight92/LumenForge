@@ -54,8 +54,8 @@ const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'lumenforge-smoke-'))
 let failures = 0
 
 /** Fresh browser context per test so localStorage never leaks between cases. */
-async function test(name, fn) {
-  const context = await browser.newContext({ acceptDownloads: true })
+async function test(name, fn, contextOptions = {}) {
+  const context = await browser.newContext({ acceptDownloads: true, ...contextOptions })
   const page = await context.newPage()
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
@@ -356,6 +356,54 @@ await test('export then import restores characters in a fresh browser', async (p
   await fresh.reload()
   await fresh.setInputFiles('#import-save', file)
   await assertText(fresh, '#character-list', 'Exported Esk')
+})
+
+await test('guided create on a phone: on top, prefilled, stats before skills', async page => {
+  await open(page)
+  const openSidebar = async () => {
+    if (!(await page.locator('#sidebar.open').count())) await page.click('#open-sidebar')
+  }
+  await openSidebar()
+  await createCharacter(page, 'Existing Ember')
+  await openSidebar()
+  await page.fill('#new-name', 'Wren')
+  await page.selectOption('#new-race', 'elf')
+  await page.click('#guided-create')
+  const modal = page.locator('#guided-create-root .guided-create-modal')
+  await modal.waitFor()
+  assert.equal(await page.locator('#sidebar.open').count(), 0, 'sidebar stayed open over the wizard')
+  assert.equal(await page.locator('#action-bar').isVisible(), false, 'action bar still shows over the wizard')
+  const onTop = await page.evaluate(() => {
+    const el = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2)
+    return Boolean(el?.closest('.guided-create-modal'))
+  })
+  assert.ok(onTop, 'something sits on top of the wizard')
+  assert.equal(await page.inputValue('[data-guided-name]'), 'Wren', 'name typed in the sidebar was not carried over')
+  assert.equal(await page.inputValue('[data-guided-race]'), 'elf', 'race picked in the sidebar was not carried over')
+  await page.click('[data-guided-next]')
+  await page.click('[data-guided-playstyle="melee"]')
+  await page.click('[data-guided-next]')
+  await assertText(page, '.guided-create-body', 'Save some Lumens for Skills on the next page!')
+  const lumens = () => page.locator('.guided-lumens-bar strong').innerText()
+  const before = await lumens()
+  await page.click('[data-guided-upgrade-stat="hp"]')
+  assert.notEqual(await lumens(), before, 'buying a stat did not spend Lumens')
+  await page.click('[data-guided-refund-stat="hp"]')
+  assert.equal(await lumens(), before, 'undoing a stat did not refund Lumens')
+  await page.click('[data-guided-next]')
+  assert.ok(await page.locator('.guided-create-body [data-guided-learn-skill]').count() > 0, 'step 4 is not Skills')
+  await page.click('[data-guided-next]')
+  await page.click('[data-guided-next]')
+  await page.click('[data-guided-finish]')
+  await assertText(page, '#current-name', 'Wren')
+  assert.equal(await modal.count(), 0, 'wizard stayed open after finishing')
+  assert.equal(await page.evaluate(() => document.body.classList.contains('guided-open')), false)
+}, { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })
+
+await test('guided create opens before any character exists', async page => {
+  await open(page)
+  await page.click('#guided-create')
+  await page.locator('#guided-create-root .guided-create-modal').waitFor()
 })
 
 await test('unreadable save is kept, not overwritten', async (page, context) => {

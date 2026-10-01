@@ -24,6 +24,9 @@ const {
   learnSkillOnDraft,
   buyItemOnDraft,
   canDraftAffordSkill,
+  upgradeStatOnDraft,
+  refundStatOnDraft,
+  emptyGuidedCreateState,
   GUIDED_PLAYSTYLES
 } = await importJs('guided-create.js')
 
@@ -53,6 +56,26 @@ if (skill) {
 
 const expensive = { cost: draft.lumens + 999 }
 assert.equal(canDraftAffordSkill(draft, expensive), false)
+
+// Stats step: buying then undoing a point is a full refund
+const statDraft = normalizeCharacter(createCharacter('Stats', 'elf'))
+const startL = statDraft.lumens
+const startStr = statDraft.stats.strength
+assert.equal(upgradeStatOnDraft(statDraft, 'strength').ok, true)
+assert.equal(statDraft.stats.strength, startStr + 1)
+assert.ok(statDraft.lumens < startL)
+assert.equal(refundStatOnDraft(statDraft, 'strength').ok, true)
+assert.equal(statDraft.stats.strength, startStr)
+assert.equal(statDraft.lumens, startL)
+assert.equal(refundStatOnDraft(statDraft, 'strength').ok, false, 'cannot undo below starting value')
+
+// Sidebar entries carry over into the wizard; race-specific picks only for that race
+const pre = emptyGuidedCreateState({ name: 'Wren', raceId: 'elf', background: 'wanderer', humanStarterSkill: 'x' })
+assert.equal(pre.form.name, 'Wren')
+assert.equal(pre.form.raceId, 'elf')
+assert.equal(pre.form.humanStarterSkill, '')
+assert.equal(emptyGuidedCreateState({ raceId: 'monster' }).form.raceId, 'human')
+assert.equal(emptyGuidedCreateState().form.name, '')
 
 const rosterBefore = 0
 // cancel must not add — finish path tested via pure helpers only (no DOM state)

@@ -211,7 +211,8 @@ import {
   learnSkillOnDraft,
   refundSkillOnDraft,
   buyItemOnDraft,
-  upgradeStatOnDraft
+  upgradeStatOnDraft,
+  refundStatOnDraft
 } from '../ui/guided-create.js'
 import { stepNumberInput } from '../ui/number-stepper.js'
 import { render } from '../ui/render.js'
@@ -914,6 +915,14 @@ const clickActions = {
     state.guidedCreate.dirty = true
     render({ content: true })
   },
+  guidedRefundStat(target) {
+    const draft = state.guidedCreate?.draftCharacter
+    if (!draft) return
+    const result = refundStatOnDraft(draft, target.dataset.guidedRefundStat)
+    if (!result.ok) return toast(result.reason)
+    state.guidedCreate.dirty = true
+    render({ content: true })
+  },
   guidedUpgradeStat(target) {
     const draft = state.guidedCreate?.draftCharacter
     if (!draft) return
@@ -976,7 +985,17 @@ function handleTabShortcut(event) {
 
 function initStaticEvents() {
   document.querySelector('#create-character')?.addEventListener('click', handleCreateCharacter)
-  document.querySelector('#guided-create')?.addEventListener('click', () => doOpenGuidedCreate())
+  document.querySelector('#guided-create')?.addEventListener('click', () => {
+    // On phones the sidebar sits on top of everything, so get it out of the way first.
+    if (isSidebarMobile() && isSidebarOpen()) setSidebarOpen(false)
+    doOpenGuidedCreate({
+      name: document.querySelector('#new-name')?.value?.trim() || '',
+      raceId: document.querySelector('#new-race')?.value || '',
+      background: document.querySelector('#new-background')?.value || '',
+      elementalAffinity: document.querySelector('#new-affinity')?.value || '',
+      humanStarterSkill: document.querySelector('#new-starter-skill')?.value || ''
+    })
+  })
 
   document.querySelector('#new-name')?.addEventListener('keydown', event => {
     if (event.key === 'Enter') handleCreateCharacter()
