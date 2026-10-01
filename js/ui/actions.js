@@ -511,8 +511,8 @@ export function printCharacterSheet() {
 /* Encounter Balancer                                                      */
 /* ---------------------------------------------------------------------- */
 
-export function openGuidedCreate() {
-  openGuidedCreateState()
+export function openGuidedCreate(prefill = {}) {
+  openGuidedCreateState(prefill)
   render({ content: true })
 }
 

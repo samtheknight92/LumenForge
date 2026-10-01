@@ -8,10 +8,10 @@ import { createCharacter, normalizeCharacter, computeStats } from '../character/
 import { getSkill, flattenSkills, getItem, raceOptions, getRace, itemSources } from '../core/cache.js'
 import { canLearnSkill, humanStarterWeaponOptions } from '../skills/skills.js'
 import { PLAYSTYLE_TREE_HINTS } from '../skills/focused-skills.js'
-import { getNextStatUpgradeCost, appendStatPurchase } from '../character/stat-costs.js'
+import { getNextStatUpgradeCost, appendStatPurchase, getLatestStatRefund, popStatPurchase } from '../character/stat-costs.js'
 import { shopPurchaseCheck, addItemToInventory } from '../items/items.js'
 import { itemPriceGil, normalizeGil } from './format.js'
-import { backgroundOptions, getBackground, DEFAULT_BACKGROUND } from '../character/backgrounds.js'
+import { backgroundOptions, getBackground, backgroundRewardSummary, DEFAULT_BACKGROUND } from '../character/backgrounds.js'
 import { computeSkillLevel } from '../character/skill-level.js'
 import { computeCombatPower } from '../character/combat-power.js'
 import { getBasicAttackSkill } from '../combat/combat.js'
@@ -26,9 +26,16 @@ export const GUIDED_PLAYSTYLES = [
   { id: 'explore', label: 'Let me explore everything', blurb: 'No filters — browse freely' }
 ]
 
-const STEP_LABELS = ['Identity', 'Playstyle', 'Skills', 'Equipment', 'Spend Lumens', 'Review']
+const STEP_LABELS = ['Identity', 'Playstyle', 'Stats', 'Skills', 'Equipment', 'Review']
 
-export function emptyGuidedCreateState() {
+export function emptyGuidedCreateState(prefill = {}) {
+  const form = { name: '', raceId: 'human', background: DEFAULT_BACKGROUND, elementalAffinity: '', humanStarterSkill: '' }
+  for (const key of Object.keys(form)) {
+    if (prefill[key]) form[key] = String(prefill[key])
+  }
+  if (form.raceId === 'monster' || !getRace(form.raceId)) form.raceId = 'human'
+  if (form.raceId !== 'dragonborn') form.elementalAffinity = ''
+  if (form.raceId !== 'human') form.humanStarterSkill = ''
   return {
     open: false,
     step: 1,
@@ -37,7 +44,7 @@ export function emptyGuidedCreateState() {
     dirty: false,
     browseSkills: false,
     browseItems: false,
-    form: { name: '', raceId: 'human', background: DEFAULT_BACKGROUND, elementalAffinity: '', humanStarterSkill: '' }
+    form
   }
 }
 
@@ -134,8 +141,23 @@ export function upgradeStatOnDraft(draft, stat) {
   return { ok: true }
 }
 
-export function openGuidedCreate() {
-  state.guidedCreate = emptyGuidedCreateState()
+/** Undo the latest stat purchase made during guided create (full Lumen refund). */
+export function refundStatOnDraft(draft, stat) {
+  const rule = STAT_RULES[stat]
+  if (!rule || !draft) return { ok: false, reason: 'Bad stat' }
+  const refund = getLatestStatRefund(draft, stat)
+  if (refund <= 0) return { ok: false, reason: 'Nothing to undo' }
+  draft.stats[stat] -= 1
+  popStatPurchase(draft, stat)
+  draft.lumens += refund
+  if (stat === 'hp') draft.hp = Math.max(0, draft.hp - 1)
+  if (stat === 'stamina') draft.stamina = Math.max(0, draft.stamina - 1)
+  return { ok: true }
+}
+
+/** Opens the wizard, carrying over anything already typed in the sidebar's quick-create form. */
+export function openGuidedCreate(prefill = {}) {
+  state.guidedCreate = emptyGuidedCreateState(prefill)
   state.guidedCreate.open = true
 }
 
@@ -212,9 +234,9 @@ export function renderGuidedCreateModal() {
   let body = ''
   if (step === 1) body = renderGuidedStepIdentity(gc)
   else if (step === 2) body = renderGuidedStepPlaystyle(gc)
-  else if (step === 3) body = renderGuidedStepSkills(gc)
-  else if (step === 4) body = renderGuidedStepEquipment(gc)
-  else if (step === 5) body = renderGuidedStepSpend(gc)
+  else if (step === 3) body = renderGuidedStepStats(gc)
+  else if (step === 4) body = renderGuidedStepSkills(gc)
+  else if (step === 5) body = renderGuidedStepEquipment(gc)
   else body = renderGuidedStepReview(gc)
 
   const backDisabled = step <= 1 ? 'disabled' : ''
@@ -222,7 +244,7 @@ export function renderGuidedCreateModal() {
   const nextAction = step >= 6 ? 'data-guided-finish' : 'data-guided-next'
 
   return `
-    <div class="modal-backdrop guided-create-modal" data-guided-dismiss>
+    <div class="modal-backdrop guided-create-modal" data-guided-dismiss data-guided-step="${step}">
       <section class="card modal-card" role="dialog" aria-modal="true" aria-label="Guided Create" tabindex="-1" data-guided-modal-card>
         <div class="card-header">
           <div>
@@ -273,13 +295,13 @@ function renderGuidedStepIdentity(gc) {
           ${races.map(r => `<option value="${esc(r.id)}" ${r.id === (f.raceId || 'human') ? 'selected' : ''}>${esc(r.icon || '')} ${esc(r.name)}</option>`).join('')}
         </select>
       </label>
-      <p class="subtle">${esc(race?.desc || '')}</p>
+      <p class="subtle">${esc(race?.description || race?.desc || '')}</p>
       <label class="field-label">Background
         <select class="input" data-guided-background>
-          ${backgroundOptions().map(b => `<option value="${esc(b.id)}" ${b.id === (f.background || DEFAULT_BACKGROUND) ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}
+          ${backgroundOptions().map(b => `<option value="${esc(b.id)}" ${b.id === (f.background || DEFAULT_BACKGROUND) ? 'selected' : ''}>${esc(b.icon || '✦')} ${esc(b.name)}</option>`).join('')}
         </select>
       </label>
-      <p class="subtle">${esc(bg?.desc || '')}</p>
+      <p class="subtle">${esc(bg?.desc || '')} Starting: ${esc(backgroundRewardSummary(bg))}.</p>
       ${extras}
     </div>
   `
@@ -306,22 +328,24 @@ function renderGuidedStepSkills(gc) {
     ? flattenSkills().filter(s => Number(s.tier || 1) === 1).slice(0, 50)
     : recommendedTier1Skills(gc.playstyle || 'explore')
   return `
-    <p class="subtle">Remaining Lumens: <strong>${draft.lumens}</strong>.</p>
-    <div class="wrap mt-8">
+    <div class="guided-lumens-bar">
+      <span>Lumens left: <strong>${draft.lumens}</strong></span>
       <button type="button" class="ghost-btn tiny" data-guided-browse-skills>${gc.browseSkills ? 'Show recommendations' : 'Browse more Tier 1'}</button>
     </div>
-    <div class="skill-grid mt-12">
+    <div class="guided-skill-list mt-8">
       ${list.map(skill => {
         const learned = draft.skills.includes(skill.id)
         const check = canLearnSkill(draft, skill)
         return `
-          <article class="skill-card ${learned ? 'unlocked' : ''}">
-            <h4>${esc(skill.icon || '✦')} ${esc(skill.name)}</h4>
-            <div class="wrap"><span class="pill gold">${skill.cost}L</span></div>
+          <article class="guided-skill-row ${learned ? 'learned' : ''}">
+            <div class="guided-skill-head">
+              <strong>${esc(skill.icon || '✦')} ${esc(skill.name)}</strong>
+              <span class="pill gold">${skill.cost}L</span>
+              ${learned
+                ? `<button type="button" class="ghost-btn tiny" data-guided-refund-skill="${esc(skill.id)}">✓ Remove</button>`
+                : `<button type="button" class="primary-btn tiny" data-guided-learn-skill="${esc(skill.id)}" ${check.ok ? '' : 'disabled'}>Learn</button>`}
+            </div>
             <p class="subtle">${esc(skill.desc || '')}</p>
-            ${learned
-              ? `<button type="button" class="ghost-btn tiny" data-guided-refund-skill="${esc(skill.id)}">Remove</button>`
-              : `<button type="button" class="primary-btn tiny" data-guided-learn-skill="${esc(skill.id)}" ${check.ok ? '' : 'disabled'}>Learn</button>`}
           </article>
         `
       }).join('')}
@@ -336,8 +360,8 @@ function renderGuidedStepEquipment(gc) {
     ? itemSources().filter(i => itemPriceGil(i) > 0 && itemPriceGil(i) <= 1200).slice(0, 40)
     : recommendedItems(gc.playstyle || 'explore')
   return `
-    <p class="subtle">Remaining Gil: <strong>${normalizeGil(draft.gil)}</strong>.</p>
-    <div class="wrap mt-8">
+    <div class="guided-lumens-bar">
+      <span>Gil left: <strong>${normalizeGil(draft.gil)}</strong></span>
       <button type="button" class="ghost-btn tiny" data-guided-browse-items>${gc.browseItems ? 'Show recommendations' : 'Browse more gear'}</button>
     </div>
     <div class="stack mt-12">
@@ -354,25 +378,30 @@ function renderGuidedStepEquipment(gc) {
   `
 }
 
-function renderGuidedStepSpend(gc) {
-  const draft = gc.draftCharacter
-  if (!draft) return ''
-  const skills = recommendedTier1Skills(gc.playstyle || 'mixed').slice(0, 12)
+function renderGuidedStepStats(gc) {
+  const draft = gc.draftCharacter || syncDraftFromIdentityForm()
+  if (!draft) return '<p class="subtle">Set identity first.</p>'
+  const stats = computeStats(draft)
   return `
-    <p class="subtle">Remaining Lumens: <strong>${draft.lumens}</strong>.</p>
-    <div class="grid two mt-12">
-      ${Object.entries(STAT_RULES).map(([stat, rule]) => `
-        <div class="card">
-          <strong>${esc(rule.label)}</strong> ${draft.stats[stat]}
-          <div class="subtle">Next: ${getNextStatUpgradeCost(draft, stat)}L</div>
-          <button type="button" class="primary-btn tiny mt-8" data-guided-upgrade-stat="${esc(stat)}">Upgrade</button>
-        </div>
-      `).join('')}
+    <div class="guided-lumens-bar">
+      <span>Lumens left: <strong>${draft.lumens}</strong></span>
+      <span class="guided-save-tip">💡 Save some Lumens for Skills on the next page!</span>
     </div>
-    <div class="wrap mt-16">
-      ${skills.filter(s => !draft.skills.includes(s.id)).map(skill =>
-        `<button type="button" class="ghost-btn tiny" data-guided-learn-skill="${esc(skill.id)}">${esc(skill.name)} (${skill.cost}L)</button>`
-      ).join('')}
+    <p class="subtle mt-8">Each point gets a little pricier the more you buy of the same stat. Tap − to undo.</p>
+    <div class="guided-stat-list mt-8">
+      ${Object.entries(STAT_RULES).map(([stat, rule]) => {
+        const cost = getNextStatUpgradeCost(draft, stat)
+        const canUndo = getLatestStatRefund(draft, stat) > 0
+        const canBuy = draft.lumens >= cost && draft.stats[stat] < rule.max
+        return `
+          <div class="guided-stat-row" title="${esc(rule.desc || '')}">
+            <span class="guided-stat-name">${esc(rule.label)}</span>
+            <strong class="guided-stat-value">${stats[stat]}</strong>
+            <button type="button" class="ghost-btn tiny" data-guided-refund-stat="${esc(stat)}" aria-label="Undo ${esc(rule.label)}" ${canUndo ? '' : 'disabled'}>−</button>
+            <button type="button" class="primary-btn tiny" data-guided-upgrade-stat="${esc(stat)}" aria-label="Buy ${esc(rule.label)} for ${cost} Lumens" ${canBuy ? '' : 'disabled'}>+ ${cost}L</button>
+          </div>
+        `
+      }).join('')}
     </div>
   `
 }

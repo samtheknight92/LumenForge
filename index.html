@@ -39,6 +39,9 @@
       <section class="sidebar-create-panel create-card">
         <h2>Create Character</h2>
         <div class="sidebar-create-body">
+        <button type="button" id="guided-create" class="primary-btn full guided-cta">✨ Guided Create</button>
+        <p class="subtle guided-cta-note">New here? It walks you through name, race, stats, skills and gear, step by step.</p>
+        <div class="create-divider"><span>or quick create</span></div>
         <label class="field-label" for="new-name">Name</label>
         <input id="new-name" class="input" placeholder="e.g. Nero the Reckless" />
         <label class="field-label" for="new-race">Race</label>
@@ -47,8 +50,7 @@
         <select id="new-background" class="input"></select>
         <p id="background-preview" class="subtle create-preview"></p>
         <div id="create-extras"></div>
-        <button type="button" id="create-character" class="primary-btn full">Quick Create</button>
-        <button type="button" id="guided-create" class="ghost-btn full mt-8">Guided Create</button>
+        <button type="button" id="create-character" class="ghost-btn full quick-create-btn">Quick Create</button>
         </div>
       </section>
 
@@ -107,6 +109,8 @@
 
   <footer id="action-bar" class="action-bar" hidden aria-label="Action bar"></footer>
 
+  <div id="guided-create-root"></div>
+
   <div id="action-bar-skill-sheet" class="action-bar-skill-sheet" hidden>
     <button type="button" class="action-bar-skill-sheet-backdrop" data-close-skill-sheet aria-label="Close skill details"></button>
     <div class="action-bar-skill-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="action-bar-skill-sheet-content">
@@ -152,6 +156,6 @@
       </div>
     </form>
   </dialog>
-  <script type="module" src="js/main.js?v=5.3.0-skill-ranks"></script>
+  <script type="module" src="js/main.js?v=5.3.1-guided-create"></script>
 </body>
 </html>
