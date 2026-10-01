@@ -212,7 +212,8 @@ import {
   refundSkillOnDraft,
   buyItemOnDraft,
   upgradeStatOnDraft,
-  refundStatOnDraft
+  refundStatOnDraft,
+  sellBackItemOnDraft
 } from '../ui/guided-create.js'
 import { stepNumberInput } from '../ui/number-stepper.js'
 import { render } from '../ui/render.js'
@@ -910,9 +911,22 @@ const clickActions = {
   guidedBuyItem(target) {
     const draft = state.guidedCreate?.draftCharacter
     if (!draft) return
-    const result = buyItemOnDraft(draft, target.dataset.guidedBuyItem)
+    const itemId = target.dataset.guidedBuyItem
+    const result = buyItemOnDraft(draft, itemId)
     if (!result.ok) return toast(result.reason)
+    const bought = state.guidedCreate.boughtItems ||= {}
+    bought[itemId] = (bought[itemId] || 0) + 1
     state.guidedCreate.dirty = true
+    render({ content: true })
+  },
+  guidedSellItem(target) {
+    const draft = state.guidedCreate?.draftCharacter
+    const itemId = target.dataset.guidedSellItem
+    const bought = state.guidedCreate?.boughtItems || {}
+    if (!draft || !bought[itemId]) return
+    const result = sellBackItemOnDraft(draft, itemId)
+    if (!result.ok) return toast(result.reason)
+    bought[itemId] -= 1
     render({ content: true })
   },
   guidedRefundStat(target) {
