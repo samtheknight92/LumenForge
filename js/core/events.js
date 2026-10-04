@@ -56,6 +56,14 @@ import {
   clearManualRevival as doClearManualRevival
 } from '../ui/combat-actions.js'
 import {
+  setSurvivalTracker as doSetSurvivalTracker,
+  toggleSurvivalPanel as doToggleSurvivalPanel,
+  adjustSurvival as doAdjustSurvival,
+  travel as doSurvivalTravel,
+  passTime as doSurvivalPassTime,
+  consumeForSurvival as doConsumeForSurvival
+} from '../ui/survival-actions.js'
+import {
   buyItem as doBuyItem,
   craftRecipe as doCraftRecipe,
   grantCraftRecipe as doGrantCraftRecipe,
@@ -598,6 +606,16 @@ const clickActions = {
   healFull() { doHeal() },
   staminaFull() { doRestoreStamina() },
   processTurn() { doProcessTurn() },
+  survivalCollapse() { doToggleSurvivalPanel() },
+  survivalAdjust(target) { doAdjustSurvival(target.dataset.survivalAdjust, Number(target.dataset.delta || 0)) },
+  survivalTravel() { doSurvivalTravel(document.querySelector('#survival-travel-metres')?.value) },
+  survivalPassTime() {
+    doSurvivalPassTime(
+      document.querySelector('#survival-hours')?.value,
+      document.querySelector('#survival-time-mode')?.value
+    )
+  },
+  survivalConsume(target) { doConsumeForSurvival(target.dataset.survivalConsume) },
   recoveryRoll() { doRollRecoveryCheck() },
   manualRevivalStart() {
     const name = prompt('Helper name (optional):', '') || ''
@@ -1235,6 +1253,10 @@ function initDelegatedEvents() {
     const target = event.target
     if (!(target instanceof HTMLElement)) return
 
+    if (target.matches('[data-survival-tracker]')) {
+      doSetSurvivalTracker(target.dataset.survivalTracker, target.checked)
+      return
+    }
     if (target.matches('[data-resource-input]')) {
       doSetResource(target.dataset.resourceInput, Number(target.value || 0))
       return

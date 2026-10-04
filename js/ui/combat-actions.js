@@ -40,6 +40,7 @@ import {
   activePerformanceStatuses
 } from '../combat/instruments.js'
 import { weatherProcessTurnStaminaDrain } from '../combat/weather-effects.js'
+import { applySkillSurvivalDrain, survivalTurnHpLoss } from '../character/survival.js'
 import {
   BASIC_ATTACK_ID,
   getBasicAttackSkill,
@@ -168,7 +169,10 @@ export function toggleSkill(skillId) {
     if (blockReason) return toast(blockReason)
   }
   if (active) character.activeToggles = character.activeToggles.filter(id => id !== skill.id)
-  else character.activeToggles.push(skill.id)
+  else {
+    character.activeToggles.push(skill.id)
+    applySkillSurvivalDrain(character, skill)
+  }
   const computed = computeStats(character)
   character.hp = clamp(character.hp, 0, computed.hp)
   character.stamina = clamp(character.stamina, 0, computed.stamina)
@@ -202,6 +206,7 @@ export function useSkill(skillId) {
   const markCombatUses = () => {
     if (quickDraw) markQuickDrawUsed(character)
     if (isOncePerCombatSkill(skill)) markSkillUsedThisCombat(character, skill.id)
+    applySkillSurvivalDrain(character, skill)
   }
 
   if (isStrikerMultiBasicSkill(skill)) {
@@ -409,6 +414,8 @@ export function processTurn(targetCharacter = null) {
   if (weatherDrain > 0) {
     character.stamina = Math.max(0, character.stamina - weatherDrain)
   }
+  const survivalHpLoss = isKnockedOut(character) ? 0 : survivalTurnHpLoss(character)
+  if (survivalHpLoss > 0) character.hp = Math.max(0, character.hp - survivalHpLoss)
   const stats = computeStats(character)
   character.hp = clamp(character.hp, 0, stats.hp)
   character.stamina = clamp(character.stamina, 0, stats.stamina)
@@ -420,6 +427,7 @@ export function processTurn(targetCharacter = null) {
   }
   const effectParts = [effectTick.summary, weatherTick.summary, passiveTick.summary].filter(Boolean)
   if (weatherDrain > 0) effectParts.push(`Heatwave: −${weatherDrain} Stamina (apply to whole party at table)`)
+  if (survivalHpLoss > 0) effectParts.push(`Collapsing from thirst: −${survivalHpLoss} HP`)
   if (koSync.entered) effectParts.push('Knocked Out')
   const effectText = effectParts.length ? ` ${effectParts.join(', ')}.` : ''
   const toggleText = spent ? `${spent} Stamina spent.` : 'No toggle costs.'
