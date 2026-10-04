@@ -41,8 +41,16 @@ function meter(key, value, max, condition, extra = '', footer = '') {
   `
 }
 
-function adjustButtons(key, buttons) {
-  return `<div class="wrap survival-buttons">${buttons.map(([delta, text, cls]) =>
+const STEPS = [25, 10, 5, 1]
+
+/** Main action (if any) plus a −25 … +25 step row. */
+function stepButtons(key, main = null) {
+  const steps = [...STEPS.map(n => [-n, `−${n}`]), ...[...STEPS].reverse().map(n => [n, `+${n}`])]
+  return (main ? adjustButtons(key, [main]) : '') + adjustButtons(key, steps, 'survival-steps')
+}
+
+function adjustButtons(key, buttons, extraClass = '') {
+  return `<div class="wrap survival-buttons ${extraClass}">${buttons.map(([delta, text, cls]) =>
     `<button type="button" class="${cls || 'ghost-btn'} tiny" data-survival-adjust="${key}" data-delta="${delta}">${text}</button>`).join('')}</div>`
 }
 
@@ -74,15 +82,15 @@ export function renderSurvivalPanel(character) {
   const meters = []
   if (on.hunger) {
     meters.push(meter('hunger', survival.hunger, SURVIVAL_RULES.max, conditionFor(snapshot, 'hunger'), '',
-      adjustButtons('hunger', [[SURVIVAL_RULES.eat, `🍖 Eat a meal +${SURVIVAL_RULES.eat}`, 'primary-btn'], [-5, '−5'], [5, '+5']])))
+      stepButtons('hunger', [SURVIVAL_RULES.eat, `🍖 Eat a meal +${SURVIVAL_RULES.eat}`, 'primary-btn'])))
   }
   if (on.thirst) {
     meters.push(meter('thirst', survival.thirst, SURVIVAL_RULES.max, conditionFor(snapshot, 'thirst'), '',
-      adjustButtons('thirst', [[SURVIVAL_RULES.drink, `💧 Drink +${SURVIVAL_RULES.drink}`, 'primary-btn'], [-5, '−5'], [5, '+5']])))
+      stepButtons('thirst', [SURVIVAL_RULES.drink, `💧 Drink +${SURVIVAL_RULES.drink}`, 'primary-btn'])))
   }
   if (on.stress) {
     meters.push(meter('stress', survival.stress, SURVIVAL_RULES.max, conditionFor(snapshot, 'stress'), '',
-      adjustButtons('stress', [[5, 'Scary +5', 'danger-btn'], [10, 'Terrifying +10', 'danger-btn'], [-10, 'Calm down −10']])))
+      stepButtons('stress')))
   }
   if (on.weight) {
     meters.push(meter('weight', snapshot.carried, Math.max(1, snapshot.carryLimit), conditionFor(snapshot, 'weight'),

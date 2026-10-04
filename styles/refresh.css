@@ -621,3 +621,5 @@ html[data-appearance="light"] .guided-create-modal .modal-card { background: #ff
 .carry-pill { font-size: 12px; vertical-align: middle; }
 .shop-header-pills { gap: 6px; justify-content: flex-end; }
 .item-weight { white-space: nowrap; }
+.survival-steps { gap: 3px; }
+.survival-steps .tiny { min-width: 0; padding-left: 7px; padding-right: 7px; }
