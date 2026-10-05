@@ -550,7 +550,14 @@ export function setDeathSavesIgnored(ignored) {
   if (!character) return
   if (!ignoreDeathSaves(character, ignored)) return
   touch(character)
-  if (ignored) toast('Staying at 0 HP. Tap "Death saves" on the Play tab to bring the popup back.')
+  if (ignored) toast('Staying at 0 HP. Tap 💥 Down on your HP bar to open this again.')
+}
+
+export function showDeathScreen() {
+  const character = activeCharacter()
+  if (!character || !isDead(character)) return
+  state.deathScreen = character.id
+  touch(character, { content: true })
 }
 
 export function acceptDeath() {
