@@ -41,17 +41,30 @@ function meter(key, value, max, condition, extra = '', footer = '') {
   `
 }
 
-const STEPS = [25, 10, 5, 1]
+const STEPS = [1, 5, 10, 25]
 
-/** Main action (if any) plus a −25 … +25 step row. */
-function stepButtons(key, main = null) {
-  const steps = [...STEPS.map(n => [-n, `−${n}`]), ...[...STEPS].reverse().map(n => [n, `+${n}`])]
-  return (main ? adjustButtons(key, [main]) : '') + adjustButtons(key, steps, 'survival-steps')
+/** Per-tracker add/subtract mode for the step buttons (screen-only, not saved). */
+const stepSign = { hunger: -1, thirst: -1, stress: -1 }
+
+export function flipSurvivalStepSign(key) {
+  if (key in stepSign) stepSign[key] = -stepSign[key]
 }
 
-function adjustButtons(key, buttons, extraClass = '') {
-  return `<div class="wrap survival-buttons ${extraClass}">${buttons.map(([delta, text, cls]) =>
-    `<button type="button" class="${cls || 'ghost-btn'} tiny" data-survival-adjust="${key}" data-delta="${delta}">${text}</button>`).join('')}</div>`
+export function survivalStepSign(key) {
+  return stepSign[key] || -1
+}
+
+/** Main action (if any), a [−]/[+] mode toggle, then one set of 1 / 5 / 10 / 25. */
+function stepButtons(key, main = null) {
+  const sign = survivalStepSign(key)
+  const label = SURVIVAL_LABELS[key].name
+  const toggle = `<button type="button" class="${sign < 0 ? 'danger-btn' : 'primary-btn'} tiny survival-sign" data-survival-sign="${key}" aria-label="${label}: buttons ${sign < 0 ? 'subtract' : 'add'}. Tap to switch." title="Tap to switch between taking away and adding">${sign < 0 ? '−' : '+'}</button>`
+  const steps = STEPS.map(n =>
+    `<button type="button" class="ghost-btn tiny" data-survival-adjust="${key}" data-delta="${sign * n}" aria-label="${sign < 0 ? 'Subtract' : 'Add'} ${n}">${n}</button>`).join('')
+  const mainBtn = main
+    ? `<button type="button" class="${main[2] || 'ghost-btn'} tiny" data-survival-adjust="${key}" data-delta="${main[0]}">${main[1]}</button>`
+    : ''
+  return `<div class="wrap survival-buttons">${mainBtn}<span class="wrap survival-steps">${toggle}${steps}</span></div>`
 }
 
 /** Collapsible Survival panel on the Play tab. */

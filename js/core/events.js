@@ -63,6 +63,7 @@ import {
   passTime as doSurvivalPassTime,
   consumeForSurvival as doConsumeForSurvival
 } from '../ui/survival-actions.js'
+import { flipSurvivalStepSign } from '../ui/survival-panel.js'
 import {
   buyItem as doBuyItem,
   craftRecipe as doCraftRecipe,
@@ -607,6 +608,10 @@ const clickActions = {
   staminaFull() { doRestoreStamina() },
   processTurn() { doProcessTurn() },
   survivalCollapse() { doToggleSurvivalPanel() },
+  survivalSign(target) {
+    flipSurvivalStepSign(target.dataset.survivalSign)
+    render({ content: true })
+  },
   survivalAdjust(target) { doAdjustSurvival(target.dataset.survivalAdjust, Number(target.dataset.delta || 0)) },
   survivalTravel() { doSurvivalTravel(document.querySelector('#survival-travel-metres')?.value) },
   survivalPassTime() {
