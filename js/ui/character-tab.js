@@ -19,6 +19,8 @@ import { filterInventoryEntries, inventoryTagOptions, INVENTORY_SORT_OPTIONS, IN
 import { getBackground, backgroundRewardSummary } from '../character/backgrounds.js'
 import { craftedByLabel } from '../items/craft-bonuses.js'
 import { maxEnchantmentSlots, entryEnchantments, enchantmentTooltip, isEnhancementItem, compatibleEquippedGearForEnhancement, applyEnchantTargetLabel, enchantDisplayLabel, isShieldEnchant } from '../items/enchantments.js'
+import { itemWeight, formatWeight, nourishmentActionLabel } from '../character/survival.js'
+import { renderCarryPill } from './survival-panel.js'
 import { computeElementalAffinity, elementalAffinityTooltip, elementalAffinityTone, isElementalAffinityRowVisible, ELEMENTS } from '../combat/elemental-affinity.js'
 
 /** Character tab — overview, equipment, inventory, skill & gear effects and affinities. */
@@ -262,7 +264,7 @@ export function renderCharacterTab(character) {
         <div class="stack gear-stack">${renderEquipSlots(character, 'Nothing equipped')}</div>
       </section>
       <section class="card inventory-card">
-        <h3 class="gear-section-title">Inventory</h3>
+        <h3 class="gear-section-title">Inventory ${renderCarryPill(character)}</h3>
         ${renderInventoryToolbar(character)}
         <div class="stack gear-stack">${renderInventoryRows(character)}</div>
       </section>
@@ -357,11 +359,15 @@ function renderInventoryRows(character) {
     const statusIcons = renderItemStatusIcons(presentation)
     const cursedBadge = renderCursedBadgeHtml(presentation)
     const cursedNameClass = itemCursedNameClass(presentation)
+    const weightText = character.survival?.on?.weight
+      ? ` · ${formatWeight(itemWeight(item) * Math.max(1, entry.qty || 1))}${entry.qty > 1 ? ` (${formatWeight(itemWeight(item))} each)` : ''}`
+      : ''
+    const eatLabel = nourishmentActionLabel(character, item)
     return `
       <div class="inventory-row inventory-item-row ${itemCardClass(presentation, '')}" data-tooltip="${esc(itemTooltip(item, character, entry))}" tabindex="0">
         <div class="inventory-item-copy">
           <strong class="inventory-item-name">${fallbackIcon(item)} <span class="${cursedNameClass}">${esc(presentation.displayName)}</span> ${cursedBadge} ${statusIcons} ${entry.qty > 1 ? `x${entry.qty}` : ''}</strong>
-          <div class="subtle inventory-item-meta">${esc(item.type || 'item')} · ${esc(item.rarity || 'common')} ${equippedSlot ? `· ${titleCase(equippedSlot)}` : ''}</div>
+          <div class="subtle inventory-item-meta">${esc(item.type || 'item')} · ${esc(item.rarity || 'common')} ${equippedSlot ? `· ${titleCase(equippedSlot)}` : ''}${weightText}</div>
           ${crafted ? `<div class="wrap inventory-item-tags"><span class="pill good">${esc(crafted)}</span></div>` : ''}
           ${(item.tags || []).length ? `<div class="wrap inventory-item-tags">${(item.tags || []).map(tag => `<span class="pill subtle-pill">${esc(tag)}</span>`).join('')}</div>` : ''}
           ${renderItemCounterControls(entry, item, { showWhenEquipped: Boolean(equippedSlot) })}
@@ -375,6 +381,7 @@ function renderInventoryRows(character) {
           <button type="button" class="ghost-btn tiny" data-toggle-entry-star="${esc(entry.uid)}" aria-label="Star item">${entry.starred ? '⭐' : '☆'}</button>
           <button type="button" class="ghost-btn tiny" data-toggle-entry-lock="${esc(entry.uid)}" aria-label="Lock item">${entry.locked ? '🔒' : '🔓'}</button>
           ${enchantTargets.map(row => `<button type="button" class="primary-btn tiny" data-apply-enchant-gear="${esc(row.entry.uid)}" data-apply-enchant-scroll="${esc(entry.uid)}">${esc(applyEnchantTargetLabel(row.slot))}</button>`).join('')}
+          ${eatLabel ? `<button type="button" class="primary-btn tiny" data-survival-consume="${esc(entry.uid)}">${eatLabel}</button>` : ''}
           ${canEquip ? `<button type="button" class="primary-btn tiny" data-equip-item="${esc(entry.uid)}">Equip</button>` : ''}
           ${canEquipOffhand ? `<button type="button" class="offhand-btn tiny" data-equip-offhand="${esc(entry.uid)}" title="${esc(offhandCheck.reason)}">Off-hand</button>` : ''}
           <button type="button" class="danger-btn tiny" data-remove-item="${esc(entry.uid)}" ${entry.locked ? 'disabled' : ''}>Remove</button>

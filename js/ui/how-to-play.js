@@ -193,6 +193,10 @@ export function renderHowToPlayTab() {
       'No initiative loop — explore, talk to NPCs and teammates, and all the roleplaying you expect from a TTRPG. Press <strong>Process Turn</strong> only when the GM calls for it and you have statuses or toggles that need ticking down at End of Turn; skip it if nothing is active.'
     ),
     tip(
+      'Survival (optional)',
+      'For groups who want more challenge. Open <strong>Survival</strong> on the Play tab and tick only what your table uses: <strong>Hunger</strong>, <strong>Thirst</strong>, <strong>Stress</strong> or <strong>Weight</strong>. Hunger and Thirst start at 100 and drop as you travel, wait and use bigger skills; eat and drink to refill them. Stress goes up when the GM says something scary happens, and a good sleep lowers it. Weight adds up your gear against a limit based on Strength. When a bar gets low (or Stress gets high, or you carry too much) a bad effect switches on and changes your stats by itself. When the GM says how far you walked, type it into <strong>Travel</strong>; when time passes, use <strong>Pass Time</strong> and pick Waiting or Sleeping.'
+    ),
+    tip(
       'Skills tab',
       'Learn skills when you have enough Lumens and meet requirements. Use <strong>Focused</strong> to see trees that match your race, weapon, and started paths, or <strong>Browse All</strong> for the full catalogue. Search always looks everywhere and marks results outside Focused. <strong>Ascension</strong> (~20 breakthroughs, hidden until you qualify — T3 Lv10 · T4 Lv15 · T5 Lv22). <strong>Ultimate</strong> splits into Rare Legends, Weapon Mastery, and Element Mastery — T5 Lv22 · T6 Lv30.'
     ),

@@ -8,6 +8,8 @@ import { isGmMode } from '../gm/gm-mode.js'
 import { filterCatalogItems, paginateItems, isShopPurchaseItem, shopMinLevelForItem, shopPurchaseCheck, ITEM_CATALOG_CATEGORIES, catalogCategoryCounts, catalogSourceCounts, activeCatalogFilterLabels } from '../items/items.js'
 import { formatCurrency, fallbackIcon, itemPriceGil, normalizeGil } from './format.js'
 import { itemTooltip } from './tooltips-text.js'
+import { itemWeight, formatWeight } from '../character/survival.js'
+import { renderCarryPill } from './survival-panel.js'
 import { resolveItemPresentation, renderCursedBadgeHtml, itemCardClass, itemCursedNameClass } from '../items/item-presentation.js'
 
 /** Shop tab — item catalogue filters, pagination and item cards. */
@@ -49,7 +51,7 @@ export function renderShopTab(character) {
           <h3>Shop</h3>
           <p class="tab-intro">Browse gear by category — food includes shop snacks like apples and cheese, not just chef recipes. Stock unlocks by rarity at your Skill Level. Hover cards for details; Grant is GM-only free loot.</p>
         </div>
-        <span class="pill gold">${formatCurrency(character.gil)}</span>
+        <span class="wrap shop-header-pills">${renderCarryPill(character)}<span class="pill gold">${formatCurrency(character.gil)}</span></span>
       </div>
       <div class="shop-filters">
         <div class="shop-filters-primary">
@@ -132,7 +134,7 @@ function renderItemCard(item, character = activeCharacter()) {
         <span class="pill">${esc(item.rarity || 'common')}</span>
         <button type="button" class="ghost-btn tiny item-star-btn" data-toggle-catalog-star="${esc(item.id)}" aria-label="Star item">${starred ? '⭐' : '☆'}</button>
       </div>
-      <div class="item-meta">${esc(item.type || 'item')} · ${esc(item.source || 'shop')}${item.damage ? ` · ${esc(item.damage)}` : ''}${handsLabel ? ` · ${esc(handsLabel)}` : ''}${offhandLabel ? ` · ${esc(offhandLabel)}` : ''}</div>
+      <div class="item-meta">${esc(item.type || 'item')} · ${esc(item.source || 'shop')}${item.damage ? ` · ${esc(item.damage)}` : ''}${handsLabel ? ` · ${esc(handsLabel)}` : ''}${offhandLabel ? ` · ${esc(offhandLabel)}` : ''}${character?.survival?.on?.weight ? ` · <span class="item-weight">⚖️ ${formatWeight(itemWeight(item))}</span>` : ''}</div>
       <p class="subtle">${esc(presentation.displayDesc || 'No description provided.')}</p>
       <div class="wrap detail-pills">
         ${statPills || '<span class="pill">No stat modifiers</span>'}

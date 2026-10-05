@@ -6,6 +6,8 @@ import { weaponKindDisplayLabel } from '../homebrew/homebrew.js'
 import { itemHasCounter } from '../items/items.js'
 import { renderItemCounterControls, renderKnockoutPanel } from './shared-panels.js'
 import { renderStatusPanel } from './status-panel.js'
+import { renderSurvivalPanel } from './survival-panel.js'
+import { nourishmentActionLabel } from '../character/survival.js'
 import { fallbackIcon } from './format.js'
 import { resolveItemPresentation } from '../items/item-presentation.js'
 import { getPinnedActionBarSkills, getSkillActivationType } from '../skills/skill-activation.js'
@@ -77,6 +79,7 @@ export function renderPlayTab(character) {
         const item = getItem(entry.itemId)
         const presentation = resolveItemPresentation(item, entry)
         const equippedSlot = Object.entries(character.equipped || {}).find(([, uid]) => uid === entry.uid)?.[0]
+        const eatLabel = nourishmentActionLabel(character, item)
         return `
           <div class="play-item-row">
             <div>
@@ -84,6 +87,7 @@ export function renderPlayTab(character) {
               <div class="subtle">${esc(item.type)}${equippedSlot ? ` · equipped (${esc(equippedSlot)})` : ''} · qty ${entry.qty || 1}</div>
               ${renderItemCounterControls(entry, item, { showWhenEquipped: true })}
             </div>
+            ${eatLabel ? `<button type="button" class="primary-btn tiny" data-survival-consume="${esc(entry.uid)}">${eatLabel}</button>` : ''}
           </div>
         `
       }).join('')
@@ -106,6 +110,8 @@ export function renderPlayTab(character) {
           }).join('')}
         </div>
       </section>
+
+      ${renderSurvivalPanel(character)}
 
       <section class="card play-weapon-card">
         <div class="kicker">Weapon</div>

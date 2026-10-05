@@ -17,6 +17,7 @@ import { invalidateCharacterCache } from '../character/character.js'
 import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
 import { knockoutActionBlockReason } from '../character/knockout.js'
 import { oncePerCombatBlockReason } from './skill-use-limits.js'
+import { survivalSkillBlockReason } from '../character/survival.js'
 export {
   characterHasQuickDraw,
   isRangedAttackSkill,
@@ -95,6 +96,10 @@ export function getSkillUseBlockReason(character, skill) {
   }
   const combatLimit = oncePerCombatBlockReason(character, skill)
   if (combatLimit) return combatLimit
+  if (skill.id !== BASIC_ATTACK_ID) {
+    const survivalBlock = survivalSkillBlockReason(character, skill)
+    if (survivalBlock) return survivalBlock
+  }
   return ''
 }
 

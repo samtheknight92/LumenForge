@@ -18,6 +18,7 @@ import { mergeInventoryStacks } from '../items/items.js'
 import { migrateLegacyStatusEffect, statusStatModifiers } from '../effects/status-stat-modifiers.js'
 import { normalizeKnockoutFields } from './knockout.js'
 import { MAX_SKILL_RANK } from '../skills/skill-ranks.js'
+import { applySurvivalStats, defaultSurvival, normalizeSurvival, carriedWeight } from './survival.js'
 import {
   emptyStatUpgradeHistory,
   normalizeStatUpgradeHistory
@@ -65,6 +66,7 @@ export function createCharacter(name, raceId, options = {}) {
     starredSkillIds: [],
     starredRecipeIds: [],
     weatherEffects: [],
+    survival: defaultSurvival(),
     folder: '',
     knockedOut: false,
     dead: false,
@@ -139,6 +141,7 @@ export function normalizeCharacter(character) {
   merged.weatherEffects = Array.isArray(character?.weatherEffects)
     ? character.weatherEffects.map(normalizeStatusEffect).filter(Boolean)
     : []
+  merged.survival = normalizeSurvival(character?.survival)
   delete merged.notes
   invalidateCharacterCache(merged)
   const computed = computeStats(merged)
@@ -337,13 +340,22 @@ export function computeStats(character) {
       stats[stat] = (stats[stat] || 0) + Number(value || 0)
     }
   }
+  const survival = applySurvivalStats(character, stats)
   stats.hp = Math.max(1, Math.floor(stats.hp))
   stats.stamina = Math.max(1, Math.floor(stats.stamina))
   if (character) {
     character._cache = character._cache || {}
     character._cache.stats = stats
+    character._cache.survival = survival
   }
   return stats
+}
+
+/** Survival conditions and carry limit, worked out alongside the stats. */
+export function getSurvivalSnapshot(character) {
+  computeStats(character)
+  const snapshot = character?._cache?.survival || { rows: {}, conditions: [], carryLimit: 0 }
+  return { ...snapshot, carried: carriedWeight(character) }
 }
 
 /** Set current HP and Stamina to computed maximum (creation, premade spawn). */
@@ -412,6 +424,7 @@ export function statBreakdown(character, stat) {
     const mods = statusStatModifiers(status, effect)
     if (mods[stat]) rows.push({ label: `${effect.name} (weather)`, value: mods[stat] })
   }
+  rows.push(...(getSurvivalSnapshot(character).rows[stat] || []))
   return rows
 }
 
