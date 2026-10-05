@@ -273,7 +273,7 @@ export function setResource(resource, value) {
   const cleanValue = Math.floor(Number(value || 0))
   if (resource === 'hp') {
     if (isDead(character) && cleanValue > 0) {
-      return toast('Dead. If your GM brings them back, use "Bring back" on the Play tab first.')
+      return toast('Dead. If your GM brings them back, tap ☠️ Dead on your HP bar, then Bring back.')
     }
     const previousHp = Number(character.hp || 0)
     const wasKo = isKnockedOut(character)

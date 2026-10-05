@@ -55,7 +55,8 @@ import {
   healedByAlly as doHealedByAlly,
   setDeathSavesIgnored as doSetDeathSavesIgnored,
   acceptDeath as doAcceptDeath,
-  bringBackFromDeath as doBringBackFromDeath
+  bringBackFromDeath as doBringBackFromDeath,
+  showDeathScreen as doShowDeathScreen
 } from '../ui/combat-actions.js'
 import {
   setSurvivalTracker as doSetSurvivalTracker,
@@ -631,6 +632,7 @@ const clickActions = {
   deathSaveIgnore() { doSetDeathSavesIgnored(true) },
   deathSaveOpen() { doSetDeathSavesIgnored(false) },
   acceptDeath() { doAcceptDeath() },
+  deathScreenOpen() { doShowDeathScreen() },
   bringBackFromDeath() { doBringBackFromDeath() },
   healInjury(target) { doHealInjury(target.dataset.healInjury) },
   addInjury() { doAddInjury(document.querySelector('#injury-select')?.value) },

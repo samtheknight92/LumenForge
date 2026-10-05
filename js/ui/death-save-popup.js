@@ -44,7 +44,7 @@ function knockedDown(character) {
           <button type="button" class="ghost-btn tiny" data-death-save-result="pass">✔ I passed</button>
           <button type="button" class="ghost-btn tiny" data-death-save-result="fail">✖ I failed</button>
         </p>
-        <p class="subtle death-save-foot">Ignore keeps you at 0 HP and closes this, in case it was a mistake or the story needs it.</p>
+        <p class="subtle death-save-foot">Ignore keeps you at 0 HP and closes this, in case it was a mistake or the story needs it. Tap 💥 Down on your HP bar to open it again.</p>
       </section>
     </div>
   `
@@ -61,6 +61,9 @@ function deathScreen(character) {
         <div class="death-save-actions">
           <button type="button" class="danger-btn" data-accept-death>Accept death</button>
         </div>
+        <p class="subtle death-save-dice">Mistake, or your GM brings them back?
+          <button type="button" class="ghost-btn tiny" data-bring-back-from-death>Bring back</button>
+        </p>
       </section>
     </div>
   `

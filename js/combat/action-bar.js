@@ -1,4 +1,5 @@
 import { esc } from '../core/utils.js'
+import { isDead, isKnockedOut, deathSaveFails, DEATH_SAVE_RULES } from '../character/knockout.js'
 import { activePerformanceStatuses } from './instruments.js'
 import { computeStats } from '../character/character.js'
 import {
@@ -30,13 +31,24 @@ import {
 import { getEffectiveSkillStaminaCost } from '../skills/career-effects.js'
 import { willQuickDrawActivate } from './quick-draw.js'
 
-function resourceMeter(resource, label, icon, value, max, tone) {
+/** "Knocked down" / "Dead" chip on the HP meter: reopens the popup from any tab. */
+function knockdownChip(character) {
+  if (isDead(character)) {
+    return '<button type="button" class="action-bar-ko-chip dead" data-death-screen-open>☠️ Dead</button>'
+  }
+  if (!isKnockedOut(character)) return ''
+  const fails = deathSaveFails(character)
+  return `<button type="button" class="action-bar-ko-chip" data-death-save-open aria-label="Knocked down: open death saves" title="Knocked down: tap to open death saves">💥 Down${fails ? ` ${fails}/${DEATH_SAVE_RULES.maxFails}` : ''}</button>`
+}
+
+function resourceMeter(resource, label, icon, value, max, tone, chip = '') {
   const pct = max > 0 ? Math.max(0, Math.min(100, Math.round((value / max) * 100))) : 0
   return `
     <div class="action-bar-meter action-bar-meter-${tone}" data-tooltip="${esc(`${label}\n${value} / ${max}`)}" tabindex="0">
       <div class="action-bar-meter-head">
         <span class="action-bar-meter-icon">${icon}</span>
         <span class="action-bar-meter-label">${esc(label)}</span>
+        ${chip}
         <span class="action-bar-meter-value">${value}/${max}</span>
         <button type="button" class="action-bar-full" data-full-resource="${esc(resource)}" aria-label="${esc(`Fill ${label}`)}"${value >= max ? ' disabled' : ''}>Full</button>
       </div>
@@ -184,7 +196,7 @@ export function renderActionBar(character) {
     <div class="action-bar-dock">
       <div class="action-bar-inner">
         <div class="action-bar-resources">
-          ${resourceMeter('hp', 'HP', '♥', character.hp, stats.hp, 'hp')}
+          ${resourceMeter('hp', 'HP', '♥', character.hp, stats.hp, 'hp', knockdownChip(character))}
           ${resourceMeter('stamina', 'Stamina', '⚡', character.stamina, stats.stamina, 'stamina')}
         </div>
         ${pinned.length ? `

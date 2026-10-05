@@ -4,7 +4,7 @@ import { computeStats } from '../character/character.js'
 import { getEquippedWeapon, getWeaponKind } from '../items/equipment.js'
 import { weaponKindDisplayLabel } from '../homebrew/homebrew.js'
 import { itemHasCounter } from '../items/items.js'
-import { renderItemCounterControls, renderKnockoutPanel } from './shared-panels.js'
+import { renderItemCounterControls } from './shared-panels.js'
 import { renderStatusPanel } from './status-panel.js'
 import { renderSurvivalPanel } from './survival-panel.js'
 import { nourishmentActionLabel } from '../character/survival.js'
@@ -138,8 +138,6 @@ export function renderPlayTab(character) {
         <h3>Consumables &amp; counters</h3>
         <div class="stack mt-12">${itemsHtml}</div>
       </section>
-
-      ${renderKnockoutPanel(character)}
 
       ${renderStatusPanel(character)}
     </div>
