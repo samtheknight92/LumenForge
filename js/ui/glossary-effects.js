@@ -57,7 +57,7 @@ export const EFFECT_DESC_OVERRIDES = {
   acid_corrosion: 'Acid weakens armour each End of Turn: Physical Defence goes down by 1 per turn for 5 turns. Usually no direct HP loss unless the GM adds it.',
   bleeding: 'A nasty cut: lose 1 HP at the End of Turn for 3 turns. First aid or bandaging can end it early.',
   critical_bleeding: 'A deep cut from a critical hit: lose 2 HP at the End of Turn for 3 turns.',
-  incapacitated: 'You cannot take actions this round — stunned, dazed, or similar (not the same as Knocked Out at 0 HP).',
+  incapacitated: 'You cannot take actions this round — stunned, dazed, or similar (not the same as Knocked down at 0 HP).',
   immobilized: 'You cannot move, but you can still attack or cast if the rules allow. Covers freeze, roots, and stuck-in-place effects.',
   mind_controlled: 'Someone else is steering your choices. Fear makes you move away; charm makes you unwilling to hurt the charmer.',
   fear: 'You must move away and cannot willingly move closer. While facing what scared you, roll twice on attacks and keep the lower roll.',

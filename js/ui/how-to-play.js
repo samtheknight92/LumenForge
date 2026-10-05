@@ -158,8 +158,8 @@ export function renderHowToPlayTab() {
       'Press <strong>Process Turn</strong> on the Play tab at the <strong>End of Turn</strong> — after you move, attack, use an item, or finish your action. On <em>your</em> sheet it: pays toggle Stamina costs (if you cannot pay, the toggle switches off unless the GM rules otherwise); applies per-turn damage or healing from statuses (Bleeding, Poison, Burn, regeneration, Mana Focus, and similar); then ticks each effect\'s remaining duration down by 1 — a 1-round effect like Blind stays for your action, then expires on this press. In combat, do this every turn after you act; out of combat, only when the GM says to and you have effects or toggles to process. When a new fight starts, press <strong>New Combat</strong> to reset once-per-combat uses like Quick Draw.'
     ),
     tip(
-      'Knocked Out &amp; Revival',
-      'At <strong>0 HP</strong> you are <strong>Knocked Out</strong> — you cannot move, attack, use items, or use skills, but you stay in initiative. On each of your turns you may make one <strong>Recovery Roll</strong> (1d20): <strong>11+</strong> success, <strong>10 or lower</strong> failure. Two successes <em>in a row</em> → <strong>Revived</strong> at 1 HP. Three failures <em>in a row</em> → <strong>Dead</strong>. A failure resets the success streak; a success resets the failure streak. Track streaks on the Play tab. <strong>Manual revival</strong> by another character takes two of the helper\'s turns (step 1 begin CPR/first aid, step 2 finish) and Revives at 1 HP. A healing item or healing skill restores its full HP amount immediately, clears Recovery streaks, and removes Knocked Out (example: a 25 HP potion Revives and restores up to 25 HP, not merely 1 HP).'
+      'Knocked down &amp; Death saves',
+      'At <strong>0 HP</strong> you are <strong>Knocked down</strong>: you cannot move, attack, use items, or use skills, but you stay in initiative. A popup gives you <strong>3 chances to not die</strong>. On each of your turns, <strong>Roll to survive</strong> (1d20): <strong>10 or more</strong> and you get back up with 1 HP. Fail <strong>3 times</strong> and your hero <strong>dies</strong>. If another player patches you up, tap <strong>Healed by another player</strong> to get up with 1 HP. A healing item or healing skill restores its full HP amount instead (a 25 HP potion brings you back with up to 25 HP). <strong>Ignore</strong> keeps you at 0 HP and closes the popup, for mistakes or when the story needs it; reopen it from the Play tab. With <strong>Injuries</strong> ticked in the Survival panel, every knockdown also gives you a random lasting injury (like a Broken Arm, −2 Strength) until your GM says it has healed.'
     ),
     tip(
       'Improvised actions &amp; Rule of Cool',
@@ -167,11 +167,11 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Saving Rolls',
-      'When the GM calls for a <strong>Saving Roll</strong>, pick a target from this ladder (1d20, meet or beat): <strong>Super Easy 3</strong> · <strong>Easy 8</strong> · <strong>Normal 11</strong> · <strong>Hard 14</strong> · <strong>Extreme 17</strong>. Apply Advantage / Disadvantage, relevant stats, or circumstance bonuses as the GM rules. Recovery Rolls at 0 HP stay fixed at 11+ (see Knocked Out).'
+      'When the GM calls for a <strong>Saving Roll</strong>, pick a target from this ladder (1d20, meet or beat): <strong>Super Easy 3</strong> · <strong>Easy 8</strong> · <strong>Normal 11</strong> · <strong>Hard 14</strong> · <strong>Extreme 17</strong>. Apply Advantage / Disadvantage, relevant stats, or circumstance bonuses as the GM rules. Death saves at 0 HP stay fixed at 10+ (see Knocked down).'
     ),
     tip(
       'Saves (backup)',
-      'Use Export Save (sidebar) to back up characters. Homebrew packs and character files move between devices — the live website does not store your data. Clearing browser data, switching browsers, or using another device may lose local saves unless you exported them. Knocked Out state and Recovery Roll streaks are included in saves.'
+      'Use Export Save (sidebar) to back up characters. Homebrew packs and character files move between devices — the live website does not store your data. Clearing browser data, switching browsers, or using another device may lose local saves unless you exported them. Knocked down state, death saves and injuries are included in saves.'
     )
   ])
 
@@ -186,7 +186,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Your turn (combat)',
-      'When initiative reaches you: <strong>1.</strong> <strong>Move</strong> and/or use one skill / Basic Attack (in either order) — unless you are Knocked Out (Recovery Roll only). <strong>2.</strong> Press <strong>Process Turn</strong> at the <strong>End of Turn</strong> (ticks, then durations). <strong>3.</strong> Say you are done; next player goes. Roll accuracy at the table first; only apply damage or target effects after the GM confirms a hit — action bar, physical dice, or manual HP/Stamina all work.'
+      'When initiative reaches you: <strong>1.</strong> <strong>Move</strong> and/or use one skill / Basic Attack (in either order) — unless you are Knocked down (roll to survive only). <strong>2.</strong> Press <strong>Process Turn</strong> at the <strong>End of Turn</strong> (ticks, then durations). <strong>3.</strong> Say you are done; next player goes. Roll accuracy at the table first; only apply damage or target effects after the GM confirms a hit — action bar, physical dice, or manual HP/Stamina all work.'
     ),
     tip(
       'Outside combat',
@@ -249,7 +249,7 @@ export function renderHowToPlayTab() {
     ),
     tip(
       'Applying effects',
-      'Add status effects and weather from the Play tab (pick effect, duration, optional note). Players press <strong>Process Turn</strong> at the End of Turn to tick timers — see <strong>Everyone</strong> above. Track Knocked Out Recovery Rolls and manual revival on that character\'s sheet.'
+      'Add status effects and weather from the Play tab (pick effect, duration, optional note). Players press <strong>Process Turn</strong> at the End of Turn to tick timers — see <strong>Everyone</strong> above. Death saves (Knocked down) and injuries are tracked on each player\'s own sheet.'
     ),
     tip(
       'Homebrew',

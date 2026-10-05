@@ -71,9 +71,11 @@ import { isGmMode } from '../gm/gm-mode.js'
 import {
   syncKnockoutAfterHpChange,
   rollRecovery,
-  startManualRevival,
-  advanceManualRevival,
-  cancelManualRevival,
+  recordDeathSave,
+  reviveByAlly,
+  ignoreDeathSaves,
+  undoDeath,
+  DEATH_SAVE_RULES,
   isKnockedOut,
   isDead
 } from '../character/knockout.js'
@@ -420,6 +422,10 @@ export function processTurn(targetCharacter = null) {
   character.hp = clamp(character.hp, 0, stats.hp)
   character.stamina = clamp(character.stamina, 0, stats.stamina)
   const koSync = syncKnockoutAfterHpChange(character, { previousHp })
+  if (koSync.injury) {
+    invalidateCharacterCache(character)
+    character.stamina = clamp(character.stamina, 0, computeStats(character).stamina)
+  }
   if (!targetCharacter || targetCharacter === activeCharacter()) touch(character)
   else if (state.activeEncounter) {
     // Encounter combatant — persist via normal save path
@@ -428,7 +434,7 @@ export function processTurn(targetCharacter = null) {
   const effectParts = [effectTick.summary, weatherTick.summary, passiveTick.summary].filter(Boolean)
   if (weatherDrain > 0) effectParts.push(`Heatwave: −${weatherDrain} Stamina (apply to whole party at table)`)
   if (survivalHpLoss > 0) effectParts.push(`Collapsing from thirst: −${survivalHpLoss} HP`)
-  if (koSync.entered) effectParts.push('Knocked Out')
+  if (koSync.entered) effectParts.push(koSync.injury ? `Knocked down (and a ${koSync.injury.name})` : 'Knocked down')
   const effectText = effectParts.length ? ` ${effectParts.join(', ')}.` : ''
   const toggleText = spent ? `${spent} Stamina spent.` : 'No toggle costs.'
   toastCombat(`End of Turn processed. ${toggleText}${effectText}${messages.length ? ` ${messages[0]}` : ''}`)
@@ -491,53 +497,76 @@ export function beginNewCombat() {
   toast('New combat started — once-per-combat uses reset (Quick Draw, Encore, Homing Shot, Rage, and similar).')
 }
 
+/** Screen-only note of the last death save, shown in the Knocked down popup. */
+function noteDeathSave(character, text, tone) {
+  state.deathSaveNote = { characterId: character.id, text, tone }
+}
+
+function finishDeathSave(character, result, label) {
+  if (result.error) return toast(result.error)
+  if (result.dead) {
+    state.deathScreen = character.id
+    state.deathSaveNote = null
+  } else if (result.revived) {
+    state.deathSaveNote = null
+    toastCombat(`${label} You get back up with 1 HP!`)
+  } else {
+    const left = result.chancesLeft
+    noteDeathSave(character, `${label} ${left} chance${left === 1 ? '' : 's'} left.`, 'bad')
+  }
+  touch(character)
+}
+
 export function rollRecoveryCheck() {
   const character = activeCharacter()
   if (!character) return
   const result = rollRecovery(character)
+  const label = result.roll == null ? '' : result.success
+    ? `🎲 You rolled ${result.roll}!`
+    : `🎲 You rolled ${result.roll}. Not enough (need ${DEATH_SAVE_RULES.target}+).`
+  finishDeathSave(character, result, label)
+}
+
+/** For players who rolled real dice and just tell the app how it went. */
+export function recordDeathSaveResult(success) {
+  const character = activeCharacter()
+  if (!character) return
+  const result = recordDeathSave(character, success)
+  finishDeathSave(character, result, success ? '🎲 Passed!' : '🎲 Failed.')
+}
+
+export function healedByAlly() {
+  const character = activeCharacter()
+  if (!character) return
+  const result = reviveByAlly(character)
   if (result.error) return toast(result.error)
+  state.deathSaveNote = null
   touch(character)
-  if (result.dead) {
-    toastCombat(`Recovery Roll ${result.roll} — failure. Three failures in a row: Dead.`)
-    return
-  }
-  if (result.revived) {
-    toastCombat(`Recovery Roll ${result.roll} — success. Two successes in a row: Revived at 1 HP.`)
-    return
-  }
-  if (result.success) {
-    toastCombat(`Recovery Roll ${result.roll} — success (${result.successStreak}/2). Need one more success in a row.`)
-    return
-  }
-  toastCombat(`Recovery Roll ${result.roll} — failure (${result.failureStreak}/3). Success streak reset.`)
+  toastCombat('Another player patched you up. Back on your feet with 1 HP!')
 }
 
-export function beginManualRevival(helperName = '') {
+export function setDeathSavesIgnored(ignored) {
   const character = activeCharacter()
   if (!character) return
-  if (!startManualRevival(character, helperName)) {
-    return toast(isDead(character) ? 'Dead — cannot start manual revival.' : 'Only Knocked Out characters can begin manual revival.')
-  }
+  if (!ignoreDeathSaves(character, ignored)) return
   touch(character)
-  toast(`Manual revival started — step 1/2${helperName ? ` (${helperName})` : ''}. Helper uses this turn to begin CPR / first aid.`)
+  if (ignored) toast('Staying at 0 HP. Tap "Death saves" on the Play tab to bring the popup back.')
 }
 
-export function continueManualRevival() {
+export function acceptDeath() {
   const character = activeCharacter()
-  if (!character) return
-  const result = advanceManualRevival(character)
-  if (result.error) return toast(result.error)
-  touch(character)
-  if (result.revived) toast('Manual revival complete — Revived at 1 HP. Recovery streaks cleared.')
-  else toast('Manual revival — step 2/2. Helper finishes revival on their next turn.')
+  state.deathScreen = null
+  if (character) touch(character)
 }
 
-export function clearManualRevival() {
+export function bringBackFromDeath() {
   const character = activeCharacter()
   if (!character) return
-  cancelManualRevival(character)
+  if (!confirm(`Bring ${character.name} back from the dead? Only do this if your GM says so.`)) return
+  if (!undoDeath(character)) return
+  state.deathScreen = null
   touch(character)
-  toast('Manual revival cancelled.')
+  toast(`${character.name} lives! Still at 0 HP and Knocked down until healed.`)
 }
 
 export function rollDice(count, sides, modifier = 0) {

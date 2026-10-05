@@ -1,8 +1,19 @@
 /**
- * Knocked Out / Recovery Roll / manual revival — table rules with sheet tracking.
+ * Knocked down / Death saves — table rules with sheet tracking.
  * Process Turn (End of Turn) is separate; this module only tracks 0 HP state.
+ *
+ * At 0 HP you are Knocked down and get three chances not to die: roll a d20,
+ * DEATH_SAVE_RULES.target or more gets you back up at 1 HP; three failed rolls
+ * and you die. Another player healing you also gets you up at 1 HP.
  */
+import { injureOnKnockdown } from './injuries.js'
 
+export const DEATH_SAVE_RULES = {
+  /** d20 roll needed to get back up. */
+  target: 10,
+  /** Failed rolls before death. */
+  maxFails: 3
+}
 export function isDead(character) {
   return Boolean(character?.dead)
 }
@@ -21,34 +32,35 @@ export function canTakeNormalActions(character) {
 
 export function knockoutActionBlockReason(character) {
   if (isDead(character)) return 'Dead — cannot act'
-  if (isKnockedOut(character)) return 'Knocked Out — only a Recovery Roll (or ally help) this turn'
+  if (isKnockedOut(character)) return 'Knocked down — you can only roll to survive (or be healed) this turn'
   return ''
 }
 
 export function clearKnockoutProgress(character) {
   if (!character) return
   character.knockedOut = false
-  character.recoverySuccessStreak = 0
   character.recoveryFailureStreak = 0
-  character.manualRevival = null
+  character.deathSaveIgnored = false
+  character.lastKnockdownInjury = null
 }
 
-export function enterKnockout(character) {
-  if (!character || isDead(character)) return
+/** Put the character at 0 HP. A fresh knockdown resets the death saves and may cause an injury. */
+export function enterKnockout(character, { random = Math.random } = {}) {
+  if (!character || isDead(character)) return null
   character.hp = 0
-  if (!character.knockedOut) {
-    character.knockedOut = true
-    character.recoverySuccessStreak = 0
-    character.recoveryFailureStreak = 0
-  } else {
-    character.knockedOut = true
-  }
+  if (character.knockedOut) return null
+  character.knockedOut = true
+  character.recoveryFailureStreak = 0
+  character.deathSaveIgnored = false
+  const injury = injureOnKnockdown(character, random)
+  character.lastKnockdownInjury = injury ? injury.id : null
+  return injury
 }
 
 /**
- * Call after any HP change. Revives (clears KO streaks) when HP is raised above 0.
+ * Call after any HP change. Revives (clears death saves) when HP is raised above 0.
  */
-export function syncKnockoutAfterHpChange(character, { previousHp = null } = {}) {
+export function syncKnockoutAfterHpChange(character, { previousHp = null, random = Math.random } = {}) {
   if (!character) return { changed: false }
   if (isDead(character)) {
     character.hp = 0
@@ -58,8 +70,8 @@ export function syncKnockoutAfterHpChange(character, { previousHp = null } = {})
   const hp = Number(character.hp || 0)
   if (hp <= 0) {
     const wasKo = Boolean(character.knockedOut)
-    enterKnockout(character)
-    return { changed: !wasKo, entered: true }
+    const injury = enterKnockout(character, { random })
+    return { changed: !wasKo, entered: !wasKo, injury }
   }
   if (character.knockedOut || (previousHp != null && previousHp <= 0)) {
     clearKnockoutProgress(character)
@@ -68,7 +80,7 @@ export function syncKnockoutAfterHpChange(character, { previousHp = null } = {})
   return { changed: false }
 }
 
-/** Healing item/skill amount applied to a Knocked Out character — full heal value, not 1 HP. */
+/** Healing item/skill amount applied to a Knocked down character — full heal value, not 1 HP. */
 export function applyHealingToCharacter(character, amount, computeStatsFn) {
   if (!character) return { healed: 0, revived: false, blocked: true }
   if (isDead(character)) return { healed: 0, revived: false, blocked: true, reason: 'Dead' }
@@ -86,101 +98,98 @@ export function applyHealingToCharacter(character, amount, computeStatsFn) {
   return { healed, revived: false, blocked: false }
 }
 
-/**
- * Recovery Roll: 1d20, 11+ success. Two successes in a row → Revived at 1 HP.
- * Three failures in a row → Dead. Opposite outcomes reset the streak.
- */
-export function rollRecovery(character, rollValue = null) {
-  if (!character) return { error: 'No character' }
-  if (isDead(character)) return { error: 'Dead — Recovery Rolls no longer apply' }
-  if (!isKnockedOut(character)) return { error: 'Not Knocked Out' }
+export function deathSaveFails(character) {
+  return Math.max(0, Math.min(DEATH_SAVE_RULES.maxFails, Number(character?.recoveryFailureStreak || 0)))
+}
 
+export function deathSaveChancesLeft(character) {
+  return DEATH_SAVE_RULES.maxFails - deathSaveFails(character)
+}
+
+/**
+ * Record one death save. `success` true gets you up at 1 HP; false counts a
+ * failure, and the last failure means death.
+ */
+export function recordDeathSave(character, success) {
+  if (!character) return { error: 'No character' }
+  if (isDead(character)) return { error: 'Dead — death saves no longer apply' }
+  if (!isKnockedOut(character)) return { error: 'Not Knocked down' }
   character.hp = 0
   character.knockedOut = true
-  const roll = Number.isFinite(Number(rollValue))
-    ? Math.max(1, Math.min(20, Math.floor(Number(rollValue))))
-    : (1 + Math.floor(Math.random() * 20))
-  const success = roll >= 11
-
   if (success) {
-    character.recoverySuccessStreak = Number(character.recoverySuccessStreak || 0) + 1
-    character.recoveryFailureStreak = 0
-    if (character.recoverySuccessStreak >= 2) {
-      character.hp = 1
-      clearKnockoutProgress(character)
-      return { roll, success: true, revived: true, dead: false }
-    }
-    return {
-      roll,
-      success: true,
-      revived: false,
-      dead: false,
-      successStreak: character.recoverySuccessStreak,
-      failureStreak: 0
-    }
+    character.hp = 1
+    clearKnockoutProgress(character)
+    return { success: true, revived: true, dead: false }
   }
-
-  character.recoveryFailureStreak = Number(character.recoveryFailureStreak || 0) + 1
-  character.recoverySuccessStreak = 0
-  if (character.recoveryFailureStreak >= 3) {
+  character.recoveryFailureStreak = deathSaveFails(character) + 1
+  if (character.recoveryFailureStreak >= DEATH_SAVE_RULES.maxFails) {
     character.dead = true
     character.knockedOut = true
-    character.manualRevival = null
-    return { roll, success: false, revived: false, dead: true, failureStreak: 3 }
+    character.deathSaveIgnored = false
+    return { success: false, revived: false, dead: true, fails: DEATH_SAVE_RULES.maxFails, chancesLeft: 0 }
   }
   return {
-    roll,
     success: false,
     revived: false,
     dead: false,
-    successStreak: 0,
-    failureStreak: character.recoveryFailureStreak
+    fails: character.recoveryFailureStreak,
+    chancesLeft: deathSaveChancesLeft(character)
   }
 }
 
-export function startManualRevival(character, helperName = '') {
-  if (!character || isDead(character)) return false
-  if (!isKnockedOut(character)) return false
-  character.manualRevival = {
-    step: 1,
-    helperName: String(helperName || '').trim().slice(0, 80)
-  }
+/** Roll a d20 death save (or pass a roll from real dice for testing). */
+export function rollRecovery(character, rollValue = null) {
+  if (!character) return { error: 'No character' }
+  if (isDead(character)) return { error: 'Dead — death saves no longer apply' }
+  if (!isKnockedOut(character)) return { error: 'Not Knocked down' }
+  const roll = Number.isFinite(Number(rollValue)) && rollValue !== null
+    ? Math.max(1, Math.min(20, Math.floor(Number(rollValue))))
+    : (1 + Math.floor(Math.random() * 20))
+  return { roll, ...recordDeathSave(character, roll >= DEATH_SAVE_RULES.target) }
+}
+
+/** Another player patched you up: back on your feet at 1 HP. */
+export function reviveByAlly(character) {
+  if (!character || isDead(character)) return { error: 'Dead — healing no longer helps' }
+  if (!isKnockedOut(character)) return { error: 'Not Knocked down' }
+  character.hp = 1
+  clearKnockoutProgress(character)
+  return { revived: true }
+}
+
+/** "Ignore": stay at 0 HP and stop the death-save popup until you are back up. */
+export function ignoreDeathSaves(character, ignored = true) {
+  if (!character || !isKnockedOut(character)) return false
+  character.deathSaveIgnored = Boolean(ignored)
   return true
 }
 
-export function advanceManualRevival(character) {
-  if (!character || isDead(character)) return { error: 'Cannot revive' }
-  if (!character.manualRevival) return { error: 'No manual revival in progress' }
-  if (Number(character.manualRevival.step) === 1) {
-    character.manualRevival = {
-      step: 2,
-      helperName: String(character.manualRevival.helperName || '').trim().slice(0, 80)
-    }
-    return { step: 2 }
-  }
-  character.hp = 1
-  clearKnockoutProgress(character)
-  return { revived: true, step: 2 }
+/** GM ruling: bring a dead character back. They stay at 0 HP, Knocked down, popup closed. */
+export function undoDeath(character) {
+  if (!character || !isDead(character)) return false
+  character.dead = false
+  character.hp = 0
+  character.knockedOut = true
+  character.recoveryFailureStreak = 0
+  character.deathSaveIgnored = true
+  return true
 }
 
-export function cancelManualRevival(character) {
-  if (character) character.manualRevival = null
+/** Should the Knocked down popup be on screen for this character? */
+export function deathSavePopupOpen(character) {
+  return Boolean(character) && isKnockedOut(character) && !character.deathSaveIgnored
 }
 
 export function normalizeKnockoutFields(character) {
   if (!character) return character
   character.dead = Boolean(character.dead)
   character.knockedOut = Boolean(character.knockedOut)
-  character.recoverySuccessStreak = Math.max(0, Math.min(2, Math.floor(Number(character.recoverySuccessStreak) || 0)))
-  character.recoveryFailureStreak = Math.max(0, Math.min(3, Math.floor(Number(character.recoveryFailureStreak) || 0)))
-  if (character.manualRevival && typeof character.manualRevival === 'object') {
-    character.manualRevival = {
-      step: Number(character.manualRevival.step) === 2 ? 2 : 1,
-      helperName: String(character.manualRevival.helperName || '').trim().slice(0, 80)
-    }
-  } else {
-    character.manualRevival = null
-  }
+  character.recoveryFailureStreak = deathSaveFails(character)
+  character.deathSaveIgnored = Boolean(character.deathSaveIgnored)
+  character.lastKnockdownInjury = typeof character.lastKnockdownInjury === 'string' ? character.lastKnockdownInjury : null
+  // Older saves tracked success streaks and a two-step revival; the death-save rules replaced both.
+  delete character.recoverySuccessStreak
+  delete character.manualRevival
 
   if (character.dead) {
     character.hp = 0
@@ -189,10 +198,7 @@ export function normalizeKnockoutFields(character) {
   }
 
   if (Number(character.hp) > 0) {
-    character.knockedOut = false
-    character.recoverySuccessStreak = 0
-    character.recoveryFailureStreak = 0
-    character.manualRevival = null
+    clearKnockoutProgress(character)
   } else {
     character.knockedOut = true
   }
@@ -203,14 +209,5 @@ export function knockoutStatusLabel(character) {
   if (!character) return ''
   if (isDead(character)) return 'Dead'
   if (!isKnockedOut(character)) return ''
-  const ok = Number(character.recoverySuccessStreak || 0)
-  const fail = Number(character.recoveryFailureStreak || 0)
-  let label = `Knocked Out · Recovery ${ok}/2 success · ${fail}/3 failure`
-  if (character.manualRevival) {
-    const helper = character.manualRevival.helperName
-      ? ` (${character.manualRevival.helperName})`
-      : ''
-    label += ` · Manual revival step ${character.manualRevival.step}/2${helper}`
-  }
-  return label
+  return `Knocked down · ${deathSaveFails(character)}/${DEATH_SAVE_RULES.maxFails} failed rolls`
 }

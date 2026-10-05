@@ -1,5 +1,5 @@
 /**
- * Optional survival trackers: Hunger, Thirst, Stress and Weight.
+ * Optional survival trackers: Hunger, Thirst, Stress, Weight and Injuries.
  *
  * Each tracker has its own on/off tick (all off by default). Hunger and
  * Thirst run 100 → 0, Stress runs 0 → 100, and Weight compares carried gear
@@ -11,8 +11,9 @@
 import { getItem } from '../core/cache.js'
 import { STAT_RULES } from '../core/constants.js'
 import { getWeaponKind, getOffhandType, isTwoHandedWeapon } from '../items/equipment.js'
+import { INJURY_LABEL, normalizeInjuries, applyInjuryStats } from './injuries.js'
 
-export const SURVIVAL_TRACKERS = ['hunger', 'thirst', 'stress', 'weight']
+export const SURVIVAL_TRACKERS = ['hunger', 'thirst', 'stress', 'weight', 'injuries']
 
 export const SURVIVAL_RULES = {
   max: 100,
@@ -75,17 +76,19 @@ export const SURVIVAL_LABELS = {
   hunger: { name: 'Hunger', icon: '🍖', help: 'Full at 100. Goes down as you travel, wait and use big skills. Eat to refill it.' },
   thirst: { name: 'Thirst', icon: '💧', help: 'Full at 100. Drops about twice as fast as Hunger. Drink to refill it.' },
   stress: { name: 'Stress', icon: '🧠', help: 'Calm at 0. Add Stress when scary things happen (the GM will say). A good sleep brings it down.' },
-  weight: { name: 'Weight', icon: '🎒', help: 'Everything you carry has a weight. Go over your limit (based on Strength) and you slow down.' }
+  weight: { name: 'Weight', icon: '🎒', help: 'Everything you carry has a weight. Go over your limit (based on Strength) and you slow down.' },
+  injuries: INJURY_LABEL
 }
 
 const clampValue = value => Math.max(0, Math.min(SURVIVAL_RULES.max, Math.round(Number(value) || 0)))
 
 export function defaultSurvival() {
   return {
-    on: { hunger: false, thirst: false, stress: false, weight: false },
+    on: { hunger: false, thirst: false, stress: false, weight: false, injuries: false },
     hunger: SURVIVAL_RULES.max,
     thirst: SURVIVAL_RULES.max,
     stress: 0,
+    injuries: [],
     collapsed: true
   }
 }
@@ -101,6 +104,7 @@ export function normalizeSurvival(raw) {
     hunger: raw.hunger === undefined ? base.hunger : clampValue(raw.hunger),
     thirst: raw.thirst === undefined ? base.thirst : clampValue(raw.thirst),
     stress: raw.stress === undefined ? base.stress : clampValue(raw.stress),
+    injuries: normalizeInjuries(raw.injuries),
     collapsed: raw.collapsed === undefined ? base.collapsed : Boolean(raw.collapsed)
   }
 }
@@ -301,6 +305,7 @@ export function applySurvivalStats(character, stats) {
       }
     }
   }
+  applyInjuryStats(character, stats, addRow)
   return { rows, carryLimit, conditions }
 }
 

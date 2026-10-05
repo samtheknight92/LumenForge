@@ -51,9 +51,11 @@ import {
   removeWeatherEffect as doRemoveWeatherEffect,
   setWeatherCombatRoll as doSetWeatherCombatRoll,
   rollRecoveryCheck as doRollRecoveryCheck,
-  beginManualRevival as doBeginManualRevival,
-  continueManualRevival as doContinueManualRevival,
-  clearManualRevival as doClearManualRevival
+  recordDeathSaveResult as doRecordDeathSaveResult,
+  healedByAlly as doHealedByAlly,
+  setDeathSavesIgnored as doSetDeathSavesIgnored,
+  acceptDeath as doAcceptDeath,
+  bringBackFromDeath as doBringBackFromDeath
 } from '../ui/combat-actions.js'
 import {
   setSurvivalTracker as doSetSurvivalTracker,
@@ -61,7 +63,9 @@ import {
   adjustSurvival as doAdjustSurvival,
   travel as doSurvivalTravel,
   passTime as doSurvivalPassTime,
-  consumeForSurvival as doConsumeForSurvival
+  consumeForSurvival as doConsumeForSurvival,
+  healInjuryAction as doHealInjury,
+  addInjuryAction as doAddInjury
 } from '../ui/survival-actions.js'
 import { flipSurvivalStepSign } from '../ui/survival-panel.js'
 import {
@@ -622,12 +626,14 @@ const clickActions = {
   },
   survivalConsume(target) { doConsumeForSurvival(target.dataset.survivalConsume) },
   recoveryRoll() { doRollRecoveryCheck() },
-  manualRevivalStart() {
-    const name = prompt('Helper name (optional):', '') || ''
-    doBeginManualRevival(name)
-  },
-  manualRevivalAdvance() { doContinueManualRevival() },
-  manualRevivalCancel() { doClearManualRevival() },
+  deathSaveResult(target) { doRecordDeathSaveResult(target.dataset.deathSaveResult === 'pass') },
+  healedByAlly() { doHealedByAlly() },
+  deathSaveIgnore() { doSetDeathSavesIgnored(true) },
+  deathSaveOpen() { doSetDeathSavesIgnored(false) },
+  acceptDeath() { doAcceptDeath() },
+  bringBackFromDeath() { doBringBackFromDeath() },
+  healInjury(target) { doHealInjury(target.dataset.healInjury) },
+  addInjury() { doAddInjury(document.querySelector('#injury-select')?.value) },
   removeEffect(target) { doRemoveStatusEffect(target.dataset.removeEffect) },
   addEffect() {
     doAddStatusEffect(

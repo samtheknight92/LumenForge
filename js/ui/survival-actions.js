@@ -17,6 +17,7 @@ import {
   applyNourishment,
   nourishmentActionLabel
 } from '../character/survival.js'
+import { addInjury, healInjury, injuryEffectText } from '../character/injuries.js'
 import { touch } from './action-helpers.js'
 
 /** Keep current HP / Stamina within the (possibly changed) maximums. */
@@ -36,6 +37,26 @@ export function setSurvivalTracker(key, on) {
   if (on) survival.collapsed = false
   settle(character)
   toast(`${SURVIVAL_LABELS[key].name} tracking ${on ? 'on' : 'off'}.`)
+}
+
+export function healInjuryAction(uid) {
+  const character = activeCharacter()
+  if (!character) return
+  const injury = healInjury(character, uid)
+  if (!injury) return
+  settle(character)
+  toast(`${injury.icon} ${injury.name} healed.`)
+}
+
+/** Add an injury the GM describes (random when nothing is picked). */
+export function addInjuryAction(injuryId) {
+  const character = activeCharacter()
+  if (!character) return
+  ensureSurvival(character)
+  const injury = addInjury(character, injuryId || null)
+  if (!injury) return
+  settle(character)
+  toast(`${injury.icon} ${injury.name}: ${injuryEffectText(injury)}.`)
 }
 
 export function toggleSurvivalPanel() {
