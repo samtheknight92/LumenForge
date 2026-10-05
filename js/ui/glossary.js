@@ -43,7 +43,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['hit points', 'health'],
     category: 'Resources & money',
     summary: 'How much harm you can take before you are out of the fight.',
-    detail: 'HP is your health pool. When you take damage, subtract it from current HP. At 0 HP your character is Knocked Out — see Recovery Roll and Revival in How to Play and the dictionary. Raise max HP with stat upgrades (Lumens cap: 1000), gear, and helpful effects. The action bar has quick +/− buttons during fights.\n\nAt the table: “Subtract damage from HP; at zero, you’re Knocked Out until you succeed on Recovery Rolls, an ally revives you, or healing brings you back.”'
+    detail: 'HP is your health pool. When you take damage, subtract it from current HP. At 0 HP your character is Knocked down and gets 3 death saves — see Knocked down in How to Play and the dictionary. Raise max HP with stat upgrades (Lumens cap: 1000), gear, and helpful effects. The action bar has quick +/− buttons during fights.\n\nAt the table: “Subtract damage from HP; at zero, you’re Knocked down until you pass a death save, an ally patches you up, or healing brings you back.”'
   },
   {
     id: 'stamina',
@@ -311,11 +311,11 @@ export const GLOSSARY_ENTRIES = [
   },
   {
     id: 'knocked-out',
-    term: 'Knocked Out',
-    aliases: ['0 hp', 'recovery roll', 'revived', 'dead', 'manual revival'],
+    term: 'Knocked down',
+    aliases: ['knocked out', '0 hp', 'death save', 'death saves', 'recovery roll', 'revived', 'dead', 'injury', 'injuries'],
     category: 'Effects & gear',
-    summary: 'At 0 HP — no normal actions; Recovery Rolls, ally revival, or healing bring you back.',
-    detail: 'When you reach 0 HP you become Knocked Out: you cannot move, attack, use items, or use skills, but you stay in initiative. Each of your turns you may make one Recovery Roll (1d20): 11+ success, 10 or lower failure. Two successes in a row → Revived at 1 HP. Three failures in a row → Dead. Streaks reset when the opposite result is rolled. Another character may spend two of their turns on manual revival (step 1 begin, step 2 finish) to Revive you at 1 HP. A healing item or healing skill Revives immediately, restores its full heal amount (capped by max HP), and clears Recovery streaks. Track all of this on the Character tab.\n\nAt the table: “Zero HP? Knocked Out — Recovery Roll or someone helps.”'
+    summary: 'At 0 HP — no normal actions; 3 death saves (10+ on a d20) or healing get you back up.',
+    detail: 'When you reach 0 HP you are Knocked down: you cannot move, attack, use items, or use skills, but you stay in initiative. A popup gives you 3 chances to not die. Each of your turns, Roll to survive (1d20): 10 or more and you get back up with 1 HP. Fail 3 times and your hero dies (a death screen appears; tap Accept death). If another player patches you up, tap Healed by another player to get up with 1 HP. A healing item or healing skill brings you back with its full heal amount (capped by max HP). Ignore keeps you at 0 HP and closes the popup; reopen it with Death saves on the Play tab. With the optional Injuries tick on, every knockdown also gives a random lasting injury until the GM says it has healed.\n\nAt the table: “Zero HP? Knocked down — roll to survive or someone helps.”'
   },
   {
     id: 'saving-roll',
@@ -323,7 +323,7 @@ export const GLOSSARY_ENTRIES = [
     aliases: ['saving throw', 'save', 'super easy', 'extreme save'],
     category: 'Effects & gear',
     summary: 'GM-set 1d20 check — Super Easy 3 through Extreme 17.',
-    detail: 'When the table needs a check that is not a normal Accuracy attack — resisting a curse, improvising a bandage from torn cloth, and similar — the GM picks a Saving Roll target from the ladder: Super Easy 3 · Easy 8 · Normal 11 · Hard 14 · Extreme 17 (meet or beat on 1d20; roughly 90% / 65% / 50% / 35% / 20% before modifiers). The GM may grant Advantage, Disadvantage, a relevant stat bonus, automatic success, or automatic failure based on approach, race, background, career, skills, gear, and circumstances. Recovery Rolls while Knocked Out remain a fixed 11+ and are not this ladder. The app does not automate most Saving Rolls — see also the GM Tools reference card.'
+    detail: 'When the table needs a check that is not a normal Accuracy attack — resisting a curse, improvising a bandage from torn cloth, and similar — the GM picks a Saving Roll target from the ladder: Super Easy 3 · Easy 8 · Normal 11 · Hard 14 · Extreme 17 (meet or beat on 1d20; roughly 90% / 65% / 50% / 35% / 20% before modifiers). The GM may grant Advantage, Disadvantage, a relevant stat bonus, automatic success, or automatic failure based on approach, race, background, career, skills, gear, and circumstances. Death saves while Knocked down remain a fixed 10+ and are not this ladder. The app does not automate most Saving Rolls — see also the GM Tools reference card.'
   },
   {
     id: 'background',

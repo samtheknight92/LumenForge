@@ -554,7 +554,7 @@ export function renderGmTab(character) {
         <span class="pill">Hard 14</span>
         <span class="pill">Extreme 17</span>
       </div>
-      <p class="subtle mt-10">Modifiers: Advantage / Disadvantage, a fitting high stat, or ±1–2 from gear, footing, weather, or help. Accuracy attacks are not Saving Rolls. Knocked Out Recovery stays 11+.</p>
+      <p class="subtle mt-10">Modifiers: Advantage / Disadvantage, a fitting high stat, or ±1–2 from gear, footing, weather, or help. Accuracy attacks are not Saving Rolls. Death saves when Knocked down stay 10+.</p>
     </section>
 
     ${renderGmInitiativeTracker()}

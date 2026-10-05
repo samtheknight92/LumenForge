@@ -11,16 +11,17 @@ import { computeCombatPower } from '../character/combat-power.js'
 import { knockoutStatusLabel } from '../character/knockout.js'
 import { isGmMode } from '../gm/gm-mode.js'
 import { renderGuidedCreateModal } from './guided-create.js'
-import { renderHowToPlayTab } from './how-to-play.js?v=5.4.0-survival'
+import { renderDeathSavePopup } from './death-save-popup.js'
+import { renderHowToPlayTab } from './how-to-play.js?v=5.5.0-deathsaves'
 import { renderNotesTab } from './notes-tab.js'
-import { renderShopTab } from './shop-tab.js?v=5.4.0-survival'
+import { renderShopTab } from './shop-tab.js?v=5.5.0-deathsaves'
 import { renderCraftTab } from './craft-tab.js'
 import { renderStatsTab } from './stats-tab.js'
 import { renderGmTab } from './gm-tab.js'
 import { renderHomebrewTab } from './homebrew-tab.js'
-import { renderSkillsTab } from './skills-tab.js?v=5.4.0-survival'
-import { renderPlayTab } from './play-tab.js?v=5.4.0-survival'
-import { renderCharacterTab } from './character-tab.js?v=5.4.0-survival'
+import { renderSkillsTab } from './skills-tab.js?v=5.5.0-deathsaves'
+import { renderPlayTab } from './play-tab.js?v=5.5.0-deathsaves'
+import { renderCharacterTab } from './character-tab.js?v=5.5.0-deathsaves'
 import { formatCurrency } from './format.js'
 import { renderActionBar } from '../combat/action-bar.js'
 import { backgroundOptions, getBackground, backgroundRewardSummary, DEFAULT_BACKGROUND } from '../character/backgrounds.js'
@@ -45,7 +46,20 @@ export function render(options = { all: true }) {
   if (opts.content) {
     renderContent()
     renderGuidedCreateHost()
+    renderDeathSaveHost()
   }
+}
+
+/** Knocked down popup / death screen, in its own layer above everything else. */
+function renderDeathSaveHost() {
+  const host = $('#death-save-root')
+  if (!host) return
+  const html = renderDeathSavePopup(activeCharacter())
+  if (host.innerHTML === html) return
+  const wasOpen = Boolean(host.firstElementChild)
+  host.innerHTML = html
+  document.body.classList.toggle('death-save-open', Boolean(html))
+  if (html && !wasOpen) host.querySelector('.primary-btn, .danger-btn')?.focus({ preventScroll: true })
 }
 
 /**

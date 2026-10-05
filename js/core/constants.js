@@ -59,7 +59,7 @@ export const STAT_RULES = {
 
 /** Plain-English "what does this stat do?" lines for new players (guided create + Stats tab). */
 export const STAT_EXPLAINERS = {
-  hp: 'Your health. Damage takes it away, and at 0 HP you are Knocked Out.',
+  hp: 'Your health. Damage takes it away, and at 0 HP you are Knocked down.',
   stamina: 'Fuel for skills. Most skills and toggles cost Stamina, so more Stamina means more skills each fight.',
   strength: 'Added to the damage of weapon attacks (Basic Attack and weapon skills). Below 0, it lowers that damage.',
   magicPower: 'Added to the damage of spells and to magical healing. Below 0, it lowers them.',

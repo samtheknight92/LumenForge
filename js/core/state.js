@@ -102,6 +102,10 @@ export const state = {
   homebrewImportPreview: null,
   homebrewMonsterShowSkillPicker: false,
   homebrewMonsterSkillSearch: '',
+  /** Character id whose death screen is showing (screen-only). */
+  deathScreen: null,
+  /** Last death-save result shown in the Knocked down popup (screen-only). */
+  deathSaveNote: null,
   guidedCreate: {
     open: false,
     step: 1,

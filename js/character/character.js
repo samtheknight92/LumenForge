@@ -70,9 +70,9 @@ export function createCharacter(name, raceId, options = {}) {
     folder: '',
     knockedOut: false,
     dead: false,
-    recoverySuccessStreak: 0,
     recoveryFailureStreak: 0,
-    manualRevival: null
+    deathSaveIgnored: false,
+    lastKnockdownInjury: null
   }
   if (options.folder) character.folder = String(options.folder).trim().slice(0, 48)
   if (race?.id === 'dragonborn' && options.elementalAffinity) {

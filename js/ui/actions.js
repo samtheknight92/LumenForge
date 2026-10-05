@@ -15,6 +15,7 @@ import {
   createCharacter,
   normalizeCharacter,
   computeStats,
+  invalidateCharacterCache,
   setRace as applyRace,
   setElementalAffinity as applyElementalAffinity
 } from '../character/character.js'
@@ -272,21 +273,26 @@ export function setResource(resource, value) {
   const cleanValue = Math.floor(Number(value || 0))
   if (resource === 'hp') {
     if (isDead(character) && cleanValue > 0) {
-      return toast('Dead — clear Dead via GM ruling before restoring HP.')
+      return toast('Dead. If your GM brings them back, use "Bring back" on the Play tab first.')
     }
     const previousHp = Number(character.hp || 0)
     const wasKo = isKnockedOut(character)
     if (wasKo && cleanValue > previousHp) {
       const result = applyHealingToCharacter(character, cleanValue - previousHp, computeStats)
       touch(character, { header: true, content: true, actionBar: true })
-      if (result.revived) toast(`Revived — restored ${result.healed} HP. Recovery streaks cleared.`)
+      if (result.revived) toast(`Back on your feet with ${result.healed} HP.`)
       return
     }
     character.hp = clamp(cleanValue, 0, stats.hp)
     const sync = syncKnockoutAfterHpChange(character, { previousHp })
+    if (sync.injury) {
+      // An injury can lower max Stamina, so keep current Stamina inside it.
+      invalidateCharacterCache(character)
+      character.stamina = clamp(character.stamina, 0, computeStats(character).stamina)
+    }
     touch(character, { header: true, content: true, actionBar: true })
-    if (sync.entered) toast('Knocked Out at 0 HP.')
-    else if (sync.revived) toast('Revived — Recovery streaks cleared.')
+    // Being Knocked down opens its own popup, so only getting back up needs a toast.
+    if (sync.revived) toast('Back on your feet!')
     return
   }
   if (resource === 'stamina') character.stamina = clamp(cleanValue, 0, stats.stamina)

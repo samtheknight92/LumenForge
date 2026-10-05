@@ -7,6 +7,7 @@ import {
   ensureSurvival,
   formatWeight
 } from '../character/survival.js'
+import { INJURIES, activeInjuries, injuryEffectText } from '../character/injuries.js'
 
 /** "Carrying 12 / 24 kg" pill shown on Character, Shop and the Survival panel. */
 export function renderCarryPill(character) {
@@ -67,14 +68,41 @@ function stepButtons(key, main = null) {
   return `<div class="wrap survival-buttons">${mainBtn}<span class="wrap survival-steps">${toggle}${steps}</span></div>`
 }
 
+function renderInjuries(injuries) {
+  const rows = injuries.length
+    ? injuries.map(row => `
+      <div class="injury-row">
+        <span class="injury-name">${esc(row.icon)} <strong>${esc(row.name)}</strong></span>
+        <span class="pill bad" data-tooltip="${esc(row.desc)}" tabindex="0">${esc(injuryEffectText(row))}</span>
+        <button type="button" class="ghost-btn tiny" data-heal-injury="${esc(row.uid)}">✨ Heal Injury</button>
+      </div>`).join('')
+    : '<p class="subtle survival-note">No injuries. Get Knocked down and you pick up a random one.</p>'
+  const options = INJURIES.map(row => `<option value="${esc(row.id)}">${esc(row.icon)} ${esc(row.name)} (${esc(injuryEffectText(row))})</option>`).join('')
+  return `
+    <div class="survival-box injury-box">
+      <h4>🩹 Injuries</h4>
+      <div class="injury-list">${rows}</div>
+      <p class="subtle">Tap Heal Injury when your GM says it has healed.</p>
+      <div class="survival-form">
+        <select class="input" id="injury-select" aria-label="Injury to add">
+          <option value="">🎲 Random injury</option>
+          ${options}
+        </select>
+        <button type="button" class="ghost-btn tiny" data-add-injury>+ Add injury</button>
+      </div>
+    </div>`
+}
+
 /** Collapsible Survival panel on the Play tab. */
 export function renderSurvivalPanel(character) {
   const survival = ensureSurvival(character)
   const on = survival.on
   const anyOn = SURVIVAL_TRACKERS.some(key => on[key])
   const snapshot = getSurvivalSnapshot(character)
+  const injuries = activeInjuries(character)
   const summaryPills = snapshot.conditions.map(row =>
-    `<span class="pill ${row.tone}">${esc(row.icon)} ${esc(row.name)}</span>`).join('')
+    `<span class="pill ${row.tone}">${esc(row.icon)} ${esc(row.name)}</span>`).join('') +
+    injuries.map(row => `<span class="pill bad">${esc(row.icon)} ${esc(row.name)}</span>`).join('')
   const header = `
     <button type="button" class="survival-toggle" data-survival-collapse aria-expanded="${survival.collapsed ? 'false' : 'true'}">
       <span class="kicker">Optional</span>
@@ -110,6 +138,8 @@ export function renderSurvivalPanel(character) {
       `${formatWeight(snapshot.carried)} / ${formatWeight(snapshot.carryLimit)}`,
       '<p class="subtle survival-note">Drop things on the Character tab to lighten your load. Item weights show there and in the Shop.</p>'))
   }
+
+  const injuryBox = on.injuries ? renderInjuries(injuries) : ''
 
   const showTravel = on.hunger || on.thirst
   const showTime = on.hunger || on.thirst || on.stress
@@ -147,6 +177,7 @@ export function renderSurvivalPanel(character) {
       <p class="subtle survival-intro">Extra tracking for groups who want more challenge. Tick only what your table uses. Bad effects apply to your stats automatically, just like weather.</p>
       <div class="wrap survival-ticks">${ticks}</div>
       ${meters.length ? `<div class="survival-meters">${meters.join('')}</div>` : ''}
+      ${injuryBox}
       ${skillNote}
       ${travelBox || timeBox ? `<div class="survival-boxes">${travelBox}${timeBox}</div>` : ''}
     </section>

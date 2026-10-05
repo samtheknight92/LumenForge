@@ -625,3 +625,41 @@ html[data-appearance="light"] .guided-create-modal .modal-card { background: #ff
 .survival-steps .tiny { min-width: 0; padding-left: 7px; padding-right: 7px; }
 .survival-sign { min-width: 30px; font-weight: 900; font-size: 15px; }
 .survival-steps .tiny { min-width: 34px; }
+
+/* ---------- Injuries (Survival panel) ---------- */
+.survival-box.injury-box { margin-top: 10px; border-color: color-mix(in srgb, var(--pop-pink) 40%, transparent); }
+.injury-list { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
+.injury-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.injury-name { flex: 1 1 auto; }
+.injury-row .pill { font-size: 12px; }
+
+/* ---------- Knocked down popup / death screen ---------- */
+#death-save-root .modal-backdrop { z-index: 450; }
+.death-save-backdrop { background: radial-gradient(circle at 50% 40%, rgba(255, 64, 64, 0.35), rgba(0, 0, 0, 0.75)); }
+.death-save-backdrop.dead { background: radial-gradient(circle at 50% 40%, rgba(60, 60, 80, 0.5), rgba(0, 0, 0, 0.88)); }
+.death-save-card {
+  background: linear-gradient(180deg, #3a1f5c, #1b1440);
+  width: min(420px, 100%); padding: 18px 18px 14px; text-align: center; align-items: center; gap: 4px;
+  border: 2px solid color-mix(in srgb, var(--pop-orange) 70%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--pop-orange) 20%, transparent), 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: death-pop 0.28s ease-out;
+}
+html[data-appearance="light"] .death-save-card { background: #fff; }
+.death-save-card.death-screen { background: linear-gradient(180deg, #2a2a3a, #121218); border-color: rgba(160, 160, 190, 0.6); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); }
+.death-save-burst { font-size: 44px; line-height: 1; }
+.death-save-card h2 { margin: 4px 0 0; font-family: var(--display); font-size: 28px; color: var(--pop-orange); }
+.death-save-card.death-screen h2 { color: inherit; }
+.death-save-sub { margin: 0; font-weight: 800; font-size: 16px; }
+.death-pips { display: flex; gap: 10px; justify-content: center; margin: 8px 0 2px; font-size: 26px; }
+.death-pip.used { filter: grayscale(0.2); animation: death-pop 0.3s ease-out; }
+.death-save-help { margin: 4px 0; font-size: 13px; }
+.death-save-note { margin: 4px 0; font-weight: 800; }
+.death-save-note.bad { color: #ff6b6b; }
+.death-injury { margin: 4px 0; font-size: 12.5px; }
+.death-save-actions { display: flex; flex-direction: column; gap: 6px; width: 100%; margin-top: 8px; }
+.death-save-actions button { width: 100%; justify-content: center; font-size: 16px; padding: 10px 12px; }
+.death-save-actions .death-ally { border-color: color-mix(in srgb, var(--pop-green) 60%, transparent); }
+.death-save-dice { margin: 8px 0 0; font-size: 12.5px; display: flex; gap: 6px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.death-save-foot { margin: 6px 0 0; font-size: 11.5px; opacity: 0.8; }
+@keyframes death-pop { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .death-save-card, .death-pip.used { animation: none; } }
