@@ -494,6 +494,22 @@ await test('guided create on a phone: on top, prefilled, stats before skills', a
   assert.equal(await page.evaluate(() => document.body.classList.contains('guided-open')), false)
 }, { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })
 
+await test('play tab on a small phone: nothing pokes past the right edge', async page => {
+  await open(page)
+  await page.click('#open-sidebar')
+  await createCharacter(page)
+  await page.evaluate(() => document.querySelector('#tabbar [data-tab="play"]').click())
+  await page.locator('#app-content [data-add-effect]').waitFor({ state: 'attached' })
+  const overflowing = await page.evaluate(() => {
+    const width = document.documentElement.clientWidth
+    return [...document.querySelectorAll('#app-content *')]
+      .filter(el => { const box = el.getBoundingClientRect(); return box.width && box.right > width + 1 })
+      .slice(0, 5)
+      .map(el => `${el.tagName.toLowerCase()}${el.id ? '#' + el.id : ''}.${[...el.classList].join('.')}`)
+  })
+  assert.deepEqual(overflowing, [], 'Play tab has parts wider than a 320px phone screen')
+}, { viewport: { width: 320, height: 700 }, isMobile: true, hasTouch: true })
+
 await test('guided create opens before any character exists', async page => {
   await open(page)
   await page.click('#guided-create')
