@@ -204,6 +204,7 @@ html[data-appearance="dark"] .tabbar button.active {
 .tabbar [data-tab="gm"] { --c: var(--pop-purple); }
 .tabbar [data-tab="notes"] { --c: var(--pop-yellow); }
 .tabbar [data-tab="howtoplay"] { --c: var(--pop-cyan); }
+.tabbar [data-tab="dungeon"] { --c: var(--pop-pink); }
 .tabbar [data-tab="character"]::before { content: "🧙"; }
 .tabbar [data-tab="play"]::before { content: "⚔️"; }
 .tabbar [data-tab="skills"]::before { content: "✨"; }
@@ -214,6 +215,7 @@ html[data-appearance="dark"] .tabbar button.active {
 .tabbar [data-tab="gm"]::before { content: "🐉"; }
 .tabbar [data-tab="notes"]::before { content: "📜"; }
 .tabbar [data-tab="howtoplay"]::before { content: "❓"; }
+.tabbar [data-tab="dungeon"]::before { content: "🗺️"; }
 html[data-appearance="light"] .tabbar button.active { color: #120f33; }
 
 /* ---------- Skill & item cards ---------- */
@@ -701,6 +703,7 @@ body:has(.tabbar [data-tab="homebrew"].active) { --tab-c: var(--pop-green); }
 body:has(.tabbar [data-tab="gm"].active) { --tab-c: var(--pop-purple); }
 body:has(.tabbar [data-tab="notes"].active) { --tab-c: var(--pop-yellow); }
 body:has(.tabbar [data-tab="howtoplay"].active) { --tab-c: var(--pop-cyan); }
+body:has(.tabbar [data-tab="dungeon"].active) { --tab-c: var(--pop-pink); }
 /* Darker version of the tab colour for text on light backgrounds */
 html[data-appearance="light"] body { --tab-ink: color-mix(in srgb, var(--tab-c) 42%, #000); }
 
@@ -786,4 +789,93 @@ html[data-appearance="light"] .toast .toast-damage-total { color: #047857; }
 @media (prefers-reduced-motion: reduce) {
   #app-content.tab-enter { animation: none; }
   .toast, .toast.show { transition: opacity 0.18s ease; }
+
+/* ---------- Dungeon Maker (GM) ---------- */
+.dungeon-tab { display: grid; gap: 12px; }
+.dungeon-control-row { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: end; }
+.dungeon-slider { flex: 1 1 260px; display: grid; gap: 6px; }
+.dungeon-slider input[type="range"] { width: 100%; accent-color: var(--pop-pink); }
+.dungeon-theme-pick { flex: 0 1 220px; display: grid; gap: 6px; }
+.dungeon-layout { display: grid; gap: 12px; }
+@media (min-width: 1000px) {
+  .dungeon-layout { grid-template-columns: minmax(0, 1.4fr) minmax(280px, 1fr); align-items: start; }
+  .dungeon-room-card { position: sticky; top: 12px; }
+}
+.dungeon-map-scroll { overflow-x: auto; padding: 22px 6px; }
+.dungeon-map {
+  --cell: clamp(30px, calc((100vw - 90px) / var(--dungeon-cols)), 64px);
+  display: grid;
+  grid-template-columns: repeat(var(--dungeon-cols), var(--cell));
+  grid-auto-rows: var(--cell);
+  gap: 6px;
+  justify-content: center;
+  margin: 0 auto;
+}
+@media (min-width: 1000px) { .dungeon-map { --cell: clamp(30px, calc(52vw / var(--dungeon-cols)), 64px); } }
+.dungeon-cell {
+  --room: var(--pop-purple);
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 2px solid color-mix(in srgb, var(--room) 70%, #000);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--room) 32%, var(--card-bg, #1d1a44));
+  color: inherit;
+  cursor: pointer;
+  font-size: calc(var(--cell) * 0.42);
+  line-height: 1;
+  min-width: 0;
+}
+.dungeon-cell.v1 { --room: var(--pop-green); }
+.dungeon-cell.v2 { --room: var(--pop-pink); }
+.dungeon-cell.v3 { --room: var(--pop-orange); }
+.dungeon-cell.v4 { --room: var(--pop-yellow); }
+.dungeon-cell.v5 { --room: var(--pop-cyan); }
+.dungeon-cell.v6 { --room: var(--pop-purple); }
+.dungeon-cell.is-entrance { --room: #ffffff; border-style: dashed; }
+.dungeon-cell.tier-twin, .dungeon-cell.tier-grand { background: color-mix(in srgb, var(--room) 50%, var(--card-bg, #1d1a44)); }
+.dungeon-cell.is-cleared { opacity: 0.45; }
+.dungeon-cell-done { position: absolute; right: 3px; bottom: 2px; font-size: 11px; font-weight: 800; }
+.dungeon-cell.is-selected { outline: 3px solid var(--room); outline-offset: 2px; z-index: 2; opacity: 1; }
+.dungeon-cell.link-r::after, .dungeon-cell.link-b::before {
+  content: "";
+  position: absolute;
+  background: color-mix(in srgb, var(--room) 70%, #000);
+  z-index: 1;
+}
+.dungeon-cell.link-r::after { left: 100%; top: 30%; width: 10px; height: 40%; }
+.dungeon-cell.link-b::before { top: 100%; left: 30%; height: 10px; width: 40%; }
+.dungeon-cell-num { position: absolute; left: 3px; top: 2px; font-size: 10px; font-weight: 800; opacity: 0.9; }
+.dungeon-cell-die { position: absolute; right: 3px; top: 2px; font-size: 9px; font-weight: 700; opacity: 0.7; }
+.dungeon-cell.is-entrance .dungeon-cell-die { right: auto; left: 50%; top: auto; bottom: 2px; transform: translateX(-50%); }
+.dungeon-cell-key { position: absolute; left: 2px; bottom: 1px; font-size: 11px; }
+.dungeon-boss-door {
+  position: absolute;
+  font-size: 16px;
+  z-index: 3;
+  filter: drop-shadow(0 0 4px #ff3b3b);
+}
+.dungeon-boss-door.side-top, .dungeon-boss-door.side-stairs { top: -20px; left: 50%; transform: translateX(-50%); }
+.dungeon-boss-door.side-bottom { bottom: -20px; left: 50%; transform: translateX(-50%); }
+.dungeon-boss-door.side-left { left: -20px; top: 50%; transform: translateY(-50%); }
+.dungeon-boss-door.side-right { right: -20px; top: 50%; transform: translateY(-50%); }
+.dungeon-room-card h3 { margin: 2px 0 0; }
+.dungeon-room-extras p { margin: 0; }
+.dungeon-list { margin: 4px 0 4px 18px; padding: 0; }
+.dungeon-key-line { color: var(--pop-yellow); }
+html[data-appearance="light"] .dungeon-key-line { color: #8a6400; }
+.dungeon-boss-box { border: 2px solid #ff5b5b; border-radius: 10px; padding: 8px 10px; display: grid; gap: 4px; }
+.dungeon-all-rooms summary { cursor: pointer; }
+.dungeon-room-list { display: grid; gap: 4px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.dungeon-room-row {
+  display: flex; gap: 8px; align-items: baseline; text-align: left;
+  padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line, rgba(255,255,255,0.12));
+  background: transparent; color: inherit; cursor: pointer; font: inherit; font-size: 13px;
+}
+.dungeon-room-row.is-cleared { opacity: 0.5; }
+.dungeon-room-row-num { font-weight: 800; min-width: 22px; }
+@media (max-width: 760px) {
+  .dungeon-map.is-dense .dungeon-cell-die, .dungeon-map.is-dense .dungeon-cell-key { display: none; }
+  .dungeon-map.is-dense .dungeon-cell-num { font-size: 9px; left: 2px; top: 1px; }
 }

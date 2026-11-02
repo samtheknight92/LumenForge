@@ -18,6 +18,7 @@ import { renderShopTab } from './shop-tab.js?v=5.5.1-kopopup'
 import { renderCraftTab } from './craft-tab.js'
 import { renderStatsTab } from './stats-tab.js'
 import { renderGmTab } from './gm-tab.js'
+import { renderDungeonTab } from './dungeon-tab.js'
 import { renderHomebrewTab } from './homebrew-tab.js'
 import { renderSkillsTab } from './skills-tab.js?v=5.5.1-kopopup'
 import { renderPlayTab } from './play-tab.js?v=5.5.1-kopopup'
@@ -118,6 +119,7 @@ function restoreContentFocus(capture) {
 function syncTabBar() {
   $$('#tabbar button').forEach(tab => {
     const selected = tab.dataset.tab === state.tab
+    if (tab.dataset.tab === 'dungeon') tab.hidden = !isGmMode() && !selected
     tab.classList.toggle('active', selected)
     tab.setAttribute('aria-selected', selected ? 'true' : 'false')
   })
@@ -341,7 +343,7 @@ export function renderContent() {
   const focusCapture = captureContentFocus()
   const content = $('#app-content')
   const character = activeCharacter()
-  if (!character && state.tab !== 'gm' && state.tab !== 'homebrew' && state.tab !== 'howtoplay') {
+  if (!character && state.tab !== 'gm' && state.tab !== 'dungeon' && state.tab !== 'homebrew' && state.tab !== 'howtoplay') {
     content.innerHTML = `
       <div class="notice-card">
         <h2>Welcome to LumenForge ✨</h2>
@@ -362,6 +364,7 @@ export function renderContent() {
     craft: () => renderCraftTab(character),
     homebrew: () => renderHomebrewTab(),
     gm: () => renderGmTab(character),
+    dungeon: () => renderDungeonTab(),
     notes: () => renderNotesTab(character),
     howtoplay: () => renderHowToPlayTab()
   }

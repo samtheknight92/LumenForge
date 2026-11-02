@@ -231,6 +231,16 @@ import {
 } from '../ui/guided-create.js'
 import { stepNumberInput } from '../ui/number-stepper.js'
 import { render } from '../ui/render.js'
+import {
+  rollDungeon as doRollDungeon,
+  setDungeonRoomCount as doSetDungeonRoomCount,
+  setDungeonTheme as doSetDungeonTheme,
+  selectDungeonRoom as doSelectDungeonRoom,
+  toggleDungeonRoomCleared as doToggleDungeonRoomCleared,
+  putDungeonBossDoorHere as doPutDungeonBossDoorHere,
+  rememberDungeonListOpen as doRememberDungeonListOpen
+} from '../ui/dungeon-actions.js'
+import { keyPiecesNeeded } from '../gm/dungeon-maker.js'
 import { state, activeCharacter, resetItemFilters } from './state.js'
 import { TAB_IDS } from './constants.js'
 import { DEFAULT_BACKGROUND } from '../character/backgrounds.js'
@@ -881,6 +891,10 @@ const clickActions = {
     stepNumberInput(input, Number(target.dataset.numberStepperDelta || 0))
   },
   startActiveEncounter() { doStartActiveEncounter() },
+  rollDungeon() { doRollDungeon() },
+  dungeonSelectRoom(target) { doSelectDungeonRoom(target.dataset.dungeonSelectRoom) },
+  dungeonToggleCleared(target) { doToggleDungeonRoomCleared(target.dataset.dungeonToggleCleared) },
+  dungeonBossHere(target) { doPutDungeonBossDoorHere(target.dataset.dungeonBossHere) },
   endActiveEncounter() { doEndActiveEncounter() },
   encounterNextTurn() { doEncounterNextTurn() },
   encounterPrevTurn() { doEncounterPrevTurn() },
@@ -1205,6 +1219,14 @@ function initDelegatedEvents() {
       debouncedGmPremadeSearch(target.value || '')
       return
     }
+    if (target.id === 'dungeon-room-count') {
+      doSetDungeonRoomCount(target.value)
+      const label = document.querySelector('#dungeon-room-count-label')
+      if (label) label.textContent = String(state.dungeonRoomCount)
+      const keys = document.querySelector('#dungeon-keys-label')
+      if (keys) keys.textContent = String(keyPiecesNeeded(state.dungeonRoomCount))
+      return
+    }
     if (target.id === 'item-search') {
       debouncedItemSearch(target.value || '')
       return
@@ -1411,6 +1433,10 @@ function initDelegatedEvents() {
       state.gmPremadePage = 0
       render({ content: true })
     }
+    if (target.id === 'dungeon-theme') {
+      doSetDungeonTheme(target.value)
+      return
+    }
     if (target.id === 'gm-premade-page-size') {
       state.gmPremadePageSize = Number(target.value) || 12
       state.gmPremadePage = 0
@@ -1457,6 +1483,10 @@ function initDelegatedEvents() {
   document.addEventListener('toggle', event => {
     const details = event.target
     if (!(details instanceof HTMLDetailsElement)) return
+    if (details.classList.contains('dungeon-all-rooms')) {
+      doRememberDungeonListOpen(details.open)
+      return
+    }
     if (!details.classList.contains('character-folder-details')) return
     const key = details.dataset.folderKey
     if (!key) return
