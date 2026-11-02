@@ -367,7 +367,7 @@ function renderInventoryRows(character) {
       <div class="inventory-row inventory-item-row ${itemCardClass(presentation, '')}" data-tooltip="${esc(itemTooltip(item, character, entry))}" tabindex="0">
         <div class="inventory-item-copy">
           <strong class="inventory-item-name">${fallbackIcon(item)} <span class="${cursedNameClass}">${esc(presentation.displayName)}</span> ${cursedBadge} ${statusIcons} ${entry.qty > 1 ? `x${entry.qty}` : ''}</strong>
-          <div class="subtle inventory-item-meta">${esc(item.type || 'item')} · ${esc(item.rarity || 'common')} ${equippedSlot ? `· ${titleCase(equippedSlot)}` : ''}${weightText}</div>
+          <div class="subtle inventory-item-meta">${esc(item.type || 'item')} · ${esc(item.rarity || 'common')} ${equippedSlot ? `· ${esc(titleCase(equippedSlot))}` : ''}${weightText}</div>
           ${crafted ? `<div class="wrap inventory-item-tags"><span class="pill good">${esc(crafted)}</span></div>` : ''}
           ${(item.tags || []).length ? `<div class="wrap inventory-item-tags">${(item.tags || []).map(tag => `<span class="pill subtle-pill">${esc(tag)}</span>`).join('')}</div>` : ''}
           ${renderItemCounterControls(entry, item, { showWhenEquipped: Boolean(equippedSlot) })}

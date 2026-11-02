@@ -59,6 +59,8 @@ async function test(name, fn, contextOptions = {}) {
   const page = await context.newPage()
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
+  // The page's security policy blocks anything unexpected; a blocked request means the policy or the app needs fixing.
+  page.on('console', message => { if (/Content Security Policy/i.test(message.text())) errors.push(message.text()) })
   page.on('dialog', dialog => dialog.accept(dialog.type() === 'prompt' ? 'Boss Room' : undefined))
   try {
     await fn(page, context)
@@ -402,6 +404,20 @@ await test('feedback form sends to Web3Forms and falls back on failure', async p
   assert.match(posts[0].message, /^Add a dice tray\n\n---\nApp: LumenForge/)
   assert.equal(await page.locator('#feedback-dialog').isVisible(), false)
 
+  // A second send straight away waits (stops floods), and a broken email is caught before sending.
+  await page.click('#open-feedback')
+  await page.fill('#feedback-dialog textarea', 'Too soon')
+  await page.click('[data-feedback-send="submit"]')
+  await assertText(page, '#toast', 'You can send more in')
+  assert.equal(posts.length, 1)
+  await page.evaluate(() => { const realNow = Date.now; Date.now = () => realNow() + 60000 })
+  await page.fill('#feedback-dialog input[name="email"]', 'not an email')
+  await page.click('[data-feedback-send="submit"]')
+  await assertText(page, '#toast', 'does not look right')
+  assert.equal(posts.length, 1)
+  await page.fill('#feedback-dialog input[name="email"]', '')
+  await page.click('[data-feedback-cancel]')
+
   fail = true
   await page.click('#open-feedback')
   await page.fill('#feedback-dialog textarea', 'Second try')
@@ -539,6 +555,68 @@ await test('guided create opens before any character exists', async page => {
   await open(page)
   await page.click('#guided-create')
   await page.locator('#guided-create-root .guided-create-modal').waitFor()
+})
+
+await test('booby-trapped save files cannot inject code into the page', async (page, context) => {
+  // Build a save, then add HTML to every bit of text a player could type or import.
+  await open(page)
+  await createCharacter(page, 'Trap Tester')
+  await page.click('#tabbar [data-tab="homebrew"]')
+  await page.locator('[data-homebrew-new]').first().click()
+  await page.fill('#homebrew-form [name="hb-name"]', 'Trap Blade')
+  await page.fill('#homebrew-form [name="hb-desc"]', 'A trap.')
+  await page.click('#homebrew-form button[type="submit"]')
+  await assertText(page, '#app-content', 'Trap Blade')
+  await page.click('#tabbar [data-tab="notes"]')
+  await page.click('[data-add-quest]')
+  await page.evaluate(() => window.LumenForge.helpers.saveNow())
+  const payload = `"'><img src="x" data-injected><svg data-injected onload="1">`
+  // Ids, links between records and UI filter settings stay intact so the lists still show everything.
+  const skip = /^(id|.*Id|.*Ids|uid|race|background|tab|type|version|kind|slot|category|subcategory|tier|element|affinity|.*[Ss]earch|.*[Ff]ilter.*|.*[Ss]ort|.*[Pp]age|.*[Ss]ource|.*[Rr]arity|.*[Cc]ategory|.*[Pp]rofession|.*[Mm]ode)$/
+  const poisoned = await page.evaluate(([payload, skipSource]) => {
+    const skip = new RegExp(skipSource)
+    const poison = (value, key = '') => typeof value === 'string' ? (skip.test(key) ? value : value + payload)
+      : Array.isArray(value) ? value.map(v => poison(v, key))
+      : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([k, v]) => [k, poison(v, k)]))
+      : value
+    return ['lumenforge_save_v3', 'lumenforge_homebrew_v1'].map(k => [k, localStorage.getItem(k) && JSON.stringify(poison(JSON.parse(localStorage.getItem(k))))])
+  }, [payload, skip.source])
+  const fresh = await context.browser().newContext()
+  await fresh.addInitScript(entries => { if (!sessionStorage.seeded) { entries.forEach(([k, v]) => v && localStorage.setItem(k, v)); sessionStorage.seeded = '1' } }, poisoned)
+  const trapped = await fresh.newPage()
+  const errors = []
+  trapped.on('pageerror', error => errors.push(error.message))
+  try {
+    await open(trapped)
+    for (const tab of await trapped.locator('#tabbar [data-tab]').evaluateAll(els => els.map(el => el.dataset.tab))) {
+      await trapped.click(`#tabbar [data-tab="${tab}"]`)
+      await trapped.locator(`#tabbar [data-tab="${tab}"][aria-selected="true"]`).waitFor()
+      const injected = await trapped.locator('[data-injected]').count()
+      assert.equal(injected, 0, `text was turned into page code on the ${tab} tab`)
+    }
+    assert.deepEqual(errors, [])
+  } finally {
+    await fresh.close()
+  }
+})
+
+await test('security policy blocks scripts slipped into the page', async page => {
+  const blocked = []
+  page.removeAllListeners('console')
+  page.on('console', message => { if (/Content Security Policy/i.test(message.text())) blocked.push(message.text()) })
+  await open(page)
+  const ran = await page.evaluate(async () => {
+    window.__ran = false
+    const img = document.createElement('img')
+    img.setAttribute('onerror', 'window.__ran = true')
+    img.src = 'data:,not-an-image'
+    document.body.append(img)
+    await new Promise(resolve => setTimeout(resolve, 200))
+    img.remove()
+    return window.__ran
+  })
+  assert.equal(ran, false)
+  assert.ok(blocked.length > 0, 'expected the browser to report the blocked handler')
 })
 
 await test('unreadable save is kept, not overwritten', async (page, context) => {

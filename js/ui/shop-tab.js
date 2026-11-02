@@ -69,7 +69,7 @@ export function renderShopTab(character) {
             }).join('')}
           </select>
           <select class="input" id="item-rarity" title="Item rarity">
-            ${rarityOptions.map(rarity => `<option value="${esc(rarity)}" ${state.itemRarity === rarity ? 'selected' : ''}>${rarity === 'all' ? 'Any rarity' : titleCase(rarity)}</option>`).join('')}
+            ${rarityOptions.map(rarity => `<option value="${esc(rarity)}" ${state.itemRarity === rarity ? 'selected' : ''}>${rarity === 'all' ? 'Any rarity' : esc(titleCase(rarity))}</option>`).join('')}
           </select>
         </div>
         <div class="shop-filters-secondary">
@@ -108,8 +108,8 @@ function renderItemCard(item, character = activeCharacter()) {
   const affordLocked = isShopPurchaseItem(item) && !gmFree && character && itemPriceGil(item) > normalizeGil(character.gil)
   const presentation = resolveItemPresentation(item, null)
   const starred = (state.starredCatalogItemIds || []).includes(item.id)
-  const statPills = Object.entries(item.statModifiers || {}).map(([stat, value]) => `<span class="pill ${value >= 0 ? 'good' : 'bad'}">${titleCase(stat)} ${value >= 0 ? '+' : ''}${value}</span>`).join('')
-  const effectPills = (item.specialEffects || []).slice(0, 3).map(effect => `<span class="pill warn">${titleCase(effect)}</span>`).join('')
+  const statPills = Object.entries(item.statModifiers || {}).map(([stat, value]) => `<span class="pill ${value >= 0 ? 'good' : 'bad'}">${esc(titleCase(stat))} ${value >= 0 ? '+' : ''}${value}</span>`).join('')
+  const effectPills = (item.specialEffects || []).slice(0, 3).map(effect => `<span class="pill warn">${esc(titleCase(effect))}</span>`).join('')
   const handsLabel = weaponHandednessLabel(item)
   const offhandLabel = offhandTypeLabel(item)
   const levelPill = isShopPurchaseItem(item) && !gmFree

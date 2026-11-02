@@ -10,14 +10,17 @@ import { toast } from '../core/utils.js'
 const APP_LABEL = 'LumenForge v5 (build 5.3.0)'
 const MAX_MESSAGE_LENGTH = 4000
 const KIND_LABELS = { bug: 'Bug', idea: 'Idea', other: 'Feedback' }
+/** Stops accidental double sends and button-mashing from flooding the inbox. */
+const SEND_COOLDOWN_MS = 30000
+let lastSentAt = 0
 
 function readForm(form) {
   const kind = KIND_LABELS[form.elements.kind.value] ? form.elements.kind.value : 'other'
   return {
     kind,
     message: form.elements.message.value.trim().slice(0, MAX_MESSAGE_LENGTH),
-    name: form.elements.name.value.trim(),
-    email: form.elements.email.value.trim(),
+    name: form.elements.name.value.trim().slice(0, 80),
+    email: form.elements.email.value.trim().slice(0, 120),
     includeInfo: form.elements.includeInfo.checked
   }
 }
@@ -89,6 +92,11 @@ export function setupFeedback() {
       return
     }
     const fields = readForm(form)
+    if (action === 'submit' && fields.email && !form.elements.email.checkValidity()) {
+      toast('That email address does not look right. Fix it or leave it empty.')
+      form.elements.email.focus()
+      return
+    }
     if (action === 'copy') {
       const feedback = buildFeedback(fields, context())
       try {
@@ -105,10 +113,16 @@ export function setupFeedback() {
       dialog.close()
       return
     }
+    const wait = Math.ceil((lastSentAt + SEND_COOLDOWN_MS - Date.now()) / 1000)
+    if (wait > 0) {
+      toast(`Thanks, that was just sent. You can send more in ${wait} seconds.`)
+      return
+    }
     sendButton.disabled = true
     sendButton.textContent = 'Sending...'
     try {
       await submitFeedback(buildSubmission(fields, context()))
+      lastSentAt = Date.now()
       form.reset()
       dialog.close()
       toast('Thanks! Your feedback was sent.')

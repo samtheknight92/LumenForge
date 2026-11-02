@@ -304,7 +304,7 @@ function renderGuidedStepIdentity(gc) {
     extras = `<label class="field-label">Elemental affinity
       <select class="input" data-guided-affinity>
         <option value="">Choose…</option>
-        ${DRAGONBORN_AFFINITIES.map(a => `<option value="${esc(a)}" ${f.elementalAffinity === a ? 'selected' : ''}>${titleCase(a)}</option>`).join('')}
+        ${DRAGONBORN_AFFINITIES.map(a => `<option value="${esc(a)}" ${f.elementalAffinity === a ? 'selected' : ''}>${esc(titleCase(a))}</option>`).join('')}
       </select>
     </label>`
   }
@@ -486,7 +486,7 @@ function renderGuidedStepReview(gc) {
   const equipped = Object.entries(draft.equipped || {}).map(([slot, entryUid]) => {
     const entry = draft.inventory.find(e => e.uid === entryUid)
     const item = entry && getItem(entry.itemId)
-    return item ? `${titleCase(slot)}: ${item.name}` : null
+    return item ? `${esc(titleCase(slot))}: ${esc(item.name)}` : null
   }).filter(Boolean)
   return `
     <div class="stack">

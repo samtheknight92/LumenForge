@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- Security: only this site's own scripts may run; the only outside address the app may contact is the feedback form service. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>LumenForge RPG v5 — Table Ready</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
@@ -12,15 +15,7 @@
   <link rel="stylesheet" href="styles/mobile.css" />
   <link rel="stylesheet" href="styles/v5-extras.css" />
   <link rel="stylesheet" href="styles/refresh.css" />
-  <script>
-    (function () {
-      var theme = localStorage.getItem('lumenforge_theme') || 'midnight';
-      if (theme === 'forge') theme = 'midnight';
-      document.documentElement.setAttribute('data-theme', theme);
-      var appearance = localStorage.getItem('lumenforge_appearance') || 'dark';
-      document.documentElement.setAttribute('data-appearance', appearance === 'light' ? 'light' : 'dark');
-    })();
-  </script>
+  <script src="js/theme-boot.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#app-content">Skip to main content</a>
