@@ -264,6 +264,28 @@ function writeSave() {
 }
 
 export const save = debounce(writeSave, 300)
+
+/**
+ * "Delete everything on this device": removes every LumenForge entry from browser
+ * storage and stops autosave so closing or reloading the page can't write it back.
+ */
+export function wipeAllSavedData() {
+  autosavePaused = true
+  save.cancel?.()
+  try {
+    const keys = []
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i)
+      if (key && key.startsWith('lumenforge')) keys.push(key)
+    }
+    keys.forEach(key => localStorage.removeItem(key))
+    sessionStorage.clear()
+  } catch (error) {
+    console.error(error)
+    return false
+  }
+  return true
+}
 export function saveNow() {
   save.cancel?.()
   writeSave()

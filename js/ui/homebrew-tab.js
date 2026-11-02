@@ -243,7 +243,7 @@ function homebrewBalanceTagChips(draft, prefix) {
       <div class="wrap mt-12">${HOMEBREW_BALANCE_TAGS.map(tag => `
         <label class="pill-label homebrew-chip">
           <input type="checkbox" name="${prefix}" value="${tag}" ${selected.has(tag) ? 'checked' : ''} />
-          ${titleCase(tag)}
+          ${esc(titleCase(tag))}
         </label>
       `).join('')}</div>
       ${homebrewBalanceWarning(draft) ? `<p class="subtle mt-12 pill warn">${esc(homebrewBalanceWarning(draft))}</p>` : ''}
@@ -266,7 +266,7 @@ function homebrewItemOffhandFields(draft) {
   return `
     <label class="field-label mt-12 hb-offhand-field">Off-hand type</label>
     <select class="input hb-offhand-field" name="hb-offhand-type">
-      ${HOMEBREW_OFFHAND_TYPES.map(type => `<option value="${type}" ${offType === type ? 'selected' : ''}>${titleCase(type)}</option>`).join('')}
+      ${HOMEBREW_OFFHAND_TYPES.map(type => `<option value="${type}" ${offType === type ? 'selected' : ''}>${esc(titleCase(type))}</option>`).join('')}
     </select>
   `
 }
@@ -417,7 +417,7 @@ function renderHomebrewSkillDamageSection(draft) {
           <span class="field-label">Element${needsElement ? ' *' : ''}</span>
           <select class="input" name="hbs-elemental-type">
             <option value="">${needsElement ? 'Pick element…' : 'Only for elemental damage modes'}</option>
-            ${HOMEBREW_ELEMENT_TYPES.map(ele => `<option value="${ele}" ${draft.elementalType === ele ? 'selected' : ''}>${titleCase(ele)}</option>`).join('')}
+            ${HOMEBREW_ELEMENT_TYPES.map(ele => `<option value="${ele}" ${draft.elementalType === ele ? 'selected' : ''}>${esc(titleCase(ele))}</option>`).join('')}
           </select>
         </label>
       </div>
@@ -445,7 +445,7 @@ function renderHomebrewUseEffectSection(draft) {
         <label class="field-label compact">Kind
           <select class="input tiny" name="hbs-use-kind-${esc(row.effectId)}">
             <option value="">Auto</option>
-            ${HOMEBREW_SKILL_EFFECT_KINDS.map(kind => `<option value="${kind}" ${row.effectKind === kind ? 'selected' : ''}>${titleCase(kind)}</option>`).join('')}
+            ${HOMEBREW_SKILL_EFFECT_KINDS.map(kind => `<option value="${kind}" ${row.effectKind === kind ? 'selected' : ''}>${esc(titleCase(kind))}</option>`).join('')}
           </select>
         </label>
         <label class="field-label compact">Turns
@@ -681,9 +681,9 @@ export function renderHomebrewTab() {
           ${cursedBadge}
           <span class="pill warn">Item</span>
         </div>
-        <div class="item-meta">${esc(item.type)} · ${esc(item.rarity || 'common')} · ${esc(shopLabel)}${item.damage ? ` · ${esc(item.damage)}` : ''}${item.weaponKind ? ` · ${esc(weaponKindDisplayLabel(item.weaponKind))}` : ''}${item.offhandType ? ` · ${titleCase(item.offhandType)}` : ''}${itemHasCounter(item) ? ` · Counter: ${esc(itemCounterLabel(item))}` : ''}${item.archived ? ' · Archived' : ''}${item.approvalStatus && item.approvalStatus !== 'approved' ? ` · ${titleCase(item.approvalStatus)}` : ''}</div>
+        <div class="item-meta">${esc(item.type)} · ${esc(item.rarity || 'common')} · ${esc(shopLabel)}${item.damage ? ` · ${esc(item.damage)}` : ''}${item.weaponKind ? ` · ${esc(weaponKindDisplayLabel(item.weaponKind))}` : ''}${item.offhandType ? ` · ${esc(titleCase(item.offhandType))}` : ''}${itemHasCounter(item) ? ` · Counter: ${esc(itemCounterLabel(item))}` : ''}${item.archived ? ' · Archived' : ''}${item.approvalStatus && item.approvalStatus !== 'approved' ? ` · ${esc(titleCase(item.approvalStatus))}` : ''}</div>
         <p class="subtle">${esc(presentation.displayDesc || 'No description.')}</p>
-        <div class="wrap detail-pills">${Object.entries(item.statModifiers || {}).map(([k, v]) => `<span class="pill good">${titleCase(k)} ${v >= 0 ? '+' : ''}${v}</span>`).join('')}${(item.specialEffects || []).map(id => renderEffectPill(id, item.name)).join('')}${(item.tags || []).map(tag => `<span class="pill subtle-pill">${esc(tag)}</span>`).join('') || (!Object.keys(item.statModifiers || {}).length ? '<span class="pill">No stat modifiers</span>' : '')}</div>
+        <div class="wrap detail-pills">${Object.entries(item.statModifiers || {}).map(([k, v]) => `<span class="pill good">${esc(titleCase(k))} ${v >= 0 ? '+' : ''}${v}</span>`).join('')}${(item.specialEffects || []).map(id => renderEffectPill(id, item.name)).join('')}${(item.tags || []).map(tag => `<span class="pill subtle-pill">${esc(tag)}</span>`).join('') || (!Object.keys(item.statModifiers || {}).length ? '<span class="pill">No stat modifiers</span>' : '')}</div>
         <div class="skill-actions">
           <select class="input tiny" id="homebrew-grant-${esc(item.id)}" aria-label="Grant target for ${esc(item.name)}">
             ${grantOptions || '<option value="">No characters</option>'}
@@ -718,7 +718,7 @@ export function renderHomebrewTab() {
         </div>
         <div class="item-meta">${displayCategory(skill.category)} · ${displaySubcategory(skill.subcategory || 'custom')} · Tier ${skill.tier} · ${skill.cost}L · ${esc(typeLabel)}${esc(damageLabel)}${esc(useFx)}${esc(lockMeta)}</div>
         <p class="subtle">${esc(skill.desc || 'No description.')}</p>
-        <div class="wrap detail-pills">${Object.entries(skill.statModifiers || {}).map(([k, v]) => `<span class="pill good">${titleCase(k)} ${v >= 0 ? '+' : ''}${v}</span>`).join('')}${(skill.specialEffects || []).map(id => renderEffectPill(id, skill.name)).join('') || (!Object.keys(skill.statModifiers || {}).length ? '<span class="pill">No stat modifiers</span>' : '')}</div>
+        <div class="wrap detail-pills">${Object.entries(skill.statModifiers || {}).map(([k, v]) => `<span class="pill good">${esc(titleCase(k))} ${v >= 0 ? '+' : ''}${v}</span>`).join('')}${(skill.specialEffects || []).map(id => renderEffectPill(id, skill.name)).join('') || (!Object.keys(skill.statModifiers || {}).length ? '<span class="pill">No stat modifiers</span>' : '')}</div>
         <div class="skill-actions">
           <select class="input tiny" id="homebrew-skill-grant-${esc(skill.id)}" aria-label="Grant target for ${esc(skill.name)}">
             ${grantOptions || '<option value="">No characters</option>'}
@@ -747,7 +747,7 @@ export function renderHomebrewTab() {
         </div>
         <div class="item-meta">${esc(race.id)} · ${skillCount} racial skill${skillCount === 1 ? '' : 's'}</div>
         <p class="subtle">${esc(race.description || 'No description.')}</p>
-        <div class="wrap detail-pills">${Object.entries(race.statModifiers || {}).map(([k, v]) => `<span class="pill good">${titleCase(k)} ${v >= 0 ? '+' : ''}${v}</span>`).join('')}${effectPills}${passives}${(!Object.keys(race.statModifiers || {}).length && !passives && !effectPills ? '<span class="pill">No stat modifiers</span>' : '')}</div>
+        <div class="wrap detail-pills">${Object.entries(race.statModifiers || {}).map(([k, v]) => `<span class="pill good">${esc(titleCase(k))} ${v >= 0 ? '+' : ''}${v}</span>`).join('')}${effectPills}${passives}${(!Object.keys(race.statModifiers || {}).length && !passives && !effectPills ? '<span class="pill">No stat modifiers</span>' : '')}</div>
         <div class="skill-actions">
           <span class="wrap compact-actions">
             <button type="button" class="ghost-btn tiny" data-homebrew-race-edit="${esc(race.id)}">Edit</button>
@@ -791,7 +791,7 @@ export function renderHomebrewTab() {
           <label class="homebrew-check"><input type="checkbox" data-homebrew-recipe-select="${esc(row.id)}" ${checked ? 'checked' : ''} /> <strong>${esc(row.name)}</strong></label>
           <span class="pill">Recipe</span>
         </div>
-        <div class="item-meta">${titleCase(row.profession || 'craft')} · Tier ${row.tier}${output ? ` · → ${esc(output.name)}` : ''}</div>
+        <div class="item-meta">${esc(titleCase(row.profession || 'craft'))} · Tier ${row.tier}${output ? ` · → ${esc(output.name)}` : ''}</div>
         <p class="subtle">${esc(row.desc || 'No description.')}</p>
         <div class="skill-actions">
           <span class="wrap compact-actions">
@@ -813,7 +813,7 @@ export function renderHomebrewTab() {
         </div>
         <div class="item-meta">${esc(row.id)}${row.skillIds?.length ? ` · ${row.skillIds.length} skill${row.skillIds.length === 1 ? '' : 's'}` : ''}</div>
         <p class="subtle">${esc(row.description || 'No description.')}</p>
-        <div class="wrap detail-pills">${Object.entries(row.statModifiers || {}).map(([k, v]) => `<span class="pill good">${titleCase(k)} ${v >= 0 ? '+' : ''}${v}</span>`).join('') || '<span class="pill">No stat modifiers</span>'}</div>
+        <div class="wrap detail-pills">${Object.entries(row.statModifiers || {}).map(([k, v]) => `<span class="pill good">${esc(titleCase(k))} ${v >= 0 ? '+' : ''}${v}</span>`).join('') || '<span class="pill">No stat modifiers</span>'}</div>
         <div class="skill-actions">
           <span class="wrap compact-actions">
             <button type="button" class="ghost-btn tiny" data-homebrew-monster-edit="${esc(kind)}" data-homebrew-monster-id="${esc(row.id)}">Edit</button>
@@ -847,11 +847,11 @@ export function renderHomebrewTab() {
           <input class="input" name="hb-icon" maxlength="8" value="${esc(draft.icon || '✦')}" />
           <label class="field-label mt-12">Type *</label>
           <select class="input" name="hb-type">
-            ${HOMEBREW_ITEM_TYPES.map(type => `<option value="${type}" ${draft.type === type ? 'selected' : ''}>${titleCase(type)}</option>`).join('')}
+            ${HOMEBREW_ITEM_TYPES.map(type => `<option value="${type}" ${draft.type === type ? 'selected' : ''}>${esc(titleCase(type))}</option>`).join('')}
           </select>
           <label class="field-label mt-12">Rarity</label>
           <select class="input" name="hb-rarity">
-            ${HOMEBREW_RARITIES.map(r => `<option value="${r}" ${draft.rarity === r ? 'selected' : ''}>${titleCase(r)}</option>`).join('')}
+            ${HOMEBREW_RARITIES.map(r => `<option value="${r}" ${draft.rarity === r ? 'selected' : ''}>${esc(titleCase(r))}</option>`).join('')}
           </select>
           <label class="field-label mt-12 hb-weapon-field hb-offhand-field">Damage (weapons / off-hand, e.g. 1d8)</label>
           <input class="input hb-weapon-field hb-offhand-field" name="hb-damage" value="${esc(draft.damage || '')}" placeholder="1d8" />

@@ -245,10 +245,10 @@ function renderSkillCard(character, skill, options = {}) {
       ${rankable && rank > 1 ? `<p class="subtle rank-bonus">${esc(rankBonusSummary(rank))}</p>` : ''}
       <div class="wrap detail-pills">
         ${isToggleSkill(skill) ? '<span class="pill warn">Toggle</span>' : ''}
-        ${skill.elementalType ? `<span class="pill">${titleCase(skill.elementalType)}</span>` : ''}
+        ${skill.elementalType ? `<span class="pill">${esc(titleCase(skill.elementalType))}</span>` : ''}
         ${skill.fusionKind === 'career' || skill.fusionKind === 'career_weapons' ? '<span class="pill good">Career Fusion</span>' : ''}
         ${isHomebrewSkill(skill) ? '<span class="pill warn">Homebrew</span>' : ''}
-        ${skill.lootType ? `<span class="pill">${titleCase(skill.lootType)}</span>` : ''}
+        ${skill.lootType ? `<span class="pill">${esc(titleCase(skill.lootType))}</span>` : ''}
         ${(skill.tags || []).map(tag => `<span class="pill subtle-pill">${esc(tag)}</span>`).join('')}
         ${conflict ? '<span class="pill bad">Conflict</span>' : ''}
       </div>

@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <!-- Security: only this site's own scripts may run; the only outside address the app may contact is the feedback form service. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>LumenForge RPG v5 — Table Ready</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
@@ -12,17 +15,10 @@
   <link rel="stylesheet" href="styles/mobile.css" />
   <link rel="stylesheet" href="styles/v5-extras.css" />
   <link rel="stylesheet" href="styles/refresh.css" />
-  <script>
-    (function () {
-      var theme = localStorage.getItem('lumenforge_theme') || 'midnight';
-      if (theme === 'forge') theme = 'midnight';
-      document.documentElement.setAttribute('data-theme', theme);
-      var appearance = localStorage.getItem('lumenforge_appearance') || 'dark';
-      document.documentElement.setAttribute('data-appearance', appearance === 'light' ? 'light' : 'dark');
-    })();
-  </script>
+  <script src="js/theme-boot.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#app-content">Skip to main content</a>
   <button type="button" id="sidebar-backdrop" class="sidebar-backdrop" hidden aria-label="Close menu"></button>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
@@ -69,6 +65,7 @@
         <button type="button" id="export-all" class="ghost-btn full">Export Save</button>
         <label class="ghost-btn full file-label">Import Save<input id="import-save" type="file" accept="application/json" hidden /></label>
         <button type="button" id="open-feedback" class="ghost-btn full">Send Feedback</button>
+        <button type="button" id="open-privacy" class="link-btn privacy-link">🔒 Privacy, terms &amp; your data</button>
       </section>
     </aside>
 
@@ -150,7 +147,8 @@
         <input type="email" name="email" class="input" maxlength="120" autocomplete="email" />
       </label>
       <input type="checkbox" name="botcheck" class="feedback-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
-      <label class="feedback-check"><input type="checkbox" name="includeInfo" checked /> Include the app version, current tab and browser (no character data)</label>
+      <label class="feedback-check"><input type="checkbox" name="includeInfo" /> Also send the app version, current tab and browser type, to help fix bugs (never character data)</label>
+      <p class="subtle feedback-privacy">When you press Send, what you write here (plus your name and email if you add them) is emailed to us through a form service called Web3Forms. We only use it to read and answer your feedback. Under 16? Ask a parent before adding your email. <button type="button" class="link-btn" data-open-privacy>Privacy details</button></p>
       <div class="feedback-actions">
         <button type="button" class="primary-btn" data-feedback-send="submit">Send</button>
         <button type="button" class="ghost-btn" data-feedback-send="copy">Copy text</button>
@@ -158,6 +156,45 @@
       </div>
     </form>
   </dialog>
-  <script type="module" src="js/main.js?v=5.5.1-kopopup"></script>
+  <dialog id="privacy-dialog" class="card feedback-dialog privacy-dialog" aria-labelledby="privacy-title">
+    <div class="privacy-body">
+      <div class="kicker">Privacy, terms &amp; your data</div>
+      <h2 id="privacy-title">The short version</h2>
+      <ul class="privacy-points">
+        <li><strong>Free, no strings.</strong> LumenForge is a free hobby project. No ads, no accounts, no payments and nothing to buy.</li>
+        <li><strong>Your characters stay on this device.</strong> Everything is saved in this browser only. We can't see it, and it isn't sent anywhere.</li>
+        <li><strong>No cookies, no tracking.</strong> No analytics or ad trackers. The browser's own storage just remembers your characters and colour theme on this device, so there is no cookie banner to click.</li>
+      </ul>
+
+      <h3>The only thing that gets sent: feedback</h3>
+      <p>If you use <strong>Send Feedback</strong>, your message (and your name and email, only if you type them) goes through <a href="https://web3forms.com/privacy" target="_blank" rel="noopener">Web3Forms</a>, a form-emailing service, to <a href="mailto:lumenforge.feedback@gmail.com">lumenforge.feedback@gmail.com</a>. If you tick the box, the app version, current tab and browser type go too. Character data never does. We only use it to read and reply to your feedback, and never sell or share it. Email us if you'd like your feedback deleted.</p>
+      <p>The site itself is hosted on GitHub Pages. Like any web host, GitHub may keep basic visit logs (such as your IP address); see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a>.</p>
+
+      <h3>Children</h3>
+      <p>You don't need an account or any personal details to play. If you're under 16, ask a parent or guardian before putting your email address in the feedback form.</p>
+
+      <h3>Terms of use</h3>
+      <ul class="privacy-points">
+        <li>Free to use for your own games, at home or at the table.</li>
+        <li>Provided as it is. We work hard to keep it working, but bugs happen and we can't recover lost characters, so use <strong>Export Save</strong> now and then to keep a backup.</li>
+        <li>Your notes, characters and homebrew are yours.</li>
+        <li>Please don't spam or abuse the feedback form.</li>
+        <li>The app and its rules may change as it grows. If this page changes, the date below changes too.</li>
+        <li>Fonts: Fredoka and Nunito, free under the SIL Open Font License. All icons are standard emoji; there are no bought or stock images.</li>
+      </ul>
+
+      <h3>Delete your data</h3>
+      <p>This removes every character, folder, note, homebrew item and setting saved in this browser. It can't be undone, so <strong>Export Save</strong> first if you might want them back.</p>
+      <div class="feedback-actions">
+        <button type="button" class="danger-btn" data-delete-all-data>Delete everything on this device</button>
+      </div>
+
+      <p class="subtle privacy-foot">Questions? Email <a href="mailto:lumenforge.feedback@gmail.com">lumenforge.feedback@gmail.com</a>. Last updated 2 November 2026.</p>
+      <div class="feedback-actions">
+        <button type="button" class="primary-btn" data-privacy-close>Close</button>
+      </div>
+    </div>
+  </dialog>
+  <script type="module" src="js/main.js?v=5.5.2-privacy"></script>
 </body>
 </html>

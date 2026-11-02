@@ -44,15 +44,16 @@ html[data-appearance="light"] {
   --shadow-lg: 0 28px 90px color-mix(in srgb, var(--blue-2) 12%, rgba(15, 23, 42, 0.14));
   --shadow-md: 0 16px 42px color-mix(in srgb, var(--blue-2) 10%, rgba(15, 23, 42, 0.1));
 
-  --title: var(--blue-2);
-  --heading: color-mix(in srgb, var(--blue-2) 72%, #0f172a);
+  /* Accent text is mixed with dark navy so it stays readable on white (4.5:1) in every theme */
+  --title: color-mix(in srgb, var(--blue-2) 55%, #0f172a);
+  --heading: color-mix(in srgb, var(--blue-2) 55%, #0f172a);
   --strong-text: #0f172a;
   --blue: var(--blue-2);
   --gold: var(--gold-2);
-  --item-title: color-mix(in srgb, var(--blue-2) 65%, #0f172a);
-  --stat-value: var(--blue-2);
-  --resource-label: color-mix(in srgb, var(--blue-2) 60%, #0f172a);
-  --effect-title: color-mix(in srgb, var(--gold-2) 55%, #0f172a);
+  --item-title: color-mix(in srgb, var(--blue-2) 55%, #0f172a);
+  --stat-value: color-mix(in srgb, var(--blue-2) 55%, #0f172a);
+  --resource-label: color-mix(in srgb, var(--blue-2) 55%, #0f172a);
+  --effect-title: color-mix(in srgb, var(--gold-2) 45%, #0f172a);
 
   --body-glow-1: color-mix(in srgb, var(--blue-2) 28%, #ffffff);
   --body-glow-2: color-mix(in srgb, var(--brand-accent) 18%, #f1f5f9);
@@ -90,7 +91,7 @@ html[data-appearance="light"] {
   --content-glow: color-mix(in srgb, var(--blue-2) 24%, transparent);
   --notice-glow: color-mix(in srgb, var(--blue-2) 22%, transparent);
 
-  --tab-text: color-mix(in srgb, var(--blue-2) 38%, #475569);
+  --tab-text: color-mix(in srgb, var(--blue-2) 38%, #334155);
   --tab-active-text: #ffffff;
   --btn-primary-text: #ffffff;
   --btn-hover-border: color-mix(in srgb, var(--blue-2) 55%, #94a3b8);
@@ -162,7 +163,7 @@ html[data-appearance="light"] .theme-swatch.active {
 
 html[data-appearance="light"] .kicker,
 html[data-appearance="light"] .effect-mini-title {
-  color: var(--blue-2);
+  color: color-mix(in srgb, var(--blue-2) 55%, #0f172a);
 }
 
 html[data-appearance="light"] .skill-card.unlocked {

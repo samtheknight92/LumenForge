@@ -83,7 +83,17 @@ export function toast(message, options = {}) {
   toastTimeout = setTimeout(hideToast, options.duration ?? TOAST_DURATION_MS)
 }
 
+/**
+ * Combat toasts mix in names players type (homebrew skills, items), so in HTML mode
+ * everything is escaped and only the bold damage total tag is let back through.
+ */
+export function safeDamageToastHtml(message) {
+  return esc(message)
+    .replace(/&lt;strong class=&quot;toast-damage-total&quot;&gt;/g, '<strong class="toast-damage-total">')
+    .replace(/&lt;\/strong&gt;/g, '</strong>')
+}
+
 /** Roll / combat feedback — stays visible until the next toast or click to dismiss. */
 export function toastCombat(message, options = {}) {
-  toast(message, { combat: true, ...options })
+  toast(options.html ? safeDamageToastHtml(message) : message, { combat: true, ...options })
 }

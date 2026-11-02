@@ -64,7 +64,7 @@ function renderPremadeBrowser({ avgCombatPower = 0, avgSkillLevel = 0, avgThreat
         </select>
       </div>
       <div class="segmented mt-12">${categories.map(category => `
-        <button type="button" data-gm-premade-category="${esc(category)}" class="${category === state.gmPremadeCategory ? 'active' : ''}">${titleCase(category)}</button>
+        <button type="button" data-gm-premade-category="${esc(category)}" class="${category === state.gmPremadeCategory ? 'active' : ''}">${esc(titleCase(category))}</button>
       `).join('')}</div>
       <div class="catalogue-summary mt-12">
         <span class="pill">${rosterCount} in roster</span>

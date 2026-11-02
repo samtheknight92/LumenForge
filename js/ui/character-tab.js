@@ -214,9 +214,9 @@ export function renderCharacterTab(character) {
           </div>
           <button type="button" class="ghost-btn tiny" data-export-character>Export</button>
         </div>
-        <label class="field-label">Rename</label>
+        <label class="field-label" for="rename-character">Rename</label>
         <input class="input" id="rename-character" value="${esc(character.name)}" />
-        <label class="field-label">Race</label>
+        <label class="field-label" for="change-race">Race</label>
         <select class="input" id="change-race">
           ${raceOptions().map(option => `<option value="${esc(option.id)}" ${option.id === character.race ? 'selected' : ''}>${esc(option.icon || '✦')} ${esc(option.name)}</option>`).join('')}
         </select>
@@ -367,7 +367,7 @@ function renderInventoryRows(character) {
       <div class="inventory-row inventory-item-row ${itemCardClass(presentation, '')}" data-tooltip="${esc(itemTooltip(item, character, entry))}" tabindex="0">
         <div class="inventory-item-copy">
           <strong class="inventory-item-name">${fallbackIcon(item)} <span class="${cursedNameClass}">${esc(presentation.displayName)}</span> ${cursedBadge} ${statusIcons} ${entry.qty > 1 ? `x${entry.qty}` : ''}</strong>
-          <div class="subtle inventory-item-meta">${esc(item.type || 'item')} · ${esc(item.rarity || 'common')} ${equippedSlot ? `· ${titleCase(equippedSlot)}` : ''}${weightText}</div>
+          <div class="subtle inventory-item-meta">${esc(item.type || 'item')} · ${esc(item.rarity || 'common')} ${equippedSlot ? `· ${esc(titleCase(equippedSlot))}` : ''}${weightText}</div>
           ${crafted ? `<div class="wrap inventory-item-tags"><span class="pill good">${esc(crafted)}</span></div>` : ''}
           ${(item.tags || []).length ? `<div class="wrap inventory-item-tags">${(item.tags || []).map(tag => `<span class="pill subtle-pill">${esc(tag)}</span>`).join('')}</div>` : ''}
           ${renderItemCounterControls(entry, item, { showWhenEquipped: Boolean(equippedSlot) })}

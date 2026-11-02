@@ -4,7 +4,7 @@ import { loadHomebrewStore, registerHomebrewInCache } from './homebrew/homebrew.
 import { load, saveNow, remindToExportIfStale } from './core/storage.js'
 import { state, activeCharacter, applyUrlState } from './core/state.js'
 /** Query bump forces browsers to reload render.js (child modules ignore main.js?v=). */
-import { render } from './ui/render.js?v=5.5.1-kopopup'
+import { render } from './ui/render.js?v=5.5.2-privacy'
 import { initEvents } from './core/events.js'
 import { setupTooltips } from './ui/tooltips.js'
 import { initUrlState, syncUrlState } from './core/url-state.js'
@@ -13,6 +13,7 @@ import { computeStats } from './character/character.js'
 import { initTheme, applyTheme } from './ui/themes.js'
 import { setupActionBarSkillSheet } from './combat/action-bar-sheet.js'
 import { setupFeedback } from './ui/feedback.js'
+import { setupPrivacy } from './ui/privacy.js'
 
 async function boot() {
   try {
@@ -27,6 +28,7 @@ async function boot() {
     setupTooltips()
     setupActionBarSkillSheet()
     setupFeedback()
+    setupPrivacy()
     render({ all: true })
     syncUrlState()
     initUrlState(() => render({ content: true, header: true, tabs: true, actionBar: true }))
