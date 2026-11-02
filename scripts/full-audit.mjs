@@ -81,7 +81,7 @@ const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8')
 const staticDetails = []
 for (const m of html.matchAll(/(?:href|src)=["']([^"']+)["']/g)) {
   const ref = m[1].split('?')[0].split('#')[0]
-  if (ref.startsWith('http') || ref.startsWith('#')) continue
+  if (!ref || /^(https?:|mailto:|#)/.test(m[1])) continue
   const filePath = path.join(root, ref)
   if (!fs.existsSync(filePath)) {
     staticDetails.push({ level: 'error', text: `Missing file linked from index.html: ${ref}` })
