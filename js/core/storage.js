@@ -8,6 +8,7 @@ import { normalizePremadePageSize } from '../character/premade-characters.js'
 import { defaultGmMonsterBuilderDraft } from '../gm/gm-monster-builder.js'
 import { normalizeEncounterEnemies, migrateEncounterQuantityFocusId } from '../gm/encounter-enemies.js'
 import { normalizeActiveEncounter } from '../gm/active-encounter.js'
+import { clampRoomCount, normalizeDungeon } from '../gm/dungeon-maker.js'
 
 /** Full app save — characters plus UI, folders, GM tools, and filters. */
 export function serializeSave() {
@@ -52,6 +53,9 @@ export function serializeSave() {
       encounterParty: state.encounterParty,
       encounterEnemies: state.encounterEnemies,
       encounterQuantityFocusId: state.encounterQuantityFocusId,
+      dungeonRoomCount: state.dungeonRoomCount,
+      dungeonThemeId: state.dungeonThemeId,
+      gmDungeon: state.gmDungeon,
       activeEncounter: state.activeEncounter
         ? {
             ...state.activeEncounter,
@@ -178,6 +182,9 @@ function applyUiFromSave(ui) {
   if (ui.encounterQuantityFocusId != null) state.encounterQuantityFocusId = String(ui.encounterQuantityFocusId || '')
   migrateEncounterQuantityFocusId()
   state.activeEncounter = ui.activeEncounter ? normalizeActiveEncounter(ui.activeEncounter) : null
+  if (ui.dungeonRoomCount != null) state.dungeonRoomCount = clampRoomCount(ui.dungeonRoomCount)
+  if (ui.dungeonThemeId != null) state.dungeonThemeId = String(ui.dungeonThemeId || '')
+  state.gmDungeon = normalizeDungeon(ui.gmDungeon)
   if (ui.gmMonsterBuilderDraft && typeof ui.gmMonsterBuilderDraft === 'object') {
     const draft = ui.gmMonsterBuilderDraft
     state.gmMonsterBuilderDraft = defaultGmMonsterBuilderDraft({
