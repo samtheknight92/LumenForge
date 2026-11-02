@@ -1042,6 +1042,11 @@ function initStaticEvents() {
     })
   })
 
+  // The welcome screen's button opens the same Guided Create as the side panel.
+  document.querySelector('#app-content')?.addEventListener('click', event => {
+    if (event.target.closest('[data-welcome-guided]')) document.querySelector('#guided-create')?.click()
+  })
+
   document.querySelector('#new-name')?.addEventListener('keydown', event => {
     if (event.key === 'Enter') handleCreateCharacter()
   })
