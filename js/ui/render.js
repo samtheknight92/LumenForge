@@ -325,14 +325,18 @@ function renderHeader() {
     `Combat Power ${combatPower.display}`,
     isGmMode() ? 'GM Mode' : '',
     koLabel,
-    `${character.skills.length} skills`,
-    `${character.inventory.length} inventory lines`
+    plural(character.skills.length, 'skill'),
+    plural(character.inventory.length, 'item')
   ].filter(Boolean).join(' · ')
   avatar.textContent = race?.icon || '👤'
   lumens.textContent = character.lumens
   hp.textContent = `${character.hp}/${stats.hp}`
   stamina.textContent = `${character.stamina}/${stats.stamina}`
   coin.textContent = formatCurrency(character.gil)
+}
+
+function plural(n, word) {
+  return `${n} ${word}${n === 1 ? '' : 's'}`
 }
 
 export function renderContent() {
@@ -343,7 +347,8 @@ export function renderContent() {
     content.innerHTML = `
       <div class="notice-card">
         <h2>Welcome to LumenForge ✨</h2>
-        <p>This rebuild keeps the core idea: characters, races, lumens, skills, equipment and GM-friendly tools - but trims the clutter so it is actually usable at the table.</p>
+        <p>Make a hero to start playing. Guided Create walks you through name, race, stats, skills and gear one step at a time. Already have a character? Pick them from your list.</p>
+        <button type="button" class="primary-btn guided-cta welcome-guided-btn" data-welcome-guided>✨ Make a character</button>
       </div>
     `
     restoreContentFocus(focusCapture)

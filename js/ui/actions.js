@@ -505,6 +505,13 @@ export function switchTab(tab) {
   state.tab = tab
   render({ content: true, tabs: true })
   syncUrlState()
+  // One gentle fade when the page changes, so you can see the switch happened.
+  const content = document.querySelector('#app-content')
+  if (content) {
+    content.classList.remove('tab-enter')
+    void content.offsetWidth
+    content.classList.add('tab-enter')
+  }
 }
 
 export function printCharacterSheet() {
