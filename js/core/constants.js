@@ -72,7 +72,7 @@ export const STAT_EXPLAINERS = {
 /** One-line summary of how attack stats fit together. */
 export const STAT_HOW_ATTACKS_WORK = 'Attacking: roll d20 + Accuracy. Reach the target\'s Physical Defence (weapons) or Magical Defence (spells) and you hit. Then roll damage and add Strength (weapons) or Magic Power (spells).'
 
-export const TAB_IDS = ['character', 'play', 'skills', 'stats', 'shop', 'craft', 'homebrew', 'gm', 'notes', 'howtoplay']
+export const TAB_IDS = ['character', 'play', 'skills', 'stats', 'shop', 'craft', 'homebrew', 'gm', 'notes', 'howtoplay', 'dungeon']
 
 /** Callout shown above a weapon skill subcategory on the Skills tab. */
 export const WEAPON_SKILL_TREE_INTROS = {

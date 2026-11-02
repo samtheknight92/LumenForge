@@ -94,7 +94,7 @@ const savedCharacters = page => page.evaluate(() =>
 await test('every tab renders without errors', async page => {
   await open(page)
   await createCharacter(page)
-  for (const tab of await page.locator('#tabbar [data-tab]').evaluateAll(els => els.map(el => el.dataset.tab))) {
+  for (const tab of await page.locator('#tabbar [data-tab]:not([hidden])').evaluateAll(els => els.map(el => el.dataset.tab))) {
     await page.click(`#tabbar [data-tab="${tab}"]`)
     await page.locator(`#tabbar [data-tab="${tab}"][aria-selected="true"]`).waitFor()
     const text = (await page.locator('#app-content').innerText()).trim()
@@ -376,6 +376,26 @@ await test('gm tools: activate GM mode, spawn a premade and build a monster', as
   await page.locator('#app-content [data-randomise-gm-monster]').first().click()
   await page.locator('#app-content [data-save-gm-monster]').first().click()
   await page.waitForFunction(n => window.LumenForge.state.characters.length > n, afterSpawn)
+})
+
+await test('dungeon maker: hidden until GM mode, rolls a map and remembers it', async page => {
+  await open(page)
+  await createCharacter(page)
+  if (await page.locator('#tabbar [data-tab="dungeon"]').isVisible()) throw new Error('Dungeon tab showed without GM mode')
+  await page.click('#tabbar [data-tab="gm"]')
+  await page.locator('#app-content [data-toggle-gm-mode]').first().click()
+  await page.click('#tabbar [data-tab="dungeon"]')
+  await page.locator('#dungeon-room-count').fill('40')
+  await assertText(page, '#dungeon-room-count-label', '40')
+  await page.locator('#app-content [data-roll-dungeon]').click()
+  const cells = await page.locator('#app-content .dungeon-cell').count()
+  if (cells !== 40) throw new Error(`expected 40 dice on the map, got ${cells}`)
+  await page.locator('#app-content .dungeon-cell').nth(3).click()
+  await page.locator('#app-content .dungeon-room-card').waitFor()
+  await page.reload()
+  await page.click('#tabbar [data-tab="dungeon"]')
+  const after = await page.locator('#app-content .dungeon-cell').count()
+  if (after !== 40) throw new Error('dungeon was not kept after reload')
 })
 
 await test('feedback form sends to Web3Forms and falls back on failure', async page => {
