@@ -214,9 +214,9 @@ export function renderCharacterTab(character) {
           </div>
           <button type="button" class="ghost-btn tiny" data-export-character>Export</button>
         </div>
-        <label class="field-label">Rename</label>
+        <label class="field-label" for="rename-character">Rename</label>
         <input class="input" id="rename-character" value="${esc(character.name)}" />
-        <label class="field-label">Race</label>
+        <label class="field-label" for="change-race">Race</label>
         <select class="input" id="change-race">
           ${raceOptions().map(option => `<option value="${esc(option.id)}" ${option.id === character.race ? 'selected' : ''}>${esc(option.icon || '✦')} ${esc(option.name)}</option>`).join('')}
         </select>

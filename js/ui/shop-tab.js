@@ -73,7 +73,7 @@ export function renderShopTab(character) {
           </select>
         </div>
         <div class="shop-filters-secondary">
-          <select class="input" id="item-sort">
+          <select class="input" id="item-sort" aria-label="Sort items">
             ${sortOptions.map(([value, label]) => `<option value="${value}" ${state.itemSort === value ? 'selected' : ''}>${esc(label)}</option>`).join('')}
           </select>
           <label class="pill ${state.itemBuyableOnly ? 'good' : ''} shop-filter-toggle" title="Shop stock you can afford at your Skill Level — profession/loot items are craft-only or GM grant">

@@ -390,6 +390,8 @@ await test('feedback form sends to Web3Forms and falls back on failure', async p
   await page.selectOption('#feedback-dialog select[name="kind"]', 'idea')
   await page.fill('#feedback-dialog textarea', 'Add a dice tray')
   await page.fill('#feedback-dialog input[name="email"]', 'player@example.com')
+  assert.equal(await page.isChecked('#feedback-dialog input[name="includeInfo"]'), false, 'browser info is opt-in')
+  await page.check('#feedback-dialog input[name="includeInfo"]')
   await page.click('[data-feedback-send="submit"]')
   await assertText(page, '#toast', 'Thanks! Your feedback was sent.')
   assert.equal(posts.length, 1)
@@ -406,8 +408,31 @@ await test('feedback form sends to Web3Forms and falls back on failure', async p
   await page.click('[data-feedback-send="submit"]')
   await assertText(page, '#toast', 'Could not send right now')
   assert.equal(posts[1].email, 'lumenforge.feedback@gmail.com')
+  assert.equal(posts[1].message, 'Second try', 'no browser info unless the box is ticked')
   assert.equal(await page.locator('#feedback-dialog').isVisible(), true)
   assert.equal(await page.inputValue('#feedback-dialog textarea'), 'Second try')
+})
+
+await test('privacy page opens and "delete everything" wipes this device', async page => {
+  await open(page)
+  await createCharacter(page, 'Doomed Dora')
+  await page.evaluate(() => window.LumenForge.helpers.saveNow())
+  await page.click('#open-feedback')
+  await page.click('#feedback-dialog [data-open-privacy]')
+  assert.equal(await page.locator('#feedback-dialog').isVisible(), false)
+  await page.locator('#privacy-dialog').waitFor()
+  await assertText(page, '#privacy-dialog', 'Your characters stay on this device')
+  await page.click('[data-privacy-close]')
+  assert.equal(await page.locator('#privacy-dialog').isVisible(), false)
+  await page.click('#open-privacy')
+  await page.click('[data-delete-all-data]')
+  await page.waitForLoadState('load')
+  await page.locator('#new-race option').first().waitFor({ state: 'attached' })
+  assert.deepEqual(await savedCharacters(page), [])
+  // The fresh app re-saves only its default look; nothing else may survive.
+  const leftovers = await page.evaluate(() => Object.fromEntries(Object.keys(localStorage).filter(k => k.startsWith('lumenforge')).map(k => [k, localStorage.getItem(k)])))
+  delete leftovers.lumenforge_first_seen
+  assert.deepEqual(leftovers, Object.fromEntries(Object.entries({ lumenforge_theme: 'midnight', lumenforge_appearance: 'dark' }).filter(([k]) => k in leftovers)))
 })
 
 await test('folder can be created and persists', async page => {

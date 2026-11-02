@@ -19,7 +19,7 @@ Current value can be adjusted directly or with the quick buttons. Maximum: ${max
       </div>
       <div class="resource-control-row">
         ${quick.map(amount => `<button type="button" class="ghost-btn tiny" data-adjust-resource="${resource}" data-amount="-${amount}">-${amount}</button>`).join('')}
-        <input class="input mini-input" type="number" min="0" max="${max}" value="${value}" data-resource-input="${resource}" />
+        <input class="input mini-input" type="number" min="0" max="${max}" value="${value}" data-resource-input="${resource}" aria-label="${label} amount" />
         ${quick.map(amount => `<button type="button" class="ghost-btn tiny" data-adjust-resource="${resource}" data-amount="${amount}">+${amount}</button>`).join('')}
         <button type="button" class="primary-btn tiny" data-full-resource="${resource}">Full</button>
       </div>
@@ -45,7 +45,7 @@ Current value can be adjusted directly or with the quick buttons. Maximum: ${max
           </div>
           <div class="resource-control-row">
             ${[-25, -10, -5, -1].map(amount => `<button type="button" class="${amount < 0 ? 'danger-btn' : 'ghost-btn'} tiny" data-adjust-resource="lumens" data-amount="${amount}">${amount}</button>`).join('')}
-            <input class="input mini-input" type="number" min="0" value="${character.lumens}" data-resource-input="lumens" />
+            <input class="input mini-input" type="number" min="0" value="${character.lumens}" data-resource-input="lumens" aria-label="Lumens amount" />
             ${[1, 5, 10, 25].map(amount => `<button type="button" class="ghost-btn tiny" data-adjust-resource="lumens" data-amount="${amount}">+${amount}</button>`).join('')}
           </div>
         </div>
@@ -55,7 +55,7 @@ Current value can be adjusted directly or with the quick buttons. Maximum: ${max
             <div class="subtle">Current: ${formatCurrency(character.gil)}</div>
           </div>
           <div class="money-grid">
-            <label><span class="field-label">Amount</span><input class="input mini-input" type="number" min="0" value="${normalizeGil(character.gil)}" data-gil-input /></label>
+            <label><span class="field-label">Amount</span><input class="input mini-input" type="number" min="0" value="${normalizeGil(character.gil)}" data-gil-input aria-label="Gil amount" /></label>
             <div class="wrap">
               <button type="button" class="danger-btn tiny" data-coin="-1000">-1k</button>
               <button type="button" class="danger-btn tiny" data-coin="-100">-100</button>

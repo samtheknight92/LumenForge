@@ -31,3 +31,26 @@
 .feedback-form .feedback-check { flex-direction: row; align-items: flex-start; gap: 8px; font-size: .9em; }
 .feedback-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .feedback-form .feedback-botcheck { display: none; }
+
+/* Privacy, terms & your data */
+.link-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--pop-cyan, #3fd4ff); text-decoration: underline; cursor: pointer; }
+html[data-appearance="light"] .link-btn { color: #07709c; }
+.privacy-link { display: block; width: 100%; margin-top: 2px; font-size: 12px; text-align: center; }
+.feedback-privacy { font-size: 12px; margin: 0; line-height: 1.4; }
+.privacy-body { display: flex; flex-direction: column; gap: 6px; }
+.privacy-body h2 { margin: 0; }
+.privacy-body h3 { margin: 6px 0 0; font-size: 15px; }
+.privacy-body p { margin: 0; font-size: 13px; line-height: 1.45; }
+.privacy-points { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 3px; font-size: 13px; line-height: 1.4; }
+.privacy-body a { color: inherit; text-decoration: underline; }
+.privacy-foot { margin-top: 4px !important; font-size: 12px !important; }
+
+/* Keyboard users: skip link and a clear focus ring on everything you can tab to */
+.skip-link { position: absolute; left: 8px; top: -60px; z-index: 1000; padding: 8px 14px; border-radius: 10px; background: #120f33; color: #fff; font-weight: 700; text-decoration: none; }
+.skip-link:focus { top: 8px; }
+:is(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline: 3px solid var(--pop-cyan, #3fd4ff); outline-offset: 2px; }
+html[data-appearance="light"] :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline-color: #07709c; }
+#app-content:focus-visible { outline: none; }
+/* Pop-up forms get a solid card so the page behind can't show through the text */
+.feedback-dialog { background: #ffffff; }
+html[data-appearance="dark"] .feedback-dialog { background: linear-gradient(180deg, #1d2050, #14163c); }

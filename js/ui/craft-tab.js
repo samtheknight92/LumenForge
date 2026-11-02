@@ -29,7 +29,7 @@ export function renderCraftTab(character) {
       </div>
       <div class="toolbar item-toolbar">
         <input class="input" id="craft-search" placeholder="Search recipes, materials, careers..." value="${esc(state.craftSearch)}" />
-        <select class="input" id="craft-profession">
+        <select class="input" id="craft-profession" aria-label="Filter by career">
           ${professions.map(profession => `<option value="${esc(profession)}" ${state.craftProfession === profession ? 'selected' : ''}>${profession === 'all' ? 'All careers' : displaySubcategory(profession)}</option>`).join('')}
         </select>
         <label class="pill ${state.craftLearnedOnly ? 'good' : ''}" style="display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .6rem;">
