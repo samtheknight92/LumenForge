@@ -60,9 +60,26 @@ function renderControls() {
           </select>
         </label>
       </div>
-      <p class="subtle mt-8">Each die is a room and its number says what's inside. Touching dice are joined by a door. Matching dice that touch merge into one bigger room. The party starts at the bottom middle and needs <strong id="dungeon-keys-label">${keyPiecesNeeded(count)}</strong> key piece${keyPiecesNeeded(count) === 1 ? '' : 's'} to open the Boss door.</p>
+      <details class="dungeon-how mt-8">
+        <summary>How it works</summary>
+        <p class="subtle mt-8">Each die is a room and its number says what's inside. Touching dice are joined by a door. Matching dice that touch merge into one bigger room. The party starts at the bottom middle and needs <strong id="dungeon-keys-label">${keyPiecesNeeded(count)}</strong> key piece(s) to open the 💀 Boss door.</p>
+        ${renderLegend()}
+      </details>
     </section>
   `
+}
+
+const LEGEND = [
+  ['v1', '🛏️', '1 Safe'],
+  ['v2', '⚔️', '2 Fight'],
+  ['v3', '🪤', '3 Trap'],
+  ['v4', '💰', '4 Treasure'],
+  ['v5', '🧩', '5 Puzzle'],
+  ['v6', '🗝️', '6 Key room']
+]
+
+function renderLegend() {
+  return `<div class="dungeon-legend mt-8">${LEGEND.map(([cls, icon, label]) => `<span class="dungeon-legend-chip ${cls}">${icon} ${label}</span>`).join('')}</div>`
 }
 
 function linkClasses(dungeon, cell) {
@@ -112,15 +129,15 @@ function renderMap(dungeon) {
   const theme = dungeonTheme(dungeon)
   return `
     <section class="card dungeon-map-card">
-      <div class="wrap">
-        <span class="pill">${esc(theme.name)}</span>
-        <span class="pill gold">🗝️ ${found} / ${dungeon.keyPiecesNeeded} key pieces</span>
-        <span class="pill subtle-pill">${dungeon.rooms.length} rooms from ${dungeon.diceCount} dice</span>
+      <div class="dungeon-map-head">
+        <strong>${esc(theme.name)}</strong>
+        <span class="pill gold">🗝️ ${found} / ${dungeon.keyPiecesNeeded}</span>
+        <span class="subtle">${dungeon.rooms.length} rooms</span>
       </div>
       <div class="dungeon-map-scroll mt-12">
         <div class="dungeon-map${dungeon.width >= 9 ? ' is-dense' : ''}" style="--dungeon-cols:${dungeon.width};--dungeon-rows:${dungeon.rows}">${cells}</div>
       </div>
-      <p class="subtle mt-8">Tap a room to see what it does. 💀 marks the Boss door; tap any room and use "Put Boss door here" to move it.</p>
+      <p class="subtle mt-8">Tap a room to see what it does.${dungeon.width >= 8 ? '<span class="dungeon-swipe-hint"> Swipe the map sideways to see it all.</span>' : ''}</p>
     </section>
   `
 }
@@ -163,7 +180,8 @@ function renderRoomDetails(dungeon) {
   }
 
   return `
-    <section class="card dungeon-room-card">
+    <section class="card dungeon-room-card${state.dungeonSheetOpen ? ' is-sheet-open' : ''}" aria-label="Room details">
+      <button type="button" class="ghost-btn tiny dungeon-sheet-close" data-dungeon-close-sheet aria-label="Close room details">✕</button>
       <div class="kicker">Room ${room.number}${roomTierLabel(room) ? ` · ${esc(roomTierLabel(room))}` : ''}</div>
       <h3>${rule?.icon || ''} ${esc(rule?.name || '')}</h3>
       <p class="mt-8">${esc(rule?.text || '')}</p>
@@ -224,6 +242,7 @@ export function renderDungeonTab() {
           ${renderMap(dungeon)}
           ${renderRoomDetails(dungeon)}
         </div>
+        ${state.dungeonSheetOpen ? '<div class="dungeon-sheet-backdrop" data-dungeon-close-sheet></div>' : ''}
         ${renderRoomList(dungeon)}
       ` : '<section class="card"><p class="subtle">Pick how many rooms you want and press Roll dungeon.</p></section>'}
     </div>

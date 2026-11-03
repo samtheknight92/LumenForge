@@ -52,6 +52,7 @@ export const state = {
   dungeonRoomCount: 24,
   dungeonThemeId: '',
   dungeonListOpen: false,
+  dungeonSheetOpen: false,
   gmDungeon: null,
   homebrewSearch: '',
   homebrewSelected: {},

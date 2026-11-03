@@ -238,7 +238,8 @@ import {
   selectDungeonRoom as doSelectDungeonRoom,
   toggleDungeonRoomCleared as doToggleDungeonRoomCleared,
   putDungeonBossDoorHere as doPutDungeonBossDoorHere,
-  rememberDungeonListOpen as doRememberDungeonListOpen
+  rememberDungeonListOpen as doRememberDungeonListOpen,
+  closeDungeonSheet as doCloseDungeonSheet
 } from '../ui/dungeon-actions.js'
 import { keyPiecesNeeded } from '../gm/dungeon-maker.js'
 import { state, activeCharacter, resetItemFilters } from './state.js'
@@ -895,6 +896,7 @@ const clickActions = {
   dungeonSelectRoom(target) { doSelectDungeonRoom(target.dataset.dungeonSelectRoom) },
   dungeonToggleCleared(target) { doToggleDungeonRoomCleared(target.dataset.dungeonToggleCleared) },
   dungeonBossHere(target) { doPutDungeonBossDoorHere(target.dataset.dungeonBossHere) },
+  dungeonCloseSheet() { doCloseDungeonSheet() },
   endActiveEncounter() { doEndActiveEncounter() },
   encounterNextTurn() { doEncounterNextTurn() },
   encounterPrevTurn() { doEncounterPrevTurn() },
@@ -1164,6 +1166,10 @@ function initStaticEvents() {
       }
       if (isSidebarOpen()) {
         setSidebarOpen(false)
+        return
+      }
+      if (state.tab === 'dungeon' && state.dungeonSheetOpen) {
+        doCloseDungeonSheet()
         return
       }
     }
