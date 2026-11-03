@@ -12,6 +12,7 @@ function refresh() {
 
 export function rollDungeon() {
   state.gmDungeon = generateDungeon({ rooms: state.dungeonRoomCount, themeId: state.dungeonThemeId })
+  state.dungeonSheetOpen = false
   refresh()
   toast(`Rolled a ${state.gmDungeon.rooms.length}-room dungeon.`)
 }
@@ -32,6 +33,7 @@ export function selectDungeonRoom(roomId) {
   const id = Number(roomId)
   if (!dungeon.rooms.some(room => room.id === id)) return
   dungeon.selectedRoomId = id
+  state.dungeonSheetOpen = true
   refresh()
 }
 
@@ -51,4 +53,9 @@ export function putDungeonBossDoorHere(cellId) {
 
 export function rememberDungeonListOpen(open) {
   state.dungeonListOpen = Boolean(open)
+}
+
+export function closeDungeonSheet() {
+  state.dungeonSheetOpen = false
+  render({ content: true })
 }

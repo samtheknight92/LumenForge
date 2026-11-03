@@ -571,6 +571,30 @@ await test('play tab on a small phone: nothing pokes past the right edge', async
   assert.deepEqual(overflowing, [], 'Play tab has parts wider than a 320px phone screen')
 }, { viewport: { width: 320, height: 700 }, isMobile: true, hasTouch: true })
 
+await test('dungeon map on a phone: styled grid, big tap targets, room details pop up', async page => {
+  await open(page)
+  await page.evaluate(() => { window.LumenForge.state.gmMode = true })
+  await page.evaluate(() => document.querySelector('#tabbar [data-tab="dungeon"]').click())
+  await page.locator('#dungeon-room-count').fill('100')
+  await page.locator('#app-content [data-roll-dungeon]').click()
+  const map = await page.evaluate(() => {
+    const grid = document.querySelector('.dungeon-map')
+    const cell = document.querySelector('.dungeon-cell').getBoundingClientRect()
+    return { display: getComputedStyle(grid).display, w: cell.width, h: cell.height, pageWider: document.documentElement.scrollWidth > window.innerWidth + 1 }
+  })
+  assert.equal(map.display, 'grid', 'dungeon map lost its grid styling')
+  assert.ok(map.w >= 40 && map.h >= 40, `dungeon rooms too small to tap (${map.w}x${map.h})`)
+  assert.equal(map.pageWider, false, 'dungeon map pushes the page sideways')
+  await page.locator('.dungeon-cell').nth(2).tap()
+  const sheet = page.locator('.dungeon-room-card.is-sheet-open')
+  await sheet.waitFor()
+  await page.waitForTimeout(400)
+  const box = await sheet.boundingBox()
+  assert.ok(box && box.y + box.height <= 700 + 1, `room details are off screen (${JSON.stringify(box)})`)
+  await page.locator('.dungeon-sheet-close').tap()
+  await page.locator('.dungeon-room-card.is-sheet-open').waitFor({ state: 'detached' })
+}, { viewport: { width: 360, height: 700 }, isMobile: true, hasTouch: true })
+
 await test('guided create opens before any character exists', async page => {
   await open(page)
   await page.click('#guided-create')

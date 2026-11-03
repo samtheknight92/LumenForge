@@ -800,6 +800,7 @@ html[data-appearance="light"] .toast .toast-damage-total { color: #047857; }
 @media (prefers-reduced-motion: reduce) {
   #app-content.tab-enter { animation: none; }
   .toast, .toast.show { transition: opacity 0.18s ease; }
+}
 
 /* ---------- Dungeon Maker (GM) ---------- */
 .dungeon-tab { display: grid; gap: 12px; }
@@ -890,3 +891,69 @@ html[data-appearance="light"] .dungeon-key-line { color: #8a6400; }
   .dungeon-map.is-dense .dungeon-cell-die, .dungeon-map.is-dense .dungeon-cell-key { display: none; }
   .dungeon-map.is-dense .dungeon-cell-num { font-size: 9px; left: 2px; top: 1px; }
 }
+
+/* Dungeon: tidy header, legend, "how it works" */
+.dungeon-how summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--tab-c, var(--pop-pink)); }
+.dungeon-legend { display: flex; flex-wrap: wrap; gap: 6px; }
+.dungeon-legend-chip {
+  --room: var(--pop-purple);
+  padding: 3px 8px; border-radius: 999px; font-size: 12px; font-weight: 700;
+  border: 1px solid color-mix(in srgb, var(--room) 70%, #000);
+  background: color-mix(in srgb, var(--room) 28%, transparent);
+}
+.dungeon-legend-chip.v1 { --room: var(--pop-green); }
+.dungeon-legend-chip.v2 { --room: var(--pop-pink); }
+.dungeon-legend-chip.v3 { --room: var(--pop-orange); }
+.dungeon-legend-chip.v4 { --room: var(--pop-yellow); }
+.dungeon-legend-chip.v5 { --room: var(--pop-cyan); }
+.dungeon-legend-chip.v6 { --room: var(--pop-purple); }
+.dungeon-map-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.dungeon-map-head .pill { margin: 0; }
+.dungeon-sheet-close, .dungeon-sheet-backdrop, .dungeon-swipe-hint { display: none; }
+.dungeon-tab > *, .dungeon-layout > * { min-width: 0; }
+
+@media (max-width: 760px) {
+  .dungeon-control-row { flex-wrap: nowrap; gap: 10px; }
+  .dungeon-slider { flex: 1 1 auto; min-width: 0; }
+  .dungeon-theme-pick { flex: 0 0 130px; }
+  .dungeon-theme-pick .input { padding-left: 8px; padding-right: 8px; font-size: 14px; }
+  .dungeon-controls .gm-strip { gap: 8px; }
+  .dungeon-controls .gm-strip .primary-btn { padding: 8px 12px; font-size: 14px; }
+
+  /* Map: big enough to tap (44px), pans sideways inside its card when the dungeon is wide */
+  .dungeon-map-card { padding-left: 8px; padding-right: 8px; }
+  .dungeon-map-scroll { margin: 0 -8px; padding: 22px 12px; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+  .dungeon-map, .dungeon-map.is-dense { --cell: max(44px, calc((100vw - 60px - (var(--dungeon-cols) - 1) * 6px) / var(--dungeon-cols))); justify-content: start; width: max-content; }
+  .dungeon-cell { font-size: 20px; border-radius: 9px; }
+  .dungeon-map.is-dense .dungeon-cell-die { display: none; }
+  .dungeon-map.is-dense .dungeon-cell-key { display: block; }
+  .dungeon-map.is-dense .dungeon-cell-num { font-size: 10px; left: 3px; top: 2px; }
+  .dungeon-swipe-hint { display: inline; }
+
+  /* Room details slide up from the bottom when you tap a room */
+  .dungeon-room-card {
+    position: fixed; left: 8px; right: 8px; bottom: 8px; top: auto;
+    max-height: 68vh; overflow-y: auto; z-index: 310; margin: 0;
+    padding-top: 14px;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(180deg, #2a2670, #1b1850);
+    border: 2px solid var(--tab-c, var(--pop-pink));
+    transform: translateY(calc(100% + 24px)); visibility: hidden;
+    transition: transform 0.22s ease, visibility 0s linear 0.22s;
+  }
+  html[data-appearance="light"] .dungeon-room-card { background: #ffffff; }
+  .dungeon-room-card.is-sheet-open { transform: none; visibility: visible; transition: transform 0.22s ease; }
+  .dungeon-sheet-close { display: inline-flex; position: absolute; right: 10px; top: 10px; min-width: 36px; min-height: 36px; justify-content: center; align-items: center; }
+  .dungeon-room-card .kicker { padding-right: 44px; }
+  .dungeon-room-card .wrap .tiny { min-height: 40px; }
+  /* A blurred page background would trap the pop-up inside the page instead of the screen */
+  .main-panel:has(.dungeon-room-card.is-sheet-open) { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .dungeon-sheet-backdrop { display: block; position: fixed; inset: 0; z-index: 305; background: rgba(5, 4, 20, 0.45); }
+  .dungeon-room-row { min-height: 40px; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .dungeon-room-card, .dungeon-room-card.is-sheet-open { transition: none; }
+}
+html[data-appearance="light"] .dungeon-cell { background: color-mix(in srgb, var(--room) 30%, #ffffff); border-color: color-mix(in srgb, var(--room) 75%, #000); color: #1b1640; }
+html[data-appearance="light"] .dungeon-cell.tier-twin, html[data-appearance="light"] .dungeon-cell.tier-grand { background: color-mix(in srgb, var(--room) 50%, #ffffff); }
+html[data-appearance="light"] .dungeon-cell.is-entrance { --room: #6b6790; background: #f3f2fb; }
