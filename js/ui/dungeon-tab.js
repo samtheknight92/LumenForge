@@ -11,7 +11,9 @@ import {
   roomRule,
   roomTierLabel,
   dungeonTheme,
-  keyPiecesFound
+  keyPiecesFound,
+  doorSet,
+  roomExits
 } from '../gm/dungeon-maker.js'
 
 /** Dungeon tab (GM Mode only): roll a dice-grid dungeon and see what every room does. */
@@ -62,7 +64,7 @@ function renderControls() {
       </div>
       <details class="dungeon-how mt-8">
         <summary>How it works</summary>
-        <p class="subtle mt-8">Each die is a room and its number says what's inside. Touching dice are joined by a door. Matching dice that touch merge into one bigger room. The party starts at the bottom middle and needs <strong id="dungeon-keys-label">${keyPiecesNeeded(count)}</strong> key piece(s) to open the 💀 Boss door.</p>
+        <p class="subtle mt-8">Each die is a room and its number says what's inside. Matching dice that touch merge into one bigger room. The white doors show which rooms lead where, and every room can be reached from the Start. The party starts at the bottom middle and needs <strong id="dungeon-keys-label">${keyPiecesNeeded(count)}</strong> key piece(s) to open the 💀 Boss door.</p>
         ${renderLegend()}
       </details>
     </section>
@@ -82,13 +84,15 @@ function renderLegend() {
   return `<div class="dungeon-legend mt-8">${LEGEND.map(([cls, icon, label]) => `<span class="dungeon-legend-chip ${cls}">${icon} ${label}</span>`).join('')}</div>`
 }
 
-function linkClasses(dungeon, cell) {
-  const at = new Map(dungeon.cells.map(c => [`${c.row},${c.col}`, c]))
+function linkClasses(dungeon, cell, at, doors) {
   const right = at.get(`${cell.row},${cell.col + 1}`)
   const below = at.get(`${cell.row + 1},${cell.col}`)
   const out = []
+  const hasDoor = next => doors.has(`${Math.min(cell.id, next.id)}-${Math.max(cell.id, next.id)}`)
   if (right && right.roomId === cell.roomId) out.push('link-r')
+  else if (right && hasDoor(right)) out.push('door-r')
   if (below && below.roomId === cell.roomId) out.push('link-b')
+  else if (below && hasDoor(below)) out.push('door-b')
   return out.join(' ')
 }
 
@@ -96,6 +100,8 @@ function renderMap(dungeon) {
   const firstCellOfRoom = new Map()
   for (const room of dungeon.rooms) firstCellOfRoom.set(room.id, Math.min(...room.cellIds))
   const roomsById = new Map(dungeon.rooms.map(room => [room.id, room]))
+  const at = new Map(dungeon.cells.map(c => [`${c.row},${c.col}`, c]))
+  const doors = doorSet(dungeon)
 
   const cells = dungeon.cells.map(cell => {
     const room = roomsById.get(cell.roomId)
@@ -108,7 +114,7 @@ function renderMap(dungeon) {
       room.tier !== 'single' ? `tier-${room.tier}` : '',
       room.cleared && room.kind !== 'entrance' ? 'is-cleared' : '',
       selected ? 'is-selected' : '',
-      linkClasses(dungeon, cell)
+      linkClasses(dungeon, cell, at, doors)
     ].filter(Boolean).join(' ')
     const boss = cell.id === dungeon.bossCellId
       ? `<span class="dungeon-boss-door side-${esc(dungeon.bossSide)}" title="Boss door">💀</span>`
@@ -148,6 +154,14 @@ function renderRoomDetails(dungeon) {
   const theme = dungeonTheme(dungeon)
   const hasBoss = room.cellIds.includes(dungeon.bossCellId)
   const extras = []
+  const roomsById = new Map(dungeon.rooms.map(r => [r.id, r]))
+  const exits = roomExits(dungeon, room.id).map(id => roomsById.get(id)).filter(Boolean).sort((a, b) => a.number - b.number)
+  extras.push(`
+    <div class="dungeon-exits">
+      <strong>Doors to:</strong>
+      ${exits.length ? exits.map(exit => `<button type="button" class="dungeon-exit-chip" data-dungeon-select-room="${exit.id}">${roomRule(exit)?.icon || ''} Room ${exit.number}</button>`).join('') : '<span class="subtle">none</span>'}
+    </div>
+  `)
 
   if (room.trap) extras.push(`<p><strong>The trap:</strong> ${esc(room.trap)}.</p>`)
   if (room.puzzle) extras.push(`<p><strong>The puzzle:</strong> ${esc(room.puzzle)}</p>`)
@@ -203,6 +217,8 @@ function renderRoomList(dungeon) {
         ${rooms.map(room => {
           const rule = roomRule(room)
           const bits = []
+          const exitNumbers = roomExits(dungeon, room.id).map(id => dungeon.rooms.find(r => r.id === id)?.number).filter(Boolean).sort((a, b) => a - b)
+          if (exitNumbers.length) bits.push(`doors to ${exitNumbers.join(', ')}`)
           if (room.keyPieces) bits.push(`🗝️${room.keyPieces > 1 ? ` ×${room.keyPieces}` : ''}${room.hiddenKey ? ' (hidden)' : ''}`)
           if (room.cellIds.includes(dungeon.bossCellId)) bits.push('💀 Boss door')
           if (room.treasure.length) bits.push(room.treasure.join(', '))

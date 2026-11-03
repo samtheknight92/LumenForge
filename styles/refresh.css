@@ -957,3 +957,25 @@ html[data-appearance="light"] .dungeon-key-line { color: #8a6400; }
 html[data-appearance="light"] .dungeon-cell { background: color-mix(in srgb, var(--room) 30%, #ffffff); border-color: color-mix(in srgb, var(--room) 75%, #000); color: #1b1640; }
 html[data-appearance="light"] .dungeon-cell.tier-twin, html[data-appearance="light"] .dungeon-cell.tier-grand { background: color-mix(in srgb, var(--room) 50%, #ffffff); }
 html[data-appearance="light"] .dungeon-cell.is-entrance { --room: #6b6790; background: #f3f2fb; }
+
+/* Dungeon doors: a white door in the gap between two rooms that connect */
+.dungeon-cell.door-r::after, .dungeon-cell.door-b::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  background: #ffffff;
+  border: 2px solid #1b1640;
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.55);
+}
+.dungeon-cell.door-r::after { left: calc(100% - 4px); top: 34%; width: 14px; height: 32%; }
+.dungeon-cell.door-b::before { top: calc(100% - 4px); left: 34%; height: 14px; width: 32%; }
+html[data-appearance="light"] .dungeon-cell.door-r::after, html[data-appearance="light"] .dungeon-cell.door-b::before { background: #fff7d6; border-color: #3a2f00; box-shadow: none; }
+.dungeon-exits { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.dungeon-exit-chip {
+  font: inherit; font-size: 13px; font-weight: 700; color: inherit; cursor: pointer;
+  padding: 4px 10px; min-height: 32px; border-radius: 999px;
+  border: 1px solid var(--tab-c, var(--pop-pink));
+  background: color-mix(in srgb, var(--tab-c, var(--pop-pink)) 18%, transparent);
+}
+@media (max-width: 760px) { .dungeon-exit-chip { min-height: 40px; } }
