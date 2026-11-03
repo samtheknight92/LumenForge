@@ -61,6 +61,22 @@ for (let n = 5; n <= 100; n++) {
     assert(pieces >= dungeon.keyPiecesNeeded, `${n}/${seed}: only ${pieces} of ${dungeon.keyPiecesNeeded} key pieces`)
     assert(dungeon.bossCellId !== dungeon.entranceCellId, 'boss door not at entrance')
     assert(sideOk(dungeon), `${n}/${seed}: boss door not on an outside wall`)
+    // Doors: only between two different touching rooms, and every room can be reached from the Entrance.
+    for (const door of dungeon.doors) {
+      const a = dungeon.cells[door.a]
+      const b = dungeon.cells[door.b]
+      assert(Math.abs(a.row - b.row) + Math.abs(a.col - b.col) === 1, `${n}/${seed}: door between dice that don't touch`)
+      assert(a.roomId !== b.roomId, `${n}/${seed}: door inside one room`)
+    }
+    assert(dungeon.doors.length >= dungeon.rooms.length - 1, `${n}/${seed}: too few doors to reach every room`)
+    const reached = new Set([entrance.id])
+    const queue = [entrance.id]
+    while (queue.length) {
+      for (const next of dm.roomExits(dungeon, queue.shift())) {
+        if (!reached.has(next)) { reached.add(next); queue.push(next) }
+      }
+    }
+    assert(reached.size === dungeon.rooms.length, `${n}/${seed}: ${dungeon.rooms.length - reached.size} room(s) cut off from the Entrance`)
     // Room numbers 1..R.
     const numbers = dungeon.rooms.map(r => r.number).sort((a, b) => a - b)
     assert(numbers.every((x, i) => x === i + 1), 'room numbers are 1..R')
@@ -73,6 +89,16 @@ assert(d.themeId === 'forge', 'chosen theme kept')
 const loaded = dm.normalizeDungeon(JSON.parse(JSON.stringify(d)))
 assert(loaded && loaded.rooms.length === d.rooms.length, 'dungeon survives save/load')
 assert(dm.normalizeDungeon({ cells: [] }) === null, 'broken dungeon rejected')
+assert(loaded.doors.length === d.doors.length, 'doors survive save/load')
+const oldSave = JSON.parse(JSON.stringify(d))
+delete oldSave.doors
+const upgraded = dm.normalizeDungeon(oldSave)
+assert(upgraded.doors.length >= upgraded.rooms.length - 1, 'a dungeon saved before doors existed gets doors when loaded')
+
+// Some loops: across many dungeons there are more doors than the bare minimum.
+const extra = Array.from({ length: 30 }, (_, i) => dm.generateDungeon({ rooms: 40, rng: seeded(500 + i) }))
+  .reduce((sum, x) => sum + x.doors.length - (x.rooms.length - 1), 0)
+assert(extra > 0, 'no extra doors ever added, so there are never any loops')
 
 // Moving the boss door.
 const target = d.cells.find(c => c.id !== d.entranceCellId && c.id !== d.bossCellId)

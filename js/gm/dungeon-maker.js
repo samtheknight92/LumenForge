@@ -235,7 +235,7 @@ export function generateDungeon({ rooms = DUNGEON_DEFAULT_ROOMS, themeId = '', r
   const theme = DUNGEON_THEMES.find(t => t.id === themeId) || roll.pick(DUNGEON_THEMES)
 
   const dungeon = {
-    version: 1,
+    version: 2,
     diceCount,
     width: layout.width,
     rows: layout.rows,
@@ -247,23 +247,105 @@ export function generateDungeon({ rooms = DUNGEON_DEFAULT_ROOMS, themeId = '', r
     bossSide: 'top',
     cells: cells.map(({ id, row, col, value, roomId }) => ({ id, row, col, value, roomId })),
     rooms: roomsOut,
-    selectedRoomId: roomsOut[entranceCell.roomId].id
+    selectedRoomId: roomsOut[entranceCell.roomId].id,
+    doors: []
   }
+  dungeon.doors = generateDoors(dungeon, rng)
   const boss = suggestBossDoor(dungeon)
   dungeon.bossCellId = boss.cellId
   dungeon.bossSide = boss.side
   return dungeon
 }
 
-/** Steps from the Entrance to every die (through any touching dice). */
+/** Share of the extra walls (beyond what's needed to reach every room) that also get a door, for a few loops. */
+export const EXTRA_DOOR_CHANCE = 0.2
+
+const doorKey = (a, b) => (a < b ? `${a}-${b}` : `${b}-${a}`)
+
+/** Every place two different rooms touch, grouped by the pair of rooms. */
+function roomBorders(dungeon) {
+  const byPair = new Map()
+  const neighbours = neighbourMap(dungeon.cells)
+  for (const cell of dungeon.cells) {
+    for (const { side, cell: next } of neighbours.get(cell.id)) {
+      if (!next || (side !== 'right' && side !== 'bottom') || next.roomId === cell.roomId) continue
+      const key = doorKey(cell.roomId, next.roomId)
+      if (!byPair.has(key)) byPair.set(key, { rooms: [cell.roomId, next.roomId], edges: [] })
+      byPair.get(key).edges.push({ a: cell.id, b: next.id })
+    }
+  }
+  return [...byPair.values()]
+}
+
+/**
+ * Random doors between rooms. First a random "tree" of doors that reaches every room
+ * (so nothing is ever cut off from the Entrance), then a few extra doors for loops and shortcuts.
+ */
+export function generateDoors(dungeon, rng = Math.random, extraChance = EXTRA_DOOR_CHANCE) {
+  const borders = roomBorders(dungeon)
+  for (let i = borders.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1))
+    ;[borders[i], borders[j]] = [borders[j], borders[i]]
+  }
+  const parent = new Map(dungeon.rooms.map(room => [room.id, room.id]))
+  const find = id => {
+    while (parent.get(id) !== id) {
+      parent.set(id, parent.get(parent.get(id)))
+      id = parent.get(id)
+    }
+    return id
+  }
+  const doors = []
+  const addDoor = border => {
+    const edge = border.edges[Math.floor(rng() * border.edges.length)]
+    doors.push({ a: Math.min(edge.a, edge.b), b: Math.max(edge.a, edge.b) })
+  }
+  const leftover = []
+  for (const border of borders) {
+    const [x, y] = border.rooms.map(find)
+    if (x !== y) {
+      parent.set(x, y)
+      addDoor(border)
+    } else {
+      leftover.push(border)
+    }
+  }
+  for (const border of leftover) if (rng() < extraChance) addDoor(border)
+  return doors.sort((p, q) => p.a - q.a || p.b - q.b)
+}
+
+/** Set of "a-b" cell pairs that have a door between them. */
+export function doorSet(dungeon) {
+  return new Set((dungeon?.doors || []).map(door => doorKey(door.a, door.b)))
+}
+
+/** Rooms you can walk to from this room through a door, by room id. */
+export function roomExits(dungeon, roomId) {
+  const byId = new Map(dungeon.cells.map(cell => [cell.id, cell]))
+  const out = new Set()
+  for (const door of dungeon.doors || []) {
+    const a = byId.get(door.a)
+    const b = byId.get(door.b)
+    if (!a || !b) continue
+    if (a.roomId === roomId) out.add(b.roomId)
+    if (b.roomId === roomId) out.add(a.roomId)
+  }
+  return [...out]
+}
+
+/** Steps from the Entrance to every die, walking through rooms and their doors. */
 export function distancesFromEntrance(dungeon) {
   const neighbours = neighbourMap(dungeon.cells)
+  const doors = doorSet(dungeon)
+  const useDoors = Array.isArray(dungeon.doors)
   const dist = new Map([[dungeon.entranceCellId, 0]])
   const queue = [dungeon.entranceCellId]
   while (queue.length) {
     const id = queue.shift()
+    const here = dungeon.cells[id]
     for (const { cell } of neighbours.get(id)) {
-      if (cell && !dist.has(cell.id)) {
+      const open = cell && (!useDoors || cell.roomId === here.roomId || doors.has(doorKey(id, cell.id)))
+      if (open && !dist.has(cell.id)) {
         dist.set(cell.id, dist.get(id) + 1)
         queue.push(cell.id)
       }
@@ -341,8 +423,13 @@ export function normalizeDungeon(raw) {
   if (!Array.isArray(raw.cells) || !Array.isArray(raw.rooms) || !raw.cells.length || !raw.rooms.length) return null
   const roomIds = new Set(raw.rooms.map(room => room?.id))
   if (raw.cells.some(cell => !cell || !roomIds.has(cell.roomId))) return null
+  const cellIds = new Set(raw.cells.map(cell => cell.id))
+  const doors = Array.isArray(raw.doors)
+    ? raw.doors.filter(door => door && cellIds.has(door.a) && cellIds.has(door.b)).map(door => ({ a: Number(door.a), b: Number(door.b) }))
+    : generateDoors(raw)
   return {
     ...raw,
+    doors,
     diceCount: clampRoomCount(raw.diceCount),
     rooms: raw.rooms.map(room => ({
       ...room,
