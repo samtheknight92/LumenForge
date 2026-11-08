@@ -2720,8 +2720,10 @@ body.skill-sheet-open {
   margin-top: 0.25rem;
   opacity: 0.75;
 }
-.homebrew-item-not-weapon .hb-weapon-field { display: none; }
-.homebrew-item-not-offhand .hb-offhand-field { display: none; }
+/* Fields shared by weapons and off-hands (e.g. Damage) hide only when the item is neither. */
+.homebrew-item-not-weapon .hb-weapon-field:not(.hb-offhand-field) { display: none; }
+.homebrew-item-not-offhand .hb-offhand-field:not(.hb-weapon-field) { display: none; }
+.homebrew-item-not-weapon.homebrew-item-not-offhand .hb-weapon-field.hb-offhand-field { display: none; }
 .homebrew-lock-grid {
   display: flex;
   flex-wrap: wrap;
@@ -3189,3 +3191,10 @@ body.skill-sheet-open {
 }
 .weather-section { border-top: 1px solid var(--border); padding-top: 1rem; }
 .subtle-pill { opacity: 0.85; }
+
+/* Homebrew Balance check (editor + import preview) */
+.homebrew-balance-check { margin-top: 4px; }
+.homebrew-balance-check .pill { display: inline-block; white-space: normal; line-height: 1.4; border-radius: 12px; margin: 0; }
+.homebrew-balance-check ul { margin: 6px 0 0; padding-left: 18px; font-size: .9em; }
+.homebrew-import-balance summary { cursor: pointer; font-weight: 600; }
+.homebrew-import-balance > .grid { max-height: 40vh; overflow-y: auto; }

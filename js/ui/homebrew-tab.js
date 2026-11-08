@@ -4,7 +4,7 @@ import { state, activeCharacter } from '../core/state.js'
 import { getRace, getSkill, getItem } from '../core/cache.js'
 import { getEffect } from '../character/character.js'
 import { displayCategory, displaySubcategory } from '../skills/skills.js'
-import { listHomebrewItems, listHomebrewSkills, listHomebrewRaces, listHomebrewBackgrounds, listHomebrewRecipes, listHomebrewMonsterTypes, listHomebrewMonsterRoles, listHomebrewMonsterSpecials, homebrewSkillTreeOptions, homebrewRaceOptionsForSkills, homebrewWeaponKindOptions, weaponKindDisplayLabel, homebrewSkillLockOptions, homebrewSkillLockSummary, homebrewBalanceWarning, listMonsterTemplateSkillOptions, MONSTER_IMMUNITY_EXTRA_TAGS } from '../homebrew/homebrew.js'
+import { normalizeHomebrewItem, normalizeHomebrewSkill, listHomebrewItems, listHomebrewSkills, listHomebrewRaces, listHomebrewBackgrounds, listHomebrewRecipes, listHomebrewMonsterTypes, listHomebrewMonsterRoles, listHomebrewMonsterSpecials, homebrewSkillTreeOptions, homebrewRaceOptionsForSkills, homebrewWeaponKindOptions, weaponKindDisplayLabel, homebrewSkillLockOptions, homebrewSkillLockSummary, homebrewBalanceWarning, listMonsterTemplateSkillOptions, MONSTER_IMMUNITY_EXTRA_TAGS } from '../homebrew/homebrew.js'
 import { homebrewDamageStatLabel } from '../homebrew/homebrew-combat.js'
 import { itemHasCounter, itemCounterLabel } from '../items/items.js'
 import { renderEffectPill } from './shared-panels.js'
@@ -15,6 +15,7 @@ import { itemTooltip, skillTooltip } from './tooltips-text.js'
 import { resolveItemPresentation, renderCursedBadgeHtml, itemCardClass, itemCursedNameClass } from '../items/item-presentation.js'
 import { backgroundItemLabel } from '../character/backgrounds.js'
 import { ELEMENTS, normalizeBuilderElementId } from '../combat/elemental-affinity.js'
+import { homebrewItemBalance, homebrewSkillBalance, renderBalanceCheck } from '../homebrew/balance-check.js'
 
 /** Homebrew tab — custom item, skill, race, background, recipe and monster editors, plus pack import. */
 
@@ -234,6 +235,34 @@ function homebrewItemEditorClass(draft) {
   return classes.join(' ')
 }
 
+function homebrewBalanceBox(kind, draft) {
+  const result = kind === 'skill' ? homebrewSkillBalance(draft) : homebrewItemBalance(draft)
+  return `<div class="span-2" data-homebrew-balance-box="${kind}">${renderBalanceCheck(result, esc)}</div>`
+}
+
+/** Re-run the Balance check for the open editor without a full re-render (called while typing). */
+export function refreshHomebrewBalanceBox(kind) {
+  const box = typeof document !== 'undefined' ? document.querySelector(`[data-homebrew-balance-box="${kind}"]`) : null
+  if (!box) return
+  const draft = kind === 'skill' ? state.homebrewSkillDraft : state.homebrewDraft
+  if (!draft) return
+  box.innerHTML = renderBalanceCheck(kind === 'skill' ? homebrewSkillBalance(draft) : homebrewItemBalance(draft), esc)
+}
+
+function importBalanceRows(parsed) {
+  const rows = []
+  for (const raw of Object.values(parsed?.items || {})) {
+    const item = normalizeHomebrewItem(raw)
+    const result = item && homebrewItemBalance(item)
+    if (result) rows.push({ name: item.name, result })
+  }
+  for (const raw of Object.values(parsed?.skills || {})) {
+    const skill = normalizeHomebrewSkill(raw)
+    if (skill) rows.push({ name: skill.name, result: homebrewSkillBalance(skill) })
+  }
+  return rows
+}
+
 function homebrewBalanceTagChips(draft, prefix) {
   const selected = new Set(draft?.balanceTags || [])
   return `
@@ -333,6 +362,8 @@ function renderHomebrewImportModal() {
     `<li>${esc(row.kind)} <strong>${esc(row.id)}</strong> — ${row.action === 'skip' ? 'will skip (official)' : 'will overwrite local'}</li>`
   ).join('')
   const mode = block.mode || 'merge'
+  const balanceRows = importBalanceRows(block.parsed)
+  const balanceWarnings = balanceRows.filter(row => row.result.tone === 'warn').length
   return `
     <div class="modal-backdrop homebrew-import-modal" data-homebrew-import-dismiss>
       <section class="card modal-card">
@@ -346,6 +377,14 @@ function renderHomebrewImportModal() {
         <p class="subtle">Incoming: ${esc(incoming)}</p>
         <p class="subtle">New: ${preview.newEntries?.length || 0} · Conflicts: ${preview.conflicts?.length || 0}</p>
         ${conflictRows ? `<ul class="subtle mt-12">${conflictRows}</ul>` : ''}
+        ${balanceRows.length ? `
+          <details class="homebrew-import-balance mt-12" ${balanceWarnings ? 'open' : ''}>
+            <summary>Balance check: ${balanceWarnings ? `${balanceWarnings} of ${balanceRows.length} entries look off` : `all ${balanceRows.length} entries look fair`}</summary>
+            <div class="grid one mt-12">${balanceRows.map(row => `
+              <div><strong>${esc(row.name)}</strong>${renderBalanceCheck(row.result, esc)}</div>
+            `).join('')}</div>
+          </details>
+        ` : ''}
         <div class="grid one mt-16">
           <label class="pill-label"><input type="radio" name="homebrew-import-mode" value="merge" ${mode === 'merge' ? 'checked' : ''} data-homebrew-import-mode /> Merge (incoming wins on conflicts)</label>
           <label class="pill-label"><input type="radio" name="homebrew-import-mode" value="replace" ${mode === 'replace' ? 'checked' : ''} data-homebrew-import-mode /> Replace all local homebrew</label>
@@ -879,6 +918,7 @@ export function renderHomebrewTab() {
         ${homebrewItemMetaFields(draft)}
         ${homebrewItemCurseFields(draft)}
         ${homebrewApprovalField(draft, 'hb-approval-status')}
+        ${homebrewBalanceBox('item', draft)}
         ${homebrewBalanceTagChips(draft, 'hb-balance')}
         <div class="span-2">
           <button type="submit" class="primary-btn">Save item</button>
@@ -980,6 +1020,7 @@ export function renderHomebrewTab() {
         })}
         ${renderHomebrewSkillLocksSection(skillDraft)}
         ${homebrewApprovalField(skillDraft, 'hbs-approval-status')}
+        ${homebrewBalanceBox('skill', skillDraft)}
         ${homebrewBalanceTagChips(skillDraft, 'hbs-balance')}
         <label class="field-label mt-12 span-2">Tags (comma-separated)</label>
         <input class="input span-2" name="hbs-tags" value="${esc(skillDraft.tagsText || '')}" placeholder="fire, control, healing" />
