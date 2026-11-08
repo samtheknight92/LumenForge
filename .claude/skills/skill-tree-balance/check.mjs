@@ -44,6 +44,33 @@ function targetsOf(desc) {
   return 1
 }
 
+// What each status is worth, in "points of damage" so it adds onto damage.
+// perTurn = value per turn it lasts (counted up to 4 turns); flat = whole value.
+const STATUS_VALUE = {
+  incapacitated: { perTurn: 4 }, mind_controlled: { perTurn: 4 }, stunning: { perTurn: 4 }, charm: { perTurn: 3 },
+  fear: { perTurn: 2.5 }, blinded: { perTurn: 2 }, silenced: { perTurn: 2 }, knockdown: { flat: 2 },
+  immobilized: { perTurn: 1.5 }, weakened: { perTurn: 1.5 }, exhausted: { perTurn: 1.5 }, cursed: { perTurn: 1.5 },
+  burn: { flat: 5 }, poison: { flat: 6 }, bleeding: { flat: 3 }, acid_corrosion: { flat: 3 }
+}
+const statusPoints = acts => acts.reduce((t, a) => {
+  const v = STATUS_VALUE[a.effectId]; if (!v) return t
+  const chance = a.chance == null ? 1 : Math.min(1, a.chance)
+  return t + chance * (v.flat ?? v.perTurn * Math.min(4, Math.max(1, Number(a.duration || 1))))
+}, 0)
+// Extra benefits written in the text ("riders"), also in points of damage.
+const RIDERS = [
+  ['accuracy bonus', /accuracy\s*\+\s*(\d)|\+(\d) accuracy/, m => 0.5 * Number(m[1] || m[2])],
+  ['heals you', /heal (?:yourself|you)|you heal|heal for half/, () => 2],
+  ['push / knock back', /\bpush|knock (?:back|prone)|knockdown/, () => 1],
+  ['ignores cover or defence', /ignore[s]? (?:half )?cover|ignores? \d+ (?:points of )?(?:physical|magical|total)? ?defence/, () => 1.5],
+  ['defence for you', /you gain \+(\d) (?:physical|magical) defence|gain \+(\d) physical defence/, m => 0.75 * Number(m[1] || m[2])],
+  ['better crits', /critical hit on (?:a )?natural 1[5-9]/, () => 1],
+  ['free movement', /teleport|move up to \d+ ?ft/, () => 1],
+  ['lowers enemy defence', /defence is \d+ lower|reduce the target's (?:physical|magical) defence|defence by \d/, () => 1.5]
+]
+// Uses that are limited may be stronger per use without being unfair.
+const limitFactor = d => /per day|per long rest|once per rest/.test(d) ? 0.4 : /once per (?:combat|scene|encounter)/.test(d) ? 0.6 : 1
+
 // Work out what a skill is FOR, and a rough power number on that role's scale.
 function profile(s) {
   const desc = String(s.desc || '')
@@ -58,7 +85,8 @@ function profile(s) {
   let dmg = 0
   if (attack) {
     dmg = (dice[0] || 0) + (/weapon damage|basic attack|gore damage|bite damage|claw damage/.test(d) ? AVG_WEAPON_DIE : 0)
-    if (/\+\s*(magic power|strength)/.test(d)) dmg += 2
+    // + Strength / + Magic Power, or weapon damage (which always adds Strength): about +2 at mid level.
+    if (/\+\s*(magic power|strength)/.test(d) || /weapon damage|basic attack/.test(d)) dmg += 2
   }
   const targets = targetsOf(desc)
   const control = hostile.reduce((t, a) => t + (a.chance == null ? 1 : Math.min(1, a.chance)) * Math.max(1, Number(a.duration || 1)), 0) +
@@ -74,11 +102,18 @@ function profile(s) {
   else if (support || /\+\d+ (physical|magical) defence|resist|shield|barrier|armou?r/.test(d)) role = 'support'
   else role = 'utility'
 
-  const power = role === 'damage' ? dmg * targets + control * 0.75
-    : role === 'healing' ? heal * (/\ball allies|each ally|allies within|party/.test(d) ? 2.5 : 1)
-    : role === 'control' ? control * targets
+  const onTarget = acts.filter(a => a.applyTo !== 'self' && a.applyTo !== 'ally')
+  const effectPts = statusPoints(onTarget) + (/save or|until it beats|stop at the edge|difficult terrain|cannot act|held\b/.test(d) && !onTarget.length ? 3 : 0)
+  const riders = RIDERS.map(([name, re, f]) => { const m = d.match(re); return m ? { name, pts: f(m) } : null }).filter(Boolean)
+  const riderPts = riders.reduce((t, r) => t + r.pts, 0)
+  const limit = limitFactor(d)
+  const raw = role === 'damage' ? dmg * targets + effectPts * targets + riderPts
+    : role === 'healing' ? heal * (/\ball allies|each ally|allies within|party/.test(d) ? 2.5 : 1) + riderPts
+    : role === 'control' ? effectPts * targets + riderPts
     : 0
-  return { kind, role, power: Math.round(power * 10) / 10, dmg, heal, control: Math.round(control * 10) / 10, targets, stamina: Number(s.staminaCost || 0) }
+  const power = raw * limit
+  const r1 = x => Math.round(x * 10) / 10
+  return { kind, role, power: r1(power), dmg, dicePts: r1(dmg * targets), effectPts: r1(effectPts * targets), riderPts: r1(riderPts), riders: riders.map(r => r.name), limit, heal, control: r1(control), targets, stamina: Number(s.staminaCost || 0) }
 }
 
 for (const s of skills) s.p = profile(s)
@@ -133,10 +168,11 @@ for (const s of skills) roles[s.p.role] = (roles[s.p.role] || 0) + 1
 out.push(`# Skill tree balance — ${skills.length} skills${onlyTree ? ` (tree: ${onlyTree})` : ''}`, '')
 out.push(`Roles found: ${Object.entries(roles).map(([k, v]) => `${k} ${v}`).join(', ')}.`, '')
 out.push(`## Much stronger or weaker than tier peers (${flags.length})`, '')
-out.push('Power = average damage x targets (+ a little for status effects), or average healing, or control (chance x turns). Peers = active skills of the same tier and role.', '')
+out.push('Power = average dice damage x targets + status effects (each status priced by how much it shuts a foe down, x chance, x turns) + extras in the text (accuracy, pushes, self-heal, ignoring defence…). Skills limited to once per combat or per day count for less per use, so they are allowed to hit harder. Peers = active skills of the same tier, role and shape.', '')
 for (const f of flags.sort((a, b) => b.ratio - a.ratio)) {
   const { s } = f
-  out.push(`- **${s.name}** (${s.tree}, Tier ${s.tier}, ${f.shape} ${s.p.role}) power ${s.p.power} vs typical ${f.med} for ${f.peers} Tier ${s.tier} ${f.shape} ${s.p.role} skills (${f.ratio.toFixed(1)}x), Stamina ${s.p.stamina} vs typical ${f.medSt}. "${s.desc.slice(0, 180)}${s.desc.length > 180 ? '…' : ''}"`)
+  const parts = s.p.role === 'damage' ? ` [dice ${s.p.dicePts} + status effects ${s.p.effectPts} + extras ${s.p.riderPts}${s.p.riders.length ? ` (${s.p.riders.join(', ')})` : ''}${s.p.limit < 1 ? `, x${s.p.limit} because it is limited per combat/day` : ''}]` : s.p.role === 'control' ? ` [status effects ${s.p.effectPts} + extras ${s.p.riderPts}${s.p.limit < 1 ? `, x${s.p.limit} limited use` : ''}]` : ''
+  out.push(`- **${s.name}** (${s.tree}, Tier ${s.tier}, ${f.shape} ${s.p.role}) power ${s.p.power}${parts} vs typical ${f.med} for ${f.peers} Tier ${s.tier} ${f.shape} ${s.p.role} skills (${f.ratio.toFixed(1)}x), Stamina ${s.p.stamina} vs typical ${f.medSt}. "${s.desc.slice(0, 180)}${s.desc.length > 180 ? '…' : ''}"`)
 }
 out.push('', '## Area vs single-target price check', '')
 for (const tier of [1, 2, 3, 4, 5]) {

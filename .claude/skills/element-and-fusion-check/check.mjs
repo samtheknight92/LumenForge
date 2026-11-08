@@ -137,23 +137,49 @@ out.push('', `## 5. Fusion rule: two normal skills of Tier N or N-1, one from ea
 for (const r of ruleBreaks.slice(0, MAX)) out.push(`- ${r}`)
 
 // ---------- 6. Strictly better than its parts ----------
+// Power = dice x targets + status effects (priced by how hard each one shuts a foe down)
+// + extras written in the text. Same model as skill-tree-balance.
+const STATUS_VALUE = {
+  incapacitated: { perTurn: 4 }, mind_controlled: { perTurn: 4 }, stunning: { perTurn: 4 }, charm: { perTurn: 3 },
+  fear: { perTurn: 2.5 }, blinded: { perTurn: 2 }, silenced: { perTurn: 2 }, knockdown: { flat: 2 },
+  immobilized: { perTurn: 1.5 }, weakened: { perTurn: 1.5 }, exhausted: { perTurn: 1.5 }, cursed: { perTurn: 1.5 },
+  burn: { flat: 5 }, poison: { flat: 6 }, bleeding: { flat: 3 }, acid_corrosion: { flat: 3 }
+}
+const RIDERS = {
+  'accuracy bonus': /accuracy\s*\+\s*\d|\+\d accuracy/, 'heals you': /heal (?:yourself|you)|you heal|heal for half|heal yourself/,
+  'push / knock back': /\bpush|knock (?:back|prone)|knockdown/, 'ignores cover or defence': /ignore[s]? (?:half )?cover|ignores? \d+ (?:points of )?(?:physical|magical|total)? ?defence/,
+  'defence for you': /you gain \+\d (?:physical|magical) defence/, 'free movement': /teleport|move up to \d+ ?ft|tunnel/,
+  'lowers enemy defence': /defence is \d+ lower|reduce the target's (?:physical|magical) defence/, 'heals allies': /all(?:y|ies)[^.]*(?:heal|regain|restore)|heal[^.]*all(?:y|ies)/,
+  'buffs allies': /all(?:y|ies)[^.]*gain/, 'once per combat or day': /once per|per day|per long rest/
+}
+const statusPts = s => (s.activationEffects || []).filter(a => a.applyTo !== 'self' && a.applyTo !== 'ally').reduce((t, a) => {
+  const v = STATUS_VALUE[a.effectId]; if (!v) return t
+  const c = a.chance == null ? 1 : Math.min(1, a.chance)
+  return t + c * (v.flat ?? v.perTurn * Math.min(4, Math.max(1, Number(a.duration || 1))))
+}, 0)
+const ridersOf = s => new Set(Object.entries(RIDERS).filter(([, re]) => re.test(String(s.desc).toLowerCase())).map(([k]) => k))
+const powerOf = s => { const t = targets(s.desc); return (firstDice(s.desc) + statusPts(s)) * t }
 const strict = []
+const close = []
 for (const f of fusions) {
   const pre = (f.prerequisites?.skills || []).map(id => byId.get(id)).filter(Boolean)
-  if (pre.length !== 2) continue
-  const fd = firstDice(f.desc) * targets(f.desc)
-  const fs_ = statusesOf(f)
-  if (!fd) continue
-  const better = pre.every(p => {
-    const pd = firstDice(p.desc) * targets(p.desc)
-    const ps = statusesOf(p)
-    return pd > 0 && fd >= pd && Number(f.staminaCost || 0) <= Number(p.staminaCost || 0) && [...ps].every(x => fs_.has(x))
+  if (pre.length !== 2 || !firstDice(f.desc)) continue
+  const fp = powerOf(f); const fr = ridersOf(f); const fs_ = statusesOf(f)
+  const verdicts = pre.map(p => {
+    const pp = powerOf(p); const pr = ridersOf(p)
+    const lostRiders = [...pr].filter(x => x !== 'once per combat or day' && !fr.has(x))
+    const lostStatus = [...statusesOf(p)].filter(x => !fs_.has(x))
+    const limitedFusion = fr.has('once per combat or day') && !pr.has('once per combat or day')
+    return { p, pp, beats: pp > 0 && fp >= pp && Number(f.staminaCost || 0) <= Number(p.staminaCost || 0) && !lostRiders.length && !lostStatus.length && !limitedFusion, lostRiders, lostStatus }
   })
-  if (better) strict.push({ f, pre, fd })
+  if (verdicts.every(v => v.beats)) strict.push({ f, fp, verdicts })
+  else if (verdicts.every(v => v.pp > 0 && fp >= v.pp && Number(f.staminaCost || 0) <= Number(v.p.staminaCost || 0))) close.push({ f, verdicts })
 }
-out.push('', `## 6. Fusions strictly better than both parts — ${strict.length}`, '', 'Hits as hard or harder, for the same or less Stamina, with every status the parts had. Once learned, the two parts are never worth pressing again.', '')
-for (const s of strict.slice(0, MAX)) out.push(`- **${s.f.name}** (Tier ${s.f.tier}, ${s.f.staminaCost} Stamina, ~${Math.round(s.fd)} dmg) vs ${s.pre.map(p => `${p.name} (Tier ${p.tier}, ${p.staminaCost} Stamina, ~${Math.round(firstDice(p.desc) * targets(p.desc))} dmg)`).join(' and ')}.`)
+const r1 = x => Math.round(x * 10) / 10
+out.push('', `## 6. Fusions strictly better than both parts — ${strict.length}`, '', 'Compared on power (dice x targets + status effects, each priced by how hard it shuts a foe down), Stamina, and every extra the parent has (self-heal, push, ally buff, ignoring cover…). A fusion is only listed when it beats BOTH parents on all of these. Once learned, the two parts are never worth pressing again.', '')
+for (const s of strict.slice(0, MAX)) out.push(`- **${s.f.name}** (Tier ${s.f.tier}, ${s.f.staminaCost} Stamina, power ${r1(s.fp)}) vs ${s.verdicts.map(v => `${v.p.name} (Tier ${v.p.tier}, ${v.p.staminaCost} Stamina, power ${r1(v.pp)})`).join(' and ')}.`)
 if (strict.length > MAX) out.push(`- …and ${strict.length - MAX} more (run with --all).`)
+out.push('', `Not counted as strictly better (${close.length}): stronger and no dearer, but a parent keeps something the fusion lacks, so the parent still has a use. ${close.slice(0, 5).map(c => `${c.f.name}: ${c.verdicts.filter(v => !v.beats).map(v => `${v.p.name} keeps ${[...v.lostRiders, ...v.lostStatus].join(', ') || 'a different job'}`).join('; ')}`).join('. ')}${close.length > 5 ? '…' : ''}`)
 
 // ---------- 7. Copy-paste fusions (identity lost) ----------
 const skeleton = s => String(s.desc).toLowerCase()

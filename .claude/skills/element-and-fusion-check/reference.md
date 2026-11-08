@@ -19,7 +19,16 @@ Read from each element's Attunement ("Fire Attunement … Ice weakness 200%"). I
 
 ## Strictly better
 
-A fusion is "strictly better" than its parents when, against each parent, it does at least as much damage (first dice x targets; area = 2.5 targets), costs the same or less Stamina, and applies every status the parent applied.
+Uses the same power model as skill-tree-balance: dice x targets plus status effects, each priced by how hard it shuts a foe down (Incapacitated 4 a turn, Weakened 1.5 a turn, Burn 5, Poison 6…), times chance.
+
+A fusion is "strictly better" than its parents only when, against EACH parent, it:
+- has equal or higher power,
+- costs the same or less Stamina,
+- applies every status the parent applies, and
+- keeps every extra the parent has (self-heal, push, ally heal or buff, ignoring cover, lowering defence, free movement), and
+- is not more limited (once per combat / per day) than the parent.
+
+Fusions that win on power and Stamina but lose an extra are listed separately as "not strictly better": the parent still has a use.
 
 ## Same-template fusions
 

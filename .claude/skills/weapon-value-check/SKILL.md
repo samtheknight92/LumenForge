@@ -11,7 +11,7 @@ Checks every shop weapon's damage, stat bonuses, perks and enchant slots against
 
 1. From the repo root, run `node .claude/skills/weapon-value-check/check.mjs`. It only reads `data/json/items.json`. If that file looks stale, say so (it is rebuilt from `data/items-data.js` by `npm run build-data`); do not rebuild it yourself.
 2. Read the report. It has five parts: the value table, price-vs-value flags, damage dice outliers, price ladder breaks, rarity ladder breaks, and gaps.
-3. Before passing on a flag, open the weapon's text and its perk in `data/json/effects.json`. The score counts every perk as equal, so a flag can be explained by a very strong or very weak perk. Say so when that is the case.
+3. Before passing on a flag, open the weapon's text and its perk in `data/json/effects.json`. Each perk has its own value in `perk-values.json` (with a reason). If the perk's real strength differs from its listed value, say so and suggest a new value. If the report lists unpriced perks, add them to the table before trusting the flags.
 4. Report to the user in plain English, grouped by weapon. For each flag give:
    - **What**: the weapon and what looks off.
    - **Why it matters**: what a player would notice (for example "nobody buys the Demon Axe because the cheaper Berserker Axe hits harder").

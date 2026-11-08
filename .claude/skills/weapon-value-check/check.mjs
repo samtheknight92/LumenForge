@@ -22,7 +22,11 @@ const fmtGil = g => `${Math.round(g).toLocaleString('en-GB')} Gil`
 // same as one point of Strength, because Strength adds 1 to damage.
 const STAT_WEIGHT = { hp: 3, stamina: 4, strength: 10, magicPower: 10, accuracy: 8, speed: 12, physicalDefence: 10, magicalDefence: 10 }
 const DAMAGE_WEIGHT = 10
-const SPECIAL_WEIGHT = 15
+// Each perk is priced on its own (perk-values.json, next to this file). A perk
+// missing from that table falls back to 15 points and is listed as unpriced.
+const PERKS = JSON.parse(fs.readFileSync(new URL('./perk-values.json', import.meta.url), 'utf8'))
+const UNPRICED_PERK = 15
+const unpriced = new Set()
 const SLOT_WEIGHT = 5
 const RARITY_ORDER = ['common', 'uncommon', 'rare', 'epic', 'legendary']
 const HIGH = 1.6
@@ -53,17 +57,28 @@ const avgDice = f => {
 }
 
 // burn_on_hit + burn describe one perk, so count each perk once.
-const specialCount = list => new Set((list || []).map(s => s.replace(/_on_hit$|_passive$/, ''))).size
+// Twins (burn + burn_on_hit) describe one perk, so count each family once at its higher value.
+const TWINS = { burn: 'burn_on_hit', poison: 'poison_on_hit', stealth: 'stealth_strike' }
+function perkValue(list) {
+  const fam = new Map()
+  for (const id of list || []) {
+    const key = TWINS[id] || id
+    const pts = PERKS[id]?.points ?? (unpriced.add(id), UNPRICED_PERK)
+    fam.set(key, Math.max(fam.get(key) || 0, pts))
+  }
+  return { count: fam.size, points: [...fam.values()].reduce((a, b) => a + b, 0), names: [...fam.keys()] }
+}
 
 const rows = weapons.map(w => {
   const avg = avgDice(w.damage)
   const statParts = Object.entries(w.statModifiers || {}).map(([k, v]) => [k, v, v * (STAT_WEIGHT[k] ?? 8)])
   const statValue = statParts.reduce((t, p) => t + p[2], 0)
-  const specials = specialCount(w.specialEffects)
+  const perk = perkValue(w.specialEffects)
+  const specials = perk.count
   const slots = Number(w.enchantmentSlots || 0)
-  const value = avg * DAMAGE_WEIGHT + statValue + specials * SPECIAL_WEIGHT + slots * SLOT_WEIGHT
+  const value = avg * DAMAGE_WEIGHT + statValue + perk.points + slots * SLOT_WEIGHT
   const gil = toGil(w.price)
-  return { id: w.id, name: w.name, kind: kindOf(w), rarity: w.rarity, damage: w.damage, avg, stats: w.statModifiers, specials, slots, value: Math.round(value), gil, gilPerPoint: gil / Math.max(1, value) }
+  return { id: w.id, name: w.name, kind: kindOf(w), rarity: w.rarity, damage: w.damage, avg, stats: w.statModifiers, specials, perkPts: perk.points, perkNames: perk.names, damagePts: Math.round(avg * DAMAGE_WEIGHT), slots, value: Math.round(value), gil, gilPerPoint: gil / Math.max(1, value) }
 })
 
 const median = a => { const s = [...a].sort((x, y) => x - y); const n = s.length; return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : 0 }
@@ -116,14 +131,14 @@ if (process.argv.includes('--json')) {
 const statText = s => Object.entries(s || {}).map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${k}`).join(', ') || 'no stats'
 const out = []
 out.push(`# Weapon value check — ${rows.length} weapons`, '')
-out.push('Value points = average damage x10 + stat bonuses (priced like the Stats tab) + 15 per special perk + 5 per enchant slot.', '')
-out.push('## Value table', '', '| Weapon | Kind | Rarity | Damage | Value pts | Price | Gil per pt |', '|---|---|---|---|---|---|---|')
-for (const r of [...rows].sort((a, b) => a.kind.localeCompare(b.kind) || a.gil - b.gil)) out.push(`| ${r.name} | ${r.kind} | ${r.rarity} | ${r.damage} | ${r.value} | ${fmtGil(r.gil)} | ${r.gilPerPoint.toFixed(1)} |`)
+out.push('Value points = average damage x10 + stat bonuses (priced like the Stats tab) + each perk at its own value (perk-values.json) + 5 per enchant slot.', '')
+out.push('## Value table', '', '| Weapon | Kind | Rarity | Damage | Dice pts | Perk pts | Value pts | Price | Gil per pt |', '|---|---|---|---|---|---|---|---|---|')
+for (const r of [...rows].sort((a, b) => a.kind.localeCompare(b.kind) || a.gil - b.gil)) out.push(`| ${r.name} | ${r.kind} | ${r.rarity} | ${r.damage} | ${r.damagePts} | ${r.perkPts} | ${r.value} | ${fmtGil(r.gil)} | ${r.gilPerPoint.toFixed(1)} |`)
 out.push('', `## Price vs value flags (${flags.length})`, '')
 for (const f of flags.sort((a, b) => b.ratio - a.ratio)) {
   const { r } = f
   const peerText = f.peers.length ? ` Same-kind ${r.rarity} neighbours: ${f.peers.map(p => `${p.name} (${p.damage}, ${p.value} pts, ${fmtGil(p.gil)})`).join('; ')}.` : ''
-  out.push(`- **${r.name}** (${r.rarity} ${r.kind}) is ${f.kind === 'overpriced' ? 'much dearer' : 'much cheaper'} than other ${r.rarity} weapons for what it gives: ${r.damage} damage, ${statText(r.stats)}, ${r.specials} perk(s), ${r.slots} slot(s) = ${r.value} pts for ${fmtGil(r.gil)} (${f.ratio.toFixed(2)}x the ${r.rarity} average price per point).${peerText} Suggested fix: price near ${fmtGil(f.fairGil)}, or ${f.kind === 'overpriced' ? 'add damage/stats to justify the price' : 'trim its stats or damage'}.`)
+  out.push(`- **${r.name}** (${r.rarity} ${r.kind}) is ${f.kind === 'overpriced' ? 'much dearer' : 'much cheaper'} than other ${r.rarity} weapons for what it gives: ${r.damage} damage, ${statText(r.stats)}, ${r.perkNames.length ? `perk ${r.perkNames.join(' + ')} (${r.perkPts} pts)` : 'no perk'}, ${r.slots} slot(s) = ${r.value} pts for ${fmtGil(r.gil)} (${f.ratio.toFixed(2)}x the ${r.rarity} average price per point).${peerText} Suggested fix: price near ${fmtGil(f.fairGil)}, or ${f.kind === 'overpriced' ? 'add damage/stats to justify the price' : 'trim its stats or damage'}.`)
 }
 out.push('', `## Damage dice outliers (${diceOut.length})`, '')
 for (const d of diceOut) out.push(`- **${d.r.name}** (${d.r.rarity}) rolls ${d.r.damage} (average ${d.r.avg}), while a typical ${d.r.rarity} weapon averages ${d.med}. A swing this big decides fights on its own, whatever the price.`)
@@ -134,4 +149,5 @@ for (const l of rarityInv) out.push(`- **${l.high.name}** (${l.high.rarity}, ${l
 const kinds = [...new Set(rows.map(r => r.kind))]
 const missing = ['sword', 'axe', 'dagger', 'polearm', 'hammer', 'staff', 'ranged'].flatMap(k => RARITY_ORDER.filter(rar => !rows.some(r => r.kind === k && r.rarity === rar)).map(rar => `${k}/${rar}`))
 out.push('', `## Gaps in the shop`, '', `Kinds found: ${kinds.join(', ')}. Missing kind+rarity slots: ${missing.join(', ') || 'none'}.`)
+if (unpriced.size) out.push('', `## Unpriced perks (${unpriced.size})`, '', `These perks are not in perk-values.json, so they were counted at ${UNPRICED_PERK} points: ${[...unpriced].join(', ')}. Add them to the table.`)
 console.log(out.join('\n'))

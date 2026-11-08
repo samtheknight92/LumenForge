@@ -17,10 +17,21 @@ Passive / Aura = passive. Toggle = toggle. Craft / Enchant = crafting. Everythin
 
 ## Power (active skills only)
 
-- **Damage** = average of the first dice in the text (2d6 = 7), +5.5 if it adds weapon/bite/claw damage, +2 if it adds Strength or Magic Power, times targets, plus 0.75 x control.
-- **Targets**: "fire 2 shots", "four attacks", "eight cuts" etc. = that number (max 4). Area words (per creature, each enemy, radius, burst, cone, line, area) = 2.5. Otherwise 1.
-- **Healing** = average healing, x2.5 if it heals all/each ally.
-- **Control** = sum of (chance x turns) for each control status, x targets.
+Everything is counted in "points of damage" so effects and damage add up.
+
+- **Dice** = average of the first dice in the text (2d6 = 7), +5.5 if it uses weapon/bite/claw damage, +2 for weapon damage or "+ Strength / + Magic Power".
+- **Targets**: "fire 2 shots", "four attacks", "eight cuts" = that number (max 4). Area words (per creature, each enemy, radius, burst, cone, line, area) = 2.5. Otherwise 1.
+- **Status effects on the target**, each x its chance:
+  - per turn (up to 4 turns): Incapacitated / Mind Controlled 4, Charm 3, Fear 2.5, Blinded / Silenced 2, Immobilized / Weakened / Exhausted / Cursed 1.5
+  - whole effect: Poison 6, Burn 5, Bleeding 3, Acid 3, Knockdown 2
+  - text-only control ("save or…", "held", difficult terrain) with no status attached: 3
+  Status points are multiplied by targets, like damage.
+- **Extras in the text**: +N Accuracy (0.5 per point), heals you (2), push/knock back (1), ignores cover or defence (1.5), lowers enemy defence (1.5), defence for you (0.75 per point), better crits (1), free movement (1).
+- **Limited uses**: once per combat x0.6, per day / per long rest x0.4. A limited skill is allowed to be stronger per use, so its power is scaled down before comparing.
+- **Healing** = average healing (x2.5 if it heals all/each ally) + extras.
+- **Control** = status effects x targets + extras.
+
+The report shows each flagged skill's split: dice + status effects + extras, so you can see whether effects were counted.
 
 ## Thresholds
 
