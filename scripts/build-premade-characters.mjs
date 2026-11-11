@@ -167,6 +167,36 @@ function buildGear(archetype, level) {
 
 // ─── Core build ───
 
+/**
+ * Fighters (NPCs and monsters) keep their main damage stat at 0 or more, so
+ * every hit lands for its weapon or skill dice instead of the 1-damage minimum.
+ * Pedestrians are townsfolk, not fighters, so they are left as they are.
+ */
+const DAMAGE_STAT_FLOORS = [0, -1]
+const MAX_FLOOR_THREAT_DRIFT = 1
+function solveWithDamageFloor({ category, characterBase, shape, level }) {
+  const solved = solveStatsForThreatLevel({
+    computeThreatLevel: runtime.computeThreatLevel,
+    characterBase,
+    shape,
+    targetThreat: level
+  })
+  if (category === 'pedestrian') return solved
+  const stat = (shape.magicPower || 0) > (shape.strength || 0) ? 'magicPower' : 'strength'
+  // Raise only the damage stat on top of the solved build (HP and defences stay
+  // as solved). Try 0 first, then −1; if even that pushes the Threat Level more
+  // than one step off, keep the original build so the level stays honest.
+  for (const floor of DAMAGE_STAT_FLOORS) {
+    if (solved.stats[stat] >= floor) return solved
+    const stats = { ...solved.stats, [stat]: floor }
+    const info = runtime.computeThreatLevel({ ...characterBase, stats, _cache: undefined })
+    if (Math.abs(info.threatLevel - level) <= MAX_FLOOR_THREAT_DRIFT) {
+      return { stats, achievedThreatLevel: info.threatLevel, info }
+    }
+  }
+  return solved
+}
+
 let sequence = 0
 function buildEntry({ category, level, slotIndex, archetype, name, race, elementalAffinity = '' }) {
   const variant = pickVariant(level, slotIndex)
@@ -193,12 +223,7 @@ function buildEntry({ category, level, slotIndex, archetype, name, race, element
     elementalAffinity
   }
 
-  const solved = solveStatsForThreatLevel({
-    computeThreatLevel: runtime.computeThreatLevel,
-    characterBase,
-    shape,
-    targetThreat: level
-  })
+  const solved = solveWithDamageFloor({ category, characterBase, shape, level })
 
   const isHumanoid = category === 'pedestrian' || category === 'npc' || Boolean(archetype.isHumanoid)
   const lumens = lumenDropForLevel(solved.achievedThreatLevel)

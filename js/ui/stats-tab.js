@@ -1,4 +1,5 @@
 import { esc } from '../core/utils.js'
+import { damageStatHint } from '../character/damage-stat-hint.js'
 import { STAT_RULES, STAT_EXPLAINERS, STAT_HOW_ATTACKS_WORK } from '../core/constants.js'
 import { getNextStatUpgradeCost, getLatestStatRefund, getPurchasedStatCount, purchasesUntilNextBand } from '../character/stat-costs.js'
 import { computeStats, statBreakdown } from '../character/character.js'
@@ -76,6 +77,7 @@ export function renderStatsTab(character) {
   return `
     ${renderResourceManager(character)}
     <p class="stat-howto mt-12">⚔️ ${esc(STAT_HOW_ATTACKS_WORK)}</p>
+    ${damageStatHint(computed) ? `<p class="pill warn damage-stat-hint mt-8">⚠️ ${esc(damageStatHint(computed))}</p>` : ''}
     <p class="subtle mt-8">Early stat upgrades are cheaper. The price rises as you repeatedly improve the same stat. Gear and skill bonuses do not change the upgrade price.</p>
     <div class="grid two stat-upgrade-grid mt-16">
       ${Object.entries(STAT_RULES).map(([stat, rule]) => {

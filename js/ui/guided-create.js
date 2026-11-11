@@ -2,6 +2,7 @@
  * Guided Character Creator — in-memory draft until Finish.
  */
 import { DRAGONBORN_AFFINITIES, STAT_RULES, STAT_EXPLAINERS, STAT_HOW_ATTACKS_WORK } from '../core/constants.js'
+import { damageStatHint } from '../character/damage-stat-hint.js'
 import { state } from '../core/state.js'
 import { uid, toast, deepClone, esc, titleCase } from '../core/utils.js'
 import { createCharacter, normalizeCharacter, computeStats, invalidateCharacterCache } from '../character/character.js'
@@ -455,6 +456,7 @@ function renderGuidedStepStats(gc) {
       <span class="guided-save-tip">💡 Save some Lumens for Skills on the next page!</span>
     </div>
     <p class="guided-stat-howto mt-8">⚔️ ${esc(STAT_HOW_ATTACKS_WORK)}</p>
+    ${damageStatHint(stats) ? `<p class="pill warn damage-stat-hint mt-8">⚠️ ${esc(damageStatHint(stats))}</p>` : ''}
     <p class="subtle mt-8">Each point gets a little pricier the more you buy of the same stat. Tap − to undo.</p>
     <div class="guided-stat-list mt-8">
       ${Object.entries(STAT_RULES).map(([stat, rule]) => {
@@ -502,6 +504,7 @@ function renderGuidedStepReview(gc) {
         <span class="pill">PD ${stats.physicalDefence}</span>
         <span class="pill">MD ${stats.magicalDefence}</span>
       </div>
+      ${damageStatHint(stats) ? `<p class="pill warn damage-stat-hint">⚠️ ${esc(damageStatHint(stats))} You can go back to the Stats step to fix this.</p>` : ''}
       <p><strong>Skills:</strong> ${(draft.skills || []).map(id => getSkill(id)?.name || id).join(', ') || '—'}</p>
       <p><strong>Equipped:</strong> ${equipped.join('; ') || '—'}</p>
       <p><strong>Wallet:</strong> ${draft.lumens}L · ${normalizeGil(draft.gil)} Gil</p>

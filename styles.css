@@ -3192,6 +3192,9 @@ body.skill-sheet-open {
 .weather-section { border-top: 1px solid var(--border); padding-top: 1rem; }
 .subtle-pill { opacity: 0.85; }
 
+/* New-player hint when both damage stats are still negative */
+.pill.damage-stat-hint { display: block; white-space: normal; line-height: 1.45; border-radius: 12px; padding: 8px 12px; font-size: .92em; }
+
 /* Homebrew Balance check (editor + import preview) */
 .homebrew-balance-check { margin-top: 4px; }
 .homebrew-balance-check .pill { display: inline-block; white-space: normal; line-height: 1.4; border-radius: 12px; margin: 0; }
