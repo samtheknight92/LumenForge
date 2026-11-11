@@ -5,12 +5,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 3,
-    "gil": 200,
+    "lumens": 6,
+    "gil": 400,
     "stats": {
       "hp": 6,
       "stamina": 8,
-      "strength": -5,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": -5,
       "speed": 1,
@@ -48,7 +48,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": "premade_hunter_focus_charm_2"
     },
-    "notes": "Duelist lives by clean footwork and a well-timed riposte, not brute force. Carries Bronze Sword, Leather Armor and Hunter's Focus Charm. Defeat loot: 3 Lumens, 200 Gil."
+    "notes": "Duelist lives by clean footwork and a well-timed riposte, not brute force. Built around Strength (Threat Level 2), which is where nearly every stat point above the baseline sheet went. Carries Bronze Sword, Leather Armor and Hunter's Focus Charm. Defeat loot: 6 Lumens, 400 Gil."
   },
   {
     "premadeId": "npc_berserker_lv01_2",
@@ -107,12 +107,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 3,
-    "gil": 200,
+    "lumens": 6,
+    "gil": 400,
     "stats": {
       "hp": 1,
       "stamina": 1,
-      "strength": -5,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -5,
       "speed": 1,
@@ -150,7 +150,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": "premade_lucky_coin_2"
     },
-    "notes": "Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Carries Training Bow, Leather Armor and Lucky Coin. Defeat loot: 3 Lumens, 200 Gil."
+    "notes": "Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. Built around Strength (Threat Level 2), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Carries Training Bow, Leather Armor and Lucky Coin. Defeat loot: 6 Lumens, 400 Gil."
   },
   {
     "premadeId": "npc_battle_mage_lv02_4",
@@ -158,13 +158,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 6,
-    "gil": 400,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 8,
       "stamina": 8,
       "strength": -5,
-      "magicPower": -5,
+      "magicPower": -1,
       "accuracy": -5,
       "speed": 2,
       "physicalDefence": 7,
@@ -206,7 +206,7 @@
       "armor": "premade_cloth_robes_2",
       "accessory": "premade_power_ring_3"
     },
-    "notes": "Battle Mage channels fire through the blade — half swordsman, half pyromancer. Carries Bronze Sword, Apprentice Spell Tome, Cloth Robes and Ring of Power. Defeat loot: 6 Lumens, 400 Gil."
+    "notes": "Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Magic Power (Threat Level 3), which is where nearly every stat point above the baseline sheet went. Carries Bronze Sword, Apprentice Spell Tome, Cloth Robes and Ring of Power. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "npc_assassin_lv02_5",
@@ -214,12 +214,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 6,
-    "gil": 400,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 9,
       "stamina": 8,
-      "strength": -5,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 1,
@@ -257,7 +257,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": "premade_lucky_coin_2"
     },
-    "notes": "Assassin wins fights before the target notices — high reward, thin margin for error. They leaned even harder into that at the cost of everything else — Stamina in particular was left untrained. Carries Bronze Dagger, Cloth Robes and Lucky Coin. Defeat loot: 6 Lumens, 400 Gil."
+    "notes": "Assassin wins fights before the target notices — high reward, thin margin for error. Built around Strength (Threat Level 3), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Stamina in particular was left untrained. Carries Bronze Dagger, Cloth Robes and Lucky Coin. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "npc_trickster_lv02_6",
@@ -265,13 +265,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 6,
-    "gil": 400,
+    "lumens": 9,
+    "gil": 600,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": 0,
       "accuracy": -4,
       "speed": 1,
       "physicalDefence": 8,
@@ -308,7 +308,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": "premade_lucky_coin_2"
     },
-    "notes": "Trickster slips in, causes chaos, and slips back out — not built to trade blows. Carries Bronze Dagger, Cloth Robes and Lucky Coin. Defeat loot: 6 Lumens, 400 Gil."
+    "notes": "Trickster slips in, causes chaos, and slips back out — not built to trade blows. Built around Magic Power (Threat Level 3), which is where nearly every stat point above the baseline sheet went. Carries Bronze Dagger, Cloth Robes and Lucky Coin. Defeat loot: 9 Lumens, 600 Gil."
   },
   {
     "premadeId": "npc_guardian_lv03_7",
@@ -316,12 +316,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 9,
-    "gil": 600,
+    "lumens": 12,
+    "gil": 800,
     "stats": {
       "hp": 1,
       "stamina": 1,
-      "strength": -5,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": -5,
       "speed": 1,
@@ -366,7 +366,7 @@
       "armor": "premade_chain_mail_2",
       "accessory": "premade_ring_of_protection_3"
     },
-    "notes": "Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their go-to move is Polearm Basics. Carries Bronze Spear, Wooden Shield, Chain Mail and Ring of Protection. Defeat loot: 9 Lumens, 600 Gil."
+    "notes": "Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Built around Strength (Threat Level 4), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their go-to move is Polearm Basics. Carries Bronze Spear, Wooden Shield, Chain Mail and Ring of Protection. Defeat loot: 12 Lumens, 800 Gil."
   },
   {
     "premadeId": "npc_warlock_lv03_8",
@@ -432,12 +432,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 9,
-    "gil": 600,
+    "lumens": 12,
+    "gil": 800,
     "stats": {
       "hp": 9,
       "stamina": 9,
-      "strength": -4,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 1,
@@ -472,7 +472,7 @@
       "armor": "premade_leather_armor_0",
       "accessory": "premade_lucky_coin_1"
     },
-    "notes": "Monk fights with nothing but hands, feet, and total command of their own body. Their go-to move is Striker Basics. Carries Leather Armor and Lucky Coin. Defeat loot: 9 Lumens, 600 Gil."
+    "notes": "Monk fights with nothing but hands, feet, and total command of their own body. Built around Strength (Threat Level 4), which is where nearly every stat point above the baseline sheet went. Their go-to move is Striker Basics. Carries Leather Armor and Lucky Coin. Defeat loot: 12 Lumens, 800 Gil."
   },
   {
     "premadeId": "npc_ranger_lv04_a",
@@ -480,12 +480,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 12,
-    "gil": 800,
+    "lumens": 15,
+    "gil": 1000,
     "stats": {
       "hp": 9,
       "stamina": 9,
-      "strength": -4,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -5,
       "speed": 1,
@@ -525,7 +525,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": "premade_hunter_focus_charm_2"
     },
-    "notes": "Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Their go-to move is Ranged Basics. Carries Training Bow, Leather Armor and Hunter's Focus Charm. Defeat loot: 12 Lumens, 800 Gil."
+    "notes": "Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Strength (Threat Level 5), which is where nearly every stat point above the baseline sheet went. Their go-to move is Ranged Basics. Carries Training Bow, Leather Armor and Hunter's Focus Charm. Defeat loot: 15 Lumens, 1000 Gil."
   },
   {
     "premadeId": "npc_paladin_lv04_b",
@@ -533,12 +533,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 12,
-    "gil": 800,
+    "lumens": 15,
+    "gil": 1000,
     "stats": {
       "hp": 7,
       "stamina": 9,
-      "strength": -5,
+      "strength": -1,
       "magicPower": -4,
       "accuracy": -4,
       "speed": 2,
@@ -583,7 +583,7 @@
       "armor": "premade_chain_mail_2",
       "accessory": "premade_ring_of_protection_3"
     },
-    "notes": "Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Their go-to move is Sword Basics. Carries Bronze Sword, Wooden Shield, Chain Mail and Ring of Protection. Defeat loot: 12 Lumens, 800 Gil."
+    "notes": "Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Built around Strength (Threat Level 5), which is where nearly every stat point above the baseline sheet went. Their go-to move is Sword Basics. Carries Bronze Sword, Wooden Shield, Chain Mail and Ring of Protection. Defeat loot: 15 Lumens, 1000 Gil."
   },
   {
     "premadeId": "npc_elementalist_lv04_c",
@@ -649,13 +649,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 15,
-    "gil": 1000,
+    "lumens": 18,
+    "gil": 1200,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": -1,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
@@ -690,7 +690,7 @@
       "armor": "premade_cloth_robes_0",
       "accessory": "premade_ring_of_protection_1"
     },
-    "notes": "Medic carries more bandages than weapons — keeps everyone else standing. Their kit leans on Field Medic and Light Ray. Carries Cloth Robes and Ring of Protection. Defeat loot: 15 Lumens, 1000 Gil."
+    "notes": "Medic carries more bandages than weapons — keeps everyone else standing. Built around Magic Power (Threat Level 6), which is where nearly every stat point above the baseline sheet went. Their kit leans on Field Medic and Light Ray. Carries Cloth Robes and Ring of Protection. Defeat loot: 18 Lumens, 1200 Gil."
   },
   {
     "premadeId": "npc_alchemist_lv05_e",
@@ -698,13 +698,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 15,
-    "gil": 1000,
+    "lumens": 18,
+    "gil": 1200,
     "stats": {
       "hp": 12,
       "stamina": 12,
       "strength": -3,
-      "magicPower": -2,
+      "magicPower": 0,
       "accuracy": -1,
       "speed": 2,
       "physicalDefence": 9,
@@ -738,7 +738,7 @@
       "armor": "premade_cloth_robes_0",
       "accessory": "premade_lucky_coin_1"
     },
-    "notes": "Alchemist carries more bombs and elixirs than weapons — a walking supply depot for every occasion. Built around HP and Stamina (Threat Level 5), which is where nearly every stat point above the baseline sheet went. Their go-to move is Apothecary. Carries Cloth Robes and Lucky Coin. Defeat loot: 15 Lumens, 1000 Gil."
+    "notes": "Alchemist carries more bombs and elixirs than weapons — a walking supply depot for every occasion. Built around Magic Power and HP (Threat Level 6), which is where nearly every stat point above the baseline sheet went. Their go-to move is Apothecary. Carries Cloth Robes and Lucky Coin. Defeat loot: 18 Lumens, 1200 Gil."
   },
   {
     "premadeId": "npc_duelist_lv05_f",
@@ -858,12 +858,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 18,
-    "gil": 1200,
+    "lumens": 21,
+    "gil": 1400,
     "stats": {
       "hp": 8,
       "stamina": 9,
-      "strength": -5,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -5,
       "speed": 2,
@@ -904,7 +904,7 @@
       "armor": "premade_leather_armor_1",
       "accessory": "premade_lucky_coin_2"
     },
-    "notes": "Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. They leaned even harder into that at the cost of everything else — HP in particular was left untrained. Their kit leans on Ranged Basics and Steady Aim. Carries Hunting Bow, Leather Armor and Lucky Coin. Defeat loot: 18 Lumens, 1200 Gil."
+    "notes": "Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. Built around Strength (Threat Level 7), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — HP in particular was left untrained. Their kit leans on Ranged Basics and Steady Aim. Carries Hunting Bow, Leather Armor and Lucky Coin. Defeat loot: 21 Lumens, 1400 Gil."
   },
   {
     "premadeId": "npc_battle_mage_lv06_i",
@@ -971,12 +971,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 21,
-    "gil": 1400,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -1018,7 +1018,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": "premade_lucky_coin_2"
     },
-    "notes": "Assassin wins fights before the target notices — high reward, thin margin for error. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Dagger Basics, Light Step and Light Fingers. Carries Iron Dagger, Cloth Robes and Lucky Coin. Defeat loot: 21 Lumens, 1400 Gil."
+    "notes": "Assassin wins fights before the target notices — high reward, thin margin for error. Built around Strength (Threat Level 8), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Dagger Basics, Light Step and Light Fingers. Carries Iron Dagger, Cloth Robes and Lucky Coin. Defeat loot: 24 Lumens, 1600 Gil."
   },
   {
     "premadeId": "npc_trickster_lv07_k",
@@ -1026,13 +1026,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 21,
-    "gil": 1400,
+    "lumens": 24,
+    "gil": 1600,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": 0,
       "accuracy": -2,
       "speed": 3,
       "physicalDefence": 8,
@@ -1072,7 +1072,7 @@
       "armor": "premade_cloth_robes_1",
       "accessory": "premade_lucky_coin_2"
     },
-    "notes": "Trickster slips in, causes chaos, and slips back out — not built to trade blows. Built around Accuracy and Speed (Threat Level 7), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics and Light Step. Carries Iron Dagger, Cloth Robes and Lucky Coin. Defeat loot: 21 Lumens, 1400 Gil."
+    "notes": "Trickster slips in, causes chaos, and slips back out — not built to trade blows. Built around Magic Power and Accuracy (Threat Level 8), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics and Light Step. Carries Iron Dagger, Cloth Robes and Lucky Coin. Defeat loot: 24 Lumens, 1600 Gil."
   },
   {
     "premadeId": "npc_guardian_lv07_l",
@@ -1140,13 +1140,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 24,
-    "gil": 1600,
+    "lumens": 27,
+    "gil": 1800,
     "stats": {
       "hp": 8,
       "stamina": 8,
       "strength": -3,
-      "magicPower": -5,
+      "magicPower": -1,
       "accuracy": -5,
       "speed": 2,
       "physicalDefence": 8,
@@ -1191,7 +1191,7 @@
       "armor": "premade_mage_robes_2",
       "accessory": "premade_pendant_of_wisdom_3"
     },
-    "notes": "Warlock trades a sturdy body for raw dark magic — a stiff breeze of physical damage puts them down. Their kit leans on Shadow Bolt and Darkvision. Carries Quarterstaff, Arcane Focus Orb, Mage Robes and Pendant of Wisdom. Defeat loot: 24 Lumens, 1600 Gil."
+    "notes": "Warlock trades a sturdy body for raw dark magic — a stiff breeze of physical damage puts them down. Built around Magic Power (Threat Level 9), which is where nearly every stat point above the baseline sheet went. Their kit leans on Shadow Bolt and Darkvision. Carries Quarterstaff, Arcane Focus Orb, Mage Robes and Pendant of Wisdom. Defeat loot: 27 Lumens, 1800 Gil."
   },
   {
     "premadeId": "npc_monk_lv08_n",
@@ -1199,12 +1199,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 24,
-    "gil": 1600,
+    "lumens": 27,
+    "gil": 1800,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 3,
@@ -1240,7 +1240,7 @@
       "armor": "premade_studded_leather_0",
       "accessory": "premade_ring_of_speed_1"
     },
-    "notes": "Monk fights with nothing but hands, feet, and total command of their own body. Built around HP and Stamina (Threat Level 8), which is where nearly every stat point above the baseline sheet went. Their kit leans on Striker Basics and Open Stance. Carries Studded Leather and Ring of Speed. Defeat loot: 24 Lumens, 1600 Gil."
+    "notes": "Monk fights with nothing but hands, feet, and total command of their own body. Built around Strength and HP (Threat Level 9), which is where nearly every stat point above the baseline sheet went. Their kit leans on Striker Basics and Open Stance. Carries Studded Leather and Ring of Speed. Defeat loot: 27 Lumens, 1800 Gil."
   },
   {
     "premadeId": "npc_ranger_lv08_o",
@@ -1248,12 +1248,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 24,
-    "gil": 1600,
+    "lumens": 27,
+    "gil": 1800,
     "stats": {
       "hp": 9,
       "stamina": 9,
-      "strength": -4,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -5,
       "speed": 1,
@@ -1295,7 +1295,7 @@
       "armor": "premade_studded_leather_1",
       "accessory": "premade_hunter_focus_charm_2"
     },
-    "notes": "Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Their kit leans on Ranged Basics, Steady Aim and Steady Hand. Carries Hunting Bow, Studded Leather and Hunter's Focus Charm. Defeat loot: 24 Lumens, 1600 Gil."
+    "notes": "Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Strength (Threat Level 9), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand. Carries Hunting Bow, Studded Leather and Hunter's Focus Charm. Defeat loot: 27 Lumens, 1800 Gil."
   },
   {
     "premadeId": "npc_paladin_lv09_p",
@@ -1303,12 +1303,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 27,
-    "gil": 1800,
+    "lumens": 30,
+    "gil": 2000,
     "stats": {
       "hp": 7,
       "stamina": 9,
-      "strength": -5,
+      "strength": -1,
       "magicPower": -4,
       "accuracy": -4,
       "speed": 2,
@@ -1361,7 +1361,7 @@
       "armor": "premade_scale_mail_2",
       "accessory": "premade_ring_of_protection_3"
     },
-    "notes": "Veteran Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Iron Sword, Round Buckler, Scale Mail and Ring of Protection. Defeat loot: 27 Lumens, 1800 Gil."
+    "notes": "Veteran Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Built around Strength (Threat Level 10), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Iron Sword, Round Buckler, Scale Mail and Ring of Protection. Defeat loot: 30 Lumens, 2000 Gil."
   },
   {
     "premadeId": "npc_elementalist_lv09_q",
@@ -1369,13 +1369,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 27,
-    "gil": 1800,
+    "lumens": 30,
+    "gil": 2000,
     "stats": {
       "hp": 6,
       "stamina": 1,
       "strength": -3,
-      "magicPower": -5,
+      "magicPower": -1,
       "accuracy": -5,
       "speed": 2,
       "physicalDefence": 7,
@@ -1427,7 +1427,7 @@
       "armor": "premade_mage_robes_2",
       "accessory": "premade_pendant_of_wisdom_3"
     },
-    "notes": "Veteran Elementalist burns and freezes in equal measure — huge magical burst, almost no physical toughness. Their kit leans on Fire Spark, Ice Shard and Warm Hands, among others. Carries Quarterstaff, Arcane Focus Orb, Mage Robes and Pendant of Wisdom. Defeat loot: 27 Lumens, 1800 Gil."
+    "notes": "Veteran Elementalist burns and freezes in equal measure — huge magical burst, almost no physical toughness. Built around Magic Power (Threat Level 10), which is where nearly every stat point above the baseline sheet went. Their kit leans on Fire Spark, Ice Shard and Warm Hands, among others. Carries Quarterstaff, Arcane Focus Orb, Mage Robes and Pendant of Wisdom. Defeat loot: 30 Lumens, 2000 Gil."
   },
   {
     "premadeId": "npc_medic_lv09_r",
@@ -1435,13 +1435,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 27,
-    "gil": 1800,
+    "lumens": 30,
+    "gil": 2000,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": -1,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
@@ -1483,7 +1483,7 @@
       "armor": "premade_mage_robes_0",
       "accessory": "premade_ring_of_protection_1"
     },
-    "notes": "Veteran Medic carries more bandages than weapons — keeps everyone else standing. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Field Medic, Triage and Antidote Training, among others. Carries Mage Robes and Ring of Protection. Defeat loot: 27 Lumens, 1800 Gil."
+    "notes": "Veteran Medic carries more bandages than weapons — keeps everyone else standing. Built around Magic Power (Threat Level 10), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Field Medic, Triage and Antidote Training, among others. Carries Mage Robes and Ring of Protection. Defeat loot: 30 Lumens, 2000 Gil."
   },
   {
     "premadeId": "npc_alchemist_lv10_s",
@@ -1491,13 +1491,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 30,
-    "gil": 2000,
+    "lumens": 33,
+    "gil": 2200,
     "stats": {
       "hp": 12,
       "stamina": 12,
       "strength": -3,
-      "magicPower": -2,
+      "magicPower": 0,
       "accuracy": -1,
       "speed": 2,
       "physicalDefence": 9,
@@ -1539,7 +1539,7 @@
       "armor": "premade_mage_robes_0",
       "accessory": "premade_lucky_coin_1"
     },
-    "notes": "Veteran Alchemist carries more bombs and elixirs than weapons — a walking supply depot for every occasion. Built around HP and Stamina (Threat Level 10), which is where nearly every stat point above the baseline sheet went. Their kit leans on Apothecary, Label Reader and Acid Vials, among others. Carries Mage Robes and Lucky Coin. Defeat loot: 30 Lumens, 2000 Gil."
+    "notes": "Veteran Alchemist carries more bombs and elixirs than weapons — a walking supply depot for every occasion. Built around Magic Power and HP (Threat Level 11), which is where nearly every stat point above the baseline sheet went. Their kit leans on Apothecary, Label Reader and Acid Vials, among others. Carries Mage Robes and Lucky Coin. Defeat loot: 33 Lumens, 2200 Gil."
   },
   {
     "premadeId": "npc_duelist_lv10_t",
@@ -1547,12 +1547,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 30,
-    "gil": 2000,
+    "lumens": 33,
+    "gil": 2200,
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -1600,7 +1600,7 @@
       "armor": "premade_studded_leather_1",
       "accessory": "premade_marksman_gloves_2"
     },
-    "notes": "Veteran Duelist lives by clean footwork and a well-timed riposte, not brute force. They leaned even harder into that at the cost of everything else — HP in particular was left untrained. Their kit leans on Sword Basics, Combat Stance and Precise Footwork, among others. Carries Iron Sword, Studded Leather and Marksman's Gloves. Defeat loot: 30 Lumens, 2000 Gil."
+    "notes": "Veteran Duelist lives by clean footwork and a well-timed riposte, not brute force. Built around Strength (Threat Level 11), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — HP in particular was left untrained. Their kit leans on Sword Basics, Combat Stance and Precise Footwork, among others. Carries Iron Sword, Studded Leather and Marksman's Gloves. Defeat loot: 33 Lumens, 2200 Gil."
   },
   {
     "premadeId": "npc_berserker_lv10_u",
@@ -1608,12 +1608,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 30,
-    "gil": 2000,
+    "lumens": 33,
+    "gil": 2200,
     "stats": {
       "hp": 8,
       "stamina": 9,
-      "strength": -5,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": -4,
       "speed": 1,
@@ -1664,7 +1664,7 @@
       "armor": "premade_studded_leather_1",
       "accessory": "premade_power_ring_2"
     },
-    "notes": "Veteran Berserker trades every ounce of defence for raw swinging power and a bad temper. Their kit leans on Axe Basics, Heavy Swing and Battle Fury, among others. Carries Iron Axe, Studded Leather and Ring of Power. Defeat loot: 30 Lumens, 2000 Gil."
+    "notes": "Veteran Berserker trades every ounce of defence for raw swinging power and a bad temper. Built around Strength (Threat Level 11), which is where nearly every stat point above the baseline sheet went. Their kit leans on Axe Basics, Heavy Swing and Battle Fury, among others. Carries Iron Axe, Studded Leather and Ring of Power. Defeat loot: 33 Lumens, 2200 Gil."
   },
   {
     "premadeId": "npc_beastmaster_lv11_v",
@@ -1672,12 +1672,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 33,
-    "gil": 2200,
+    "lumens": 36,
+    "gil": 2400,
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -1725,7 +1725,7 @@
       "armor": "premade_studded_leather_1",
       "accessory": "premade_ring_of_speed_2"
     },
-    "notes": "Veteran Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Ranged Basics, Steady Aim and Trail Warden, among others. Carries Crossbow, Studded Leather and Ring of Speed. Defeat loot: 33 Lumens, 2200 Gil."
+    "notes": "Veteran Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. Built around Strength (Threat Level 12), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Ranged Basics, Steady Aim and Trail Warden, among others. Carries Crossbow, Studded Leather and Ring of Speed. Defeat loot: 36 Lumens, 2400 Gil."
   },
   {
     "premadeId": "npc_battle_mage_lv11_w",
@@ -1799,12 +1799,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 33,
-    "gil": 2200,
+    "lumens": 36,
+    "gil": 2400,
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -1852,7 +1852,7 @@
       "armor": "premade_mage_robes_1",
       "accessory": "premade_ring_of_speed_2"
     },
-    "notes": "Veteran Assassin wins fights before the target notices — high reward, thin margin for error. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Main Gauche, Mage Robes and Ring of Speed. Defeat loot: 33 Lumens, 2200 Gil."
+    "notes": "Veteran Assassin wins fights before the target notices — high reward, thin margin for error. Built around Strength (Threat Level 12), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Main Gauche, Mage Robes and Ring of Speed. Defeat loot: 36 Lumens, 2400 Gil."
   },
   {
     "premadeId": "npc_trickster_lv12_y",
@@ -1860,13 +1860,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 36,
-    "gil": 2400,
+    "lumens": 39,
+    "gil": 2600,
     "stats": {
       "hp": 9,
       "stamina": 9,
       "strength": -3,
-      "magicPower": -4,
+      "magicPower": 0,
       "accuracy": -5,
       "speed": 1,
       "physicalDefence": 8,
@@ -1916,7 +1916,7 @@
       "armor": "premade_mage_robes_1",
       "accessory": "premade_ring_of_speed_2"
     },
-    "notes": "Veteran Trickster slips in, causes chaos, and slips back out — not built to trade blows. Their kit leans on Dagger Basics, Light Step and Shadow Step, among others. Carries Main Gauche, Mage Robes and Ring of Speed. Defeat loot: 36 Lumens, 2400 Gil."
+    "notes": "Veteran Trickster slips in, causes chaos, and slips back out — not built to trade blows. Built around Magic Power (Threat Level 13), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics, Light Step and Shadow Step, among others. Carries Main Gauche, Mage Robes and Ring of Speed. Defeat loot: 39 Lumens, 2600 Gil."
   },
   {
     "premadeId": "npc_guardian_lv12_z",
@@ -1924,12 +1924,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 36,
-    "gil": 2400,
+    "lumens": 39,
+    "gil": 2600,
     "stats": {
       "hp": 9,
       "stamina": 10,
-      "strength": -4,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -1983,7 +1983,7 @@
       "armor": "premade_scale_mail_2",
       "accessory": "premade_amulet_of_earth_3"
     },
-    "notes": "Veteran Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Their kit leans on Polearm Basics, Reach Advantage and Reach Guard, among others. Carries Spear, Iron Shield, Scale Mail and Amulet of Earth. Defeat loot: 36 Lumens, 2400 Gil."
+    "notes": "Veteran Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Built around Strength (Threat Level 13), which is where nearly every stat point above the baseline sheet went. Their kit leans on Polearm Basics, Reach Advantage and Reach Guard, among others. Carries Spear, Iron Shield, Scale Mail and Amulet of Earth. Defeat loot: 39 Lumens, 2600 Gil."
   },
   {
     "premadeId": "npc_warlock_lv12_10",
@@ -1991,13 +1991,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 36,
-    "gil": 2400,
+    "lumens": 39,
+    "gil": 2600,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
@@ -2049,7 +2049,7 @@
       "armor": "premade_mage_robes_2",
       "accessory": "premade_pendant_of_wisdom_3"
     },
-    "notes": "Veteran Warlock trades a sturdy body for raw dark magic — a stiff breeze of physical damage puts them down. Their kit leans on Shadow Bolt, Darkvision and Darkness, among others. Carries Mystic Staff, Novice Wand, Mage Robes and Pendant of Wisdom. Defeat loot: 36 Lumens, 2400 Gil."
+    "notes": "Veteran Warlock trades a sturdy body for raw dark magic — a stiff breeze of physical damage puts them down. Built around Magic Power (Threat Level 13), which is where nearly every stat point above the baseline sheet went. Their kit leans on Shadow Bolt, Darkvision and Darkness, among others. Carries Mystic Staff, Novice Wand, Mage Robes and Pendant of Wisdom. Defeat loot: 39 Lumens, 2600 Gil."
   },
   {
     "premadeId": "npc_monk_lv13_11",
@@ -2114,12 +2114,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 39,
-    "gil": 2600,
+    "lumens": 42,
+    "gil": 2800,
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 3,
@@ -2168,7 +2168,7 @@
       "armor": "premade_studded_leather_1",
       "accessory": "premade_marksman_gloves_2"
     },
-    "notes": "Veteran Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 13), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Crossbow, Studded Leather and Marksman's Gloves. Defeat loot: 39 Lumens, 2600 Gil."
+    "notes": "Veteran Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Strength and Accuracy (Threat Level 14), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Crossbow, Studded Leather and Marksman's Gloves. Defeat loot: 42 Lumens, 2800 Gil."
   },
   {
     "premadeId": "npc_paladin_lv13_13",
@@ -2176,12 +2176,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 39,
-    "gil": 2600,
+    "lumens": 42,
+    "gil": 2800,
     "stats": {
       "hp": 7,
       "stamina": 9,
-      "strength": -5,
+      "strength": -1,
       "magicPower": -4,
       "accuracy": -4,
       "speed": 2,
@@ -2235,7 +2235,7 @@
       "armor": "premade_scale_mail_2",
       "accessory": "premade_pendant_of_wisdom_3"
     },
-    "notes": "Veteran Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Steel Sword, Iron Shield, Scale Mail and Pendant of Wisdom. Defeat loot: 39 Lumens, 2600 Gil."
+    "notes": "Veteran Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Built around Strength (Threat Level 14), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Steel Sword, Iron Shield, Scale Mail and Pendant of Wisdom. Defeat loot: 42 Lumens, 2800 Gil."
   },
   {
     "premadeId": "npc_elementalist_lv14_14",
@@ -2243,13 +2243,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 42,
-    "gil": 2800,
+    "lumens": 45,
+    "gil": 3000,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
@@ -2303,7 +2303,7 @@
       "armor": "premade_mage_robes_2",
       "accessory": "premade_pendant_of_wisdom_3"
     },
-    "notes": "Veteran Elementalist burns and freezes in equal measure — huge magical burst, almost no physical toughness. Their kit leans on Fire Spark, Ice Shard and Warm Hands, among others. Carries Mystic Staff, Novice Wand, Mage Robes and Pendant of Wisdom. Defeat loot: 42 Lumens, 2800 Gil."
+    "notes": "Veteran Elementalist burns and freezes in equal measure — huge magical burst, almost no physical toughness. Built around Magic Power (Threat Level 15), which is where nearly every stat point above the baseline sheet went. Their kit leans on Fire Spark, Ice Shard and Warm Hands, among others. Carries Mystic Staff, Novice Wand, Mage Robes and Pendant of Wisdom. Defeat loot: 45 Lumens, 3000 Gil."
   },
   {
     "premadeId": "npc_medic_lv14_15",
@@ -2369,13 +2369,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 42,
-    "gil": 2800,
+    "lumens": 45,
+    "gil": 3000,
     "stats": {
       "hp": 12,
       "stamina": 12,
       "strength": -3,
-      "magicPower": -2,
+      "magicPower": 0,
       "accuracy": -1,
       "speed": 2,
       "physicalDefence": 9,
@@ -2420,7 +2420,7 @@
       "armor": "premade_mage_robes_0",
       "accessory": "premade_power_ring_1"
     },
-    "notes": "Veteran Alchemist carries more bombs and elixirs than weapons — a walking supply depot for every occasion. Built around HP and Stamina (Threat Level 14), which is where nearly every stat point above the baseline sheet went. Their kit leans on Apothecary, Label Reader and Acid Vials, among others. Carries Mage Robes and Ring of Power. Defeat loot: 42 Lumens, 2800 Gil."
+    "notes": "Veteran Alchemist carries more bombs and elixirs than weapons — a walking supply depot for every occasion. Built around Magic Power and HP (Threat Level 15), which is where nearly every stat point above the baseline sheet went. Their kit leans on Apothecary, Label Reader and Acid Vials, among others. Carries Mage Robes and Ring of Power. Defeat loot: 45 Lumens, 3000 Gil."
   },
   {
     "premadeId": "npc_duelist_lv15_17",
@@ -2433,7 +2433,7 @@
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 0,
       "speed": 3,
@@ -2483,7 +2483,7 @@
       "armor": "premade_studded_leather_1",
       "accessory": "premade_marksman_gloves_2"
     },
-    "notes": "Veteran Duelist lives by clean footwork and a well-timed riposte, not brute force. Built around Accuracy and Strength (Threat Level 15), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Sword Basics, Combat Stance and Precise Footwork, among others. Carries Steel Sword, Studded Leather and Marksman's Gloves. Defeat loot: 45 Lumens, 3000 Gil."
+    "notes": "Veteran Duelist lives by clean footwork and a well-timed riposte, not brute force. Built around Strength and Accuracy (Threat Level 15), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Sword Basics, Combat Stance and Precise Footwork, among others. Carries Steel Sword, Studded Leather and Marksman's Gloves. Defeat loot: 45 Lumens, 3000 Gil."
   },
   {
     "premadeId": "npc_berserker_lv15_18",
@@ -2491,12 +2491,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 45,
-    "gil": 3000,
+    "lumens": 48,
+    "gil": 3200,
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -2549,7 +2549,7 @@
       "armor": "premade_studded_leather_1",
       "accessory": "premade_belt_of_giant_strength_2"
     },
-    "notes": "Veteran Berserker trades every ounce of defence for raw swinging power and a bad temper. Their kit leans on Axe Basics, Heavy Swing and Battle Fury, among others. Carries Battle Axe, Studded Leather and Belt of Giant Strength. Defeat loot: 45 Lumens, 3000 Gil."
+    "notes": "Veteran Berserker trades every ounce of defence for raw swinging power and a bad temper. Built around Strength (Threat Level 16), which is where nearly every stat point above the baseline sheet went. Their kit leans on Axe Basics, Heavy Swing and Battle Fury, among others. Carries Battle Axe, Studded Leather and Belt of Giant Strength. Defeat loot: 48 Lumens, 3200 Gil."
   },
   {
     "premadeId": "npc_beastmaster_lv15_19",
@@ -2557,12 +2557,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 45,
-    "gil": 3000,
+    "lumens": 48,
+    "gil": 3200,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -1,
       "speed": 4,
@@ -2612,7 +2612,7 @@
       "armor": "premade_studded_leather_1",
       "accessory": "premade_ring_of_speed_2"
     },
-    "notes": "Veteran Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. Built around Accuracy and Speed (Threat Level 15), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Trail Warden, among others. Carries Crossbow, Studded Leather and Ring of Speed. Defeat loot: 45 Lumens, 3000 Gil."
+    "notes": "Veteran Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. Built around Strength and Accuracy (Threat Level 16), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Trail Warden, among others. Carries Crossbow, Studded Leather and Ring of Speed. Defeat loot: 48 Lumens, 3200 Gil."
   },
   {
     "premadeId": "npc_battle_mage_lv16_1a",
@@ -2620,13 +2620,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 48,
-    "gil": 3200,
+    "lumens": 51,
+    "gil": 3400,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
@@ -2681,7 +2681,7 @@
       "armor": "premade_mage_robes_2",
       "accessory": "premade_pendant_of_wisdom_3"
     },
-    "notes": "Veteran Battle Mage channels fire through the blade — half swordsman, half pyromancer. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Steel Sword, Novice Wand, Mage Robes and Pendant of Wisdom. Defeat loot: 48 Lumens, 3200 Gil."
+    "notes": "Veteran Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Magic Power (Threat Level 17), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Steel Sword, Novice Wand, Mage Robes and Pendant of Wisdom. Defeat loot: 51 Lumens, 3400 Gil."
   },
   {
     "premadeId": "npc_assassin_lv16_1b",
@@ -2689,12 +2689,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 48,
-    "gil": 3200,
+    "lumens": 51,
+    "gil": 3400,
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 3,
@@ -2746,7 +2746,7 @@
       "armor": "premade_mage_robes_1",
       "accessory": "premade_ring_of_speed_2"
     },
-    "notes": "Veteran Assassin wins fights before the target notices — high reward, thin margin for error. Built around Accuracy and Speed (Threat Level 16), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Main Gauche, Mage Robes and Ring of Speed. Defeat loot: 48 Lumens, 3200 Gil."
+    "notes": "Veteran Assassin wins fights before the target notices — high reward, thin margin for error. Built around Strength and Accuracy (Threat Level 17), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Main Gauche, Mage Robes and Ring of Speed. Defeat loot: 51 Lumens, 3400 Gil."
   },
   {
     "premadeId": "npc_trickster_lv16_1c",
@@ -2754,13 +2754,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 48,
-    "gil": 3200,
+    "lumens": 51,
+    "gil": 3400,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
@@ -2812,7 +2812,7 @@
       "armor": "premade_mage_robes_1",
       "accessory": "premade_ring_of_speed_2"
     },
-    "notes": "Veteran Trickster slips in, causes chaos, and slips back out — not built to trade blows. Their kit leans on Dagger Basics, Light Step and Shadow Step, among others. Carries Main Gauche, Mage Robes and Ring of Speed. Defeat loot: 48 Lumens, 3200 Gil."
+    "notes": "Veteran Trickster slips in, causes chaos, and slips back out — not built to trade blows. Built around Magic Power (Threat Level 17), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics, Light Step and Shadow Step, among others. Carries Main Gauche, Mage Robes and Ring of Speed. Defeat loot: 51 Lumens, 3400 Gil."
   },
   {
     "premadeId": "npc_guardian_lv17_1d",
@@ -2820,12 +2820,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 51,
-    "gil": 3400,
+    "lumens": 54,
+    "gil": 3600,
     "stats": {
       "hp": 9,
       "stamina": 10,
-      "strength": -4,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -2882,7 +2882,7 @@
       "armor": "premade_scale_mail_2",
       "accessory": "premade_amulet_of_earth_3"
     },
-    "notes": "Elite Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Their kit leans on Polearm Basics, Reach Advantage and Reach Guard, among others. Carries Halberd, Steel Kite Shield, Scale Mail and Amulet of Earth. Defeat loot: 51 Lumens, 3400 Gil."
+    "notes": "Elite Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Built around Strength (Threat Level 18), which is where nearly every stat point above the baseline sheet went. Their kit leans on Polearm Basics, Reach Advantage and Reach Guard, among others. Carries Halberd, Steel Kite Shield, Scale Mail and Amulet of Earth. Defeat loot: 54 Lumens, 3600 Gil."
   },
   {
     "premadeId": "npc_warlock_lv17_1e",
@@ -2890,13 +2890,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 51,
-    "gil": 3400,
+    "lumens": 54,
+    "gil": 3600,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
@@ -2952,7 +2952,7 @@
       "armor": "premade_mage_robes_2",
       "accessory": "premade_pendant_of_wisdom_3"
     },
-    "notes": "Elite Warlock trades a sturdy body for raw dark magic — a stiff breeze of physical damage puts them down. Their kit leans on Shadow Bolt, Darkvision and Darkness, among others. Carries Crystal Staff, Novice Wand, Mage Robes and Pendant of Wisdom. Defeat loot: 51 Lumens, 3400 Gil."
+    "notes": "Elite Warlock trades a sturdy body for raw dark magic — a stiff breeze of physical damage puts them down. Built around Magic Power (Threat Level 18), which is where nearly every stat point above the baseline sheet went. Their kit leans on Shadow Bolt, Darkvision and Darkness, among others. Carries Crystal Staff, Novice Wand, Mage Robes and Pendant of Wisdom. Defeat loot: 54 Lumens, 3600 Gil."
   },
   {
     "premadeId": "npc_monk_lv17_1f",
@@ -3019,12 +3019,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 54,
-    "gil": 3600,
+    "lumens": 57,
+    "gil": 3800,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -1,
       "speed": 4,
@@ -3076,7 +3076,7 @@
       "armor": "premade_studded_leather_1",
       "accessory": "premade_marksman_gloves_2"
     },
-    "notes": "Elite Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 18), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Composite Bow, Studded Leather and Marksman's Gloves. Defeat loot: 54 Lumens, 3600 Gil."
+    "notes": "Elite Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Strength and Accuracy (Threat Level 19), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Composite Bow, Studded Leather and Marksman's Gloves. Defeat loot: 57 Lumens, 3800 Gil."
   },
   {
     "premadeId": "npc_paladin_lv18_1h",
@@ -3084,12 +3084,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 54,
-    "gil": 3600,
+    "lumens": 57,
+    "gil": 3800,
     "stats": {
       "hp": 7,
       "stamina": 9,
-      "strength": -5,
+      "strength": -1,
       "magicPower": -4,
       "accuracy": -4,
       "speed": 2,
@@ -3150,7 +3150,7 @@
       "armor": "premade_scale_mail_2",
       "accessory": "premade_pendant_of_wisdom_3"
     },
-    "notes": "Elite Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. They leaned even harder into that at the cost of everything else — Physical Defence in particular was left untrained. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Silver Sword, Steel Kite Shield, Scale Mail and Pendant of Wisdom. Defeat loot: 54 Lumens, 3600 Gil."
+    "notes": "Elite Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Built around Strength (Threat Level 19), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Physical Defence in particular was left untrained. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Silver Sword, Steel Kite Shield, Scale Mail and Pendant of Wisdom. Defeat loot: 57 Lumens, 3800 Gil."
   },
   {
     "premadeId": "npc_elementalist_lv18_1i",
@@ -3293,13 +3293,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 57,
-    "gil": 3800,
+    "lumens": 60,
+    "gil": 4000,
     "stats": {
       "hp": 15,
       "stamina": 16,
       "strength": -3,
-      "magicPower": -1,
+      "magicPower": 0,
       "accuracy": 1,
       "speed": 2,
       "physicalDefence": 11,
@@ -3346,7 +3346,7 @@
       "armor": "premade_mage_robes_0",
       "accessory": "premade_power_ring_1"
     },
-    "notes": "Elite Alchemist carries more bombs and elixirs than weapons — a walking supply depot for every occasion. Built around Stamina and HP (Threat Level 19), which is where nearly every stat point above the baseline sheet went. Their kit leans on Apothecary, Label Reader and Acid Vials, among others. Carries Mage Robes and Ring of Power. Defeat loot: 57 Lumens, 3800 Gil."
+    "notes": "Elite Alchemist carries more bombs and elixirs than weapons — a walking supply depot for every occasion. Built around Stamina and HP (Threat Level 20), which is where nearly every stat point above the baseline sheet went. Their kit leans on Apothecary, Label Reader and Acid Vials, among others. Carries Mage Robes and Ring of Power. Defeat loot: 60 Lumens, 4000 Gil."
   },
   {
     "premadeId": "npc_duelist_lv19_1l",
@@ -3419,12 +3419,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 60,
-    "gil": 4000,
+    "lumens": 63,
+    "gil": 4200,
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -3480,7 +3480,7 @@
       "armor": "premade_shadow_cloak_1",
       "accessory": "premade_belt_of_giant_strength_2"
     },
-    "notes": "Elite Berserker trades every ounce of defence for raw swinging power and a bad temper. Their kit leans on Axe Basics, Heavy Swing and Battle Fury, among others. Carries Double Axe, Shadow Cloak and Belt of Giant Strength. Defeat loot: 60 Lumens, 4000 Gil."
+    "notes": "Elite Berserker trades every ounce of defence for raw swinging power and a bad temper. Built around Strength (Threat Level 21), which is where nearly every stat point above the baseline sheet went. Their kit leans on Axe Basics, Heavy Swing and Battle Fury, among others. Carries Double Axe, Shadow Cloak and Belt of Giant Strength. Defeat loot: 63 Lumens, 4200 Gil."
   },
   {
     "premadeId": "npc_beastmaster_lv20_1n",
@@ -3488,12 +3488,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 60,
-    "gil": 4000,
+    "lumens": 63,
+    "gil": 4200,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -1,
       "speed": 3,
@@ -3547,7 +3547,7 @@
       "armor": "premade_shadow_cloak_1",
       "accessory": "premade_boots_of_stealth_2"
     },
-    "notes": "Elite Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. Built around Accuracy and HP (Threat Level 20), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Trail Warden, among others. Carries Composite Bow, Shadow Cloak and Boots of Stealth. Defeat loot: 60 Lumens, 4000 Gil."
+    "notes": "Elite Beastmaster spreads training evenly across ranged combat and survival — built to keep a companion (and themself) alive, not to specialise. Built around Strength and Accuracy (Threat Level 21), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Trail Warden, among others. Carries Composite Bow, Shadow Cloak and Boots of Stealth. Defeat loot: 63 Lumens, 4200 Gil."
   },
   {
     "premadeId": "npc_battle_mage_lv20_1o",
@@ -3561,7 +3561,7 @@
       "hp": 10,
       "stamina": 10,
       "strength": -2,
-      "magicPower": -2,
+      "magicPower": 0,
       "accuracy": -2,
       "speed": 2,
       "physicalDefence": 8,
@@ -3618,7 +3618,7 @@
       "armor": "premade_fire_robes_2",
       "accessory": "premade_headband_of_intellect_3"
     },
-    "notes": "Elite Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Strength and Magic Power (Threat Level 20), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Silver Sword, Scholar's Grimoire, Fire Robes and Headband of Intellect. Defeat loot: 60 Lumens, 4000 Gil."
+    "notes": "Elite Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Magic Power and Strength (Threat Level 20), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Silver Sword, Scholar's Grimoire, Fire Robes and Headband of Intellect. Defeat loot: 60 Lumens, 4000 Gil."
   },
   {
     "premadeId": "npc_assassin_lv21_1p",
@@ -3626,12 +3626,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 63,
-    "gil": 4200,
+    "lumens": 66,
+    "gil": 4400,
     "stats": {
       "hp": 10,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 0,
       "speed": 6,
@@ -3685,7 +3685,7 @@
       "armor": "premade_fire_robes_1",
       "accessory": "premade_boots_of_stealth_2"
     },
-    "notes": "Elite Assassin wins fights before the target notices — high reward, thin margin for error. Built around Speed and Accuracy (Threat Level 21), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Silver Dagger, Fire Robes and Boots of Stealth. Defeat loot: 63 Lumens, 4200 Gil."
+    "notes": "Elite Assassin wins fights before the target notices — high reward, thin margin for error. Built around Speed and Strength (Threat Level 22), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Silver Dagger, Fire Robes and Boots of Stealth. Defeat loot: 66 Lumens, 4400 Gil."
   },
   {
     "premadeId": "npc_trickster_lv21_1q",
@@ -3693,13 +3693,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 63,
-    "gil": 4200,
+    "lumens": 66,
+    "gil": 4400,
     "stats": {
       "hp": 10,
       "stamina": 11,
       "strength": -3,
-      "magicPower": -2,
+      "magicPower": 0,
       "accuracy": -1,
       "speed": 4,
       "physicalDefence": 8,
@@ -3753,7 +3753,7 @@
       "armor": "premade_fire_robes_1",
       "accessory": "premade_boots_of_stealth_2"
     },
-    "notes": "Elite Trickster slips in, causes chaos, and slips back out — not built to trade blows. Built around Accuracy and Speed (Threat Level 21), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics, Light Step and Shadow Step, among others. Carries Silver Dagger, Fire Robes and Boots of Stealth. Defeat loot: 63 Lumens, 4200 Gil."
+    "notes": "Elite Trickster slips in, causes chaos, and slips back out — not built to trade blows. Built around Magic Power and Accuracy (Threat Level 22), which is where nearly every stat point above the baseline sheet went. Their kit leans on Dagger Basics, Light Step and Shadow Step, among others. Carries Silver Dagger, Fire Robes and Boots of Stealth. Defeat loot: 66 Lumens, 4400 Gil."
   },
   {
     "premadeId": "npc_guardian_lv21_1r",
@@ -3761,12 +3761,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 63,
-    "gil": 4200,
+    "lumens": 66,
+    "gil": 4400,
     "stats": {
       "hp": 7,
       "stamina": 9,
-      "strength": -4,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -3826,7 +3826,7 @@
       "armor": "premade_plate_mail_2",
       "accessory": "premade_amulet_of_earth_3"
     },
-    "notes": "Elite Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Polearm Basics, Reach Advantage and Reach Guard, among others. Carries Halberd, Steel Kite Shield, Plate Mail and Amulet of Earth. Defeat loot: 63 Lumens, 4200 Gil."
+    "notes": "Elite Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Built around Strength (Threat Level 22), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Polearm Basics, Reach Advantage and Reach Guard, among others. Carries Halberd, Steel Kite Shield, Plate Mail and Amulet of Earth. Defeat loot: 66 Lumens, 4400 Gil."
   },
   {
     "premadeId": "npc_warlock_lv22_1s",
@@ -3967,12 +3967,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 66,
-    "gil": 4400,
+    "lumens": 69,
+    "gil": 4600,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 2,
       "speed": 6,
@@ -4025,7 +4025,7 @@
       "armor": "premade_shadow_cloak_1",
       "accessory": "premade_marksman_gloves_2"
     },
-    "notes": "Elite Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 22), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Composite Bow, Shadow Cloak and Marksman's Gloves. Defeat loot: 66 Lumens, 4400 Gil."
+    "notes": "Elite Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 23), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Composite Bow, Shadow Cloak and Marksman's Gloves. Defeat loot: 69 Lumens, 4600 Gil."
   },
   {
     "premadeId": "npc_paladin_lv23_1v",
@@ -4515,13 +4515,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 75,
-    "gil": 5000,
+    "lumens": 78,
+    "gil": 5200,
     "stats": {
       "hp": 10,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -3,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
@@ -4583,7 +4583,7 @@
       "armor": "premade_fire_robes_2",
       "accessory": "premade_headband_of_intellect_3"
     },
-    "notes": "Master Battle Mage channels fire through the blade — half swordsman, half pyromancer. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Flame Blade, Scholar's Grimoire, Fire Robes and Headband of Intellect. Defeat loot: 75 Lumens, 5000 Gil."
+    "notes": "Master Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Magic Power (Threat Level 26), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Flame Blade, Scholar's Grimoire, Fire Robes and Headband of Intellect. Defeat loot: 78 Lumens, 5200 Gil."
   },
   {
     "premadeId": "npc_assassin_lv25_23",
@@ -4591,12 +4591,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 75,
-    "gil": 5000,
+    "lumens": 78,
+    "gil": 5200,
     "stats": {
       "hp": 10,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 0,
       "speed": 8,
@@ -4652,7 +4652,7 @@
       "armor": "premade_fire_robes_1",
       "accessory": "premade_boots_of_stealth_2"
     },
-    "notes": "Master Assassin wins fights before the target notices — high reward, thin margin for error. Built around Speed and Accuracy (Threat Level 25), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Poison Dagger, Fire Robes and Boots of Stealth. Defeat loot: 75 Lumens, 5000 Gil."
+    "notes": "Master Assassin wins fights before the target notices — high reward, thin margin for error. Built around Speed and Strength (Threat Level 26), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Poison Dagger, Fire Robes and Boots of Stealth. Defeat loot: 78 Lumens, 5200 Gil."
   },
   {
     "premadeId": "npc_trickster_lv26_24",
@@ -4666,7 +4666,7 @@
       "hp": 11,
       "stamina": 12,
       "strength": -3,
-      "magicPower": -1,
+      "magicPower": 0,
       "accuracy": 2,
       "speed": 7,
       "physicalDefence": 8,
@@ -4730,12 +4730,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 78,
-    "gil": 5200,
+    "lumens": 81,
+    "gil": 5400,
     "stats": {
       "hp": 11,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -4798,7 +4798,7 @@
       "armor": "premade_plate_mail_2",
       "accessory": "premade_iron_boots_3"
     },
-    "notes": "Master Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Built around Physical Defence and HP (Threat Level 26), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Stamina in particular was left untrained. Their kit leans on Polearm Basics, Reach Advantage and Reach Guard, among others. Carries Pike, Heater Shield, Plate Mail and Iron Boots. Defeat loot: 78 Lumens, 5200 Gil."
+    "notes": "Master Guardian plants their feet and refuses to move — the wall the rest of the party fights behind. Built around Strength and Physical Defence (Threat Level 27), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Stamina in particular was left untrained. Their kit leans on Polearm Basics, Reach Advantage and Reach Guard, among others. Carries Pike, Heater Shield, Plate Mail and Iron Boots. Defeat loot: 81 Lumens, 5400 Gil."
   },
   {
     "premadeId": "npc_warlock_lv26_26",
@@ -4944,12 +4944,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 81,
-    "gil": 5400,
+    "lumens": 84,
+    "gil": 5600,
     "stats": {
       "hp": 12,
       "stamina": 12,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 3,
       "speed": 7,
@@ -5005,7 +5005,7 @@
       "armor": "premade_shadow_cloak_1",
       "accessory": "premade_eagle_eye_pendant_2"
     },
-    "notes": "Master Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 27), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Lightning Bow, Shadow Cloak and Eagle Eye Pendant. Defeat loot: 81 Lumens, 5400 Gil."
+    "notes": "Master Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 28), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Lightning Bow, Shadow Cloak and Eagle Eye Pendant. Defeat loot: 84 Lumens, 5600 Gil."
   },
   {
     "premadeId": "npc_paladin_lv27_29",
@@ -5013,12 +5013,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 81,
-    "gil": 5400,
+    "lumens": 84,
+    "gil": 5600,
     "stats": {
       "hp": 10,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -5083,7 +5083,7 @@
       "armor": "premade_plate_mail_2",
       "accessory": "premade_amulet_of_shadows_3"
     },
-    "notes": "Master Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Flame Blade, Heater Shield, Plate Mail and Amulet of Shadows. Defeat loot: 81 Lumens, 5400 Gil."
+    "notes": "Master Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Built around Strength (Threat Level 28), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Flame Blade, Heater Shield, Plate Mail and Amulet of Shadows. Defeat loot: 84 Lumens, 5600 Gil."
   },
   {
     "premadeId": "npc_elementalist_lv28_2a",
@@ -5955,12 +5955,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 96,
-    "gil": 6400,
+    "lumens": 99,
+    "gil": 6600,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 2,
       "speed": 6,
@@ -6022,7 +6022,7 @@
       "armor": "premade_ice_armor_1",
       "accessory": "premade_eagle_eye_pendant_2"
     },
-    "notes": "Master Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 32), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Elvish Bow, Ice Armor and Eagle Eye Pendant. Defeat loot: 96 Lumens, 6400 Gil."
+    "notes": "Master Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 33), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Elvish Bow, Ice Armor and Eagle Eye Pendant. Defeat loot: 99 Lumens, 6600 Gil."
   },
   {
     "premadeId": "npc_paladin_lv32_2n",
@@ -6035,7 +6035,7 @@
     "stats": {
       "hp": 13,
       "stamina": 11,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -2,
       "accuracy": -2,
       "speed": 2,
@@ -6100,7 +6100,7 @@
       "armor": "premade_knight_armor_2",
       "accessory": "premade_amulet_of_shadows_3"
     },
-    "notes": "Master Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Built around HP and Physical Defence (Threat Level 32), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Frost Sword, Warden's Targe, Knight's Armor and Amulet of Shadows. Defeat loot: 96 Lumens, 6400 Gil."
+    "notes": "Master Paladin splits their training between front-line tanking and field medicine — built to protect, not to finish fights fast. Built around HP and Strength (Threat Level 32), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Oathbound and Lay on Hands, among others. Carries Frost Sword, Warden's Targe, Knight's Armor and Amulet of Shadows. Defeat loot: 96 Lumens, 6400 Gil."
   },
   {
     "premadeId": "npc_elementalist_lv32_2o",
@@ -6538,13 +6538,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 102,
-    "gil": 6800,
+    "lumens": 105,
+    "gil": 7000,
     "stats": {
       "hp": 9,
       "stamina": 10,
       "strength": -4,
-      "magicPower": -5,
+      "magicPower": -1,
       "accuracy": -5,
       "speed": 2,
       "physicalDefence": 8,
@@ -6614,7 +6614,7 @@
       "armor": "premade_void_armor_2",
       "accessory": "premade_amulet_of_mana_3"
     },
-    "notes": "Legendary Battle Mage channels fire through the blade — half swordsman, half pyromancer. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Frost Sword, Mage's Codex, Void Armor and Amulet of Mana. Defeat loot: 102 Lumens, 6800 Gil."
+    "notes": "Legendary Battle Mage channels fire through the blade — half swordsman, half pyromancer. Built around Magic Power (Threat Level 35), which is where nearly every stat point above the baseline sheet went. Their kit leans on Sword Basics, Fire Spark and Warm Hands, among others. Carries Frost Sword, Mage's Codex, Void Armor and Amulet of Mana. Defeat loot: 105 Lumens, 7000 Gil."
   },
   {
     "premadeId": "npc_assassin_lv35_2v",
@@ -6622,12 +6622,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 105,
-    "gil": 7000,
+    "lumens": 108,
+    "gil": 7200,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 3,
       "speed": 12,
@@ -6687,7 +6687,7 @@
       "armor": "premade_void_armor_1",
       "accessory": "premade_speed_boots_2"
     },
-    "notes": "Legendary Assassin wins fights before the target notices — high reward, thin margin for error. Built around Speed and Accuracy (Threat Level 35), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Assassin's Blade, Void Armor and Boots of Speed. Defeat loot: 105 Lumens, 7000 Gil."
+    "notes": "Legendary Assassin wins fights before the target notices — high reward, thin margin for error. Built around Speed and Accuracy (Threat Level 36), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Dagger Basics, Light Step and Light Fingers, among others. Carries Assassin's Blade, Void Armor and Boots of Speed. Defeat loot: 108 Lumens, 7200 Gil."
   },
   {
     "premadeId": "npc_trickster_lv35_2w",
@@ -6770,7 +6770,7 @@
     "stats": {
       "hp": 15,
       "stamina": 12,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 2,
@@ -6982,12 +6982,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 108,
-    "gil": 7200,
+    "lumens": 111,
+    "gil": 7400,
     "stats": {
       "hp": 12,
       "stamina": 12,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 4,
       "speed": 8,
@@ -7050,7 +7050,7 @@
       "armor": "premade_ice_armor_1",
       "accessory": "premade_eagle_eye_pendant_2"
     },
-    "notes": "Legendary Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 36), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Crystal Bow, Ice Armor and Eagle Eye Pendant. Defeat loot: 108 Lumens, 7200 Gil."
+    "notes": "Legendary Ranger reads the land and puts an arrow where it counts before anyone closes the distance. Built around Accuracy and Speed (Threat Level 37), which is where nearly every stat point above the baseline sheet went. Their kit leans on Ranged Basics, Steady Aim and Steady Hand, among others. Carries Crystal Bow, Ice Armor and Eagle Eye Pendant. Defeat loot: 111 Lumens, 7400 Gil."
   },
   {
     "premadeId": "npc_paladin_lv37_31",
@@ -7136,13 +7136,13 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 111,
-    "gil": 7400,
+    "lumens": 114,
+    "gil": 7600,
     "stats": {
       "hp": 10,
       "stamina": 9,
       "strength": -3,
-      "magicPower": -5,
+      "magicPower": -1,
       "accuracy": -4,
       "speed": 2,
       "physicalDefence": 8,
@@ -7214,7 +7214,7 @@
       "armor": "premade_void_armor_2",
       "accessory": "premade_amulet_of_mana_3"
     },
-    "notes": "Legendary Elementalist burns and freezes in equal measure — huge magical burst, almost no physical toughness. Their kit leans on Fire Spark, Ice Shard and Warm Hands, among others. Carries Elemental Staff, Mage's Codex, Void Armor and Amulet of Mana. Defeat loot: 111 Lumens, 7400 Gil."
+    "notes": "Legendary Elementalist burns and freezes in equal measure — huge magical burst, almost no physical toughness. Built around Magic Power (Threat Level 38), which is where nearly every stat point above the baseline sheet went. Their kit leans on Fire Spark, Ice Shard and Warm Hands, among others. Carries Elemental Staff, Mage's Codex, Void Armor and Amulet of Mana. Defeat loot: 114 Lumens, 7600 Gil."
   },
   {
     "premadeId": "npc_medic_lv37_33",
@@ -7352,12 +7352,12 @@
     "race": "human",
     "category": "npc",
     "elementalAffinity": "",
-    "lumens": 114,
-    "gil": 7600,
+    "lumens": 117,
+    "gil": 7800,
     "stats": {
       "hp": 12,
       "stamina": 11,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 14,
       "speed": 7,
@@ -7420,7 +7420,7 @@
       "armor": "premade_ice_armor_1",
       "accessory": "premade_eagle_eye_pendant_2"
     },
-    "notes": "Legendary Duelist lives by clean footwork and a well-timed riposte, not brute force. Built around Accuracy and Speed (Threat Level 38), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Strength in particular was left untrained. Their kit leans on Sword Basics, Combat Stance and Precise Footwork, among others. Carries Wind Blade, Ice Armor and Eagle Eye Pendant. Defeat loot: 114 Lumens, 7600 Gil."
+    "notes": "Legendary Duelist lives by clean footwork and a well-timed riposte, not brute force. Built around Accuracy and Speed (Threat Level 39), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Magical Defence in particular was left untrained. Their kit leans on Sword Basics, Combat Stance and Precise Footwork, among others. Carries Wind Blade, Ice Armor and Eagle Eye Pendant. Defeat loot: 117 Lumens, 7800 Gil."
   },
   {
     "premadeId": "npc_berserker_lv38_36",
@@ -10359,7 +10359,7 @@
       "hp": 1,
       "stamina": 1,
       "strength": -3,
-      "magicPower": -5,
+      "magicPower": -1,
       "accuracy": -5,
       "speed": 1,
       "physicalDefence": 1,
@@ -10391,7 +10391,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_1"
     },
-    "notes": "Restless Skeleton drains the life out of a fight slowly — control and attrition over brute force. Carries Bronze Sword and Lucky Coin. Defeat loot: 6 Lumens."
+    "notes": "Restless Skeleton drains the life out of a fight slowly — control and attrition over brute force. Built around Magic Power (Threat Level 2), which is where nearly every stat point above the baseline sheet went. Carries Bronze Sword and Lucky Coin. Defeat loot: 6 Lumens."
   },
   {
     "premadeId": "monster_aquatic_lv01_49",
@@ -10399,12 +10399,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 3,
+    "lumens": 6,
     "gil": 0,
     "stats": {
       "hp": 3,
       "stamina": 10,
-      "strength": -5,
+      "strength": 0,
       "magicPower": -5,
       "accuracy": -4,
       "speed": 1,
@@ -10432,7 +10432,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "River Serpent overwhelms with slow, crushing size rather than finesse. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Carries Lucky Coin. Defeat loot: 3 Lumens."
+    "notes": "River Serpent overwhelms with slow, crushing size rather than finesse. Built around Strength (Threat Level 2), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Carries Lucky Coin. Defeat loot: 6 Lumens."
   },
   {
     "premadeId": "monster_beast_wolf_lv02_4a",
@@ -10440,12 +10440,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 6,
+    "lumens": 9,
     "gil": 0,
     "stats": {
       "hp": 11,
       "stamina": 10,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 3,
@@ -10473,7 +10473,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Young Wolf hunts in numbers, closes distance fast, and rarely stops to defend. Built around HP and Strength (Threat Level 2), which is where nearly every stat point above the baseline sheet went. Carries Lucky Coin. Defeat loot: 6 Lumens."
+    "notes": "Young Wolf hunts in numbers, closes distance fast, and rarely stops to defend. Built around Strength and HP (Threat Level 3), which is where nearly every stat point above the baseline sheet went. Carries Lucky Coin. Defeat loot: 9 Lumens."
   },
   {
     "premadeId": "monster_construct_lv02_4b",
@@ -10481,12 +10481,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 6,
+    "lumens": 9,
     "gil": 0,
     "stats": {
       "hp": 11,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -10514,7 +10514,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Rubble Construct was built (literally) to soak hits — nearly unkillable head-on, but painfully slow and easy to outmaneuver. Built around Physical Defence and HP (Threat Level 2), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Stamina in particular was left untrained. Carries Lucky Coin. Defeat loot: 6 Lumens."
+    "notes": "Rubble Construct was built (literally) to soak hits — nearly unkillable head-on, but painfully slow and easy to outmaneuver. Built around Strength and Physical Defence (Threat Level 3), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Stamina in particular was left untrained. Carries Lucky Coin. Defeat loot: 9 Lumens."
   },
   {
     "premadeId": "monster_plant_lv02_4c",
@@ -10522,12 +10522,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 6,
+    "lumens": 9,
     "gil": 0,
     "stats": {
       "hp": 12,
       "stamina": 10,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -10555,7 +10555,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Creeping Vine barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Physical Defence (Threat Level 2), which is where nearly every stat point above the baseline sheet went. Carries Lucky Coin. Defeat loot: 6 Lumens."
+    "notes": "Creeping Vine barely moves, poisons everything nearby, and simply refuses to die. Built around Strength and HP (Threat Level 3), which is where nearly every stat point above the baseline sheet went. Carries Lucky Coin. Defeat loot: 9 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv03_4d",
@@ -10563,12 +10563,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 9,
+    "lumens": 12,
     "gil": 0,
     "stats": {
       "hp": 12,
       "stamina": 11,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -10603,7 +10603,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Gelatinous Slime shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Stamina (Threat Level 3), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their go-to move is Tough Skin. Carries Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 9 Lumens."
+    "notes": "Gelatinous Slime shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around Strength and HP (Threat Level 4), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their go-to move is Tough Skin. Carries Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 12 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv03_4e",
@@ -10611,13 +10611,13 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 9,
+    "lumens": 12,
     "gil": 0,
     "stats": {
       "hp": 11,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -2,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 8,
@@ -10651,7 +10651,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Wyrmling brings the complete package — tough, magical, mobile and dangerous at range and in melee. Built around HP and Magic Power (Threat Level 3), which is where nearly every stat point above the baseline sheet went. Their go-to move is Tough Skin. Carries Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 9 Lumens."
+    "notes": "Wyrmling brings the complete package — tough, magical, mobile and dangerous at range and in melee. Built around Magic Power and HP (Threat Level 4), which is where nearly every stat point above the baseline sheet went. Their go-to move is Tough Skin. Carries Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 12 Lumens."
   },
   {
     "premadeId": "monster_giant_lv03_4f",
@@ -10659,12 +10659,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 9,
+    "lumens": 12,
     "gil": 20,
     "stats": {
       "hp": 8,
       "stamina": 10,
-      "strength": -5,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -10704,7 +10704,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_1"
     },
-    "notes": "Hill Brute hits like a landslide and shrugs off blows that would kill anything else — but slow to react and easy to bait. Their go-to move is Tough Skin. Carries Stone Hammer and Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 9 Lumens, 20 Gil."
+    "notes": "Hill Brute hits like a landslide and shrugs off blows that would kill anything else — but slow to react and easy to bait. Built around Strength (Threat Level 4), which is where nearly every stat point above the baseline sheet went. Their go-to move is Tough Skin. Carries Stone Hammer and Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 12 Lumens, 20 Gil."
   },
   {
     "premadeId": "monster_spider_swarm_lv04_4g",
@@ -10712,12 +10712,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 12,
+    "lumens": 15,
     "gil": 0,
     "stats": {
       "hp": 11,
       "stamina": 10,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -1,
       "speed": 4,
@@ -10752,7 +10752,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Cave Spider traps first, poisons second, and rarely fights fair. Built around Accuracy and Speed (Threat Level 4), which is where nearly every stat point above the baseline sheet went. Their go-to move is Powerful Bite. Carries Lucky Coin. Potential defeat drops: sharp_fangs. Defeat loot: 12 Lumens."
+    "notes": "Cave Spider traps first, poisons second, and rarely fights fair. Built around Strength and Accuracy (Threat Level 5), which is where nearly every stat point above the baseline sheet went. Their go-to move is Powerful Bite. Carries Lucky Coin. Potential defeat drops: sharp_fangs. Defeat loot: 15 Lumens."
   },
   {
     "premadeId": "monster_fiend_lv04_4h",
@@ -10801,12 +10801,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 12,
+    "lumens": 15,
     "gil": 0,
     "stats": {
       "hp": 12,
       "stamina": 11,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -1,
       "speed": 4,
@@ -10841,7 +10841,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Rat Swarm swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 4), which is where nearly every stat point above the baseline sheet went. Their go-to move is Powerful Bite. Carries Lucky Coin. Potential defeat drops: sharp_fangs. Defeat loot: 12 Lumens."
+    "notes": "Rat Swarm swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around Strength and HP (Threat Level 5), which is where nearly every stat point above the baseline sheet went. Their go-to move is Powerful Bite. Carries Lucky Coin. Potential defeat drops: sharp_fangs. Defeat loot: 15 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv05_4j",
@@ -10890,12 +10890,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 15,
+    "lumens": 18,
     "gil": 0,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 0,
       "speed": 6,
@@ -10930,7 +10930,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Scrub Hawk owns the sky and the initiative — hard to pin down, but folds fast once actually caught. Built around Speed and Accuracy (Threat Level 5), which is where nearly every stat point above the baseline sheet went. Their go-to move is Natural Claws. Carries Lucky Coin. Potential defeat drops: sharp_claws. Defeat loot: 15 Lumens."
+    "notes": "Scrub Hawk owns the sky and the initiative — hard to pin down, but folds fast once actually caught. Built around Speed and Strength (Threat Level 6), which is where nearly every stat point above the baseline sheet went. Their go-to move is Natural Claws. Carries Lucky Coin. Potential defeat drops: sharp_claws. Defeat loot: 18 Lumens."
   },
   {
     "premadeId": "monster_goblinoid_lv05_4l",
@@ -11002,13 +11002,13 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 18,
+    "lumens": 21,
     "gil": 0,
     "stats": {
       "hp": 11,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -2,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 9,
@@ -11047,7 +11047,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_1"
     },
-    "notes": "Restless Skeleton drains the life out of a fight slowly — control and attrition over brute force. Built around Magical Defence and HP (Threat Level 6), which is where nearly every stat point above the baseline sheet went. Their go-to move is Tough Skin. Carries Iron Sword and Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 18 Lumens."
+    "notes": "Restless Skeleton drains the life out of a fight slowly — control and attrition over brute force. Built around Magic Power and Magical Defence (Threat Level 7), which is where nearly every stat point above the baseline sheet went. Their go-to move is Tough Skin. Carries Iron Sword and Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 21 Lumens."
   },
   {
     "premadeId": "monster_aquatic_lv06_4n",
@@ -11109,12 +11109,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 18,
+    "lumens": 21,
     "gil": 0,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 5,
@@ -11155,7 +11155,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Young Wolf hunts in numbers, closes distance fast, and rarely stops to defend. Built around Speed and Strength (Threat Level 6), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite and Tough Skin. Carries Lucky Coin. Potential defeat drops: sharp_fangs, thick_hide. Defeat loot: 18 Lumens."
+    "notes": "Young Wolf hunts in numbers, closes distance fast, and rarely stops to defend. Built around Strength and Speed (Threat Level 7), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite and Tough Skin. Carries Lucky Coin. Potential defeat drops: sharp_fangs, thick_hide. Defeat loot: 21 Lumens."
   },
   {
     "premadeId": "monster_construct_lv07_4p",
@@ -11211,12 +11211,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 21,
+    "lumens": 24,
     "gil": 0,
     "stats": {
       "hp": 17,
       "stamina": 12,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 2,
@@ -11251,7 +11251,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Creeping Vine barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Physical Defence (Threat Level 7), which is where nearly every stat point above the baseline sheet went. Their go-to move is Tough Skin. Carries Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 21 Lumens."
+    "notes": "Creeping Vine barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Strength (Threat Level 8), which is where nearly every stat point above the baseline sheet went. Their go-to move is Tough Skin. Carries Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 24 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv07_4r",
@@ -11259,12 +11259,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 21,
+    "lumens": 24,
     "gil": 0,
     "stats": {
       "hp": 17,
       "stamina": 12,
-      "strength": -3,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -11299,7 +11299,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Gelatinous Slime shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 7), which is where nearly every stat point above the baseline sheet went. Their go-to move is Tough Skin. Carries Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 21 Lumens."
+    "notes": "Gelatinous Slime shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 8), which is where nearly every stat point above the baseline sheet went. Their go-to move is Tough Skin. Carries Lucky Coin. Potential defeat drops: thick_hide. Defeat loot: 24 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv08_4s",
@@ -11408,12 +11408,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 24,
+    "lumens": 27,
     "gil": 0,
     "stats": {
       "hp": 12,
       "stamina": 11,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 0,
       "speed": 5,
@@ -11460,7 +11460,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Cave Spider traps first, poisons second, and rarely fights fair. Built around Accuracy and Speed (Threat Level 8), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Natural Claws and Tough Skin. Carries Lucky Coin. Potential defeat drops: sharp_fangs, sharp_claws, thick_hide. Defeat loot: 24 Lumens."
+    "notes": "Cave Spider traps first, poisons second, and rarely fights fair. Built around Strength and Accuracy (Threat Level 9), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Natural Claws and Tough Skin. Carries Lucky Coin. Potential defeat drops: sharp_fangs, sharp_claws, thick_hide. Defeat loot: 27 Lumens."
   },
   {
     "premadeId": "monster_fiend_lv09_4v",
@@ -11521,12 +11521,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 27,
+    "lumens": 30,
     "gil": 0,
     "stats": {
       "hp": 14,
       "stamina": 11,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 1,
       "speed": 6,
@@ -11573,7 +11573,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Plague Rat Horde swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 9), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Tough Skin. Carries Lucky Coin. Potential defeat drops: crusher_molars, thick_hide. Defeat loot: 27 Lumens."
+    "notes": "Plague Rat Horde swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 10), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Tough Skin. Carries Lucky Coin. Potential defeat drops: crusher_molars, thick_hide. Defeat loot: 30 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv09_4x",
@@ -11634,12 +11634,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 30,
+    "lumens": 33,
     "gil": 0,
     "stats": {
       "hp": 11,
       "stamina": 11,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 1,
       "speed": 8,
@@ -11687,7 +11687,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "War Eagle owns the sky and the initiative — hard to pin down, but folds fast once actually caught. Built around Speed and Accuracy (Threat Level 10), which is where nearly every stat point above the baseline sheet went. Their kit leans on Natural Claws, Razor Claws and Pounce, among others. Carries Lucky Coin. Potential defeat drops: razor_talons, flexible_tail_section. Defeat loot: 30 Lumens."
+    "notes": "War Eagle owns the sky and the initiative — hard to pin down, but folds fast once actually caught. Built around Speed and Accuracy (Threat Level 11), which is where nearly every stat point above the baseline sheet went. Their kit leans on Natural Claws, Razor Claws and Pounce, among others. Carries Lucky Coin. Potential defeat drops: razor_talons, flexible_tail_section. Defeat loot: 33 Lumens."
   },
   {
     "premadeId": "monster_goblinoid_lv10_4z",
@@ -11700,7 +11700,7 @@
     "stats": {
       "hp": 11,
       "stamina": 10,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -11771,13 +11771,13 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 30,
+    "lumens": 33,
     "gil": 0,
     "stats": {
       "hp": 11,
       "stamina": 10,
       "strength": -3,
-      "magicPower": -2,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 2,
       "physicalDefence": 9,
@@ -11828,7 +11828,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_1"
     },
-    "notes": "Ravenous Ghoul drains the life out of a fight slowly — control and attrition over brute force. Built around Magical Defence and HP (Threat Level 10), which is where nearly every stat point above the baseline sheet went. Their kit leans on Magical Resistance, Tough Skin and Rock Skin. Carries Iron Sword and Lucky Coin. Potential defeat drops: anti_magic_essence, living_rock_fragments. Defeat loot: 30 Lumens."
+    "notes": "Ravenous Ghoul drains the life out of a fight slowly — control and attrition over brute force. Built around Magic Power and Magical Defence (Threat Level 11), which is where nearly every stat point above the baseline sheet went. Their kit leans on Magical Resistance, Tough Skin and Rock Skin. Carries Iron Sword and Lucky Coin. Potential defeat drops: anti_magic_essence, living_rock_fragments. Defeat loot: 33 Lumens."
   },
   {
     "premadeId": "monster_aquatic_lv11_51",
@@ -12029,12 +12029,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 36,
+    "lumens": 39,
     "gil": 0,
     "stats": {
       "hp": 20,
       "stamina": 13,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 2,
@@ -12086,7 +12086,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Spore Stalker barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 12), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Tail Swipe and Magical Resistance. Carries Lucky Coin. Potential defeat drops: thick_hide, flexible_tail_section, anti_magic_essence. Defeat loot: 36 Lumens."
+    "notes": "Spore Stalker barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 13), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Tail Swipe and Magical Resistance. Carries Lucky Coin. Potential defeat drops: thick_hide, flexible_tail_section, anti_magic_essence. Defeat loot: 39 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv12_55",
@@ -12094,12 +12094,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 36,
+    "lumens": 39,
     "gil": 0,
     "stats": {
       "hp": 16,
       "stamina": 12,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -12152,7 +12152,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Acid Ooze shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 12), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Lucky Coin. Potential defeat drops: living_rock_fragments, acid_bladder, anti_magic_essence. Defeat loot: 36 Lumens."
+    "notes": "Acid Ooze shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 13), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Lucky Coin. Potential defeat drops: living_rock_fragments, acid_bladder, anti_magic_essence. Defeat loot: 39 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv12_56",
@@ -12160,13 +12160,13 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 36,
+    "lumens": 39,
     "gil": 0,
     "stats": {
       "hp": 12,
       "stamina": 10,
       "strength": -1,
-      "magicPower": -1,
+      "magicPower": 0,
       "accuracy": -2,
       "speed": 3,
       "physicalDefence": 10,
@@ -12218,7 +12218,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Young Wyvern brings the complete package — tough, magical, mobile and dangerous at range and in melee. Built around HP and Strength (Threat Level 12), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Rock Skin and Tail Swipe, among others. Carries Lucky Coin. Potential defeat drops: living_rock_fragments, flexible_tail_section, anti_magic_essence. Defeat loot: 36 Lumens."
+    "notes": "Young Wyvern brings the complete package — tough, magical, mobile and dangerous at range and in melee. Built around Magic Power and HP (Threat Level 13), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Rock Skin and Tail Swipe, among others. Carries Lucky Coin. Potential defeat drops: living_rock_fragments, flexible_tail_section, anti_magic_essence. Defeat loot: 39 Lumens."
   },
   {
     "premadeId": "monster_giant_lv13_57",
@@ -12292,12 +12292,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 39,
+    "lumens": 42,
     "gil": 0,
     "stats": {
       "hp": 13,
       "stamina": 11,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 3,
       "speed": 8,
@@ -12351,7 +12351,7 @@
       "armor": null,
       "accessory": "premade_lucky_coin_0"
     },
-    "notes": "Giant Spider traps first, poisons second, and rarely fights fair. Built around Accuracy and Speed (Threat Level 13), which is where nearly every stat point above the baseline sheet went. Their kit leans on Web Shot, Powerful Bite and Natural Claws, among others. Carries Lucky Coin. Potential defeat drops: sharp_fangs, razor_talons, thick_hide. Defeat loot: 39 Lumens."
+    "notes": "Giant Spider traps first, poisons second, and rarely fights fair. Built around Accuracy and Speed (Threat Level 14), which is where nearly every stat point above the baseline sheet went. Their kit leans on Web Shot, Powerful Bite and Natural Claws, among others. Carries Lucky Coin. Potential defeat drops: sharp_fangs, razor_talons, thick_hide. Defeat loot: 42 Lumens."
   },
   {
     "premadeId": "monster_fiend_lv13_59",
@@ -12412,12 +12412,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 42,
+    "lumens": 45,
     "gil": 0,
     "stats": {
       "hp": 18,
       "stamina": 12,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 4,
       "speed": 10,
@@ -12464,7 +12464,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Plague Rat Horde swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Speed (Threat Level 14), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Tough Skin. Carries Ring of Power. Potential defeat drops: crusher_molars, thick_hide. Defeat loot: 42 Lumens."
+    "notes": "Plague Rat Horde swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Speed (Threat Level 15), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Tough Skin. Carries Ring of Power. Potential defeat drops: crusher_molars, thick_hide. Defeat loot: 45 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv14_5b",
@@ -12929,12 +12929,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 48,
+    "lumens": 51,
     "gil": 0,
     "stats": {
       "hp": 25,
       "stamina": 14,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -1,
       "speed": 2,
@@ -12986,7 +12986,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Spore Stalker barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 16), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Tail Swipe and Magical Resistance. Carries Ring of Power. Potential defeat drops: thick_hide, flexible_tail_section, anti_magic_essence. Defeat loot: 48 Lumens."
+    "notes": "Spore Stalker barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 17), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Tail Swipe and Magical Resistance. Carries Ring of Power. Potential defeat drops: thick_hide, flexible_tail_section, anti_magic_essence. Defeat loot: 51 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv17_5j",
@@ -12994,12 +12994,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 51,
+    "lumens": 54,
     "gil": 0,
     "stats": {
       "hp": 15,
       "stamina": 11,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -13055,7 +13055,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Caustic Blob shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 17), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence. Defeat loot: 51 Lumens."
+    "notes": "Caustic Blob shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 18), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence. Defeat loot: 54 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv17_5k",
@@ -13069,7 +13069,7 @@
       "hp": 12,
       "stamina": 10,
       "strength": -2,
-      "magicPower": -1,
+      "magicPower": 0,
       "accuracy": -3,
       "speed": 3,
       "physicalDefence": 9,
@@ -13131,7 +13131,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Adult Drake brings the complete package — tough, magical, mobile and dangerous at range and in melee. Built around HP and Magic Power (Threat Level 17), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Rock Skin and Fire Breath, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, flame_gland, tail_spikes, razor_talons. Defeat loot: 51 Lumens."
+    "notes": "Adult Drake brings the complete package — tough, magical, mobile and dangerous at range and in melee. Built around Magic Power and HP (Threat Level 17), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Rock Skin and Fire Breath, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, flame_gland, tail_spikes, razor_talons. Defeat loot: 51 Lumens."
   },
   {
     "premadeId": "monster_giant_lv17_5l",
@@ -13223,7 +13223,7 @@
     "stats": {
       "hp": 13,
       "stamina": 12,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 3,
       "speed": 8,
@@ -13358,12 +13358,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 54,
+    "lumens": 57,
     "gil": 0,
     "stats": {
       "hp": 18,
       "stamina": 12,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 4,
       "speed": 10,
@@ -13419,7 +13419,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Locust Cloud swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Speed (Threat Level 18), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, thick_hide. Defeat loot: 54 Lumens."
+    "notes": "Locust Cloud swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Speed (Threat Level 19), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, thick_hide. Defeat loot: 57 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv19_5p",
@@ -13570,7 +13570,7 @@
     "stats": {
       "hp": 11,
       "stamina": 10,
-      "strength": -1,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 3,
@@ -13947,12 +13947,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 63,
+    "lumens": 66,
     "gil": 0,
     "stats": {
       "hp": 28,
       "stamina": 14,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -1,
       "speed": 2,
@@ -14012,7 +14012,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Bloomless Horror barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 21), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Tail Swipe, among others. Carries Ring of Power. Potential defeat drops: thick_hide, venom_sacs, flexible_tail_section, anti_magic_essence. Defeat loot: 63 Lumens."
+    "notes": "Bloomless Horror barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 22), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Tail Swipe, among others. Carries Ring of Power. Potential defeat drops: thick_hide, venom_sacs, flexible_tail_section, anti_magic_essence. Defeat loot: 66 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv21_5x",
@@ -14020,12 +14020,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 63,
+    "lumens": 66,
     "gil": 0,
     "stats": {
       "hp": 35,
       "stamina": 16,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -14081,7 +14081,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Caustic Blob shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Stamina (Threat Level 21), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence. Defeat loot: 63 Lumens."
+    "notes": "Caustic Blob shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Stamina (Threat Level 22), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence. Defeat loot: 66 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv22_5y",
@@ -14390,12 +14390,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 69,
+    "lumens": 72,
     "gil": 0,
     "stats": {
       "hp": 25,
       "stamina": 14,
-      "strength": -3,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": 10,
       "speed": 12,
@@ -14451,7 +14451,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Locust Cloud swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 23), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, thick_hide. Defeat loot: 69 Lumens."
+    "notes": "Locust Cloud swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 24), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, thick_hide. Defeat loot: 72 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv23_63",
@@ -14997,12 +14997,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 78,
+    "lumens": 81,
     "gil": 0,
     "stats": {
       "hp": 32,
       "stamina": 15,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 0,
       "speed": 2,
@@ -15069,7 +15069,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Rotwood Ancient barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 26), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Power. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, regenerative_tissue, flexible_tail_section. Defeat loot: 78 Lumens."
+    "notes": "Rotwood Ancient barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 27), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Power. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, regenerative_tissue, flexible_tail_section. Defeat loot: 81 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv26_6b",
@@ -15077,12 +15077,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 78,
+    "lumens": 81,
     "gil": 0,
     "stats": {
       "hp": 27,
       "stamina": 14,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -15144,7 +15144,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Amorphous Horror shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around Magical Defence and HP (Threat Level 26), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Accuracy in particular was left untrained. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, regenerative_tissue. Defeat loot: 78 Lumens."
+    "notes": "Amorphous Horror shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around Magical Defence and HP (Threat Level 27), which is where nearly every stat point above the baseline sheet went. They leaned even harder into that at the cost of everything else — Accuracy in particular was left untrained. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, regenerative_tissue. Defeat loot: 81 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv26_6c",
@@ -15504,12 +15504,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 84,
+    "lumens": 87,
     "gil": 0,
     "stats": {
       "hp": 31,
       "stamina": 16,
-      "strength": -3,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": 15,
       "speed": 12,
@@ -15571,7 +15571,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Vermin Tide swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 28), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 84 Lumens."
+    "notes": "Vermin Tide swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 29), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 87 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv28_6h",
@@ -16083,7 +16083,7 @@
     "stats": {
       "hp": 30,
       "stamina": 12,
-      "strength": -2,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -16154,12 +16154,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 90,
+    "lumens": 93,
     "gil": 0,
     "stats": {
       "hp": 39,
       "stamina": 17,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 1,
       "speed": 2,
@@ -16226,7 +16226,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Rotwood Ancient barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 30), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Power. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, regenerative_tissue, flexible_tail_section. Defeat loot: 90 Lumens."
+    "notes": "Rotwood Ancient barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 31), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Power. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, regenerative_tissue, flexible_tail_section. Defeat loot: 93 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv31_6p",
@@ -16234,12 +16234,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 93,
+    "lumens": 96,
     "gil": 0,
     "stats": {
       "hp": 63,
       "stamina": 23,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -16301,7 +16301,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Amorphous Horror shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Stamina (Threat Level 31), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, regenerative_tissue. Defeat loot: 93 Lumens."
+    "notes": "Amorphous Horror shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Stamina (Threat Level 32), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, regenerative_tissue. Defeat loot: 96 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv31_6q",
@@ -16661,12 +16661,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 96,
+    "lumens": 99,
     "gil": 0,
     "stats": {
       "hp": 42,
       "stamina": 19,
-      "strength": -3,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": 15,
       "speed": 12,
@@ -16728,7 +16728,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Vermin Tide swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 32), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 96 Lumens."
+    "notes": "Vermin Tide swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 33), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 99 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv33_6v",
@@ -17321,12 +17321,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 105,
+    "lumens": 108,
     "gil": 0,
     "stats": {
       "hp": 45,
       "stamina": 19,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 1,
       "speed": 2,
@@ -17394,7 +17394,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Primal Bloomlord barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 35), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Power. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, phoenix_cells, flexible_tail_section. Defeat loot: 105 Lumens."
+    "notes": "Primal Bloomlord barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 36), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Power. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, phoenix_cells, flexible_tail_section. Defeat loot: 108 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv35_73",
@@ -17402,12 +17402,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 105,
+    "lumens": 108,
     "gil": 0,
     "stats": {
       "hp": 39,
       "stamina": 17,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -17470,7 +17470,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Ancient Ooze Colony shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 35), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, phoenix_cells. Defeat loot: 105 Lumens."
+    "notes": "Ancient Ooze Colony shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 36), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Power. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, phoenix_cells. Defeat loot: 108 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv36_74",
@@ -17834,12 +17834,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 111,
+    "lumens": 114,
     "gil": 0,
     "stats": {
       "hp": 55,
       "stamina": 23,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 15,
       "speed": 12,
@@ -17901,7 +17901,7 @@
       "armor": null,
       "accessory": "premade_power_ring_0"
     },
-    "notes": "Rat King's Legion swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 37), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 111 Lumens."
+    "notes": "Rat King's Legion swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 38), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Power. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 114 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv37_79",
@@ -18494,12 +18494,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
+    "lumens": 123,
     "gil": 0,
     "stats": {
       "hp": 51,
       "stamina": 20,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 2,
       "speed": 2,
@@ -18567,7 +18567,7 @@
       "armor": null,
       "accessory": "premade_ring_of_protection_0"
     },
-    "notes": "Primal Bloomlord barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 40), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Protection. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, phoenix_cells, flexible_tail_section. Defeat loot: 120 Lumens."
+    "notes": "Primal Bloomlord barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 41), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Protection. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, phoenix_cells, flexible_tail_section. Defeat loot: 123 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv40_7h",
@@ -18575,12 +18575,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 120,
+    "lumens": 123,
     "gil": 0,
     "stats": {
       "hp": 45,
       "stamina": 19,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -18643,7 +18643,7 @@
       "armor": null,
       "accessory": "premade_ring_of_protection_0"
     },
-    "notes": "Ancient Ooze Colony shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 40), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Protection. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, phoenix_cells. Defeat loot: 120 Lumens."
+    "notes": "Ancient Ooze Colony shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 41), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Protection. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, phoenix_cells. Defeat loot: 123 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv40_7i",
@@ -19007,12 +19007,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 126,
+    "lumens": 129,
     "gil": 0,
     "stats": {
       "hp": 67,
       "stamina": 26,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 15,
       "speed": 12,
@@ -19074,7 +19074,7 @@
       "armor": null,
       "accessory": "premade_ring_of_protection_0"
     },
-    "notes": "Rat King's Legion swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 42), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Protection. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 126 Lumens."
+    "notes": "Rat King's Legion swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Accuracy (Threat Level 43), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Protection. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 129 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv42_7n",
@@ -19692,12 +19692,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 132,
+    "lumens": 135,
     "gil": 0,
     "stats": {
       "hp": 58,
       "stamina": 22,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 3,
       "speed": 2,
@@ -19770,7 +19770,7 @@
       "armor": null,
       "accessory": "premade_ring_of_protection_0"
     },
-    "notes": "World-Root Devourer barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 44), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Protection. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, phoenix_cells, flexible_tail_section. Defeat loot: 132 Lumens."
+    "notes": "World-Root Devourer barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Magical Defence (Threat Level 45), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Protection. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, phoenix_cells, flexible_tail_section. Defeat loot: 135 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv45_7v",
@@ -19778,12 +19778,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 135,
+    "lumens": 138,
     "gil": 0,
     "stats": {
       "hp": 57,
       "stamina": 22,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -3,
       "speed": 2,
@@ -19851,7 +19851,7 @@
       "armor": null,
       "accessory": "premade_ring_of_protection_0"
     },
-    "notes": "Primordial Devourer shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 45), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Protection. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, phoenix_cells. Defeat loot: 135 Lumens."
+    "notes": "Primordial Devourer shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Magical Defence (Threat Level 46), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Protection. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, phoenix_cells. Defeat loot: 138 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv45_7w",
@@ -20235,12 +20235,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 138,
+    "lumens": 141,
     "gil": 0,
     "stats": {
       "hp": 79,
       "stamina": 30,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": 15,
       "speed": 12,
@@ -20307,7 +20307,7 @@
       "armor": null,
       "accessory": "premade_ring_of_protection_0"
     },
-    "notes": "Endless Vermin Plague swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Stamina (Threat Level 46), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Protection. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 138 Lumens."
+    "notes": "Endless Vermin Plague swarms in numbers too great to fight one at a time — no single member is dangerous alone. Built around HP and Stamina (Threat Level 47), which is where nearly every stat point above the baseline sheet went. Their kit leans on Powerful Bite, Crushing Bite and Venomous Claws, among others. Carries Ring of Protection. Potential defeat drops: crusher_molars, venom_sacs, combat_coordination_gland, thick_hide. Defeat loot: 141 Lumens."
   },
   {
     "premadeId": "monster_elemental_lv47_81",
@@ -20935,12 +20935,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 147,
+    "lumens": 150,
     "gil": 0,
     "stats": {
       "hp": 72,
       "stamina": 25,
-      "strength": -3,
+      "strength": -1,
       "magicPower": -3,
       "accuracy": 5,
       "speed": 2,
@@ -21013,7 +21013,7 @@
       "armor": null,
       "accessory": "premade_ring_of_protection_0"
     },
-    "notes": "World-Root Devourer barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Physical Defence (Threat Level 49), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Protection. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, phoenix_cells, flexible_tail_section. Defeat loot: 147 Lumens."
+    "notes": "World-Root Devourer barely moves, poisons everything nearby, and simply refuses to die. Built around HP and Physical Defence (Threat Level 50), which is where nearly every stat point above the baseline sheet went. Their kit leans on Tough Skin, Venomous Claws and Regeneration, among others. Carries Ring of Protection. Potential defeat drops: thick_hide, venom_sacs, anti_magic_essence, phoenix_cells, flexible_tail_section. Defeat loot: 150 Lumens."
   },
   {
     "premadeId": "monster_ooze_lv49_89",
@@ -21021,12 +21021,12 @@
     "race": "monster",
     "category": "monster",
     "elementalAffinity": "",
-    "lumens": 147,
+    "lumens": 150,
     "gil": 0,
     "stats": {
       "hp": 113,
       "stamina": 36,
-      "strength": -3,
+      "strength": 0,
       "magicPower": -3,
       "accuracy": -2,
       "speed": 3,
@@ -21094,7 +21094,7 @@
       "armor": null,
       "accessory": "premade_ring_of_protection_0"
     },
-    "notes": "Primordial Devourer shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Stamina (Threat Level 49), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Protection. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, phoenix_cells. Defeat loot: 147 Lumens."
+    "notes": "Primordial Devourer shrugs off nearly any hit and dishes damage back just as slowly — a war of attrition. Built around HP and Stamina (Threat Level 50), which is where nearly every stat point above the baseline sheet went. Every spare point went into offense; defence was barely an afterthought, so this build hits hard and breaks easily. Their kit leans on Tough Skin, Acid Spit and Rock Skin, among others. Carries Ring of Protection. Potential defeat drops: metallic_fragments, acid_bladder, anti_magic_essence, phoenix_cells. Defeat loot: 150 Lumens."
   },
   {
     "premadeId": "monster_dragonkin_lv50_8a",

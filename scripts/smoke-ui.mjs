@@ -363,6 +363,15 @@ await test('homebrew tab: create a custom item and open each editor', async page
   await assertText(page, '#app-content', 'Smoke Blade')
 })
 
+await test('new players are told why their hits are weak until they raise a damage stat', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="stats"]')
+  await assertText(page, '.damage-stat-hint', 'minimum 1 damage')
+  for (let i = 0; i < 3; i++) await page.locator('[data-upgrade-stat="strength"]').first().click()
+  await page.waitForFunction(() => !document.querySelector('.damage-stat-hint'))
+})
+
 await test('gm tools: activate GM mode, spawn a premade and build a monster', async page => {
   await open(page)
   await createCharacter(page)
