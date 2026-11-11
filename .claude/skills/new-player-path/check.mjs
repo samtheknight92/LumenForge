@@ -57,6 +57,21 @@ const buyStats = (lumens, plan) => {
   return { stats, left }
 }
 const hitChance = (acc, def) => Math.max(5, Math.min(95, (21 - (def - acc)) * 5))
+/** Average of a hit when every hit deals at least 1 (the app's minimum damage rule). */
+const avgMin1 = (diceText, mod) => {
+  const m = String(diceText).match(/(\d+)d(\d+)/)
+  if (!m) return Math.max(1, mod)
+  let dist = new Map([[0, 1]])
+  for (let i = 0; i < Number(m[1]); i++) {
+    const next = new Map()
+    for (const [t, p] of dist) for (let f = 1; f <= Number(m[2]); f++) next.set(t + f, (next.get(t + f) || 0) + p / Number(m[2]))
+    dist = next
+  }
+  let e = 0
+  for (const [t, p] of dist) e += Math.max(1, t + mod) * p
+  return e
+}
+
 const rows = []
 const LUMENS = 113, GIL = 2400
 for (const [cat, trees] of [['weapons', skillsJson.weapons], ['magic', skillsJson.magic]]) {
@@ -69,19 +84,21 @@ for (const [cat, trees] of [['weapons', skillsJson.weapons], ['magic', skillsJso
     const { stats, left } = buyStats(LUMENS - t1Cost, [[dmgStat, 0], ['accuracy', 0], [dmgStat, 1], ['hp', 15]])
     const weapons = Object.values(items.weapons).filter(w => w.rarity === 'common' && KIND[tree]?.test(w.id)).sort((a, b) => gil(a.price) - gil(b.price))
     const w = weapons[0]
-    let dmg, how
+    let dmg, how, dice = null, statBonus = 0
     if (cat === 'magic') {
       const spell = actives.find(s => /\d+d\d+/.test(s.desc))
-      dmg = spell ? avgDice(spell.desc) + stats.magicPower : 0
+      dice = spell ? spell.desc : null
       how = spell ? `${spell.name}` : 'no Tier 1 damage spell'
     } else if (tree === 'striker') {
-      dmg = 2.5 + stats.strength; how = 'unarmed 1d4'
+      dice = '1d4'; how = 'unarmed 1d4'
     } else {
-      dmg = w ? avgDice(w.damage) + stats[dmgStat] + (w.statModifiers?.[dmgStat] || 0) : 0
+      dice = w ? w.damage : null
+      statBonus = w?.statModifiers?.[dmgStat] || 0
       how = w ? `${w.name} (${w.damage}, ${gil(w.price)} Gil)` : 'no common weapon'
     }
-    const rawStat = DEFAULT_STATS[dmgStat] + (cat === 'magic' || tree === 'striker' ? 0 : (w?.statModifiers?.[dmgStat] || 0))
-    const rawDmg = cat === 'magic' ? (dmg ? dmg - stats.magicPower + DEFAULT_STATS.magicPower : 0) : tree === 'striker' ? 2.5 + DEFAULT_STATS.strength : (w ? avgDice(w.damage) + rawStat : 0)
+    // Every hit deals at least 1 damage (the app's minimum), so average with that floor.
+    dmg = dice ? avgMin1(dice, stats[dmgStat] + statBonus) : 0
+    const rawDmg = dice ? avgMin1(dice, DEFAULT_STATS[dmgStat] + statBonus) : 0
     const acc = stats.accuracy + (w?.statModifiers?.accuracy || 0)
     const hit = hitChance(acc, cat === 'magic' ? foe.md : foe.pd)
     const perTurn = Math.max(0, dmg) * hit / 100
@@ -102,7 +119,7 @@ for (const r of rows) {
   if (r.toT2 > 0) flags.push(`**${r.tree}**: has only ${r.t1.length} Tier 1 skills, but Tier 2 needs Skill Level ${TIER_MIN_LEVEL[2]}. A new player must learn ${r.toT2} skills from other trees first. Fine if intended; say it on the Skills tab.`)
 }
 const weak = rows.filter(r => r.rawDmg <= 1.5 && r.dmg > 0)
-if (weak.length) flags.push(`${weak.length} of ${rows.length} paths average 1.5 damage or less per hit if the player does not buy Strength or Magic Power first (${weak.map(r => r.tree).join(', ')}). Starting damage stats are −3, so a brand-new player who spends Lumens on skills instead can deal 0 damage, and nothing on screen tells them why. → Start damage stats at 0, or have Guided Create recommend raising them first.`)
+if (weak.length) flags.push(`${weak.length} of ${rows.length} paths average 1.5 damage or less per hit if the player does not buy Strength or Magic Power first (${weak.map(r => r.tree).join(', ')}). Starting damage stats are −3 (on purpose: stats are bought with Lumens), so a brand-new player who spends Lumens on skills instead lands mostly minimum 1-damage hits. → Make sure the app explains this where players spend Lumens (creation and the Stats tab).`)
 const uniq = [...new Set(flags)]
 const groupBy = re => uniq.filter(f => re.test(f))
 out.push('', '## Flags', '')

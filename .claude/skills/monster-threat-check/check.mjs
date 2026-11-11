@@ -22,19 +22,34 @@ const avgDice = t => { const m = String(t).match(/(\d+)d(\d+)/); return m ? m[1]
 const hit = (acc, def) => Math.max(0.05, Math.min(0.95, (21 - (def - acc)) / 20))
 const r1 = x => Math.round(x * 10) / 10
 
+/** Average of a hit when every hit deals at least 1 (the app's minimum damage rule). */
+const avgMin1 = (diceText, mod) => {
+  const m = String(diceText).match(/(\d+)d(\d+)/)
+  if (!m) return Math.max(1, mod)
+  let dist = new Map([[0, 1]])
+  for (let i = 0; i < Number(m[1]); i++) {
+    const next = new Map()
+    for (const [t, p] of dist) for (let f = 1; f <= Number(m[2]); f++) next.set(t + f, (next.get(t + f) || 0) + p / Number(m[2]))
+    dist = next
+  }
+  let e = 0
+  for (const [t, p] of dist) e += Math.max(1, t + mod) * p
+  return e
+}
+
 function profile(p) {
   const st = { ...p.stats }
   const inv = new Map((p.inventory || []).map(i => [i.uid, i.itemId]))
   const gear = Object.values(p.equipped || {}).map(uid => itemById.get(inv.get(uid))).filter(Boolean)
   for (const g of gear) for (const [k, v] of Object.entries(g.statModifiers || {})) st[k] = (st[k] || 0) + v
   const weapon = gear.find(g => g.type === 'weapon')
-  const weaponAtk = { name: weapon ? weapon.name : 'unarmed', dmg: (weapon ? avgDice(weapon.damage) : 2.5) + st.strength, vs: 'physicalDefence' }
+  const weaponAtk = { name: weapon ? weapon.name : 'unarmed', dmg: avgMin1(weapon ? weapon.damage : '1d4', st.strength), vs: 'physicalDefence' }
   // Best damage skill it knows (dice + Magic Power or Strength, or weapon damage + Strength).
   let best = weaponAtk
   for (const id of p.skills || []) {
     const s = skillById.get(id); if (!s || /^Passive/i.test(s.desc) || !/attack roll|save or take|takes \d+d/i.test(s.desc)) continue
     const magical = /magical defence/i.test(s.desc)
-    const dmg = avgDice(s.desc) + (/weapon damage/i.test(s.desc) ? weaponAtk.dmg : magical ? st.magicPower : st.strength)
+    const dmg = /weapon damage/i.test(s.desc) ? avgDice(s.desc) + weaponAtk.dmg : avgMin1(s.desc, magical ? st.magicPower : st.strength)
     if (dmg > best.dmg) best = { name: s.name, dmg, vs: magical ? 'magicalDefence' : 'physicalDefence' }
   }
   const lv = Number((p.premadeId.match(/_lv0*(\d+)_/) || [])[1] || 0)
@@ -63,7 +78,7 @@ for (const b of bands) {
   out.push(`| ${(b - 1) * 5 + 1}–${b * 5} | ${median(m.map(x => x.hp))} | ${r1(median(m.map(x => x.dpt)))} | ${r1(median(m.map(x => Math.min(99, x.turnsToKillPC))))} | ${r1(median(m.map(x => Math.min(99, x.turnsToDrop))))} |`)
 }
 const flags = []
-const harmless = all.filter(x => x.p.category !== 'pedestrian' && x.best.dmg <= 1)
+const harmless = all.filter(x => x.p.category !== 'pedestrian' && x.best.dmg <= 1.5)
 for (const x of all) {
   if (harmless.includes(x)) continue
   const peers = all.filter(y => y.band === x.band && y.p.category === x.p.category && y !== x)
@@ -79,12 +94,12 @@ for (const x of all.filter(y => y.p.category === 'monster' && y.band >= 3)) {
   if (x.dpt < median(low.map(y => y.dpt)) && x.hp < median(low.map(y => y.hp))) inv.push(`**${x.p.name}** (level ${x.lv}) hits softer and has less HP than a typical level ${(x.band - 3) * 5 + 1}–${(x.band - 2) * 5} monster. A GM picking by level will be surprised.`)
 }
 const quick = all.filter(x => x.p.category === 'monster' && x.turnsToDrop < 1)
-out.push('', `## Can't really hurt anyone (${harmless.length})`, '', 'Monsters and NPCs whose best attack averages 1 damage or less, because their Strength or Magic Power is below zero. By level band:', '')
+out.push('', `## Barely hurt anyone (${harmless.length})`, '', 'Monsters and NPCs whose best attack averages 1.5 damage or less, because their Strength or Magic Power is below zero, so most hits deal only the minimum 1 damage. By level band:', '')
 for (const b of bands) {
   const h = harmless.filter(x => x.band === b); if (!h.length) continue
   out.push(`- Levels ${(b - 1) * 5 + 1}–${b * 5}: ${h.length} (${h.filter(x => x.p.category === 'monster').length} monsters, ${h.filter(x => x.p.category === 'npc').length} NPCs). e.g. ${h.slice(0, 4).map(x => `${x.p.name} lv ${x.lv}: ${x.best.name} ${r1(x.best.dmg)}`).join('; ')}`)
 }
-out.push('', 'Why it matters: fights against these drag on with nobody taking damage, which new GMs read as "the game is broken". → Have the premade generator raise the main damage stat to at least 0 before anything else.')
+out.push('', 'Why it matters: fights against these drag on, chipping 1 HP at a time, which new GMs read as "the game is broken". → Have the premade generator raise the main damage stat to at least 0 before anything else.')
 out.push('', `## Out of line with same-level peers (${flags.length})`, '', 'Compared with others of the same category and level band (5 levels).', '')
 for (const f of flags.slice(0, MAX)) out.push(`- ${f}`)
 if (flags.length > MAX) out.push(`- …and ${flags.length - MAX} more (run with --all).`)
