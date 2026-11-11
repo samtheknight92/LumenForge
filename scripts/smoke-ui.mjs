@@ -372,6 +372,25 @@ await test('new players are told why their hits are weak until they raise a dama
   await page.waitForFunction(() => !document.querySelector('.damage-stat-hint'))
 })
 
+await test('homebrew balance check updates live while typing', async page => {
+  await open(page)
+  await createCharacter(page)
+  await page.click('#tabbar [data-tab="homebrew"]')
+  await page.locator('[data-homebrew-new]').first().click()
+  await page.selectOption('#homebrew-form [name="hb-type"]', 'weapon')
+  await page.selectOption('#homebrew-form [name="hb-rarity"]', 'rare')
+  await page.fill('#homebrew-form [name="hb-damage"]', '1d10')
+  await assertText(page, '[data-homebrew-balance-box="item"]', 'suggested price')
+  await page.fill('#homebrew-form [name="hb-price"]', '999999')
+  await assertText(page, '[data-homebrew-balance-box="item"]', 'pricey')
+  await page.locator('[data-homebrew-cancel]').first().click()
+  await page.locator('[data-homebrew-skill-new]').first().click()
+  await page.selectOption('#homebrew-skill-form [name="hbs-skill-type"]', 'activatable')
+  await page.selectOption('#homebrew-skill-form [name="hbs-damage-mode"]', 'dice')
+  await page.fill('#homebrew-skill-form [name="hbs-damage-dice"]', '20d12')
+  await assertText(page, '[data-homebrew-balance-box="skill"]', 'stronger than a typical Tier 1')
+})
+
 await test('gm tools: activate GM mode, spawn a premade and build a monster', async page => {
   await open(page)
   await createCharacter(page)

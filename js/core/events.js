@@ -249,6 +249,7 @@ import { closeActionBarSkillSheet, tryOpenActionBarSkillSheet } from '../combat/
 import { debounce, toast } from './utils.js'
 import { trackPendingEditDebouncer } from './pending-edits.js'
 import { syncHomebrewDraftFromForm, syncHomebrewSkillDraftFromForm, syncHomebrewRaceDraftFromForm, syncHomebrewMonsterDraftFromForm, alignHomebrewSkillSubcategory } from '../homebrew/homebrew.js'
+import { refreshHomebrewBalanceBox } from '../ui/homebrew-tab.js'
 import { applyTheme, applyAppearance } from '../ui/themes.js'
 import { saveNow } from './storage.js'
 import { subcategoriesFor, visibleSubcategories, syncFusionFilters } from '../skills/skills.js'
@@ -489,6 +490,16 @@ const debouncedGlossarySearch = debounce(value => {
   state.glossarySearch = value
   render({ content: true })
 }, 200)
+
+const debouncedHomebrewItemBalance = debounce(() => {
+  syncHomebrewDraftFromForm()
+  refreshHomebrewBalanceBox('item')
+}, 250)
+
+const debouncedHomebrewSkillBalance = debounce(() => {
+  syncHomebrewSkillDraftFromForm()
+  refreshHomebrewBalanceBox('skill')
+}, 250)
 
 const debouncedHomebrewSearch = debounce(value => {
   state.homebrewSearch = value
@@ -1292,6 +1303,14 @@ function initDelegatedEvents() {
     }
     if (target.matches('[data-quest-reward]')) {
       debouncedQuestUpdate(state.activeId, target.dataset.questReward, 'reward', target.value || '')
+      return
+    }
+    if (target.closest('#homebrew-form')) {
+      debouncedHomebrewItemBalance()
+      return
+    }
+    if (target.closest('#homebrew-skill-form')) {
+      debouncedHomebrewSkillBalance()
     }
   })
 

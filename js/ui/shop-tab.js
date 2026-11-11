@@ -51,7 +51,7 @@ export function renderShopTab(character) {
           <h3>Shop</h3>
           <p class="tab-intro">Browse gear by category — food includes shop snacks like apples and cheese, not just chef recipes. Stock unlocks by rarity at your Skill Level. Hover cards for details; Grant is GM-only free loot.</p>
         </div>
-        <span class="wrap shop-header-pills">${renderCarryPill(character)}<span class="pill gold">${formatCurrency(character.gil)}</span></span>
+        <span class="wrap shop-header-pills">${renderCarryPill(character)}</span>
       </div>
       <div class="shop-filters">
         <div class="shop-filters-primary">
