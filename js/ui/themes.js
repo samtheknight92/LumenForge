@@ -43,6 +43,8 @@ export function applyTheme(themeId) {
 export function applyAppearance(appearance) {
   const resolved = appearance === 'light' ? 'light' : 'dark'
   document.documentElement.dataset.appearance = resolved
+  // Phone browsers colour their top bar to match the app.
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', resolved === 'light' ? '#eef0fb' : '#0b1022')
   localStorage.setItem(APPEARANCE_STORAGE_KEY, resolved)
   document.querySelectorAll('[data-set-appearance]').forEach(button => {
     const active = button.dataset.setAppearance === resolved
