@@ -1388,6 +1388,7 @@ function initDelegatedEvents() {
       if (!state.guidedCreate) return
       state.guidedCreate.form.background = target.value || 'wanderer'
       state.guidedCreate.dirty = true
+      render({ content: true })
       return
     }
     if (target.matches('[data-guided-affinity]')) {

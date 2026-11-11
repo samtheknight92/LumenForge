@@ -211,7 +211,15 @@ export function syncDraftFromIdentityForm() {
   const prev = gc.draftCharacter
   const draft = normalizeCharacter(createCharacter(name, f.raceId || 'human', options))
   draft.id = prev?.id || uid('draft')
-  if (prev && prev.race === draft.race) {
+  const keepPrevious = prev && prev.race === draft.race && prev.background === draft.background
+  if (prev && !keepPrevious) {
+    // A new race or background means a new starting package: drop anything bought with the old one.
+    const prevBg = getBackground(prev.background)
+    const spent = prev.lumens !== prevBg?.lumens || prev.gil !== prevBg?.gil
+    gc.boughtItems = {}
+    if (spent && prev.background !== draft.background) toast('Background changed: your Lumens, Gil and items now match the new background, so earlier picks were reset.')
+  }
+  if (keepPrevious) {
     draft.skills = [...new Set([...(draft.skills || []), ...(prev.skills || []).filter(id => !(draft.skills || []).includes(id))])]
     // Prefer explicit human starter
     if (options.humanStarterSkill && !draft.skills.includes(options.humanStarterSkill)) {
@@ -295,6 +303,13 @@ export function renderGuidedCreateModal() {
   `
 }
 
+/** Big warning for hard-mode backgrounds (Isekai'd starts with nothing at all). */
+function backgroundHardModeWarning(bg) {
+  if (!bg?.hardMode) return ''
+  const nothing = !bg.gil && !bg.lumens && !(bg.items || []).length
+  return `<p class="pill warn guided-bg-warning">⚠️ Hard mode: ${nothing ? 'you start with 0 Gil, 0 Lumens and no items, so you cannot buy any stats, skills or gear while making this character' : 'this background is meant to be tough'}. ${esc(bg.tableNote || '')} Check with your GM before picking it.</p>`
+}
+
 function renderGuidedStepIdentity(gc) {
   const f = gc.form || {}
   const races = raceOptions().filter(r => r.id !== 'monster')
@@ -332,7 +347,9 @@ function renderGuidedStepIdentity(gc) {
           ${backgroundOptions().map(b => `<option value="${esc(b.id)}" ${b.id === (f.background || DEFAULT_BACKGROUND) ? 'selected' : ''}>${esc(b.icon || '✦')} ${esc(b.name)}</option>`).join('')}
         </select>
       </label>
-      <p class="subtle">${esc(bg?.desc || '')} Starting: ${esc(backgroundRewardSummary(bg))}.</p>
+      <p class="subtle">${esc(bg?.desc || '')}</p>
+      <p class="guided-bg-start"><strong>You start with:</strong> ${esc(backgroundRewardSummary(bg))}</p>
+      ${backgroundHardModeWarning(bg)}
       ${extras}
     </div>
   `
@@ -508,6 +525,7 @@ function renderGuidedStepReview(gc) {
       <p><strong>Skills:</strong> ${(draft.skills || []).map(id => getSkill(id)?.name || id).join(', ') || '—'}</p>
       <p><strong>Equipped:</strong> ${equipped.join('; ') || '—'}</p>
       <p><strong>Wallet:</strong> ${draft.lumens}L · ${normalizeGil(draft.gil)} Gil</p>
+      ${backgroundHardModeWarning(getBackground(draft.background))}
       <p><strong>Basic Attack:</strong> ${esc(basic?.name || '—')}</p>
     </div>
   `

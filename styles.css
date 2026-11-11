@@ -3201,3 +3201,7 @@ body.skill-sheet-open {
 .homebrew-balance-check ul { margin: 6px 0 0; padding-left: 18px; font-size: .9em; }
 .homebrew-import-balance summary { cursor: pointer; font-weight: 600; }
 .homebrew-import-balance > .grid { max-height: 40vh; overflow-y: auto; }
+
+/* Guided Create: what the chosen background starts you with */
+.guided-bg-start { margin: 0; }
+.pill.guided-bg-warning { display: block; white-space: normal; line-height: 1.45; border-radius: 12px; padding: 8px 12px; }
